@@ -36,8 +36,8 @@
 
         /* Hero Background with Image */
         .hero-background {
-            /* CORRECTED: Use url() syntax for background-image */
-            background-image: url('transparent - thread-viewer.jpg');
+            /* CORRECTED: Use url() syntax and .png extension for background-image */
+            background-image: url('transparent - thread-viewer.png');
             background-size: cover; /* Cover the entire section */
             background-position: center; /* Center the image */
             background-repeat: no-repeat;
@@ -192,10 +192,10 @@
                 <h1 id="hero-headline" class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight">
                     Shapes Beyond Footwear – Book Your Appointment Today
                 </h1>
-                <p id="hero-subheadline" class="text-xl md:text-2xl lg:text-3xl font-light mb-10 opacity-90">
+                <p id="hero-subheadline" class="text-xl md:text-2xl lg:text-3xl font-light mb-16 opacity-90">
                     Fast. Easy. No obligation. Get expert advice in minutes.
                 </p>
-                <button id="schedule-cta" class="apple-button apple-button-primary text-xl md:text-2xl">
+                <button id="schedule-cta" class="apple-button apple-button-primary text-2xl md:text-3xl shadow-xl hover:scale-105">
                     Schedule Now
                 </button>
             </div>
@@ -326,7 +326,7 @@
                 benefit3Title: "Trusted Experts",
                 benefit3Text: "Personalized advice for your needs",
                 modalTitle: "Schedule Your Appointment",
-                modalText: "This is where your Calendly embed would go. For now, click \"Confirm\" to simulate booking.",
+                modalText: "Please use the Calendly scheduler below to book your appointment.",
                 thankyouHeadline: "Thank you! Your appointment is confirmed.",
                 thankyouSubheadline: "Check your email for confirmation.",
                 backToHomepage: "Back to Homepage",
@@ -349,7 +349,7 @@
                 benefit3Title: "Vertrauenswürdige Experten",
                 benefit3Text: "Persönliche Beratung für deine Bedürfnisse",
                 modalTitle: "Termin vereinbaren",
-                modalText: "Hier würde Ihr Calendly-Einbettungscode stehen. Klicken Sie vorerst auf „Bestätigen“, um die Buchung zu simulieren.",
+                modalText: "Bitte nutzen Sie den Calendly-Planer unten, um Ihren Termin zu buchen.",
                 thankyouHeadline: "Vielen Dank! Ihr Termin ist bestätigt.",
                 thankyouSubheadline: "Bitte überprüfen Sie Ihre E-Mails zur Bestätigung.",
                 backToHomepage: "Zurück zur Startseite",
@@ -371,8 +371,6 @@
         const benefit3Text = document.getElementById('benefit3-text');
         const modalTitle = document.getElementById('modal-title');
         const modalText = document.getElementById('modal-text');
-        // Removed confirmBookingBtn as it's not used with Calendly iframe
-        // const confirmBookingBtn = document.getElementById('confirm-booking'); // This line was causing the error
         const calendlyModal = document.getElementById('calendly-modal');
         const closeModalBtn = document.getElementById('close-modal');
         const landingPageContent = document.getElementById('landing-page-content');
@@ -396,8 +394,8 @@
             benefit3Text.textContent = langData.benefit3Text;
             modalTitle.textContent = langData.modalTitle;
             modalText.textContent = langData.modalText;
-            // Removed confirmBookingBtn.textContent = langData.confirmBooking; // This line was causing the error
             document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
+            // FIXED: Corrected typo from 'thanky.subheadline' to 'thankyouSubheadline'
             document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
             backToHomepageBtn.textContent = langData.backToHomepage;
             currentLangSpan.textContent = langData.currentLang;
@@ -446,13 +444,6 @@
                 calendlyModal.style.display = 'none';
             }
         });
-
-        // Removed confirmBookingBtn logic entirely as Calendly handles booking
-        // confirmBookingBtn.addEventListener('click', () => {
-        //     calendlyModal.style.display = 'none'; // Hide modal
-        //     landingPageContent.classList.add('hidden'); // Hide landing page
-        //     thankYouPage.classList.remove('hidden'); // Show thank you page
-        // });
 
         // Back to Homepage from Thank You Page
         backToHomepageBtn.addEventListener('click', () => {
