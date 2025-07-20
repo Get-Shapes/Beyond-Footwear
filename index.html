@@ -11,7 +11,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Light background */
+            background-color: #f8fafc; /* Light background, similar to get-shapes.com */
             transition: background-color 0.3s ease;
         }
         body.dark {
@@ -34,10 +34,10 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
         }
 
-        /* Hero Section with Video Background */
+        /* Hero Section with Image Background */
         .hero-background {
-            /* No background-image here, video takes over */
-            background-size: cover; /* Kept for consistency, but video handles filling */
+            background-image: url('transparent - thread-viewer.png'); /* Re-added background image */
+            background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -47,7 +47,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 70vh; /* Adjusted for more vertical space */
+            min-height: 60vh; /* Adjusted for tighter spacing */
             text-align: center;
             padding: 8px; /* p-8 */
             border-bottom-left-radius: 3rem; /* rounded-b-3xl */
@@ -55,22 +55,7 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
         }
 
-        /* Video element for background */
-        .hero-background video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -1; /* Place behind content */
-            transform: translate(-50%, -50%);
-            object-fit: cover; /* Reverted to cover for filling without bars */
-            object-position: center center; /* Ensure video is centered within its space */
-        }
-
-        /* Overlay for better text readability on hero video */
+        /* Overlay for better text readability on hero section */
         .hero-background::before {
             content: "";
             position: absolute;
@@ -211,13 +196,6 @@
 
         <!-- Hero Section -->
         <section class="hero-background">
-            <!-- Video Background -->
-            <video autoplay loop muted playsinline class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto object-cover transform -translate-x-1/2 -translate-y-1/2 z-0">
-                <source src="C0020.mp4" type="video/mp4">
-                <!-- Add other video formats for broader browser compatibility -->
-                <!-- <source src="YOUR_VIDEO_URL.webm" type="video/webm"> -->
-                Your browser does not support the video tag.
-            </video>
             <div class="relative z-10 max-w-4xl mx-auto text-white">
                 <!-- Logo in Hero Section (using relative path) -->
                 <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="mx-auto mb-6 w-48 md:w-64 filter invert dark:filter-none" style="filter: invert(1) brightness(2);">
@@ -227,57 +205,29 @@
                 <p id="hero-subheadline" class="text-xl md:text-2xl lg:text-3xl font-light mb-16 opacity-90">
                     Fast. Easy. No obligation. Get expert advice in minutes.
                 </p>
+            </div>
+        </section>
+
+        <!-- New Product Description Section (now with video and button) -->
+        <section class="container mx-auto my-10 p-8 bg-white dark:bg-gray-700 rounded-xl shadow-lg">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">Beyond Footwear</h2>
+            <!-- Video embed goes here -->
+            <div class="relative w-full overflow-hidden rounded-lg mb-8" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+                <video controls autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg">
+                    <source src="C0020.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <!-- Schedule Now button moved here, in its own centered div -->
+            <div class="text-center mt-8">
                 <button id="schedule-cta" class="apple-button apple-button-primary text-2xl md:text-3xl shadow-xl hover:scale-105">
                     Schedule Now
                 </button>
             </div>
         </section>
 
-        <!-- New Product Description Section -->
-        <section class="container mx-auto my-16 p-8 bg-white dark:bg-gray-700 rounded-xl shadow-lg">
-            <h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">Beyond Footwear</h2>
-            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
-                Welcome to a truly unique wellness experience! You'll find SHAPES waiting for you – slip them into any of your shoes (dress shoes, sneakers, even your spa slippers!).
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mb-4">The Problem:</h3>
-                    <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                        Guests arrive with bodies stressed by modern life – passive feet, weak foundations, poor posture, chronic pain. Traditional wellness offerings often don't address this root cause.
-                    </p>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mb-4">The SHAPES Solution:</h3>
-                    <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                        Award-winning insoles that transform ANY guest shoe (heels, sneakers, slippers) into an active therapeutic training device. Guests feel it working instantly.
-                    </p>
-                </div>
-            </div>
-
-            <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mb-4">How It Works:</h3>
-            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
-                A dynamic, responsive surface forces muscular activation and stabilization with every step, reactivating natural movement patterns – the antidote to concrete/asphalt/modern shoes.
-            </p>
-
-            <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mb-4">Your Benefits:</h3>
-            <ul class="text-lg text-gray-700 dark:text-gray-300 list-disc list-inside space-y-3 mb-8">
-                <li><strong class="font-semibold">"WOW" Factor:</strong> Creates an immediate, unique, memorable experience unlike anything else.</li>
-                <li><strong class="font-semibold">24/7 Wellness:</strong> Extends therapeutic benefits far beyond the spa/gym, throughout the stay.</li>
-                <li><strong class="font-semibold">Direct Revenue Stream:</strong> Guests consistently ask to purchase SHAPES to take home.</li>
-                <li><strong class="font-semibold">Enhanced Reputation:</strong> Be known as the innovative hotel offering genuine, cutting-edge well-being.</li>
-                <li><strong class="font-semibold">Proven Success:</strong> Trusted by TUI Mein Schiff fleetwide & Robinson Clubs.</li>
-                <li><strong class="font-semibold">Simple Integration:</strong> Place SHAPES in guest shoes during their workout or excursions or simply in the guest rooms/slippers.</li>
-            </ul>
-
-            <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mb-4 text-center">Act Now!</h3>
-            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8 text-center">
-                Be a pioneer in guest wellness and revenue. Book a demo today and see why major brands are choosing SHAPES.
-            </p>
-        </section>
-
         <!-- Benefits Section (Existing, below the new section) -->
-        <section class="container mx-auto my-16 p-8">
+        <section class="container mx-auto my-10 p-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Benefit Card 1: Homepage Link -->
                 <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg text-center transform hover:scale-105 transition duration-300">
@@ -391,10 +341,9 @@
 
         let currentLanguage = 'en'; // Default language
 
-        // DOM elements
+        // DOM elements - these are defined once and should be accessed after DOM is fully loaded
         const heroHeadline = document.getElementById('hero-headline');
         const heroSubheadline = document.getElementById('hero-subheadline');
-        const scheduleCta = document.getElementById('schedule-cta');
         const benefit1Title = document.getElementById('benefit1-title');
         const benefit1Text = document.getElementById('benefit1-text');
         const benefit2Title = document.getElementById('benefit2-title');
@@ -402,7 +351,7 @@
         const benefit3Title = document.getElementById('benefit3-title');
         const benefit3Text = document.getElementById('benefit3-text');
         const modalTitle = document.getElementById('modal-title');
-        const modalText = document.getElementById('modal-text');
+        // Removed modalText as it's no longer in the HTML
         const calendlyModal = document.getElementById('calendly-modal');
         const closeModalBtn = document.getElementById('close-modal');
         const landingPageContent = document.getElementById('landing-page-content');
@@ -417,7 +366,6 @@
             const langData = content[currentLanguage];
             heroHeadline.textContent = langData.heroHeadline;
             heroSubheadline.textContent = langData.heroSubheadline;
-            scheduleCta.textContent = langData.scheduleCta;
             benefit1Title.textContent = langData.benefit1Title;
             benefit1Text.innerHTML = langData.benefit1Text; // Use innerHTML for links/lists
             benefit2Title.textContent = langData.benefit2Title;
@@ -425,11 +373,17 @@
             benefit3Title.textContent = langData.benefit3Title;
             benefit3Text.textContent = langData.benefit3Text;
             modalTitle.textContent = langData.modalTitle;
-            modalText.textContent = langData.modalText;
+            // Removed modalText.textContent = langData.modalText;
             document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
             document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
             backToHomepageBtn.textContent = langData.backToHomepage;
-            currentLangSpan.textContent = langData.currentLang;
+            currentLangSpan.textContent = langData.currentLang; // Update the language toggle button text
+
+            // Update the text for the scheduleCta button after it's moved
+            const updatedScheduleCta = document.getElementById('schedule-cta');
+            if (updatedScheduleCta) {
+                updatedScheduleCta.textContent = langData.scheduleCta;
+            }
         }
 
         // Language Toggle Event Listener
@@ -459,9 +413,14 @@
             updateContent(); // Initialize content with default language
         };
 
-        // Show Calendly Modal
-        scheduleCta.addEventListener('click', () => {
-            calendlyModal.style.display = 'flex'; // Use flex to center content
+        // Show Calendly Modal (event listener moved inside DOMContentLoaded)
+        document.addEventListener('DOMContentLoaded', () => {
+            const scheduleCtaButton = document.getElementById('schedule-cta');
+            if (scheduleCtaButton) {
+                scheduleCtaButton.addEventListener('click', () => {
+                    calendlyModal.style.display = 'flex'; // Use flex to center content
+                });
+            }
         });
 
         // Close Calendly Modal
