@@ -34,18 +34,43 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
         }
 
-        /* Hero Background with Image */
+        /* Hero Section with Video Background */
         .hero-background {
-            background-image: url('transparent - thread-viewer.png');
-            background-size: auto 100%; /* Adjusted: Height fills, width scales proportionally */
-            background-position: center center; /* Adjusted for more precise centering */
+            /* No background-image here, video takes over */
+            background-size: cover; /* Kept for consistency, but video handles filling */
+            background-position: center center;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* For parallax effect and better visual scaling */
+            background-attachment: fixed;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh; /* Adjusted for more vertical space */
+            text-align: center;
+            padding: 8px; /* p-8 */
+            border-bottom-left-radius: 3rem; /* rounded-b-3xl */
+            border-bottom-right-radius: 3rem; /* rounded-b-3xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
         }
 
-        /* Overlay for better text readability on hero image */
+        /* Video element for background */
+        .hero-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1; /* Place behind content */
+            transform: translate(-50%, -50%);
+            object-fit: cover; /* Reverted to cover for filling without bars */
+            object-position: center center; /* Ensure video is centered within its space */
+        }
+
+        /* Overlay for better text readability on hero video */
         .hero-background::before {
             content: "";
             position: absolute;
@@ -185,7 +210,14 @@
         </div>
 
         <!-- Hero Section -->
-        <section class="relative flex flex-col items-center justify-center min-h-[60vh] text-center p-8 overflow-hidden rounded-b-3xl shadow-xl hero-background">
+        <section class="hero-background">
+            <!-- Video Background -->
+            <video autoplay loop muted playsinline class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto object-cover transform -translate-x-1/2 -translate-y-1/2 z-0">
+                <source src="C0020.mp4" type="video/mp4">
+                <!-- Add other video formats for broader browser compatibility -->
+                <!-- <source src="YOUR_VIDEO_URL.webm" type="video/webm"> -->
+                Your browser does not support the video tag.
+            </video>
             <div class="relative z-10 max-w-4xl mx-auto text-white">
                 <!-- Logo in Hero Section (using relative path) -->
                 <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="mx-auto mb-6 w-48 md:w-64 filter invert dark:filter-none" style="filter: invert(1) brightness(2);">
