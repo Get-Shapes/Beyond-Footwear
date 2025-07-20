@@ -9,37 +9,31 @@
     <!-- Google Fonts - Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        html, body {
+            height: 100%; /* Ensure html and body take full height for proper scrolling */
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc; /* Light background for fallback/base */
-            position: relative; /* Needed for pseudo-elements */
-            min-height: 100vh; /* Ensure body takes full height for background */
-            transition: background-color 0.3s ease;
-            z-index: 0; /* Ensures content sits above it */
-        }
-
-        /* Background image layer with blur */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('transparent - thread-viewer.png');
+            background-image: url('transparent - thread-viewer.png'); /* Apply image directly to body */
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            background-attachment: scroll; /* Changed to scroll for smoother mobile experience */
-            filter: blur(3px); /* Apply blur here */
-            z-index: -2; /* Behind the overlay and content */
-            transition: filter 0.3s ease;
+            background-attachment: scroll; /* This makes it scroll smoothly */
+            filter: blur(3px); /* Apply blur directly to the body background */
+            position: relative; /* Needed for the overlay pseudo-element if it's absolute */
+            min-height: 100vh; /* Ensure body takes full height */
+            transition: background-color 0.3s ease, filter 0.3s ease;
+            color: #e2e8f0; /* Default text color for body, adjusted by sections */
         }
 
         /* Full-page overlay for readability */
         body::before {
             content: "";
-            position: fixed; /* Fixed to viewport */
+            position: absolute; /* Changed to absolute to scroll with content */
             top: 0;
             left: 0;
             right: 0;
@@ -51,27 +45,27 @@
 
         body.dark {
             background-color: #1a202c; /* Dark background */
-            color: #e2e8f0;
+            /* The background-image and filter on body will still apply */
         }
         body.dark::before {
             background: rgba(0, 0, 0, 0.7); /* Slightly darker overlay in dark mode */
         }
 
-        /* Glassy effect for content boxes (Liquid Glass look) */
+        /* Glassy effect for content boxes (Standard Glass look) */
         .glassy-box {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)); /* Subtle gradient for light mode */
-            backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
-            -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
+            background-color: rgba(255, 255, 255, 0.15); /* Semi-transparent white for light mode */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
             border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); /* Diffused shadow */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Lighter shadow */
             border-radius: 1rem; /* Consistent with rounded-xl */
-            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
         }
 
         .dark .glassy-box {
-            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2)); /* Subtle gradient for dark mode */
+            background-color: rgba(45, 55, 72, 0.4); /* Semi-transparent dark for dark mode */
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
         /* Hero Section - now relies on body for background image */
