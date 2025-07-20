@@ -212,10 +212,22 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
             </button>
-            <!-- Language Toggle -->
-            <button id="lang-toggle" class="p-2 rounded-full glassy-box text-white dark:text-gray-200 shadow-md transition duration-300">
-                <span id="current-lang">EN</span>
-            </button>
+            <!-- Language Toggle with Dropdown -->
+            <div class="relative">
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box text-white dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
+                    <span id="current-lang">EN</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white dark:bg-gray-700 rounded-lg shadow-xl py-1 z-50 glassy-box">
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="zh">中文</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="it">Italiano</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="es">Español</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="pt">Português</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="by">Bayrisch</button>
+                </div>
+            </div>
         </div>
 
         <!-- Hero Section -->
@@ -223,8 +235,8 @@
             <div class="relative z-10 max-w-5xl mx-auto text-white">
                 <!-- Logo in Hero Section (using relative path) -->
                 <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="mx-auto mb-6 w-48 md:w-64 filter invert dark:filter-none" style="filter: invert(1) brightness(2);" ondragstart="return false;">
-                <h1 id="hero-headline" class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight">
-                    Shapes Beyond Footwear<br><br>Book Your Appointment Today
+                <h1 id="hero-headline" class="text-5xl md:text-6xl lg:text-6xl font-extrabold mb-6 leading-tight">
+                    Shapes Beyond Footwear<br>Book Your Appointment Today
                 </h1>
                 <p id="hero-subheadline" class="text-xl md:text-2xl lg:text-3xl font-light mb-16 opacity-90">
                     Fast. Easy. No obligation. Get Shapes.
@@ -319,7 +331,7 @@
         // Language content
         const content = {
             en: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Book Your Appointment Today",
+                heroHeadline: "Shapes Beyond Footwear<br>Book Your Appointment Today",
                 heroSubheadline: "Fast. Easy. No obligation. Get Shapes.",
                 scheduleCta: "Schedule Now",
                 benefit1Title: "Visit Our Official Site",
@@ -341,7 +353,7 @@
                 currentLang: "EN"
             },
             de: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Buche jetzt deinen Termin",
+                heroHeadline: "Shapes Beyond Footwear<br>Buche jetzt deinen Termin",
                 heroSubheadline: "Schnell. Einfach. Unverbindlich. Hol dir Shapes.",
                 scheduleCta: "Jetzt Termin vereinbaren",
                 benefit1Title: "Besuche Unsere Offizielle Website",
@@ -363,7 +375,7 @@
                 currentLang: "DE"
             },
             zh: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>立即预约",
+                heroHeadline: "Shapes Beyond Footwear<br>立即预约",
                 heroSubheadline: "快速。简单。无义务。获取 Shapes。",
                 scheduleCta: "立即预约",
                 benefit1Title: "访问我们的官方网站",
@@ -385,7 +397,7 @@
                 currentLang: "ZH"
             },
             it: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Prenota il tuo appuntamento oggi",
+                heroHeadline: "Shapes Beyond Footwear<br>Prenota il tuo appuntamento oggi",
                 heroSubheadline: "Veloce. Facile. Senza impegno. Ottieni Shapes.",
                 scheduleCta: "Prenota Ora",
                 benefit1Title: "Visita il Nostro Sito Ufficiale",
@@ -407,7 +419,7 @@
                 currentLang: "IT"
             },
             es: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Reserva tu cita hoy",
+                heroHeadline: "Shapes Beyond Footwear<br>Reserva tu cita hoy",
                 heroSubheadline: "Rápido. Fácil. Sin compromiso. Consigue Shapes.",
                 scheduleCta: "Reservar Ahora",
                 benefit1Title: "Visita Nuestro Sitio Oficial",
@@ -429,7 +441,7 @@
                 currentLang: "ES"
             },
             pt: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Agende sua consulta hoje",
+                heroHeadline: "Shapes Beyond Footwear<br>Agende sua consulta hoje",
                 heroSubheadline: "Rápido. Fácil. Sem compromisso. Obtenha Shapes.",
                 scheduleCta: "Agendar Agora",
                 benefit1Title: "Visite Nosso Site Oficial",
@@ -451,7 +463,7 @@
                 currentLang: "PT"
             },
             by: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Buach heid no an Termin",
+                heroHeadline: "Shapes Beyond Footwear<br>Buach heid no an Termin",
                 heroSubheadline: "Schnell. Oafach. Ohne Vapflichtung. Kriag Shapes.",
                 scheduleCta: "Termin buacha",
                 benefit1Title: "Schau auf unsana offiziejn Seitn",
@@ -461,7 +473,6 @@
                     <ul class="list-none p-0 space-y-2">
                         <li>Mehrmals nominiert für Wellness & Spa Innovation Award & German Design Award</li>
                         <li><strong>Gwunna vom German Design Award 23</strong></li>
-                        <li><strong>Gwunna vom German Innovation Award 23</strong></li>
                         <li><strong>Gwunna vom German Innovation Award 23</strong> (Medizin & Gsundheit)</li>
                     </ul>
                 `,
@@ -475,8 +486,7 @@
             }
         };
 
-        const langKeys = ['en', 'de', 'zh', 'it', 'es', 'pt', 'by'];
-        let currentLangIndex = 0; // Default to English
+        let currentLanguage = 'en'; // Default language
 
         // DOM elements - these are defined once and should be accessed after DOM is fully loaded
         const heroHeadline = document.getElementById('hero-headline');
@@ -496,41 +506,56 @@
         const langToggleBtn = document.getElementById('lang-toggle');
         const currentLangSpan = document.getElementById('current-lang');
         const themeToggleBtn = document.getElementById('theme-toggle');
+        const langDropdown = document.getElementById('lang-dropdown'); // Get the dropdown element
 
         // Function to update content based on language
         function updateContent() {
-            const langData = content[langKeys[currentLangIndex]];
-            heroHeadline.innerHTML = langData.heroHeadline; // Changed to innerHTML to render <br>
+            const langData = content[currentLanguage];
+            heroHeadline.innerHTML = langData.heroHeadline;
             heroSubheadline.textContent = langData.heroSubheadline;
             benefit1Title.textContent = langData.benefit1Title;
-            benefit1Text.innerHTML = langData.benefit1Text; // Use innerHTML for links/lists
+            benefit1Text.innerHTML = langData.benefit1Text;
             benefit2Title.textContent = langData.benefit2Title;
-            benefit2Text.innerHTML = langData.benefit2Text; // Use innerHTML for links/lists
+            benefit2Text.innerHTML = langData.benefit2Text;
             benefit3Title.textContent = langData.benefit3Title;
             benefit3Text.textContent = langData.benefit3Text;
             modalTitle.textContent = langData.modalTitle;
             document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
             document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
             backToHomepageBtn.textContent = langData.backToHomepage;
-            currentLangSpan.textContent = langData.currentLang; // Update the language toggle button text
+            currentLangSpan.textContent = langData.currentLang;
 
-            // Update the text for the scheduleCta button after it's moved
             const updatedScheduleCta = document.getElementById('schedule-cta');
             if (updatedScheduleCta) {
                 updatedScheduleCta.textContent = langData.scheduleCta;
             }
         }
 
-        // Language Toggle Event Listener
-        langToggleBtn.addEventListener('click', () => {
-            currentLangIndex = (currentLangIndex + 1) % langKeys.length;
-            updateContent();
+        // Language Toggle Event Listener (for showing/hiding dropdown)
+        langToggleBtn.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent click from immediately closing dropdown
+            langDropdown.classList.toggle('hidden');
+        });
+
+        // Event listeners for language options in the dropdown
+        langDropdown.querySelectorAll('.lang-option').forEach(button => {
+            button.addEventListener('click', (event) => {
+                currentLanguage = event.target.dataset.lang;
+                updateContent();
+                langDropdown.classList.add('hidden'); // Hide dropdown after selection
+            });
+        });
+
+        // Close dropdown if clicking outside
+        document.addEventListener('click', (event) => {
+            if (!langDropdown.contains(event.target) && !langToggleBtn.contains(event.target)) {
+                langDropdown.classList.add('hidden');
+            }
         });
 
         // Theme Toggle Event Listener
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark');
-            // Store user preference in localStorage
             if (document.body.classList.contains('dark')) {
                 localStorage.setItem('theme', 'dark');
             } else {
@@ -538,26 +563,28 @@
             }
         });
 
-        // Check for saved theme preference on load
+        // Check for saved theme preference and set initial language on load
         window.onload = () => {
             if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.body.classList.add('dark');
             } else {
                 document.body.classList.remove('dark');
             }
+
             // Set initial language based on browser preference or default to 'en'
             const browserLang = navigator.language.split('-')[0];
-            const initialLang = langKeys.includes(browserLang) ? browserLang : 'en';
-            currentLangIndex = langKeys.indexOf(initialLang);
+            const availableLangs = Object.keys(content);
+            const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
+            currentLanguage = initialLang;
             updateContent();
         };
 
-        // Show Calendly Modal (event listener moved inside DOMContentLoaded)
+        // Show Calendly Modal
         document.addEventListener('DOMContentLoaded', () => {
             const scheduleCtaButton = document.getElementById('schedule-cta');
             if (scheduleCtaButton) {
                 scheduleCtaButton.addEventListener('click', () => {
-                    calendlyModal.style.display = 'flex'; // Use flex to center content
+                    calendlyModal.style.display = 'flex';
                 });
             }
         });
@@ -576,8 +603,8 @@
 
         // Back to Homepage from Thank You Page
         backToHomepageBtn.addEventListener('click', () => {
-            thankYouPage.classList.add('hidden'); // Hide thank you page
-            landingPageContent.classList.remove('hidden'); // Show landing page
+            thankYouPage.classList.add('hidden');
+            landingPageContent.classList.remove('hidden');
         });
     </script>
 
