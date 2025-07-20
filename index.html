@@ -30,7 +30,7 @@
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-attachment: scroll; /* Changed to scroll for smoother mobile experience */
             filter: blur(3px); /* Apply blur here */
             z-index: -2; /* Behind the overlay and content */
             transition: filter 0.3s ease;
@@ -284,7 +284,9 @@
         <!-- Footer Section -->
         <footer class="mt-auto py-8 text-center text-gray-400 dark:text-gray-600 flex flex-col items-center">
             <!-- Small logo watermark in footer -->
-            <img src="Shapes BL 150.png" alt="Company Logo Watermark" class="mb-2 w-20 md:w-24 filter invert dark:filter-none" style="filter: invert(1) brightness(2);">
+            <img src="Shapes BL 150.png" alt="Company Logo" class="mb-2 w-20 md:w-24 filter invert dark:filter-none" style="filter: invert(1) brightness(2);">
+            <!-- New image added below the logo -->
+            <img src="Signaturen-Allround-lang-final.png" alt="Signaturen Allround" class="mb-2 w-48 md:w-64 filter invert dark:filter-none">
             <p class="text-sm">© 2025 Shapes Beyond Footwear. All rights reserved.</p>
         </footer>
     </div>
