@@ -57,19 +57,21 @@
             background: rgba(0, 0, 0, 0.7); /* Slightly darker overlay in dark mode */
         }
 
-        /* Glassy effect for content boxes */
+        /* Glassy effect for content boxes (Liquid Glass look) */
         .glassy-box {
-            background-color: rgba(255, 255, 255, 0.15); /* Semi-transparent white for light mode */
-            backdrop-filter: blur(10px); /* Frosted glass effect */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)); /* Subtle gradient for light mode */
+            backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
+            -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
             border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Lighter shadow for glassy look */
-            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); /* Diffused shadow */
+            border-radius: 1rem; /* Consistent with rounded-xl */
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
         }
 
         .dark .glassy-box {
-            background-color: rgba(45, 55, 72, 0.4); /* Semi-transparent dark for dark mode */
+            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2)); /* Subtle gradient for dark mode */
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
         /* Hero Section - now relies on body for background image */
@@ -97,7 +99,8 @@
             @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
         }
         .apple-button-primary {
-            @apply bg-blue-600 text-white hover:bg-blue-700;
+            @apply bg-blue-600 hover:bg-blue-700;
+            color: white !important; /* Force white text for Schedule Now button */
         }
         .apple-button-secondary {
             @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
