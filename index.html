@@ -11,16 +11,31 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Light background, similar to get-shapes.com */
-            background-image: url('transparent - thread-viewer.png'); /* Full-page background image */
+            background-color: #f8fafc; /* Light background for fallback/base */
+            position: relative; /* Needed for pseudo-elements */
+            min-height: 100vh; /* Ensure body takes full height for background */
+            transition: background-color 0.3s ease;
+            z-index: 0; /* Ensures content sits above it */
+        }
+
+        /* Background image layer with blur */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('transparent - thread-viewer.png');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* For parallax effect */
-            position: relative; /* Needed for body::before pseudo-element */
-            z-index: 0; /* Ensures content sits above it */
-            transition: background-color 0.3s ease;
+            background-attachment: fixed;
+            filter: blur(3px); /* Apply blur here */
+            z-index: -2; /* Behind the overlay and content */
+            transition: filter 0.3s ease;
         }
+
         /* Full-page overlay for readability */
         body::before {
             content: "";
@@ -29,8 +44,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.4); /* Dark overlay for light mode */
-            z-index: -1; /* Behind content, above body background */
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay for light mode */
+            z-index: -1; /* Behind content, above body background image */
             transition: background 0.3s ease;
         }
 
@@ -39,7 +54,7 @@
             color: #e2e8f0;
         }
         body.dark::before {
-            background: rgba(0, 0, 0, 0.6); /* Slightly darker overlay in dark mode */
+            background: rgba(0, 0, 0, 0.7); /* Slightly darker overlay in dark mode */
         }
 
         .dark .text-gray-900 {
@@ -60,8 +75,6 @@
 
         /* Hero Section - now relies on body for background image */
         .hero-background {
-            /* Removed background-image, background-size, background-position, background-repeat, background-attachment */
-            /* Removed .hero-background::before as body::before handles full-page overlay */
             position: relative;
             overflow: hidden;
             display: flex;
