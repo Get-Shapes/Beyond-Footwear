@@ -37,7 +37,7 @@
         /* Hero Background with Image */
         .hero-background {
             background-image: url('transparent - thread-viewer.png');
-            background-size: cover; /* Cover the entire section */
+            background-size: auto 100%; /* Adjusted: Height fills, width scales proportionally */
             background-position: center center; /* Adjusted for more precise centering */
             background-repeat: no-repeat;
             background-attachment: fixed; /* For parallax effect and better visual scaling */
@@ -395,7 +395,7 @@
             modalTitle.textContent = langData.modalTitle;
             modalText.textContent = langData.modalText;
             document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
-            document.getElementById('thankyou-subheadline').textContent = langData.thankouSubheadline;
+            document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
             backToHomepageBtn.textContent = langData.backToHomepage;
             currentLangSpan.textContent = langData.currentLang;
         }
