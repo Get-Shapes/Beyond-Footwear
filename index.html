@@ -6,11 +6,17 @@
     <title>Shapes Beyond Footwear</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Font - Acumin Pro Extra Condensed -->
     <style>
+        @font-face {
+            font-family: 'acumin-pro-extra-condensed';
+            src: url('acumin-pro-extra-condensed.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'acumin-pro-extra-condensed', sans-serif; /* Use the new font */
             background-color: #f8fafc; /* Light background for fallback/base */
             position: relative; /* Needed for pseudo-elements */
             min-height: 100vh; /* Ensure body takes full height for background */
