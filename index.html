@@ -12,12 +12,36 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc; /* Light background, similar to get-shapes.com */
+            background-image: url('transparent - thread-viewer.png'); /* Full-page background image */
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* For parallax effect */
+            position: relative; /* Needed for body::before pseudo-element */
+            z-index: 0; /* Ensures content sits above it */
             transition: background-color 0.3s ease;
         }
+        /* Full-page overlay for readability */
+        body::before {
+            content: "";
+            position: fixed; /* Fixed to viewport */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay for light mode */
+            z-index: -1; /* Behind content, above body background */
+            transition: background 0.3s ease;
+        }
+
         body.dark {
             background-color: #1a202c; /* Dark background */
             color: #e2e8f0;
         }
+        body.dark::before {
+            background: rgba(0, 0, 0, 0.6); /* Slightly darker overlay in dark mode */
+        }
+
         .dark .text-gray-900 {
             color: #e2e8f0;
         }
@@ -34,13 +58,10 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
         }
 
-        /* Hero Section with Image Background */
+        /* Hero Section - now relies on body for background image */
         .hero-background {
-            background-image: url('transparent - thread-viewer.png'); /* Re-added background image */
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+            /* Removed background-image, background-size, background-position, background-repeat, background-attachment */
+            /* Removed .hero-background::before as body::before handles full-page overlay */
             position: relative;
             overflow: hidden;
             display: flex;
@@ -53,18 +74,6 @@
             border-bottom-left-radius: 3rem; /* rounded-b-3xl */
             border-bottom-right-radius: 3rem; /* rounded-b-3xl */
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
-        }
-
-        /* Overlay for better text readability on hero section */
-        .hero-background::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Dark overlay */
-            z-index: 0;
         }
 
         .hero-background .relative.z-10 {
@@ -308,7 +317,6 @@
                 benefit3Title: "Trusted Experts",
                 benefit3Text: "Personalized advice for your needs",
                 modalTitle: "Schedule Your Appointment",
-                modalText: "Please use the Calendly scheduler below to book your appointment.",
                 thankyouHeadline: "Thank you! Your appointment is confirmed.",
                 thankyouSubheadline: "Check your email for confirmation.",
                 backToHomepage: "Back to Homepage",
@@ -331,7 +339,6 @@
                 benefit3Title: "Vertrauenswürdige Experten",
                 benefit3Text: "Persönliche Beratung für deine Bedürfnisse",
                 modalTitle: "Termin vereinbaren",
-                modalText: "Bitte nutzen Sie den Calendly-Planer unten, um Ihren Termin zu buchen.",
                 thankyouHeadline: "Vielen Dank! Ihr Termin ist bestätigt.",
                 thankyouSubheadline: "Bitte überprüfen Sie Ihre E-Mails zur Bestätigung.",
                 backToHomepage: "Zurück zur Startseite",
@@ -351,7 +358,6 @@
         const benefit3Title = document.getElementById('benefit3-title');
         const benefit3Text = document.getElementById('benefit3-text');
         const modalTitle = document.getElementById('modal-title');
-        // Removed modalText as it's no longer in the HTML
         const calendlyModal = document.getElementById('calendly-modal');
         const closeModalBtn = document.getElementById('close-modal');
         const landingPageContent = document.getElementById('landing-page-content');
@@ -373,7 +379,6 @@
             benefit3Title.textContent = langData.benefit3Title;
             benefit3Text.textContent = langData.benefit3Text;
             modalTitle.textContent = langData.modalTitle;
-            // Removed modalText.textContent = langData.modalText;
             document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
             document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
             backToHomepageBtn.textContent = langData.backToHomepage;
