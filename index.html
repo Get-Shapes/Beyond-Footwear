@@ -36,11 +36,11 @@
 
         /* Hero Background with Image */
         .hero-background {
-            /* CORRECTED: Use url() syntax and .png extension for background-image */
             background-image: url('transparent - thread-viewer.png');
             background-size: cover; /* Cover the entire section */
-            background-position: center; /* Center the image */
+            background-position: center center; /* Adjusted for more precise centering */
             background-repeat: no-repeat;
+            background-attachment: fixed; /* For parallax effect and better visual scaling */
             position: relative;
             overflow: hidden;
         }
@@ -185,7 +185,7 @@
         </div>
 
         <!-- Hero Section -->
-        <section class="relative flex flex-col items-center justify-center min-h-[70vh] text-center p-8 overflow-hidden rounded-b-3xl shadow-xl hero-background">
+        <section class="relative flex flex-col items-center justify-center min-h-[60vh] text-center p-8 overflow-hidden rounded-b-3xl shadow-xl hero-background">
             <div class="relative z-10 max-w-4xl mx-auto text-white">
                 <!-- Logo in Hero Section (using relative path) -->
                 <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="mx-auto mb-6 w-48 md:w-64 filter invert dark:filter-none" style="filter: invert(1) brightness(2);">
@@ -395,8 +395,7 @@
             modalTitle.textContent = langData.modalTitle;
             modalText.textContent = langData.modalText;
             document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
-            // FIXED: Corrected typo from 'thanky.subheadline' to 'thankyouSubheadline'
-            document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
+            document.getElementById('thankyou-subheadline').textContent = langData.thankouSubheadline;
             backToHomepageBtn.textContent = langData.backToHomepage;
             currentLangSpan.textContent = langData.currentLang;
         }
