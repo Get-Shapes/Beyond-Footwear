@@ -171,6 +171,11 @@
             border: none;
             border-radius: 0.75rem; /* rounded-xl */
         }
+
+        /* Custom line-height for hero headline */
+        #hero-headline {
+            line-height: 1.1; /* Tighter line height than default leading-tight (1.25) */
+        }
     </style>
 </head>
 <body class="text-gray-800" oncontextmenu="return false;">
@@ -232,11 +237,11 @@
 
         <!-- Hero Section -->
         <section class="hero-background">
-            <div class="relative z-10 max-w-5xl mx-auto text-white">
+            <div class="relative z-10 max-w-6xl mx-auto text-white">
                 <!-- Logo in Hero Section (using relative path) -->
                 <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="mx-auto mb-6 w-48 md:w-64 filter invert dark:filter-none" style="filter: invert(1) brightness(2);" ondragstart="return false;">
                 <h1 id="hero-headline" class="text-5xl md:text-6xl lg:text-6xl font-extrabold mb-6 leading-tight">
-                    Shapes Beyond Footwear<br><br>Book Your Appointment Today
+                    Shapes Beyond Footwear<br>Book Your Appointment Today
                 </h1>
                 <p id="hero-subheadline" class="text-xl md:text-2xl lg:text-3xl font-light mb-16 opacity-90">
                     Fast. Easy. No obligation. Get Shapes.
@@ -331,7 +336,7 @@
         // Language content
         const content = {
             en: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Book Your Appointment Today",
+                heroHeadline: "Shapes Beyond Footwear<br>Book Your Appointment Today",
                 heroSubheadline: "Fast. Easy. No obligation. Get Shapes.",
                 scheduleCta: "Schedule Now",
                 benefit1Title: "Visit Our Official Site",
@@ -353,7 +358,7 @@
                 currentLang: "EN"
             },
             de: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Buche jetzt deinen Termin",
+                heroHeadline: "Shapes Beyond Footwear<br>Buche jetzt deinen Termin",
                 heroSubheadline: "Schnell. Einfach. Unverbindlich. Hol dir Shapes.",
                 scheduleCta: "Jetzt Termin vereinbaren",
                 benefit1Title: "Besuche Unsere Offizielle Website",
@@ -362,8 +367,8 @@
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
                         <li>Mehrfache Nominierungen für Wellness & Spa Innovation Award & German Design Award</li>
-                        <li><strong>Gewinner des German Design Award 23</strong></li>
-                        <li><strong>Gewinner des German Innovation Award 23</strong> (Medizin & Gesundheit)</li>
+                        <li><strong>Gwunna vom German Design Award 23</strong></li>
+                        <li><strong>Gwunna vom German Innovation Award 23</strong> (Medizin & Gesundheit)</li>
                     </ul>
                 `,
                 benefit3Title: "Vertrauenswürdige Experten",
@@ -375,7 +380,7 @@
                 currentLang: "DE"
             },
             zh: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>立即预约",
+                heroHeadline: "Shapes Beyond Footwear<br>立即预约",
                 heroSubheadline: "快速。简单。无义务。获取 Shapes。",
                 scheduleCta: "立即预约",
                 benefit1Title: "访问我们的官方网站",
@@ -397,7 +402,7 @@
                 currentLang: "ZH"
             },
             it: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Prenota il tuo appuntamento oggi",
+                heroHeadline: "Shapes Beyond Footwear<br>Prenota il tuo appuntamento oggi",
                 heroSubheadline: "Veloce. Facile. Senza impegno. Ottieni Shapes.",
                 scheduleCta: "Prenota Ora",
                 benefit1Title: "Visita il Nostro Sito Ufficiale",
@@ -419,7 +424,7 @@
                 currentLang: "IT"
             },
             es: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Reserva tu cita hoy",
+                heroHeadline: "Shapes Beyond Footwear<br>Reserva tu cita hoy",
                 heroSubheadline: "Rápido. Fácil. Sin compromiso. Consigue Shapes.",
                 scheduleCta: "Reservar Ahora",
                 benefit1Title: "Visita Nuestro Sitio Oficial",
@@ -441,7 +446,7 @@
                 currentLang: "ES"
             },
             pt: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Agende sua consulta hoje",
+                heroHeadline: "Shapes Beyond Footwear<br>Agende sua consulta hoje",
                 heroSubheadline: "Rápido. Fácil. Sem compromisso. Obtenha Shapes.",
                 scheduleCta: "Agendar Agora",
                 benefit1Title: "Visite Nosso Site Oficial",
@@ -463,7 +468,7 @@
                 currentLang: "PT"
             },
             by: {
-                heroHeadline: "Shapes Beyond Footwear<br><br>Buach heid no an Termin",
+                heroHeadline: "Shapes Beyond Footwear<br>Buach heid no an Termin",
                 heroSubheadline: "Schnell. Oafach. Ohne Vapflichtung. Kriag Shapes.",
                 scheduleCta: "Termin buacha",
                 benefit1Title: "Schau auf unsana offiziejn Seitn",
