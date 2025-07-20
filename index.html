@@ -224,7 +224,7 @@
                 <!-- Logo in Hero Section (using relative path) -->
                 <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="mx-auto mb-6 w-48 md:w-64 filter invert dark:filter-none" style="filter: invert(1) brightness(2);">
                 <h1 id="hero-headline" class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight">
-                    Shapes Beyond Footwear – Book Your Appointment Today
+                    Shapes Beyond Footwear<br>Book Your Appointment Today
                 </h1>
                 <p id="hero-subheadline" class="text-xl md:text-2xl lg:text-3xl font-light mb-16 opacity-90">
                     Fast. Easy. No obligation. Get Shapes.
@@ -319,7 +319,7 @@
         // Language content
         const content = {
             en: {
-                heroHeadline: "Shapes Beyond Footwear – Book Your Appointment Today",
+                heroHeadline: "Shapes Beyond Footwear<br>Book Your Appointment Today",
                 heroSubheadline: "Fast. Easy. No obligation. Get Shapes.",
                 scheduleCta: "Schedule Now",
                 benefit1Title: "Visit Our Official Site",
@@ -341,7 +341,7 @@
                 currentLang: "EN"
             },
             de: {
-                heroHeadline: "Shapes Beyond Footwear – Buche jetzt deinen Termin",
+                heroHeadline: "Shapes Beyond Footwear<br>Buche jetzt deinen Termin",
                 heroSubheadline: "Schnell. Einfach. Unverbindlich. Hol dir Shapes.",
                 scheduleCta: "Jetzt Termin vereinbaren",
                 benefit1Title: "Besuche Unsere Offizielle Website",
@@ -388,7 +388,7 @@
         // Function to update content based on language
         function updateContent() {
             const langData = content[currentLanguage];
-            heroHeadline.textContent = langData.heroHeadline;
+            heroHeadline.innerHTML = langData.heroHeadline; // Changed to innerHTML to render <br>
             heroSubheadline.textContent = langData.heroSubheadline;
             benefit1Title.textContent = langData.benefit1Title;
             benefit1Text.innerHTML = langData.benefit1Text; // Use innerHTML for links/lists
