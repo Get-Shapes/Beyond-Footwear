@@ -47,14 +47,14 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        /* Hero Section - now relies on body for background image */
+        /* Hero Section - now contains video and logo */
         .hero-background {
             position: relative;
             overflow: hidden;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center horizontally */
+            justify-content: flex-start; /* Align to top */
             min-height: 60vh; /* Adjusted for tighter spacing */
             text-align: center;
             padding: 8px; /* p-8 */
@@ -169,11 +169,6 @@
     /></noscript>
     <!-- End Facebook Pixel Placeholder -->
 
-    <!-- Logo for Light Mode -->
-    <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="absolute top-4 left-4 w-24 md:w-32 z-50" ondragstart="return false;">
-    <!-- Logo for Dark Mode -->
-    <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Logo" class="absolute top-4 left-4 w-24 md:w-32 z-50 hidden" ondragstart="return false;">
-
     <!-- Main Landing Page Content -->
     <div id="landing-page-content" class="min-h-screen flex flex-col">
         <!-- Top Right Controls -->
@@ -203,16 +198,14 @@
         </div>
 
         <!-- Hero Section -->
-        <section class="hero-background">
-            <div class="relative z-10 max-w-6xl mx-auto">
-                <!-- Logo is now outside this div, as a direct child of body -->
-            </div>
-        </section>
+        <section class="hero-background px-4">
+            <!-- Logo for Light Mode -->
+            <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="mt-4 mb-4 w-24 md:w-32 z-50" ondragstart="return false;">
+            <!-- Logo for Dark Mode -->
+            <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Logo" class="mt-4 mb-4 w-24 md:w-32 z-50 hidden" ondragstart="return false;">
 
-        <!-- New Product Description Section (now with video) -->
-        <section class="container mx-auto mt-2 p-8 rounded-xl glassy-box">
             <!-- Video embed goes here -->
-            <div class="relative w-full overflow-hidden rounded-lg mb-8" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+            <div class="relative w-full max-w-4xl overflow-hidden rounded-lg mb-8" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
                 <video controls autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" controlsList="nodownload">
                     <source src="C0020.mp4" type="video/mp4">
                     Your browser does not support the video tag.
