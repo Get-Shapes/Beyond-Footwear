@@ -16,7 +16,7 @@
             min-height: 100vh; /* Ensure body takes full height for background */
             transition: background-color 0.3s ease;
             z-index: 0; /* Ensures content sits above it */
-            color: #1a202c; /* Default dark text for light background */
+            /* Removed 'color' property here to rely solely on Tailwind classes */
         }
 
         /* Remove background image layer and overlay */
@@ -199,7 +199,7 @@
 
         <!-- Hero Section -->
         <section class="hero-background">
-            <div class="relative z-10 max-w-6xl mx-auto text-white">
+            <div class="relative z-10 max-w-6xl mx-auto">
                 <!-- Logo in Hero Section (using relative path) -->
                 <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="absolute top-6 left-6 w-32 md:w-40 filter-none dark:filter-invert" ondragstart="return false;">
             </div>
@@ -438,7 +438,7 @@
         const calendlyModal = document.getElementById('calendly-modal');
         const closeModalBtn = document.getElementById('close-modal');
         const landingPageContent = document.getElementById('landing-page-content');
-        const thankYouPage = document.getElementById('thank-ou-page');
+        const thankYouPage = document.getElementById('thank-you-page');
         const backToHomepageBtn = document.getElementById('back-to-homepage');
         const langToggleBtn = document.getElementById('lang-toggle');
         const currentLangSpan = document.getElementById('current-lang');
