@@ -11,51 +11,23 @@
     <style>
         body {
             font-family: 'Urbanist', sans-serif; /* Use the Urbanist font */
-            background-color: #f8fafc; /* Light background for fallback/base */
+            background-color: #f8fafc; /* Default light background */
             position: relative; /* Needed for pseudo-elements */
             min-height: 100vh; /* Ensure body takes full height for background */
             transition: background-color 0.3s ease;
             z-index: 0; /* Ensures content sits above it */
-            color: #1a202c; /* Default text color for light background */
+            color: #1a202c; /* Default dark text for light background */
         }
 
-        /* Background image layer with blur */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('transparent - thread-viewer.png');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: scroll; /* Changed to scroll for smoother mobile experience */
-            filter: blur(3px); /* Apply blur here */
-            z-index: -2; /* Behind the overlay and content */
-            transition: filter 0.3s ease;
-        }
-
-        /* Full-page overlay for readability */
+        /* Remove background image layer and overlay */
+        body::after,
         body::before {
-            content: "";
-            position: fixed; /* Fixed to viewport */
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5); /* Dark overlay for light mode */
-            z-index: -1; /* Behind content, above body background image */
-            transition: background 0.3s ease;
+            content: none; /* Remove pseudo-elements entirely */
         }
 
         body.dark {
             background-color: #1a202c; /* Dark background */
-            color: #e2e8f0; /* Text color for dark background */
-        }
-        body.dark::before {
-            background: rgba(0, 0, 0, 0.7); /* Slightly darker overlay in dark mode */
+            color: #e2e8f0; /* Light text for dark background */
         }
 
         /* Glassy effect for content boxes (Liquid Glass look) */
@@ -125,7 +97,7 @@
             align-items: center;
         }
         .modal-content {
-            background-color: #fefefe;
+            background-color: #fefefe; /* Default light background for modal */
             margin: auto;
             padding: 2.5rem; /* 40px */
             border-radius: 1rem; /* 16px */
@@ -138,13 +110,14 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            color: #1a202c; /* Default dark text for modal */
         }
         .dark .modal-content {
-            background-color: #2d3748;
-            color: #e2e8f0;
+            background-color: #2d3748; /* Dark background for modal content */
+            color: #e2e8f0; /* Text color for modal content */
         }
         .close-button {
-            color: #aaa;
+            color: #aaa; /* Default light mode color */
             position: absolute;
             top: 1rem;
             right: 1.5rem;
@@ -154,28 +127,16 @@
         }
         .close-button:hover,
         .close-button:focus {
-            color: #000;
+            color: #000; /* Default light mode hover */
             text-decoration: none;
             cursor: pointer;
         }
         .dark .close-button {
-            color: #cbd5e0;
+            color: #cbd5e0; /* Adjusted for dark background */
         }
         .dark .close-button:hover,
         .dark .close-button:focus {
-            color: #fefefe;
-        }
-        /* Calendly iframe styling */
-        .calendly-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 0.75rem; /* rounded-xl */
-        }
-
-        /* Custom line-height for hero headline */
-        #hero-headline {
-            line-height: 1.0; /* Tighter line height for minimal spacing */
+            color: #fefefe; /* Adjusted for dark background */
         }
     </style>
 </head>
@@ -213,14 +174,14 @@
         <!-- Top Right Controls -->
         <div class="absolute top-6 right-6 flex space-x-4 z-50">
             <!-- Theme Toggle -->
-            <button id="theme-toggle" class="p-2 rounded-full glassy-box text-white dark:text-gray-200 shadow-md transition duration-300">
+            <button id="theme-toggle" class="p-2 rounded-full glassy-box text-gray-800 dark:text-gray-200 shadow-md transition duration-300">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
             </button>
             <!-- Language Toggle with Dropdown -->
             <div class="relative">
-                <button id="lang-toggle" class="p-2 rounded-full glassy-box text-white dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box text-gray-800 dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
                     <span id="current-lang">EN</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -240,7 +201,7 @@
         <section class="hero-background">
             <div class="relative z-10 max-w-6xl mx-auto text-white">
                 <!-- Logo in Hero Section (using relative path) -->
-                <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="mx-auto mb-6 w-48 md:w-64 filter invert dark:filter-none" ondragstart="return false;">
+                <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="absolute top-6 left-6 w-32 md:w-40 filter-none dark:filter-invert" ondragstart="return false;">
             </div>
         </section>
 
@@ -267,8 +228,8 @@
             <div class="grid grid-cols-1 gap-8">
                 <!-- Benefit Card 2: Awards (Concise) -->
                 <div class="text-center transform hover:scale-105 transition duration-300">
-                    <h3 id="benefit2-title" class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-3">Award-Winning</h3>
-                    <ul id="benefit2-text" class="text-gray-800 dark:text-gray-300 list-none p-0 space-y-2">
+                    <h3 id="benefit2-title" class="text-gray-800 dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h3>
+                    <ul id="benefit2-text" class="text-gray-700 dark:text-gray-300 list-none p-0 space-y-2">
                         <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
                         <li><strong>Winner of German Design Award 23</strong></li>
                         <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
@@ -277,21 +238,13 @@
             </div>
         </section>
 
-        <!-- Footer Section -->
-        <footer class="mt-auto py-8 text-center text-gray-400 dark:text-gray-600 flex flex-col items-center">
-            <!-- Small logo watermark in footer -->
-            <img src="Shapes BL 150.png" alt="Company Logo" class="mb-2 w-20 md:w-24 filter invert dark:filter-none" ondragstart="return false;">
-            <!-- New image added below the logo -->
-            <img src="Signaturen-Allround-lang-final.png" alt="Signaturen Allround" class="mb-2 w-48 md:w-64 filter invert dark:filter-none" ondragstart="return false;">
-            <p class="text-sm">© 2025 Shapes Beyond Footwear. All rights reserved.</p>
-        </footer>
     </div>
 
     <!-- Calendly Modal -->
     <div id="calendly-modal" class="modal">
         <div class="modal-content">
             <span class="close-button" id="close-modal">&times;</span>
-            <h2 id="modal-title" class="text-3xl font-bold text-gray-900 dark:text-gray-200 mb-6">Schedule Your Appointment</h2>
+            <h2 id="modal-title" class="text-gray-800 dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
             <!-- Calendly Embed - Replace YOUR_CALENDLY_LINK with your actual Calendly scheduling link -->
             <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe"></iframe>
             <!-- Removed the "Confirm Booking" button as Calendly handles its own flow -->
@@ -300,10 +253,10 @@
 
     <!-- Thank You Page Content (Initially Hidden) -->
     <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
-        <h1 id="thankyou-headline" class="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-gray-100 mb-6">
+        <h1 id="thankyou-headline" class="text-gray-900 dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
             Thank you! Your appointment is confirmed.
         </h1>
-        <p id="thankyou-subheadline" class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-10">
+        <p id="thankyou-subheadline" class="text-gray-700 dark:text-gray-300 text-xl md:text-2xl mb-10">
             Check your email for confirmation.
         </p>
         <button id="back-to-homepage" class="apple-button apple-button-secondary text-xl">
@@ -498,12 +451,10 @@
             // Only update if elements exist and content is not empty
             if (heroHeadline) heroHeadline.innerHTML = langData.heroHeadline;
             if (heroSubheadline) heroSubheadline.textContent = langData.heroSubheadline;
-            if (benefit1Title) benefit1Title.textContent = langData.benefit1Title;
-            if (benefit1Text) benefit1Text.innerHTML = langData.benefit1Text;
+            // The benefit1Title, benefit1Text, benefit3Title, benefit3Text elements are removed from HTML,
+            // so no need to update their content.
             if (benefit2Title) benefit2Title.textContent = langData.benefit2Title;
             if (benefit2Text) benefit2Text.innerHTML = langData.benefit2Text;
-            if (benefit3Title) benefit3Title.textContent = langData.benefit3Title;
-            if (benefit3Text) benefit3Text.textContent = langData.benefit3Text;
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
             if (document.getElementById('thankyou-headline')) document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
             if (document.getElementById('thankyou-subheadline')) document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
@@ -541,6 +492,7 @@
         // Theme Toggle Event Listener
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark');
+            // Store user preference in localStorage
             if (document.body.classList.contains('dark')) {
                 localStorage.setItem('theme', 'dark');
             } else {
