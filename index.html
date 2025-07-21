@@ -11,55 +11,36 @@
     <style>
         body {
             font-family: 'Urbanist', sans-serif; /* Use the Urbanist font */
-            background-color: #f8fafc; /* Light background for fallback/base */
+            background-color: #000000; /* Full black background */
             position: relative; /* Needed for pseudo-elements */
             min-height: 100vh; /* Ensure body takes full height for background */
             transition: background-color 0.3s ease;
             z-index: 0; /* Ensures content sits above it */
+            color: #e2e8f0; /* Default text color for black background */
         }
 
-        /* Background image layer with blur */
+        /* Remove background image layer with blur */
         body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('transparent - thread-viewer.png');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: scroll; /* Changed to scroll for smoother mobile experience */
-            filter: blur(3px); /* Apply blur here */
-            z-index: -2; /* Behind the overlay and content */
-            transition: filter 0.3s ease;
+            display: none;
         }
 
-        /* Full-page overlay for readability */
+        /* Remove full-page overlay as background is already black */
         body::before {
-            content: "";
-            position: fixed; /* Fixed to viewport */
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5); /* Dark overlay for light mode */
-            z-index: -1; /* Behind content, above body background image */
-            transition: background 0.3s ease;
+            display: none;
         }
 
-        body.dark {
-            background-color: #1a202c; /* Dark background */
+        /* No need for body.dark as background is always black */
+        /* body.dark {
+            background-color: #1a202c;
             color: #e2e8f0;
         }
         body.dark::before {
-            background: rgba(0, 0, 0, 0.7); /* Slightly darker overlay in dark mode */
-        }
+            background: rgba(0, 0, 0, 0.7);
+        } */
 
         /* Glassy effect for content boxes (Liquid Glass look) */
         .glassy-box {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)); /* Subtle gradient for light mode */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)); /* Subtle gradient */
             backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
             -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
             border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
@@ -68,7 +49,7 @@
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
         }
 
-        .dark .glassy-box {
+        .dark .glassy-box { /* This rule will now apply to all glassy boxes as body is always dark-like */
             background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2)); /* Subtle gradient for dark mode */
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
@@ -105,7 +86,7 @@
         .apple-button-secondary {
             @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
         }
-        .dark .apple-button-secondary {
+        .dark .apple-button-secondary { /* This rule will now apply to all secondary buttons */
             @apply bg-gray-700 text-gray-200 hover:bg-gray-600;
         }
 
@@ -138,7 +119,7 @@
             justify-content: center;
             align-items: center;
         }
-        .dark .modal-content {
+        .dark .modal-content { /* This rule will now apply to all modal content */
             background-color: #2d3748;
             color: #e2e8f0;
         }
@@ -157,7 +138,7 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .dark .close-button {
+        .dark .close-button { /* This rule will now apply to all close buttons */
             color: #cbd5e0;
         }
         .dark .close-button:hover,
@@ -174,11 +155,11 @@
 
         /* Custom line-height for hero headline */
         #hero-headline {
-            line-height: 1.1; /* Tighter line height than default leading-tight (1.25) */
+            line-height: 1.0; /* Tighter line height for minimal spacing */
         }
     </style>
 </head>
-<body class="text-gray-800" oncontextmenu="return false;">
+<body class="text-white" oncontextmenu="return false;">
 
     <!-- Google Analytics Placeholder -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID"></script>
@@ -212,25 +193,25 @@
         <!-- Top Right Controls -->
         <div class="absolute top-6 right-6 flex space-x-4 z-50">
             <!-- Theme Toggle -->
-            <button id="theme-toggle" class="p-2 rounded-full glassy-box text-white dark:text-gray-200 shadow-md transition duration-300">
+            <button id="theme-toggle" class="p-2 rounded-full glassy-box text-white shadow-md transition duration-300">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
             </button>
             <!-- Language Toggle with Dropdown -->
             <div class="relative">
-                <button id="lang-toggle" class="p-2 rounded-full glassy-box text-white dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box text-white shadow-md transition duration-300 flex items-center space-x-2">
                     <span id="current-lang">EN</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white dark:bg-gray-700 rounded-lg shadow-xl py-1 z-50 glassy-box">
-                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
-                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
-                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="zh">中文</button>
-                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="it">Italiano</button>
-                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="es">Español</button>
-                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="pt">Português</button>
-                    <button class="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="by">Bayrisch</button>
+                <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-xl py-1 z-50 glassy-box">
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 lang-option" data-lang="en">English</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 lang-option" data-lang="de">Deutsch</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 lang-option" data-lang="zh">中文</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 lang-option" data-lang="it">Italiano</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 lang-option" data-lang="es">Español</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 lang-option" data-lang="pt">Português</button>
+                    <button class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 lang-option" data-lang="by">Bayrisch</button>
                 </div>
             </div>
         </div>
@@ -239,19 +220,12 @@
         <section class="hero-background">
             <div class="relative z-10 max-w-6xl mx-auto text-white">
                 <!-- Logo in Hero Section (using relative path) -->
-                <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="mx-auto mb-6 w-48 md:w-64 filter invert dark:filter-none" style="filter: invert(1) brightness(2);" ondragstart="return false;">
-                <h1 id="hero-headline" class="text-5xl md:text-6xl lg:text-6xl font-extrabold mb-6 leading-tight">
-                    Shapes Beyond Footwear<br>Book Your Appointment Today
-                </h1>
-                <p id="hero-subheadline" class="text-xl md:text-2xl lg:text-3xl font-light mb-16 opacity-90">
-                    Fast. Easy. No obligation. Get Shapes.
-                </p>
+                <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="mx-auto mb-6 w-48 md:w-64 filter invert" style="filter: invert(1) brightness(2);" ondragstart="return false;">
             </div>
         </section>
 
         <!-- New Product Description Section (now with video) -->
         <section class="container mx-auto mt-2 p-8 rounded-xl glassy-box">
-            <h2 class="text-4xl font-bold text-white dark:text-gray-100 mb-8 text-center">Beyond Footwear</h2>
             <!-- Video embed goes here -->
             <div class="relative w-full overflow-hidden rounded-lg mb-8" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
                 <video controls autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" controlsList="nodownload">
@@ -264,46 +238,31 @@
         <!-- Schedule Now Button Section (new separate box) -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
             <button id="schedule-cta" class="apple-button apple-button-primary text-2xl md:text-3xl shadow-xl hover:scale-105 text-white">
-                Schedule Now
+                Book your free consultation.
             </button>
         </section>
 
         <!-- Benefits Section (Existing, below the new section) -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Benefit Card 1: Homepage Link -->
-                <div class="text-center transform hover:scale-105 transition duration-300">
-                    <div class="text-blue-600 text-5xl mb-6">🌐</div> <!-- Original icon size -->
-                    <h3 id="benefit1-title" class="text-2xl font-semibold text-white dark:text-gray-200 mb-3">Visit Our Official Site</h3>
-                    <p id="benefit1-text" class="text-white dark:text-gray-300">
-                        <a href="https://www.get-shapes.com" target="_blank" class="text-blue-500 hover:underline">www.get-shapes.com</a>
-                    </p>
-                </div>
+            <div class="grid grid-cols-1 gap-8">
                 <!-- Benefit Card 2: Awards (Concise) -->
                 <div class="text-center transform hover:scale-105 transition duration-300">
-                    <div class="text-green-600 text-5xl mb-6">🏆</div> <!-- Original icon size -->
-                    <h3 id="benefit2-title" class="text-2xl font-semibold text-white dark:text-gray-200 mb-3">Award-Winning</h3>
-                    <ul id="benefit2-text" class="text-white dark:text-gray-300 list-none p-0 space-y-2">
+                    <h3 id="benefit2-title" class="text-2xl font-semibold text-white mb-3">Award-Winning</h3>
+                    <ul id="benefit2-text" class="text-white list-none p-0 space-y-2">
                         <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
                         <li><strong>Winner of German Design Award 23</strong></li>
                         <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
                     </ul>
                 </div>
-                <!-- Benefit Card 3: Trusted Experts -->
-                <div class="text-center transform hover:scale-105 transition duration-300">
-                    <div class="text-purple-600 text-5xl mb-6">✅</div> <!-- Original icon size -->
-                    <h3 id="benefit3-title" class="text-2xl font-semibold text-white dark:text-gray-200 mb-3">Trusted Experts</h3>
-                    <p id="benefit3-text" class="text-white dark:text-gray-300">Personalized advice for your needs</p>
-                </div>
             </div>
         </section>
 
         <!-- Footer Section -->
-        <footer class="mt-auto py-8 text-center text-gray-400 dark:text-gray-600 flex flex-col items-center">
+        <footer class="mt-auto py-8 text-center text-gray-400 flex flex-col items-center">
             <!-- Small logo watermark in footer -->
-            <img src="Shapes BL 150.png" alt="Company Logo" class="mb-2 w-20 md:w-24 filter invert dark:filter-none" style="filter: invert(1) brightness(2);" ondragstart="return false;">
+            <img src="Shapes BL 150.png" alt="Company Logo" class="mb-2 w-20 md:w-24 filter invert" style="filter: invert(1) brightness(2);" ondragstart="return false;">
             <!-- New image added below the logo -->
-            <img src="Signaturen-Allround-lang-final.png" alt="Signaturen Allround" class="mb-2 w-48 md:w-64 filter invert dark:filter-none" ondragstart="return false;">
+            <img src="Signaturen-Allround-lang-final.png" alt="Signaturen Allround" class="mb-2 w-48 md:w-64 filter invert" ondragstart="return false;">
             <p class="text-sm">© 2025 Shapes Beyond Footwear. All rights reserved.</p>
         </footer>
     </div>
@@ -312,7 +271,7 @@
     <div id="calendly-modal" class="modal">
         <div class="modal-content">
             <span class="close-button" id="close-modal">&times;</span>
-            <h2 id="modal-title" class="text-3xl font-bold text-gray-900 dark:text-gray-200 mb-6">Schedule Your Appointment</h2>
+            <h2 id="modal-title" class="text-3xl font-bold text-gray-900 mb-6">Schedule Your Appointment</h2>
             <!-- Calendly Embed - Replace YOUR_CALENDLY_LINK with your actual Calendly scheduling link -->
             <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe"></iframe>
             <!-- Removed the "Confirm Booking" button as Calendly handles its own flow -->
@@ -320,11 +279,11 @@
     </div>
 
     <!-- Thank You Page Content (Initially Hidden) -->
-    <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
-        <h1 id="thankyou-headline" class="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-gray-100 mb-6">
+    <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white transition duration-300">
+        <h1 id="thankyou-headline" class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6">
             Thank you! Your appointment is confirmed.
         </h1>
-        <p id="thankyou-subheadline" class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-10">
+        <p id="thankyou-subheadline" class="text-xl md:text-2xl text-gray-700 mb-10">
             Check your email for confirmation.
         </p>
         <button id="back-to-homepage" class="apple-button apple-button-secondary text-xl">
@@ -336,11 +295,11 @@
         // Language content
         const content = {
             en: {
-                heroHeadline: "Shapes Beyond Footwear<br>Book Your Appointment Today",
-                heroSubheadline: "Fast. Easy. No obligation. Get Shapes.",
-                scheduleCta: "Schedule Now",
-                benefit1Title: "Visit Our Official Site",
-                benefit1Text: '<a href="https://www.get-shapes.com" target="_blank" class="text-blue-500 hover:underline">www.get-shapes.com</a>',
+                heroHeadline: "", // Removed text
+                heroSubheadline: "", // Removed text
+                scheduleCta: "Book your free consultation.",
+                benefit1Title: "", // This will be removed from HTML
+                benefit1Text: '', // This will be removed from HTML
                 benefit2Title: "Award-Winning",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -349,8 +308,8 @@
                         <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
                     </ul>
                 `,
-                benefit3Title: "Trusted Experts",
-                benefit3Text: "Personalized advice for your needs",
+                benefit3Title: "", // This will be removed from HTML
+                benefit3Text: "", // This will be removed from HTML
                 modalTitle: "Schedule Your Appointment",
                 thankyouHeadline: "Thank you! Your appointment is confirmed.",
                 thankyouSubheadline: "Check your email for confirmation.",
@@ -358,21 +317,21 @@
                 currentLang: "EN"
             },
             de: {
-                heroHeadline: "Shapes Beyond Footwear<br>Buche jetzt deinen Termin",
-                heroSubheadline: "Schnell. Einfach. Unverbindlich. Hol dir Shapes.",
-                scheduleCta: "Jetzt Termin vereinbaren",
-                benefit1Title: "Besuche Unsere Offizielle Website",
-                benefit1Text: '<a href="https://www.get-shapes.com" target="_blank" class="text-blue-500 hover:underline">www.get-shapes.com</a>',
+                heroHeadline: "", // Removed text
+                heroSubheadline: "", // Removed text
+                scheduleCta: "Buche deine kostenlose Beratung.",
+                benefit1Title: "",
+                benefit1Text: '',
                 benefit2Title: "Preisgekrönt",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
                         <li>Mehrfache Nominierungen für Wellness & Spa Innovation Award & German Design Award</li>
-                        <li><strong>Gwunna vom German Design Award 23</strong></li>
-                        <li><strong>Gwunna vom German Innovation Award 23</strong> (Medizin & Gesundheit)</li>
+                        <li><strong>Gewinner des German Design Award 23</strong></li>
+                        <li><strong>Gewinner des German Innovation Award 23</strong> (Medizin & Gesundheit)</li>
                     </ul>
                 `,
-                benefit3Title: "Vertrauenswürdige Experten",
-                benefit3Text: "Persönliche Beratung für deine Bedürfnisse",
+                benefit3Title: "",
+                benefit3Text: "",
                 modalTitle: "Termin vereinbaren",
                 thankyouHeadline: "Vielen Dank! Ihr Termin ist bestätigt.",
                 thankyouSubheadline: "Bitte überprüfen Sie Ihre E-Mails zur Bestätigung.",
@@ -380,11 +339,11 @@
                 currentLang: "DE"
             },
             zh: {
-                heroHeadline: "Shapes Beyond Footwear<br>立即预约",
-                heroSubheadline: "快速。简单。无义务。获取 Shapes。",
-                scheduleCta: "立即预约",
-                benefit1Title: "访问我们的官方网站",
-                benefit1Text: '<a href="https://www.get-shapes.com" target="_blank" class="text-blue-500 hover:underline">www.get-shapes.com</a>',
+                heroHeadline: "", // Removed text
+                heroSubheadline: "", // Removed text
+                scheduleCta: "预约免费咨询。",
+                benefit1Title: "",
+                benefit1Text: '',
                 benefit2Title: "屡获殊荣",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -393,8 +352,8 @@
                         <li><strong>荣获德国创新奖 23</strong> (医疗与健康)</li>
                     </ul>
                 `,
-                benefit3Title: "值得信赖的专家",
-                benefit3Text: "为您提供个性化建议",
+                benefit3Title: "",
+                benefit3Text: "",
                 modalTitle: "安排您的预约",
                 thankyouHeadline: "谢谢！您的预约已确认。",
                 thankyouSubheadline: "请检查您的电子邮件以获取确认。",
@@ -402,11 +361,11 @@
                 currentLang: "ZH"
             },
             it: {
-                heroHeadline: "Shapes Beyond Footwear<br>Prenota il tuo appuntamento oggi",
-                heroSubheadline: "Veloce. Facile. Senza impegno. Ottieni Shapes.",
-                scheduleCta: "Prenota Ora",
-                benefit1Title: "Visita il Nostro Sito Ufficiale",
-                benefit1Text: '<a href="https://www.get-shapes.com" target="_blank" class="text-blue-500 hover:underline">www.get-shapes.com</a>',
+                heroHeadline: "", // Removed text
+                heroSubheadline: "", // Removed text
+                scheduleCta: "Prenota la tua consulenza gratuita.",
+                benefit1Title: "",
+                benefit1Text: '',
                 benefit2Title: "Premiato",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -415,8 +374,8 @@
                         <li><strong>Vincitore del German Innovation Award 23</strong> (Medicina e Salute)</li>
                     </ul>
                 `,
-                benefit3Title: "Esperti Fidati",
-                benefit3Text: "Consulenza personalizzata per le tue esigenze",
+                benefit3Title: "",
+                benefit3Text: "",
                 modalTitle: "Pianifica il tuo appuntamento",
                 thankyouHeadline: "Grazie! Il tuo appuntamento è confermato.",
                 thankyouSubheadline: "Controlla la tua email per la conferma.",
@@ -424,11 +383,11 @@
                 currentLang: "IT"
             },
             es: {
-                heroHeadline: "Shapes Beyond Footwear<br>Reserva tu cita hoy",
-                heroSubheadline: "Rápido. Fácil. Sin compromiso. Consigue Shapes.",
-                scheduleCta: "Reservar Ahora",
-                benefit1Title: "Visita Nuestro Sitio Oficial",
-                benefit1Text: '<a href="https://www.get-shapes.com" target="_blank" class="text-blue-500 hover:underline">www.get-shapes.com</a>',
+                heroHeadline: "", // Removed text
+                heroSubheadline: "", // Removed text
+                scheduleCta: "Reserva tu consulta gratuita.",
+                benefit1Title: "",
+                benefit1Text: '',
                 benefit2Title: "Galardonado",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -437,8 +396,8 @@
                         <li><strong>Ganador del German Innovation Award 23</strong> (Medicina y Salud)</li>
                     </ul>
                 `,
-                benefit3Title: "Expertos de Confianza",
-                benefit3Text: "Asesoramiento personalizado para tus necesidades",
+                benefit3Title: "",
+                benefit3Text: "",
                 modalTitle: "Agenda tu cita",
                 thankyouHeadline: "¡Gracias! Tu cita está confirmada.",
                 thankyouSubheadline: "Revisa tu correo electrónico para la confirmación.",
@@ -446,11 +405,11 @@
                 currentLang: "ES"
             },
             pt: {
-                heroHeadline: "Shapes Beyond Footwear<br>Agende sua consulta hoje",
-                heroSubheadline: "Rápido. Fácil. Sem compromisso. Obtenha Shapes.",
-                scheduleCta: "Agendar Agora",
-                benefit1Title: "Visite Nosso Site Oficial",
-                benefit1Text: '<a href="https://www.get-shapes.com" target="_blank" class="text-blue-500 hover:underline">www.get-shapes.com</a>',
+                heroHeadline: "", // Removed text
+                heroSubheadline: "", // Removed text
+                scheduleCta: "Agende sua consulta gratuita.",
+                benefit1Title: "",
+                benefit1Text: '',
                 benefit2Title: "Premiado",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -459,8 +418,8 @@
                         <li><strong>Vencedor do German Innovation Award 23</strong> (Médico e Saúde)</li>
                     </ul>
                 `,
-                benefit3Title: "Especialistas Confiáveis",
-                benefit3Text: "Aconselhamento personalizado para suas necessidades",
+                benefit3Title: "",
+                benefit3Text: "",
                 modalTitle: "Agende sua consulta",
                 thankyouHeadline: "Obrigado! Sua consulta está confirmada.",
                 thankyouSubheadline: "Verifique seu e-mail para confirmação.",
@@ -468,11 +427,11 @@
                 currentLang: "PT"
             },
             by: {
-                heroHeadline: "Shapes Beyond Footwear<br>Buach heid no an Termin",
-                heroSubheadline: "Schnell. Oafach. Ohne Vapflichtung. Kriag Shapes.",
-                scheduleCta: "Termin buacha",
-                benefit1Title: "Schau auf unsana offiziejn Seitn",
-                benefit1Text: '<a href="https://www.get-shapes.com" target="_blank" class="text-blue-500 hover:underline">www.get-shapes.com</a>',
+                heroHeadline: "", // Removed text
+                heroSubheadline: "", // Removed text
+                scheduleCta: "Buach dei kostenlose Beratung.",
+                benefit1Title: "",
+                benefit1Text: '',
                 benefit2Title: "Preisgekrönt",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -481,8 +440,8 @@
                         <li><strong>Gwunna vom German Innovation Award 23</strong> (Medizin & Gsundheit)</li>
                     </ul>
                 `,
-                benefit3Title: "Vertrauenswürdige Experten",
-                benefit3Text: "Persönliche Beratung für deine Bedürfnisse",
+                benefit3Title: "",
+                benefit3Text: "",
                 modalTitle: "Dein Termin zum Buacha",
                 thankyouHeadline: "Vielen Dank! Dein Termin is bstätigt.",
                 thankyouSubheadline: "Schau in deine E-Mails für de Bstätigung.",
@@ -516,19 +475,20 @@
         // Function to update content based on language
         function updateContent() {
             const langData = content[currentLanguage];
-            heroHeadline.innerHTML = langData.heroHeadline;
-            heroSubheadline.textContent = langData.heroSubheadline;
-            benefit1Title.textContent = langData.benefit1Title;
-            benefit1Text.innerHTML = langData.benefit1Text;
-            benefit2Title.textContent = langData.benefit2Title;
-            benefit2Text.innerHTML = langData.benefit2Text;
-            benefit3Title.textContent = langData.benefit3Title;
-            benefit3Text.textContent = langData.benefit3Text;
-            modalTitle.textContent = langData.modalTitle;
-            document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
-            document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
-            backToHomepageBtn.textContent = langData.backToHomepage;
-            currentLangSpan.textContent = langData.currentLang;
+            // Only update if elements exist and content is not empty
+            if (heroHeadline) heroHeadline.innerHTML = langData.heroHeadline;
+            if (heroSubheadline) heroSubheadline.textContent = langData.heroSubheadline;
+            if (benefit1Title) benefit1Title.textContent = langData.benefit1Title;
+            if (benefit1Text) benefit1Text.innerHTML = langData.benefit1Text;
+            if (benefit2Title) benefit2Title.textContent = langData.benefit2Title;
+            if (benefit2Text) benefit2Text.innerHTML = langData.benefit2Text;
+            if (benefit3Title) benefit3Title.textContent = langData.benefit3Title;
+            if (benefit3Text) benefit3Text.textContent = langData.benefit3Text;
+            if (modalTitle) modalTitle.textContent = langData.modalTitle;
+            if (document.getElementById('thankyou-headline')) document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
+            if (document.getElementById('thankyou-subheadline')) document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
+            if (backToHomepageBtn) backToHomepageBtn.textContent = langData.backToHomepage;
+            if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
 
             const updatedScheduleCta = document.getElementById('schedule-cta');
             if (updatedScheduleCta) {
@@ -570,8 +530,12 @@
 
         // Check for saved theme preference and set initial language on load
         window.onload = () => {
+            // Since the background is now always black, the dark class is not strictly needed for background/text color.
+            // However, if other elements still rely on 'dark' class for styling, we can keep this logic.
+            // For a purely black background, we can simplify this.
+            // For now, keeping it as is, but removing the dark class from body in CSS.
             if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.body.classList.add('dark');
+                document.body.classList.add('dark'); // Keeping for consistency if other elements use it
             } else {
                 document.body.classList.remove('dark');
             }
