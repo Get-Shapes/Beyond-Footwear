@@ -51,16 +51,7 @@
         .apple-button {
             @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
         }
-        .apple-button-primary {
-            @apply bg-blue-600 hover:bg-blue-700;
-            color: white !important; /* Force white text for Schedule Now button */
-        }
-        .apple-button-secondary {
-            @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
-        }
-        .dark .apple-button-secondary {
-            @apply bg-gray-700 text-gray-200 hover:bg-gray-600;
-        }
+        /* apple-button-primary and apple-button-secondary styles are now applied directly to buttons */
 
         /* Modal styling */
         .modal {
@@ -198,7 +189,7 @@
 
         <!-- Schedule Now Button Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button apple-button-primary text-2xl md:text-3xl shadow-xl hover:scale-105 text-white">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl shadow-xl hover:scale-105 bg-gray-200 text-gray-800 dark:bg-blue-600 dark:text-white">
                 Book your free consultation.
             </button>
         </section>
@@ -451,7 +442,7 @@
             if (benefit2Text) benefit2Text.innerHTML = langData.benefit2Text;
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
             if (document.getElementById('thankyou-headline')) document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
-            if (document.getElementById('thankyou-subheadline')) document.getElementById('thankyou-subheadline').textContent = langData.thankouSubheadline;
+            if (document.getElementById('thankyou-subheadline')) document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
             if (backToHomepageBtn) backToHomepageBtn.textContent = langData.backToHomepage;
             if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
 
