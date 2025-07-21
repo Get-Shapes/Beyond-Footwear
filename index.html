@@ -171,6 +171,9 @@
 
     <!-- Main Landing Page Content -->
     <div id="landing-page-content" class="min-h-screen flex flex-col">
+        <!-- Logo in Hero Section (using relative path) -->
+        <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="absolute top-6 left-6 w-24 md:w-32 filter-none dark:filter-invert z-50" ondragstart="return false;">
+
         <!-- Top Right Controls -->
         <div class="absolute top-6 right-6 flex space-x-4 z-50">
             <!-- Theme Toggle -->
@@ -200,8 +203,7 @@
         <!-- Hero Section -->
         <section class="hero-background">
             <div class="relative z-10 max-w-6xl mx-auto">
-                <!-- Logo in Hero Section (using relative path) -->
-                <img src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="absolute top-4 left-4 w-24 md:w-32 filter-none dark:filter-invert z-20" ondragstart="return false;">
+                <!-- No logo here anymore, it's moved outside this div -->
             </div>
         </section>
 
@@ -273,6 +275,8 @@
                 scheduleCta: "Book your free consultation.",
                 benefit1Title: "", // This will be removed from HTML
                 benefit1Text: '', // This will be removed from HTML
+                safetyTitle: "", // This will be removed from HTML
+                safetyText: "", // This will be removed from HTML
                 benefit2Title: "Award-Winning",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -295,6 +299,8 @@
                 scheduleCta: "Buche deine kostenlose Beratung.",
                 benefit1Title: "",
                 benefit1Text: '',
+                safetyTitle: "",
+                safetyText: "",
                 benefit2Title: "Preisgekrönt",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -317,63 +323,8 @@
                 scheduleCta: "预约免费咨询。",
                 benefit1Title: "",
                 benefit1Text: '',
-                benefit2Title: "屡获殊荣",
-                benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li>多次获得健康与水疗创新奖和德国设计奖提名</li>
-                        <li><strong>荣获德国设计奖 23</strong></li>
-                        <li><strong>荣获德国创新奖 23</strong> (医疗与健康)</li>
-                    </ul>
-                `,
-                benefit3Title: "",
-                heroSubheadline: "", // Removed text
-                scheduleCta: "Book your free consultation.",
-                benefit1Title: "", // This will be removed from HTML
-                benefit1Text: '', // This will be removed from HTML
-                benefit2Title: "Award-Winning",
-                benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
-                        <li><strong>Winner of German Design Award 23</strong></li>
-                        <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
-                    </ul>
-                `,
-                benefit3Title: "", // This will be removed from HTML
-                benefit3Text: "", // This will be removed from HTML
-                modalTitle: "Schedule Your Appointment",
-                thankyouHeadline: "Thank you! Your appointment is confirmed.",
-                thankyouSubheadline: "Check your email for confirmation.",
-                backToHomepage: "Back to Homepage",
-                currentLang: "EN"
-            },
-            de: {
-                heroHeadline: "", // Removed text
-                heroSubheadline: "", // Removed text
-                scheduleCta: "Buche deine kostenlose Beratung.",
-                benefit1Title: "",
-                benefit1Text: '',
-                benefit2Title: "Preisgekrönt",
-                benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li>Mehrfache Nominierungen für Wellness & Spa Innovation Award & German Design Award</li>
-                        <li><strong>Gewinner des German Design Award 23</strong></li>
-                        <li><strong>Gewinner des German Innovation Award 23</strong> (Medizin & Gesundheit)</li>
-                    </ul>
-                `,
-                benefit3Title: "",
-                benefit3Text: "",
-                modalTitle: "Termin vereinbaren",
-                thankyouHeadline: "Vielen Dank! Ihr Termin ist bestätigt.",
-                thankyouSubheadline: "Bitte überprüfen Sie Ihre E-Mails zur Bestätigung.",
-                backToHomepage: "Zurück zur Startseite",
-                currentLang: "DE"
-            },
-            zh: {
-                heroHeadline: "", // Removed text
-                heroSubheadline: "", // Removed text
-                scheduleCta: "预约免费咨询。",
-                benefit1Title: "",
-                benefit1Text: '',
+                safetyTitle: "",
+                safetyText: "",
                 benefit2Title: "屡获殊荣",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -396,6 +347,8 @@
                 scheduleCta: "Prenota la tua consulenza gratuita.",
                 benefit1Title: "",
                 benefit1Text: '',
+                safetyTitle: "",
+                safetyText: "",
                 benefit2Title: "Premiato",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -418,6 +371,8 @@
                 scheduleCta: "Reserva tu consulta gratuita.",
                 benefit1Title: "",
                 benefit1Text: '',
+                safetyTitle: "",
+                safetyText: "",
                 benefit2Title: "Galardonado",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -440,6 +395,8 @@
                 scheduleCta: "Agende sua consulta gratuita.",
                 benefit1Title: "",
                 benefit1Text: '',
+                safetyTitle: "",
+                safetyText: "",
                 benefit2Title: "Premiado",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -462,6 +419,8 @@
                 scheduleCta: "Buach dei kostenlose Beratung.",
                 benefit1Title: "",
                 benefit1Text: '',
+                safetyTitle: "",
+                safetyText: "",
                 benefit2Title: "Preisgekrönt",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
