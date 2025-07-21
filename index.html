@@ -47,26 +47,6 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        /* Hero Section - now contains video and logo */
-        .hero-background {
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column; /* Stack children vertically */
-            align-items: center; /* Center horizontally */
-            justify-content: flex-start; /* Align to top */
-            min-height: 60vh; /* Adjusted for tighter spacing */
-            text-align: center;
-            padding: 8px; /* p-8 */
-            border-bottom-left-radius: 3rem; /* rounded-b-3xl */
-            border-bottom-right-radius: 3rem; /* rounded-b-3xl */
-            /* Removed box-shadow here */
-        }
-
-        .hero-background .relative.z-10 {
-            z-index: 1; /* Ensure text is above overlay */
-        }
-
         /* Apple-style button base */
         .apple-button {
             @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
@@ -197,15 +177,18 @@
             </div>
         </div>
 
-        <!-- Hero Section -->
-        <section class="hero-background px-4">
+        <!-- Logos above the video section -->
+        <div class="container mx-auto mt-8 flex justify-center z-50">
             <!-- Logo for Light Mode -->
-            <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="mt-4 mb-4 w-24 md:w-32 z-50" ondragstart="return false;">
+            <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="w-48 md:w-64 h-auto mb-4" ondragstart="return false;">
             <!-- Logo for Dark Mode -->
-            <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Logo" class="mt-4 mb-4 w-24 md:w-32 z-50 hidden" ondragstart="return false;">
+            <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Logo" class="w-48 md:w-64 h-auto mb-4 hidden" ondragstart="return false;">
+        </div>
 
+        <!-- Video Section (now a standalone glassy-box) -->
+        <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box relative">
             <!-- Video embed goes here -->
-            <div class="relative w-full max-w-4xl overflow-hidden rounded-lg mb-8" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+            <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
                 <video controls autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" controlsList="nodownload">
                     <source src="C0020.mp4" type="video/mp4">
                     Your browser does not support the video tag.
@@ -213,14 +196,14 @@
             </div>
         </section>
 
-        <!-- Schedule Now Button Section (new separate box) -->
+        <!-- Schedule Now Button Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
             <button id="schedule-cta" class="apple-button apple-button-primary text-2xl md:text-3xl shadow-xl hover:scale-105 text-white">
                 Book your free consultation.
             </button>
         </section>
 
-        <!-- Benefits Section (Existing, below the new section) -->
+        <!-- Benefits Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box">
             <div class="grid grid-cols-1 gap-8">
                 <!-- Benefit Card 2: Awards (Concise) -->
@@ -444,7 +427,7 @@
         const benefit2Title = document.getElementById('benefit2-title');
         const benefit2Text = document.getElementById('benefit2-text');
         const benefit3Title = document.getElementById('benefit3-title');
-        const benefit3Text = document.getElementById('benefit3-text');
+        const benefit3Text = document = document.getElementById('benefit3-text');
         const modalTitle = document.getElementById('modal-title');
         const calendlyModal = document.getElementById('calendly-modal');
         const closeModalBtn = document.getElementById('close-modal');
