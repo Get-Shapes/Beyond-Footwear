@@ -16,7 +16,7 @@
             min-height: 100vh; /* Ensure body takes full height for background */
             transition: background-color 0.3s ease;
             z-index: 0; /* Ensures content sits above it */
-            /* Removed 'color' property here to rely solely on Tailwind classes */
+            color: #1a202c; /* Default dark text for light background (gray-900) */
         }
 
         /* Remove background image layer and overlay */
@@ -97,7 +97,7 @@
             color: #e2e8f0; /* Text color for modal content */
         }
         .close-button {
-            color: #aaa; /* Default light mode color */
+            color: #1a202c; /* Black for light mode */
             position: absolute;
             top: 1rem;
             right: 1.5rem;
@@ -107,7 +107,7 @@
         }
         .close-button:hover,
         .close-button:focus {
-            color: #000; /* Default light mode hover */
+            color: #000000; /* Pure black on hover */
             text-decoration: none;
             cursor: pointer;
         }
@@ -177,19 +177,22 @@
             </div>
         </div>
 
-        <!-- Video Section (now a standalone glassy-box) -->
-        <section class="container mx-auto mt-12 p-8 rounded-xl glassy-box relative">
+        <!-- Hero Section -->
+        <section class="container mx-auto mt-8 relative">
             <!-- Logo for Light Mode -->
-            <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="absolute top-4 left-4 w-48 md:w-64 h-auto z-50" ondragstart="return false;">
+            <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="absolute top-0 left-0 w-48 md:w-64 h-auto z-50" ondragstart="return false;">
             <!-- Logo for Dark Mode -->
-            <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Logo" class="absolute top-4 left-4 w-48 md:w-64 h-auto z-50 hidden" ondragstart="return false;">
+            <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Logo" class="absolute top-0 left-0 w-48 md:w-64 h-auto z-50 hidden" ondragstart="return false;">
 
-            <!-- Video embed goes here -->
-            <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-                <video controls autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" controlsList="nodownload">
-                    <source src="C0020.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+            <!-- Video Section (now a standalone glassy-box) -->
+            <div class="mt-24 p-8 rounded-xl glassy-box relative"> <!-- Added mt-24 to push video down, making space for logo -->
+                <!-- Video embed goes here -->
+                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+                    <video controls autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" controlsList="nodownload">
+                        <source src="C0020.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
             </div>
         </section>
 
@@ -206,7 +209,7 @@
                 <!-- Benefit Card 2: Awards (Concise) -->
                 <div class="text-center transform hover:scale-105 transition duration-300">
                     <h3 id="benefit2-title" class="text-gray-800 dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h3>
-                    <ul id="benefit2-text" class="text-gray-700 dark:text-gray-300 list-none p-0 space-y-2">
+                    <ul id="benefit2-text" class="text-gray-800 dark:text-gray-300 list-none p-0 space-y-2">
                         <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
                         <li><strong>Winner of German Design Award 23</strong></li>
                         <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
@@ -233,7 +236,7 @@
         <h1 id="thankyou-headline" class="text-gray-900 dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
             Thank you! Your appointment is confirmed.
         </h1>
-        <p id="thankyou-subheadline" class="text-gray-700 dark:text-gray-300 text-xl md:text-2xl mb-10">
+        <p id="thankyou-subheadline" class="text-gray-800 dark:text-gray-300 text-xl md:text-2xl mb-10">
             Check your email for confirmation.
         </p>
         <button id="back-to-homepage" class="apple-button apple-button-secondary text-xl">
@@ -421,10 +424,10 @@
         const heroSubheadline = document.getElementById('hero-subheadline');
         const benefit1Title = document.getElementById('benefit1-title');
         const benefit1Text = document.getElementById('benefit1-text');
-        const benefit2Title = document.getElementById('benefit2-title');
+        const benefit2Title = document.getElementById('benefit2-2-title');
         const benefit2Text = document.getElementById('benefit2-text');
         const benefit3Title = document.getElementById('benefit3-title');
-        const benefit3Text = document = document.getElementById('benefit3-text');
+        const benefit3Text = document.getElementById('benefit3-text');
         const modalTitle = document.getElementById('modal-title');
         const calendlyModal = document.getElementById('calendly-modal');
         const closeModalBtn = document.getElementById('close-modal');
