@@ -50,6 +50,7 @@
         /* Apple-style button base */
         .apple-button {
             @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
+            outline: none; /* Remove default focus outline */
         }
         /* apple-button-primary and apple-button-secondary styles are now applied directly to buttons */
 
@@ -189,7 +190,7 @@
 
         <!-- Schedule Now Button Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-blue-600 dark:text-white">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-blue-600 dark:text-white focus:outline-none">
                 Book your free consultation.
             </button>
         </section>
