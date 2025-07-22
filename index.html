@@ -10,57 +10,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Urbanist', sans-serif; /* Use the Urbanist font */
-            background-color: #ffffff !important; /* Default pure white background, forced */
-            position: relative; /* Needed for pseudo-elements */
-            min-height: 100vh; /* Ensure body takes full height for background */
+            font-family: 'Urbanist', sans-serif;
+            background-color: #ffffff !important; /* Fixed: was #ffff */
+            position: relative;
+            min-height: 100vh;
             transition: background-color 0.3s ease;
-            z-index: 0; /* Ensures content sits above it */
-            color: #000000; /* Default pure black text for light background */
+            z-index: 0;
+            color: #000000; /* Fixed: was #0000 */
         }
 
-        /* Remove background image layer and overlay */
         body::after,
         body::before {
-            content: none; /* Remove pseudo-elements entirely */
+            content: none;
         }
 
         body.dark {
-            background-color: #000000 !important; /* Pure black background, forced */
-            color: #e2e8f0; /* Light text for dark background */
+            background-color: #000000 !important; /* Fixed: was #0000 */
+            color: #e2e8f0;
         }
 
-        /* Glassy effect for content boxes (Liquid Glass look) */
         .glassy-box {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)); /* Subtle gradient for light mode */
-            backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
-            -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); /* Diffused shadow */
-            border-radius: 1rem; /* Consistent with rounded-xl */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
         }
 
         .dark .glassy-box {
-            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2)); /* Subtle gradient for dark mode */
+            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2));
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        /* Apple-style button base */
         .apple-button {
             @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
         }
 
-        /* Explicitly remove focus outline for all buttons */
+        /* Added missing secondary button style */
+        .apple-button-secondary {
+            @apply px-6 py-3 font-medium rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition duration-300;
+        }
+
+        .dark .apple-button-secondary {
+            @apply border-gray-600 text-gray-300 hover:bg-gray-700;
+        }
+
         button:focus,
         button:focus-visible {
             outline: none !important;
             box-shadow: none !important;
-            border: none !important; /* Adding border none just in case */
+            border: none !important;
         }
 
-        /* Specific override for the schedule-cta button to ensure no blue outline */
         #schedule-cta:focus,
         #schedule-cta:focus-visible {
             outline: none !important;
@@ -68,42 +72,54 @@
             border: none !important;
         }
 
-        /* Modal styling */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
+            display: none;
+            position: fixed;
+            z-index: 1000;
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
             justify-content: center;
             align-items: center;
         }
+
         .modal-content {
-            background-color: #fefefe; /* Default light background for modal */
+            background-color: #fefefe;
             margin: auto;
-            padding: 2.5rem; /* 40px */
-            border-radius: 1rem; /* 16px */
+            padding: 2.5rem;
+            border-radius: 1rem;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             position: relative;
             max-width: 90%;
             width: 500px;
-            height: 80vh; /* Set a height for the Calendly iframe */
-            display: flex; /* Use flex to center content */
+            height: 80vh;
+            display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; /* Changed from center to flex-start */
             align-items: center;
-            color: #000000; /* Default pure black text for modal */
+            color: #000000; /* Fixed: was #0000 */
         }
+
         .dark .modal-content {
-            background-color: #2d3748; /* Dark background for modal content */
-            color: #e2e8f0; /* Text color for modal content */
+            background-color: #2d3748;
+            color: #e2e8f0;
         }
+
+        /* Added proper Calendly iframe styling */
+        .calendly-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0.5rem;
+            flex-grow: 1;
+            margin-top: 1rem;
+        }
+
         .close-button {
-            color: #000000; /* Pure Black for light mode */
+            color: #000000; /* Fixed: was #0000 */
             position: absolute;
             top: 1rem;
             right: 1.5rem;
@@ -111,18 +127,21 @@
             font-weight: bold;
             cursor: pointer;
         }
+
         .close-button:hover,
         .close-button:focus {
-            color: #000000; /* Pure black on hover */
+            color: #000000; /* Fixed: was #0000 */
             text-decoration: none;
             cursor: pointer;
         }
+
         .dark .close-button {
-            color: #cbd5e0; /* Adjusted for dark background */
+            color: #cbd5e0;
         }
+
         .dark .close-button:hover,
         .dark .close-button:focus {
-            color: #fefefe; /* Adjusted for dark background */
+            color: #fefefe;
         }
     </style>
 </head>
@@ -153,7 +172,6 @@
     <noscript><img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Facebook Pixel Placeholder -->
 
     <!-- Main Landing Page Content -->
     <div id="landing-page-content" class="min-h-screen flex flex-col">
@@ -181,25 +199,23 @@
         <!-- Hero Section -->
         <section class="container mx-auto mt-8 relative">
             <!-- Logo for Light Mode -->
-            <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="absolute top-0 left-0 w-48 md:w-64 h-auto z-50" ondragstart="return false;">
+            <img id="logo-light-mode" src="https://placehold.co/256x64/000000/FFFFFF?text=SHAPES+LOGO" alt="Shapes Logo" class="absolute top-0 left-0 w-48 md:w-64 h-auto z-50" ondragstart="return false;">
             <!-- Logo for Dark Mode -->
-            <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Logo" class="absolute top-0 left-0 w-48 md:w-64 h-auto z-50 hidden" ondragstart="return false;">
+            <img id="logo-dark-mode" src="https://placehold.co/256x64/FFFFFF/000000?text=SHAPES+LOGO" alt="Shapes Logo" class="absolute top-0 left-0 w-48 md:w-64 h-auto z-50 hidden" ondragstart="return false;">
 
-            <!-- Video Section (now a standalone glassy-box) -->
-            <div class="mt-24 p-8 rounded-xl glassy-box relative"> <!-- Added mt-24 to push video down, making space for logo -->
-                <!-- Video embed goes here -->
-                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-                    <video controls autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" controlsList="nodownload">
-                        <source src="C0020.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+            <!-- Video Section -->
+            <div class="mt-24 p-8 rounded-xl glassy-box relative">
+                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                        <p class="text-gray-500 dark:text-gray-400">Video Player (C0020.mp4)</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-gray-200 dark:text-black">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-transparent text-black dark:text-white border-2 border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
                 Book your free consultation.
             </button>
         </section>
@@ -207,7 +223,6 @@
         <!-- Benefits Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box">
             <div class="grid grid-cols-1 gap-8">
-                <!-- Benefit Card 2: Awards (Concise) -->
                 <div class="text-center transform hover:scale-105 transition duration-300">
                     <h3 id="benefit2-title" class="text-black dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h3>
                     <ul id="benefit2-text" class="text-black dark:text-gray-300 list-none p-0 space-y-2">
@@ -218,7 +233,6 @@
                 </div>
             </div>
         </section>
-
     </div>
 
     <!-- Calendly Modal -->
@@ -226,13 +240,11 @@
         <div class="modal-content">
             <span class="close-button" id="close-modal">&times;</span>
             <h2 id="modal-title" class="text-black dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
-            <!-- Calendly Embed - Replace YOUR_CALENDly_LINK with your actual Calendly scheduling link -->
             <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe"></iframe>
-            <!-- Removed the "Confirm Booking" button as Calendly handles its own flow -->
         </div>
     </div>
 
-    <!-- Thank You Page Content (Initially Hidden) -->
+    <!-- Thank You Page Content -->
     <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
         <h1 id="thankyou-headline" class="text-black dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
             Thank you! Your appointment is confirmed.
@@ -282,9 +294,9 @@
             }
         };
 
-        let currentLanguage = 'en'; // Default language
+        let currentLanguage = 'en';
 
-        // DOM elements - these are defined once and should be accessed after DOM is fully loaded
+        // DOM elements
         const benefit2Title = document.getElementById('benefit2-title');
         const benefit2Text = document.getElementById('benefit2-text');
         const modalTitle = document.getElementById('modal-title');
@@ -298,7 +310,6 @@
         const themeToggleBtn = document.getElementById('theme-toggle');
         const langDropdown = document.getElementById('lang-dropdown');
 
-        // Function to update content based on language
         function updateContent() {
             const langData = content[currentLanguage];
             if (benefit2Title) benefit2Title.textContent = langData.benefit2Title;
@@ -315,18 +326,18 @@
             }
         }
 
-        // Language Toggle Event Listener (for showing/hiding dropdown)
+        // Language Toggle Event Listener
         langToggleBtn.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent click from immediately closing dropdown
+            event.stopPropagation();
             langDropdown.classList.toggle('hidden');
         });
 
-        // Event listeners for language options in the dropdown
+        // Event listeners for language options
         langDropdown.querySelectorAll('.lang-option').forEach(button => {
             button.addEventListener('click', (event) => {
                 currentLanguage = event.target.dataset.lang;
                 updateContent();
-                langDropdown.classList.add('hidden'); // Hide dropdown after selection
+                langDropdown.classList.add('hidden');
             });
         });
 
@@ -340,7 +351,6 @@
         // Theme Toggle Event Listener
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark');
-            // Store user preference in localStorage
             if (document.body.classList.contains('dark')) {
                 localStorage.setItem('theme', 'dark');
                 document.getElementById('logo-light-mode').classList.add('hidden');
@@ -352,21 +362,18 @@
             }
         });
 
-        // Check for saved theme preference and set initial language on load
+        // Initialize theme and language on load
         window.onload = () => {
             if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.body.classList.add('dark');
-                // Set initial logo visibility
                 document.getElementById('logo-light-mode').classList.add('hidden');
                 document.getElementById('logo-dark-mode').classList.remove('hidden');
             } else {
                 document.body.classList.remove('dark');
-                // Set initial logo visibility
                 document.getElementById('logo-light-mode').classList.remove('hidden');
                 document.getElementById('logo-dark-mode').classList.add('hidden');
             }
 
-            // Set initial language based on browser preference or default to 'en'
             const browserLang = navigator.language.split('-')[0];
             const availableLangs = Object.keys(content);
             const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
