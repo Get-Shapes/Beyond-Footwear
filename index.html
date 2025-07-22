@@ -50,9 +50,14 @@
         /* Apple-style button base */
         .apple-button {
             @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
-            outline: none; /* Remove default focus outline */
         }
-        /* apple-button-primary and apple-button-secondary styles are now applied directly to buttons */
+
+        /* Explicitly remove focus outline for all buttons */
+        button:focus,
+        button:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+        }
 
         /* Modal styling */
         .modal {
@@ -132,7 +137,7 @@
         n.queue=[];t=b.createElement(e);t.async=!0;
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document, 'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
+        'https://connect.facebook.com/en_US/fbevents.js');
         fbq('init', 'YOUR_PIXEL_ID');
         fbq('track', 'PageView');
     </script>
@@ -188,10 +193,10 @@
             </div>
         </section>
 
-        <!-- Schedule Now Button Section -->
+        <!-- New Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-blue-600 dark:text-white focus:outline-none">
-                Book your free consultation.
+            <button id="new-cta-button" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-blue-600 dark:text-white">
+                New Call to Action
             </button>
         </section>
 
@@ -242,7 +247,8 @@
             en: {
                 heroHeadline: "", // Removed text
                 heroSubheadline: "", // Removed text
-                scheduleCta: "Book your free consultation.",
+                scheduleCta: "Book your free consultation.", // Kept for potential future use or reference
+                newCtaText: "New Call to Action", // New text for the new button
                 benefit1Title: "", // This will be removed from HTML
                 benefit1Text: '', // This will be removed from HTML
                 safetyTitle: "", // This will be removed from HTML
@@ -267,6 +273,7 @@
                 heroHeadline: "", // Removed text
                 heroSubheadline: "", // Removed text
                 scheduleCta: "Buche deine kostenlose Beratung.",
+                newCtaText: "Neuer Aufruf zum Handeln",
                 benefit1Title: "",
                 benefit1Text: '',
                 safetyTitle: "",
@@ -291,6 +298,7 @@
                 heroHeadline: "", // Removed text
                 heroSubheadline: "", // Removed text
                 scheduleCta: "预约免费咨询。",
+                newCtaText: "新的行动号召",
                 benefit1Title: "",
                 benefit1Text: '',
                 safetyTitle: "",
@@ -315,6 +323,7 @@
                 heroHeadline: "", // Removed text
                 heroSubheadline: "", // Removed text
                 scheduleCta: "Prenota la tua consulenza gratuita.",
+                newCtaText: "Nuova chiamata all'azione",
                 benefit1Title: "",
                 benefit1Text: '',
                 safetyTitle: "",
@@ -339,6 +348,7 @@
                 heroHeadline: "", // Removed text
                 heroSubheadline: "", // Removed text
                 scheduleCta: "Reserva tu consulta gratuita.",
+                newCtaText: "Nueva llamada a la acción",
                 benefit1Title: "",
                 benefit1Text: '',
                 safetyTitle: "",
@@ -363,6 +373,7 @@
                 heroHeadline: "", // Removed text
                 heroSubheadline: "", // Removed text
                 scheduleCta: "Agende sua consulta gratuita.",
+                newCtaText: "Nova chamada para ação",
                 benefit1Title: "",
                 benefit1Text: '',
                 safetyTitle: "",
@@ -387,6 +398,7 @@
                 heroHeadline: "", // Removed text
                 heroSubheadline: "", // Removed text
                 scheduleCta: "Buach dei kostenlose Beratung.",
+                newCtaText: "Neier Afruaf zum Handln",
                 benefit1Title: "",
                 benefit1Text: '',
                 safetyTitle: "",
@@ -430,6 +442,7 @@
         const currentLangSpan = document.getElementById('current-lang');
         const themeToggleBtn = document.getElementById('theme-toggle');
         const langDropdown = document.getElementById('lang-dropdown'); // Get the dropdown element
+        const newCtaButton = document.getElementById('new-cta-button'); // New button element
 
         // Function to update content based on language
         function updateContent() {
@@ -446,11 +459,7 @@
             if (document.getElementById('thankyou-subheadline')) document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
             if (backToHomepageBtn) backToHomepageBtn.textContent = langData.backToHomepage;
             if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
-
-            const updatedScheduleCta = document.getElementById('schedule-cta');
-            if (updatedScheduleCta) {
-                updatedScheduleCta.textContent = langData.scheduleCta;
-            }
+            if (newCtaButton) newCtaButton.textContent = langData.newCtaText; // Update text for the new button
         }
 
         // Language Toggle Event Listener (for showing/hiding dropdown)
@@ -512,11 +521,11 @@
             updateContent();
         };
 
-        // Show Calendly Modal
+        // Show Calendly Modal (now triggered by the new button)
         document.addEventListener('DOMContentLoaded', () => {
-            const scheduleCtaButton = document.getElementById('schedule-cta');
-            if (scheduleCtaButton) {
-                scheduleCtaButton.addEventListener('click', () => {
+            const newCtaButton = document.getElementById('new-cta-button'); // Get the new button
+            if (newCtaButton) {
+                newCtaButton.addEventListener('click', () => {
                     calendlyModal.style.display = 'flex';
                 });
             }
