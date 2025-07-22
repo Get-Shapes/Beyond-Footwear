@@ -30,26 +30,26 @@
             color: #e2e8f0; /* Light text for dark background */
         }
 
-        /* Glassy effect for content boxes (Liquid Glass look) */
+        /* Glassy effect for content boxes (Liquid Glass look) - No color tint, only transparency and grayscale */
         .glassy-box {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)); /* Subtle gradient for light mode */
+            background: rgba(255, 255, 255, 0.05); /* Very subtle white transparency for light mode */
             backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
             -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); /* Diffused shadow */
+            border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle black border for light mode */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05); /* Diffused black shadow for light mode */
             border-radius: 1rem; /* Consistent with rounded-xl */
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
         }
 
         .dark .glassy-box {
-            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2)); /* Subtle gradient for dark mode */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.05); /* Very subtle black transparency for dark mode */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white border for dark mode */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); /* Diffused black shadow for dark mode */
         }
 
-        /* Apple-style button base */
+        /* Apple-style button base - Removed default shadow from apply */
         .apple-button {
-            @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
+            @apply px-8 py-4 font-semibold rounded-xl transition duration-300;
         }
 
         /* Explicitly remove focus outline for all buttons */
@@ -83,11 +83,11 @@
             align-items: center;
         }
         .modal-content {
-            background-color: #fefefe; /* Default light background for modal */
+            background-color: #ffffff; /* Pure white background for modal in light mode */
             margin: auto;
             padding: 2.5rem; /* 40px */
             border-radius: 1rem; /* 16px */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Grayscale shadow */
             position: relative;
             max-width: 90%;
             width: 500px;
@@ -96,11 +96,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #000000; /* Default pure black text for modal */
+            color: #000000; /* Pure black text for modal */
         }
         .dark .modal-content {
-            background-color: #2d3748; /* Dark background for modal content */
-            color: #e2e8f0; /* Text color for modal content */
+            background-color: #1a202c; /* Dark gray background for modal content in dark mode */
+            color: #e2e8f0; /* Light text for modal content */
         }
         .close-button {
             color: #000000; /* Pure Black for light mode */
@@ -199,7 +199,7 @@
 
         <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-gray-200 dark:text-black">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-gray-800 dark:text-gray-200 shadow-md">
                 Book your free consultation.
             </button>
         </section>
@@ -233,14 +233,14 @@
     </div>
 
     <!-- Thank You Page Content (Initially Hidden) -->
-    <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
+    <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-900 transition duration-300">
         <h1 id="thankyou-headline" class="text-black dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
             Thank you! Your appointment is confirmed.
         </h1>
         <p id="thankyou-subheadline" class="text-black dark:text-gray-300 text-xl md:text-2xl mb-10">
             Check your email for confirmation.
         </p>
-        <button id="back-to-homepage" class="apple-button apple-button-secondary text-xl">
+        <button id="back-to-homepage" class="apple-button text-xl bg-gray-200 text-black dark:bg-gray-800 dark:text-gray-200 shadow-md">
             Back to Homepage
         </button>
     </div>
