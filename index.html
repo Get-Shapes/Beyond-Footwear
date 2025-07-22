@@ -47,9 +47,9 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        /* Apple-style button base - Removed default shadow */
+        /* Apple-style button base */
         .apple-button {
-            @apply px-8 py-4 font-semibold rounded-xl transition duration-300;
+            @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
         }
 
         /* Explicitly remove focus outline for all buttons */
@@ -199,7 +199,7 @@
 
         <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-transparent text-black dark:bg-transparent dark:text-gray-200 border border-black dark:border-gray-200">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl bg-transparent text-black dark:bg-transparent dark:text-gray-200 border border-black dark:border-gray-200">
                 Book your free consultation.
             </button>
         </section>
@@ -297,6 +297,9 @@
         const currentLangSpan = document.getElementById('current-lang');
         const themeToggleBtn = document.getElementById('theme-toggle');
         const langDropdown = document.getElementById('lang-dropdown');
+        const logoLightMode = document.getElementById('logo-light-mode');
+        const logoDarkMode = document.getElementById('logo-dark-mode');
+
 
         // Function to update content based on language
         function updateContent() {
@@ -305,7 +308,7 @@
             if (benefit2Text) benefit2Text.innerHTML = langData.benefit2Text;
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
             if (document.getElementById('thankyou-headline')) document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
-            if (document.getElementById('thankyou-subheadline')) document.getElementById('thankyou-subheadline').textContent = langData.thankYouSubheadline;
+            if (document.getElementById('thankyou-subheadline')) document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
             if (backToHomepageBtn) backToHomepageBtn.textContent = langData.backToHomepage;
             if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
 
@@ -343,8 +346,66 @@
             // Store user preference in localStorage
             if (document.body.classList.contains('dark')) {
                 localStorage.setItem('theme', 'dark');
-                document.getElementById('logo-light-mode').classList.add('hidden');
-                document.getElementById('logo-dark-mode').classList.remove('hidden');
+                logoLightMode.classList.add('hidden');
+                logoDarkMode.classList.remove('hidden');
             } else {
                 localStorage.setItem('theme', 'light');
-                document.getElementById('logo-lig
+                logoLightMode.classList.remove('hidden');
+                logoDarkMode.classList.add('hidden');
+            }
+        });
+
+        // Check for saved theme preference and set initial language on load
+        window.onload = () => {
+            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+                document.body.classList.add('dark');
+                logoLightMode.classList.add('hidden');
+                logoDarkMode.classList.remove('hidden');
+            } else {
+                document.body.classList.remove('dark');
+                logoLightMode.classList.remove('hidden');
+                logoDarkMode.classList.add('hidden');
+            }
+
+            // Set initial language based on browser preference or default to 'en'
+            const browserLang = navigator.language.split('-')[0];
+            const availableLangs = Object.keys(content);
+            const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
+            currentLanguage = initialLang;
+            updateContent();
+        };
+
+        // Show Calendly Modal
+        document.addEventListener('DOMContentLoaded', () => {
+            const scheduleCtaButton = document.getElementById('schedule-cta');
+            if (scheduleCtaButton) {
+                scheduleCtaButton.addEventListener('click', () => {
+                    calendlyModal.style.display = 'flex';
+                });
+            }
+        });
+
+        // Close Calendly Modal
+        closeModalBtn.addEventListener('click', () => {
+            calendlyModal.style.display = 'none';
+        });
+
+        // Close modal if clicking outside content
+        calendlyModal.addEventListener('click', (e) => {
+            if (e.target === calendlyModal) {
+                calendlyModal.style.display = 'none';
+            }
+        });
+
+        // Back to Homepage from Thank You Page
+        backToHomepageBtn.addEventListener('click', () => {
+            thankYouPage.classList.add('hidden');
+            landingPageContent.classList.remove('hidden');
+        });
+    </script>
+
+</body>
+</html>
