@@ -97,11 +97,9 @@
             align-items: center;
         }
         .modal-content {
-            background-color: #fefefe; /* Default light background for modal */
+            /* Removed background-color, border-radius, box-shadow to use glassy-box */
             margin: auto;
             padding: 2.5rem; /* 40px */
-            border-radius: 1rem; /* 16px */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             position: relative;
             max-width: 90%;
             width: 500px;
@@ -113,7 +111,7 @@
             color: #000000; /* Default pure black text for modal */
         }
         .dark .modal-content {
-            background-color: #2d3748; /* Dark background for modal content */
+            /* Removed background-color to use glassy-box */
             color: #e2e8f0; /* Text color for modal content */
         }
         .close-button {
@@ -239,7 +237,7 @@
 
     <!-- Calendly Modal -->
     <div id="calendly-modal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content glassy-box">
             <span class="close-button" id="close-modal">&times;</span>
             <h2 id="modal-title" class="text-black-force dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
             <!-- Calendly Embed - Replace YOUR_CALENDly_LINK with your actual Calendly scheduling link -->
