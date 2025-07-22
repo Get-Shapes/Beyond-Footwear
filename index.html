@@ -50,13 +50,26 @@
         /* Apple-style button base */
         .apple-button {
             @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
+            /* Aggressive removal of focus styles for all buttons */
+            outline: none !important;
+            box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent; /* For iOS Safari */
         }
 
-        /* Explicitly remove focus outline for all buttons */
+        /* Explicitly remove focus outline for all buttons, including accessibility outlines */
         button:focus,
         button:focus-visible {
             outline: none !important;
             box-shadow: none !important;
+            border: none !important; /* Adding border none just in case */
+        }
+
+        /* Specific override for the schedule-cta button to ensure no blue outline */
+        #schedule-cta:focus,
+        #schedule-cta:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
         }
 
         /* Modal styling */
@@ -195,7 +208,7 @@
 
         <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-blue-600 dark:text-white focus:outline-none focus:ring-0 focus:ring-offset-0">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-blue-600 dark:text-white">
                 Book your free consultation.
             </button>
         </section>
