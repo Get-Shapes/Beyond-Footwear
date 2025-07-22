@@ -54,7 +54,7 @@
 
         /* Apple-style button base */
         .apple-button {
-            @apply px-8 py-4 font-semibold rounded-xl transition duration-300; /* Removed shadow-md here */
+            @apply px-8 py-4 font-semibold rounded-xl transition duration-300;
         }
 
         /* Explicitly remove focus outline for all buttons */
@@ -194,7 +194,7 @@
             <div class="mt-24 p-8 rounded-xl glassy-box relative"> <!-- Added mt-24 to push video down, making space for logo -->
                 <!-- Video embed goes here -->
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-                    <video controls autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" controlsList="nodownload">
+                    <video controls autoplay loop playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" controlsList="nodownload">
                         <source src="Test Women 1.mp4" type="video/mp4"> <!-- Changed video source here -->
                         Your browser does not support the video tag.
                     </video>
@@ -204,7 +204,7 @@
 
         <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl bg-transparent text-black-force dark:bg-transparent dark:text-gray-200">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl bg-transparent text-black-force dark:bg-transparent dark:text-gray-200 hover:scale-105 shadow-md">
                 Book your free consultation.
             </button>
         </section>
@@ -213,7 +213,7 @@
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box">
             <div class="grid grid-cols-1 gap-8">
                 <!-- Benefit Card 2: Awards (Concise) -->
-                <div class="text-center transform hover:scale-105 transition duration-300">
+                <div class="text-center transition duration-300">
                     <h3 id="benefit2-title" class="text-black-force dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h3>
                     <ul id="benefit2-text" class="text-black-force dark:text-gray-300 list-none p-0 space-y-2">
                         <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
