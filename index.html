@@ -136,6 +136,11 @@
         .dark .close-button:focus {
             color: #fefefe; /* Adjusted for dark background */
         }
+
+        /* Specific override for language toggle button in light mode */
+        body:not(.dark) #lang-toggle {
+            background-color: #ffffff !important; /* Force solid white background in light mode */
+        }
     </style>
 </head>
 <body class="text-black" oncontextmenu="return false;">
@@ -177,7 +182,7 @@
             </button>
             <!-- Language Toggle with Dropdown -->
             <div class="relative">
-                <button id="lang-toggle" class="p-2 rounded-full bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
                     <span id="current-lang">EN</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -303,7 +308,7 @@
         const calendlyModal = document.getElementById('calendly-modal');
         const closeModalBtn = document.getElementById('close-modal');
         const landingPageContent = document.getElementById('landing-page-content');
-        const thankYouPage = document.getElementById('thank-you-page'); // Fixed typo here
+        const thankYouPage = document.getElementById('thank-you-page');
         const backToHomepageBtn = document.getElementById('back-to-homepage');
         const langToggleBtn = document.getElementById('lang-toggle');
         const currentLangSpan = document.getElementById('current-lang');
