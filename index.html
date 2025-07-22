@@ -97,13 +97,13 @@
             align-items: center;
         }
         .modal-content {
-            /* Removed background-color, border-radius, box-shadow to use glassy-box */
+            /* Removed fixed width/height to allow flex content to size it, added max-width/height */
             margin: auto;
             padding: 2.5rem; /* 40px */
             position: relative;
-            max-width: 90%;
-            width: 500px;
-            height: 80vh; /* Set a height for the Calendly iframe */
+            max-width: 90%; /* Max width for responsiveness */
+            max-height: 90vh; /* Max height for responsiveness */
+            overflow-y: auto; /* Enable scroll if content overflows */
             display: flex; /* Use flex to center content */
             flex-direction: column;
             justify-content: center;
@@ -111,7 +111,6 @@
             color: #000000; /* Default pure black text for modal */
         }
         .dark .modal-content {
-            /* Removed background-color to use glassy-box */
             color: #e2e8f0; /* Text color for modal content */
         }
         .close-button {
@@ -140,6 +139,24 @@
         /* Specific override for language toggle button in light mode */
         body:not(.dark) #lang-toggle {
             background-color: #ffffff !important; /* Force solid white background in light mode */
+        }
+
+        /* Calendly iframe container styling */
+        .calendly-iframe-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+            border-radius: 0.5rem; /* Match rounded-lg */
+        }
+
+        .calendly-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0; /* Remove default iframe border */
         }
     </style>
 </head>
@@ -244,7 +261,9 @@
             <span class="close-button" id="close-modal">&times;</span>
             <h2 id="modal-title" class="text-black-force dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
             <!-- Calendly Embed - Replace YOUR_CALENDly_LINK with your actual Calendly scheduling link -->
-            <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe"></iframe>
+            <div class="calendly-iframe-container">
+                <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe"></iframe>
+            </div>
             <!-- Removed the "Confirm Booking" button as Calendly handles its own flow -->
         </div>
     </div>
