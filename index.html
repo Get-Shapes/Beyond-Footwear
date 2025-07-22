@@ -50,13 +50,9 @@
         /* Apple-style button base */
         .apple-button {
             @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
-            /* Aggressive removal of focus styles for all buttons */
-            outline: none !important;
-            box-shadow: none !important;
-            -webkit-tap-highlight-color: transparent; /* For iOS Safari */
         }
 
-        /* Explicitly remove focus outline for all buttons, including accessibility outlines */
+        /* Explicitly remove focus outline for all buttons */
         button:focus,
         button:focus-visible {
             outline: none !important;
@@ -178,11 +174,6 @@
                 <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white dark:bg-gray-700 rounded-lg shadow-xl py-1 z-50 glassy-box">
                     <button class="block w-full text-left px-4 py-2 text-black dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
                     <button class="block w-full text-left px-4 py-2 text-black dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
-                    <button class="block w-full text-left px-4 py-2 text-black dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="zh">中文</button>
-                    <button class="block w-full text-left px-4 py-2 text-black dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="it">Italiano</button>
-                    <button class="block w-full text-left px-4 py-2 text-black dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="es">Español</button>
-                    <button class="block w-full text-left px-4 py-2 text-black dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="pt">Português</button>
-                    <button class="block w-full text-left px-4 py-2 text-black dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="by">Bayrisch</button>
                 </div>
             </div>
         </div>
@@ -208,7 +199,7 @@
 
         <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-blue-600 dark:text-white">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-gray-200 dark:text-black">
                 Book your free consultation.
             </button>
         </section>
@@ -288,90 +279,6 @@
                 thankyouSubheadline: "Bitte überprüfen Sie Ihre E-Mails zur Bestätigung.",
                 backToHomepage: "Zurück zur Startseite",
                 currentLang: "DE"
-            },
-            zh: {
-                scheduleCta: "预约免费咨询。",
-                benefit2Title: "屡获殊荣",
-                benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li>多次获得健康与水疗创新奖和德国设计奖提名</li>
-                        <li><strong>荣获德国设计奖 23</strong></li>
-                        <li><strong>荣获德国创新奖 23</strong> (医疗与健康)</li>
-                    </ul>
-                `,
-                modalTitle: "安排您的预约",
-                thankyouHeadline: "谢谢！您的预约已确认。",
-                thankyouSubheadline: "请检查您的电子邮件以获取确认。",
-                backToHomepage: "返回主页",
-                currentLang: "ZH"
-            },
-            it: {
-                scheduleCta: "Prenota la tua consulenza gratuita.",
-                benefit2Title: "Premiato",
-                benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li>Nominato più volte per Wellness & Spa Innovation Award & German Design Award</li>
-                        <li><strong>Vincitore del German Design Award 23</strong></li>
-                        <li><strong>Vincitore del German Innovation Award 23</strong> (Medicina e Salute)</li>
-                    </ul>
-                `,
-                modalTitle: "Pianifica il tuo appuntamento",
-                thankyouHeadline: "Grazie! Il tuo appuntamento è confermato.",
-                thankyouSubheadline: "Controlla la tua email per la conferma.",
-                backToHomepage: "Torna alla Homepage",
-                currentLang: "IT"
-            },
-            es: {
-                scheduleCta: "Reserva tu consulta gratuita.",
-                benefit2Title: "Galardonado",
-                benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li>Múltiples nominaciones para el Premio a la Innovación en Bienestar y Spa y el Premio Alemán de Diseño</li>
-                        <li><strong>Ganador del German Design Award 23</strong></li>
-                        <li><strong>Ganador del German Innovation Award 23</strong> (Medicina y Salud)</li>
-                    </ul>
-                `,
-                benefit3Title: "",
-                benefit3Text: "",
-                modalTitle: "Agenda tu cita",
-                thankyouHeadline: "¡Gracias! Tu cita está confirmada.",
-                thankyouSubheadline: "Revisa tu correo electrónico para la confirmación.",
-                backToHomepage: "Volver a la página de inicio",
-                currentLang: "ES"
-            },
-            pt: {
-                scheduleCta: "Agende sua consulta gratuita.",
-                benefit2Title: "Premiado",
-                benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li>Múltiplas indicações para o Prêmio de Inovação em Bem-Estar e Spa e German Design Award</li>
-                        <li><strong>Vencedor do German Design Award 23</strong></li>
-                        <li><strong>Vencedor do German Innovation Award 23</strong> (Médico e Saúde)</li>
-                    </ul>
-                `,
-                benefit3Title: "",
-                benefit3Text: "",
-                modalTitle: "Agende sua consulta",
-                thankyouHeadline: "Obrigado! Sua consulta está confirmada.",
-                thankyouSubheadline: "Verifique seu e-mail para confirmação.",
-                backToHomepage: "Voltar para a página inicial",
-                currentLang: "PT"
-            },
-            by: {
-                scheduleCta: "Buach dei kostenlose Beratung.",
-                benefit2Title: "Preisgekrönt",
-                benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li>Mehrmals nominiert für Wellness & Spa Innovation Award & German Design Award</li>
-                        <li><strong>Gwunna vom German Design Award 23</strong></li>
-                        <li><strong>Gwunna vom German Innovation Award 23</strong> (Medizin & Gsundheit)</li>
-                    </ul>
-                `,
-                modalTitle: "Dein Termin zum Buacha",
-                thankyouHeadline: "Vielen Dank! Dein Termin is bstätigt.",
-                thankyouSubheadline: "Schau in deine E-Mails für de Bstätigung.",
-                backToHomepage: "Zruck zur Startseitn",
-                currentLang: "BY"
             }
         };
 
