@@ -64,20 +64,20 @@
             @apply px-8 py-4 font-semibold rounded-xl transition duration-300;
         }
 
-        /* Explicitly remove focus outline for all buttons */
+        /* Explicitly remove focus outline and border for all buttons */
         button:focus,
         button:focus-visible {
             outline: none !important;
             box-shadow: none !important;
-            border: none !important; /* Adding border none just in case */
+            border: none !important; /* Added to aggressively remove any default borders */
         }
 
-        /* Specific override for the schedule-cta button to ensure no blue outline */
+        /* Specific override for the schedule-cta button to ensure no blue outline or border */
         #schedule-cta:focus,
         #schedule-cta:focus-visible {
             outline: none !important;
             box-shadow: none !important;
-            border: none !important;
+            border: none !important; /* Added to aggressively remove any default borders */
         }
 
         /* Modal styling */
