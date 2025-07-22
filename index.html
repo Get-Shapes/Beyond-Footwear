@@ -57,6 +57,9 @@
             object-fit: cover;
             width: 100%;
             height: 100%;
+            min-width: 100%; /* Added to force fill */
+            min-height: 100%; /* Added to force fill */
+            display: block; /* Ensure no extra space */
         }
 
         /* Apple-style button base */
@@ -305,7 +308,7 @@
         const calendlyModal = document.getElementById('calendly-modal');
         const closeModalBtn = document.getElementById('close-modal');
         const landingPageContent = document.getElementById('landing-page-content');
-        const thankYouPage = document.getElementById('thank-you-page');
+        const thankYouPage = document.getElementById('thank-ou-page');
         const backToHomepageBtn = document.getElementById('back-to-homepage');
         const langToggleBtn = document.getElementById('lang-toggle');
         const currentLangSpan = document.getElementById('current-lang');
@@ -453,3 +456,4 @@
 
 </body>
 </html>
+
