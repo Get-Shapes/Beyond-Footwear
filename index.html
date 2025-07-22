@@ -10,60 +10,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Urbanist', sans-serif;
-            background-color: #ffffff !important;
-            position: relative;
-            min-height: 100vh;
+            font-family: 'Urbanist', sans-serif; /* Use the Urbanist font */
+            background-color: #ffffff !important; /* Default pure white background, forced */
+            position: relative; /* Needed for pseudo-elements */
+            min-height: 100vh; /* Ensure body takes full height for background */
             transition: background-color 0.3s ease;
-            z-index: 0;
-            color: #000000 !important; /* Force black text in light mode */
+            z-index: 0; /* Ensures content sits above it */
+            color: #000000; /* Default pure black text for light background */
         }
 
+        /* Remove background image layer and overlay */
         body::after,
         body::before {
-            content: none;
+            content: none; /* Remove pseudo-elements entirely */
         }
 
         body.dark {
-            background-color: #000000 !important;
-            color: #e2e8f0 !important; /* Light text for dark mode */
+            background-color: #000000 !important; /* Pure black background, forced */
+            color: #e2e8f0; /* Light text for dark background */
         }
 
+        /* Glassy effect for content boxes (Liquid Glass look) */
         .glassy-box {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            backdrop-filter: blur(10px) saturate(180%);
-            -webkit-backdrop-filter: blur(10px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)); /* Subtle gradient for light mode */
+            backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
+            -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); /* Diffused shadow */
+            border-radius: 1rem; /* Consistent with rounded-xl */
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
         }
 
         .dark .glassy-box {
-            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2));
+            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2)); /* Subtle gradient for dark mode */
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
+        /* Apple-style button base - Removed default shadow */
         .apple-button {
-            @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
+            @apply px-8 py-4 font-semibold rounded-xl transition duration-300;
         }
 
-        .apple-button-secondary {
-            @apply px-6 py-3 font-medium rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition duration-300;
-        }
-
-        .dark .apple-button-secondary {
-            @apply border-gray-600 text-gray-300 hover:bg-gray-700;
-        }
-
+        /* Explicitly remove focus outline for all buttons */
         button:focus,
         button:focus-visible {
             outline: none !important;
             box-shadow: none !important;
-            border: none !important;
+            border: none !important; /* Adding border none just in case */
         }
 
+        /* Specific override for the schedule-cta button to ensure no blue outline */
         #schedule-cta:focus,
         #schedule-cta:focus-visible {
             outline: none !important;
@@ -71,53 +68,42 @@
             border: none !important;
         }
 
+        /* Modal styling */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
             left: 0;
             top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
             justify-content: center;
             align-items: center;
         }
-
         .modal-content {
-            background-color: #fefefe;
+            background-color: #fefefe; /* Default light background for modal */
             margin: auto;
-            padding: 2.5rem;
-            border-radius: 1rem;
+            padding: 2.5rem; /* 40px */
+            border-radius: 1rem; /* 16px */
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             position: relative;
             max-width: 90%;
             width: 500px;
-            height: 80vh;
-            display: flex;
+            height: 80vh; /* Set a height for the Calendly iframe */
+            display: flex; /* Use flex to center content */
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
-            color: #000000;
+            color: #000000; /* Default pure black text for modal */
         }
-
         .dark .modal-content {
-            background-color: #2d3748;
-            color: #e2e8f0;
+            background-color: #2d3748; /* Dark background for modal content */
+            color: #e2e8f0; /* Text color for modal content */
         }
-
-        .calendly-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 0.5rem;
-            flex-grow: 1;
-            margin-top: 1rem;
-        }
-
         .close-button {
-            color: #000000;
+            color: #000000; /* Pure Black for light mode */
             position: absolute;
             top: 1rem;
             right: 1.5rem;
@@ -125,48 +111,18 @@
             font-weight: bold;
             cursor: pointer;
         }
-
         .close-button:hover,
         .close-button:focus {
-            color: #000000;
+            color: #000000; /* Pure black on hover */
             text-decoration: none;
             cursor: pointer;
         }
-
         .dark .close-button {
-            color: #cbd5e0;
+            color: #cbd5e0; /* Adjusted for dark background */
         }
-
         .dark .close-button:hover,
         .dark .close-button:focus {
-            color: #fefefe;
-        }
-
-        /* Force all text to be black in light mode */
-        body:not(.dark) * {
-            color: #000000 !important;
-        }
-
-        /* Override for dark mode */
-        body.dark * {
-            color: #e2e8f0 !important;
-        }
-
-        /* Specific overrides for elements that need different colors in dark mode */
-        body.dark .text-gray-200 {
-            color: #e2e8f0 !important;
-        }
-
-        body.dark .text-gray-300 {
-            color: #d1d5db !important;
-        }
-
-        body.dark .text-gray-400 {
-            color: #9ca3af !important;
-        }
-
-        body.dark .text-gray-500 {
-            color: #6b7280 !important;
+            color: #fefefe; /* Adjusted for dark background */
         }
     </style>
 </head>
@@ -197,26 +153,27 @@
     <noscript><img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
     /></noscript>
+    <!-- End Facebook Pixel Placeholder -->
 
     <!-- Main Landing Page Content -->
     <div id="landing-page-content" class="min-h-screen flex flex-col">
         <!-- Top Right Controls -->
         <div class="absolute top-6 right-6 flex space-x-4 z-50">
             <!-- Theme Toggle -->
-            <button id="theme-toggle" class="p-2 rounded-full glassy-box shadow-md transition duration-300">
+            <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black dark:text-gray-200 shadow-md transition duration-300">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
             </button>
             <!-- Language Toggle with Dropdown -->
             <div class="relative">
-                <button id="lang-toggle" class="p-2 rounded-full glassy-box shadow-md transition duration-300 flex items-center space-x-2">
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box text-black dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
                     <span id="current-lang">EN</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white dark:bg-gray-700 rounded-lg shadow-xl py-1 z-50 glassy-box">
-                    <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
-                    <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
+                    <button class="block w-full text-left px-4 py-2 text-black dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
+                    <button class="block w-full text-left px-4 py-2 text-black dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
                 </div>
             </div>
         </div>
@@ -224,23 +181,25 @@
         <!-- Hero Section -->
         <section class="container mx-auto mt-8 relative">
             <!-- Logo for Light Mode -->
-            <img id="logo-light-mode" src="https://placehold.co/256x64/000000/FFFFFF?text=SHAPES+LOGO" alt="Shapes Logo" class="absolute top-0 left-0 w-48 md:w-64 h-auto z-50" ondragstart="return false;">
+            <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="absolute top-0 left-0 w-48 md:w-64 h-auto z-50" ondragstart="return false;">
             <!-- Logo for Dark Mode -->
-            <img id="logo-dark-mode" src="https://placehold.co/256x64/FFFFFF/000000?text=SHAPES+LOGO" alt="Shapes Logo" class="absolute top-0 left-0 w-48 md:w-64 h-auto z-50 hidden" ondragstart="return false;">
+            <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Logo" class="absolute top-0 left-0 w-48 md:w-64 h-auto z-50 hidden" ondragstart="return false;">
 
-            <!-- Video Section -->
-            <div class="mt-24 p-8 rounded-xl glassy-box relative">
-                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                        <p>Video Player (C0020.mp4)</p>
-                    </div>
+            <!-- Video Section (now a standalone glassy-box) -->
+            <div class="mt-24 p-8 rounded-xl glassy-box relative"> <!-- Added mt-24 to push video down, making space for logo -->
+                <!-- Video embed goes here -->
+                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+                    <video controls autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" controlsList="nodownload">
+                        <source src="C0020.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
         </section>
 
         <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-transparent border-none hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-transparent text-black dark:bg-transparent dark:text-gray-200 border border-black dark:border-gray-200">
                 Book your free consultation.
             </button>
         </section>
@@ -248,9 +207,10 @@
         <!-- Benefits Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box">
             <div class="grid grid-cols-1 gap-8">
+                <!-- Benefit Card 2: Awards (Concise) -->
                 <div class="text-center transform hover:scale-105 transition duration-300">
-                    <h3 id="benefit2-title" class="text-2xl font-semibold mb-3">Award-Winning</h3>
-                    <ul id="benefit2-text" class="list-none p-0 space-y-2">
+                    <h3 id="benefit2-title" class="text-black dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h3>
+                    <ul id="benefit2-text" class="text-black dark:text-gray-300 list-none p-0 space-y-2">
                         <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
                         <li><strong>Winner of German Design Award 23</strong></li>
                         <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
@@ -258,23 +218,26 @@
                 </div>
             </div>
         </section>
+
     </div>
 
     <!-- Calendly Modal -->
     <div id="calendly-modal" class="modal">
         <div class="modal-content">
             <span class="close-button" id="close-modal">&times;</span>
-            <h2 id="modal-title" class="text-3xl font-bold mb-6">Schedule Your Appointment</h2>
+            <h2 id="modal-title" class="text-black dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
+            <!-- Calendly Embed - Replace YOUR_CALENDly_LINK with your actual Calendly scheduling link -->
             <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe"></iframe>
+            <!-- Removed the "Confirm Booking" button as Calendly handles its own flow -->
         </div>
     </div>
 
-    <!-- Thank You Page Content -->
+    <!-- Thank You Page Content (Initially Hidden) -->
     <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
-        <h1 id="thankyou-headline" class="text-5xl md:text-6xl font-extrabold mb-6">
+        <h1 id="thankyou-headline" class="text-black dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
             Thank you! Your appointment is confirmed.
         </h1>
-        <p id="thankyou-subheadline" class="text-xl md:text-2xl mb-10">
+        <p id="thankyou-subheadline" class="text-black dark:text-gray-300 text-xl md:text-2xl mb-10">
             Check your email for confirmation.
         </p>
         <button id="back-to-homepage" class="apple-button apple-button-secondary text-xl">
@@ -319,9 +282,9 @@
             }
         };
 
-        let currentLanguage = 'en';
+        let currentLanguage = 'en'; // Default language
 
-        // DOM elements
+        // DOM elements - these are defined once and should be accessed after DOM is fully loaded
         const benefit2Title = document.getElementById('benefit2-title');
         const benefit2Text = document.getElementById('benefit2-text');
         const modalTitle = document.getElementById('modal-title');
@@ -335,13 +298,14 @@
         const themeToggleBtn = document.getElementById('theme-toggle');
         const langDropdown = document.getElementById('lang-dropdown');
 
+        // Function to update content based on language
         function updateContent() {
             const langData = content[currentLanguage];
             if (benefit2Title) benefit2Title.textContent = langData.benefit2Title;
             if (benefit2Text) benefit2Text.innerHTML = langData.benefit2Text;
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
             if (document.getElementById('thankyou-headline')) document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
-            if (document.getElementById('thankyou-subheadline')) document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
+            if (document.getElementById('thankyou-subheadline')) document.getElementById('thankyou-subheadline').textContent = langData.thankYouSubheadline;
             if (backToHomepageBtn) backToHomepageBtn.textContent = langData.backToHomepage;
             if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
 
@@ -351,18 +315,18 @@
             }
         }
 
-        // Language Toggle Event Listener
+        // Language Toggle Event Listener (for showing/hiding dropdown)
         langToggleBtn.addEventListener('click', (event) => {
-            event.stopPropagation();
+            event.stopPropagation(); // Prevent click from immediately closing dropdown
             langDropdown.classList.toggle('hidden');
         });
 
-        // Event listeners for language options
+        // Event listeners for language options in the dropdown
         langDropdown.querySelectorAll('.lang-option').forEach(button => {
             button.addEventListener('click', (event) => {
                 currentLanguage = event.target.dataset.lang;
                 updateContent();
-                langDropdown.classList.add('hidden');
+                langDropdown.classList.add('hidden'); // Hide dropdown after selection
             });
         });
 
@@ -376,64 +340,11 @@
         // Theme Toggle Event Listener
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark');
+            // Store user preference in localStorage
             if (document.body.classList.contains('dark')) {
                 localStorage.setItem('theme', 'dark');
                 document.getElementById('logo-light-mode').classList.add('hidden');
                 document.getElementById('logo-dark-mode').classList.remove('hidden');
             } else {
                 localStorage.setItem('theme', 'light');
-                document.getElementById('logo-light-mode').classList.remove('hidden');
-                document.getElementById('logo-dark-mode').classList.add('hidden');
-            }
-        });
-
-        // Initialize theme and language on load
-        window.onload = () => {
-            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.body.classList.add('dark');
-                document.getElementById('logo-light-mode').classList.add('hidden');
-                document.getElementById('logo-dark-mode').classList.remove('hidden');
-            } else {
-                document.body.classList.remove('dark');
-                document.getElementById('logo-light-mode').classList.remove('hidden');
-                document.getElementById('logo-dark-mode').classList.add('hidden');
-            }
-
-            const browserLang = navigator.language.split('-')[0];
-            const availableLangs = Object.keys(content);
-            const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
-            currentLanguage = initialLang;
-            updateContent();
-        };
-
-        // Show Calendly Modal
-        document.addEventListener('DOMContentLoaded', () => {
-            const scheduleCtaButton = document.getElementById('schedule-cta');
-            if (scheduleCtaButton) {
-                scheduleCtaButton.addEventListener('click', () => {
-                    calendlyModal.style.display = 'flex';
-                });
-            }
-        });
-
-        // Close Calendly Modal
-        closeModalBtn.addEventListener('click', () => {
-            calendlyModal.style.display = 'none';
-        });
-
-        // Close modal if clicking outside content
-        calendlyModal.addEventListener('click', (e) => {
-            if (e.target === calendlyModal) {
-                calendlyModal.style.display = 'none';
-            }
-        });
-
-        // Back to Homepage from Thank You Page
-        backToHomepageBtn.addEventListener('click', () => {
-            thankYouPage.classList.add('hidden');
-            landingPageContent.classList.remove('hidden');
-        });
-    </script>
-
-</body>
-</html>
+                document.getElementById('logo-lig
