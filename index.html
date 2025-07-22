@@ -193,10 +193,10 @@
             </div>
         </section>
 
-        <!-- New Call to Action Section (Re-added) -->
+        <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="new-cta-button" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-blue-600 dark:text-white focus:outline-none focus:ring-0 focus:ring-offset-0">
-                New Call to Action
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-gray-200 text-black dark:bg-blue-600 dark:text-white focus:outline-none focus:ring-0 focus:ring-offset-0">
+                Book your free consultation.
             </button>
         </section>
 
@@ -245,14 +245,7 @@
         // Language content
         const content = {
             en: {
-                heroHeadline: "", // Removed text
-                heroSubheadline: "", // Removed text
-                scheduleCta: "Book your free consultation.", // Kept for potential future use or reference
-                newCtaText: "New Call to Action", // New text for the new button
-                benefit1Title: "", // This will be removed from HTML
-                benefit1Text: '', // This will be removed from HTML
-                safetyTitle: "", // This will be removed from HTML
-                safetyText: "", // This will be removed from HTML
+                scheduleCta: "Book your free consultation.",
                 benefit2Title: "Award-Winning",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -261,8 +254,6 @@
                         <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
                     </ul>
                 `,
-                benefit3Title: "", // This will be removed from HTML
-                benefit3Text: "", // This will be removed from HTML
                 modalTitle: "Schedule Your Appointment",
                 thankyouHeadline: "Thank you! Your appointment is confirmed.",
                 thankyouSubheadline: "Check your email for confirmation.",
@@ -270,14 +261,7 @@
                 currentLang: "EN"
             },
             de: {
-                heroHeadline: "", // Removed text
-                heroSubheadline: "", // Removed text
                 scheduleCta: "Buche deine kostenlose Beratung.",
-                newCtaText: "Neuer Aufruf zum Handeln",
-                benefit1Title: "",
-                benefit1Text: '',
-                safetyTitle: "",
-                safetyText: "",
                 benefit2Title: "Preisgekrönt",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -286,8 +270,6 @@
                         <li><strong>Gewinner des German Innovation Award 23</strong> (Medizin & Gesundheit)</li>
                     </ul>
                 `,
-                benefit3Title: "",
-                benefit3Text: "",
                 modalTitle: "Termin vereinbaren",
                 thankyouHeadline: "Vielen Dank! Ihr Termin ist bestätigt.",
                 thankyouSubheadline: "Bitte überprüfen Sie Ihre E-Mails zur Bestätigung.",
@@ -295,14 +277,7 @@
                 currentLang: "DE"
             },
             zh: {
-                heroHeadline: "", // Removed text
-                heroSubheadline: "", // Removed text
                 scheduleCta: "预约免费咨询。",
-                newCtaText: "新的行动号召",
-                benefit1Title: "",
-                benefit1Text: '',
-                safetyTitle: "",
-                safetyText: "",
                 benefit2Title: "屡获殊荣",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -311,8 +286,6 @@
                         <li><strong>荣获德国创新奖 23</strong> (医疗与健康)</li>
                     </ul>
                 `,
-                benefit3Title: "",
-                benefit3Text: "",
                 modalTitle: "安排您的预约",
                 thankyouHeadline: "谢谢！您的预约已确认。",
                 thankyouSubheadline: "请检查您的电子邮件以获取确认。",
@@ -320,14 +293,7 @@
                 currentLang: "ZH"
             },
             it: {
-                heroHeadline: "", // Removed text
-                heroSubheadline: "", // Removed text
                 scheduleCta: "Prenota la tua consulenza gratuita.",
-                newCtaText: "Nuova chiamata all'azione",
-                benefit1Title: "",
-                benefit1Text: '',
-                safetyTitle: "",
-                safetyText: "",
                 benefit2Title: "Premiato",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -336,8 +302,6 @@
                         <li><strong>Vincitore del German Innovation Award 23</strong> (Medicina e Salute)</li>
                     </ul>
                 `,
-                benefit3Title: "",
-                benefit3Text: "",
                 modalTitle: "Pianifica il tuo appuntamento",
                 thankyouHeadline: "Grazie! Il tuo appuntamento è confermato.",
                 thankyouSubheadline: "Controlla la tua email per la conferma.",
@@ -345,14 +309,7 @@
                 currentLang: "IT"
             },
             es: {
-                heroHeadline: "", // Removed text
-                heroSubheadline: "", // Removed text
                 scheduleCta: "Reserva tu consulta gratuita.",
-                newCtaText: "Nueva llamada a la acción",
-                benefit1Title: "",
-                benefit1Text: '',
-                safetyTitle: "",
-                safetyText: "",
                 benefit2Title: "Galardonado",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -370,14 +327,7 @@
                 currentLang: "ES"
             },
             pt: {
-                heroHeadline: "", // Removed text
-                heroSubheadline: "", // Removed text
                 scheduleCta: "Agende sua consulta gratuita.",
-                newCtaText: "Nova chamada para ação",
-                benefit1Title: "",
-                benefit1Text: '',
-                safetyTitle: "",
-                safetyText: "",
                 benefit2Title: "Premiado",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -395,14 +345,7 @@
                 currentLang: "PT"
             },
             by: {
-                heroHeadline: "", // Removed text
-                heroSubheadline: "", // Removed text
                 scheduleCta: "Buach dei kostenlose Beratung.",
-                newCtaText: "Neier Afruaf zum Handln",
-                benefit1Title: "",
-                benefit1Text: '',
-                safetyTitle: "",
-                safetyText: "",
                 benefit2Title: "Preisgekrönt",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
@@ -411,8 +354,6 @@
                         <li><strong>Gwunna vom German Innovation Award 23</strong> (Medizin & Gsundheit)</li>
                     </ul>
                 `,
-                benefit3Title: "",
-                benefit3Text: "",
                 modalTitle: "Dein Termin zum Buacha",
                 thankyouHeadline: "Vielen Dank! Dein Termin is bstätigt.",
                 thankyouSubheadline: "Schau in deine E-Mails für de Bstätigung.",
@@ -424,14 +365,8 @@
         let currentLanguage = 'en'; // Default language
 
         // DOM elements - these are defined once and should be accessed after DOM is fully loaded
-        const heroHeadline = document.getElementById('hero-headline');
-        const heroSubheadline = document.getElementById('hero-subheadline');
-        const benefit1Title = document.getElementById('benefit1-title');
-        const benefit1Text = document.getElementById('benefit1-text');
-        const benefit2Title = document.getElementById('benefit2-title'); // Corrected ID reference
+        const benefit2Title = document.getElementById('benefit2-title');
         const benefit2Text = document.getElementById('benefit2-text');
-        const benefit3Title = document.getElementById('benefit3-title');
-        const benefit3Text = document.getElementById('benefit3-text');
         const modalTitle = document.getElementById('modal-title');
         const calendlyModal = document.getElementById('calendly-modal');
         const closeModalBtn = document.getElementById('close-modal');
@@ -441,17 +376,11 @@
         const langToggleBtn = document.getElementById('lang-toggle');
         const currentLangSpan = document.getElementById('current-lang');
         const themeToggleBtn = document.getElementById('theme-toggle');
-        const langDropdown = document.getElementById('lang-dropdown'); // Get the dropdown element
-        const newCtaButton = document.getElementById('new-cta-button'); // New button element
+        const langDropdown = document.getElementById('lang-dropdown');
 
         // Function to update content based on language
         function updateContent() {
             const langData = content[currentLanguage];
-            // Only update if elements exist and content is not empty
-            if (heroHeadline) heroHeadline.innerHTML = langData.heroHeadline;
-            if (heroSubheadline) heroSubheadline.textContent = langData.heroSubheadline;
-            // The benefit1Title, benefit1Text, benefit3Title, benefit3Text elements are removed from HTML,
-            // so no need to update their content.
             if (benefit2Title) benefit2Title.textContent = langData.benefit2Title;
             if (benefit2Text) benefit2Text.innerHTML = langData.benefit2Text;
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
@@ -459,7 +388,11 @@
             if (document.getElementById('thankyou-subheadline')) document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
             if (backToHomepageBtn) backToHomepageBtn.textContent = langData.backToHomepage;
             if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
-            if (newCtaButton) newCtaButton.textContent = langData.newCtaText; // Update text for the new button
+
+            const scheduleCtaButton = document.getElementById('schedule-cta');
+            if (scheduleCtaButton) {
+                scheduleCtaButton.textContent = langData.scheduleCta;
+            }
         }
 
         // Language Toggle Event Listener (for showing/hiding dropdown)
@@ -521,11 +454,11 @@
             updateContent();
         };
 
-        // Show Calendly Modal (now triggered by the new button)
+        // Show Calendly Modal
         document.addEventListener('DOMContentLoaded', () => {
-            const newCtaButton = document.getElementById('new-cta-button'); // Get the new button
-            if (newCtaButton) {
-                newCtaButton.addEventListener('click', () => {
+            const scheduleCtaButton = document.getElementById('schedule-cta');
+            if (scheduleCtaButton) {
+                scheduleCtaButton.addEventListener('click', () => {
                     calendlyModal.style.display = 'flex';
                 });
             }
