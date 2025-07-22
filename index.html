@@ -201,8 +201,9 @@
             <div class="mt-24 p-8 rounded-xl glassy-box relative"> <!-- Added mt-24 to push video down, making space for logo -->
                 <!-- Video embed goes here -->
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-                    <video controls autoplay loop playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" controlsList="nodownload">
+                    <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" controlsList="nodownload">
                         <source src="Test Women 1.mp4" type="video/mp4">
+                        <source src="Zurab 1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -416,6 +417,36 @@
         backToHomepageBtn.addEventListener('click', () => {
             thankYouPage.classList.add('hidden');
             landingPageContent.classList.remove('hidden');
+        });
+
+        // Video looping logic
+        const mainVideo = document.getElementById('mainVideo');
+        const videoSources = [
+            'Test Women 1.mp4',
+            'Zurab 1.mp4'
+        ];
+        let currentVideoIndex = 0;
+
+        // Set initial video source on script load (or when video element is ready)
+        // This is important if the video element's src is not set initially in HTML
+        mainVideo.src = videoSources[currentVideoIndex];
+
+        mainVideo.addEventListener('ended', () => {
+            currentVideoIndex++;
+            if (currentVideoIndex >= videoSources.length) {
+                currentVideoIndex = 0; // Loop back to the first video
+            }
+            mainVideo.src = videoSources[currentVideoIndex];
+            mainVideo.load(); // Load the new video source
+            mainVideo.play().catch(error => {
+                // Catch any errors if autoplay is blocked (e.g., due to browser policies)
+                console.log("Autoplay prevented after video ended:", error);
+            });
+        });
+
+        // Attempt to play on load (will be caught if autoplay is blocked)
+        mainVideo.play().catch(error => {
+            console.log("Initial autoplay prevented:", error);
         });
     </script>
 
