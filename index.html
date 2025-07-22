@@ -173,9 +173,7 @@
         <div class="absolute top-6 right-6 flex space-x-4 z-50">
             <!-- Theme Toggle -->
             <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                </svg>
+                <!-- SVG icon will be dynamically updated by JavaScript -->
             </button>
             <!-- Language Toggle with Dropdown -->
             <div class="relative">
@@ -305,7 +303,7 @@
         const calendlyModal = document.getElementById('calendly-modal');
         const closeModalBtn = document.getElementById('close-modal');
         const landingPageContent = document.getElementById('landing-page-content');
-        const thankYouPage = document.getElementById('thank-ou-page');
+        const thankYouPage = document.getElementById('thank-you-page'); // Fixed typo here
         const backToHomepageBtn = document.getElementById('back-to-homepage');
         const langToggleBtn = document.getElementById('lang-toggle');
         const currentLangSpan = document.getElementById('current-lang');
@@ -354,6 +352,24 @@
             }
         });
 
+        // Function to update the theme toggle icon
+        function updateThemeToggleIcon() {
+            const isDarkMode = document.body.classList.contains('dark');
+            if (isDarkMode) {
+                themeToggleBtn.innerHTML = `
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                `; // Sun icon for dark mode
+            } else {
+                themeToggleBtn.innerHTML = `
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path>
+                    </svg>
+                `; // Half moon icon for light mode
+            }
+        }
+
         // Theme Toggle Event Listener
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark');
@@ -367,6 +383,7 @@
                 logoLightMode.classList.remove('hidden');
                 logoDarkMode.classList.add('hidden');
             }
+            updateThemeToggleIcon(); // Update icon after theme change
         });
 
         // Check for saved theme preference and set initial language on load
@@ -390,6 +407,7 @@
             const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
             currentLanguage = initialLang;
             updateContent();
+            updateThemeToggleIcon(); // Set initial icon on load
         };
 
         // Show Calendly Modal
