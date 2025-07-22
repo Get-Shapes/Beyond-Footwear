@@ -11,12 +11,12 @@
     <style>
         body {
             font-family: 'Urbanist', sans-serif;
-            background-color: #ffffff !important; /* Fixed: was #ffff */
+            background-color: #ffffff !important;
             position: relative;
             min-height: 100vh;
             transition: background-color 0.3s ease;
             z-index: 0;
-            color: #000000; /* Fixed: was #0000 */
+            color: #000000 !important; /* Force black text in light mode */
         }
 
         body::after,
@@ -25,8 +25,8 @@
         }
 
         body.dark {
-            background-color: #000000 !important; /* Fixed: was #0000 */
-            color: #e2e8f0;
+            background-color: #000000 !important;
+            color: #e2e8f0 !important; /* Light text for dark mode */
         }
 
         .glassy-box {
@@ -49,7 +49,6 @@
             @apply px-8 py-4 font-semibold rounded-xl shadow-md transition duration-300;
         }
 
-        /* Added missing secondary button style */
         .apple-button-secondary {
             @apply px-6 py-3 font-medium rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition duration-300;
         }
@@ -98,9 +97,9 @@
             height: 80vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Changed from center to flex-start */
+            justify-content: flex-start;
             align-items: center;
-            color: #000000; /* Fixed: was #0000 */
+            color: #000000;
         }
 
         .dark .modal-content {
@@ -108,7 +107,6 @@
             color: #e2e8f0;
         }
 
-        /* Added proper Calendly iframe styling */
         .calendly-iframe {
             width: 100%;
             height: 100%;
@@ -119,7 +117,7 @@
         }
 
         .close-button {
-            color: #000000; /* Fixed: was #0000 */
+            color: #000000;
             position: absolute;
             top: 1rem;
             right: 1.5rem;
@@ -130,7 +128,7 @@
 
         .close-button:hover,
         .close-button:focus {
-            color: #000000; /* Fixed: was #0000 */
+            color: #000000;
             text-decoration: none;
             cursor: pointer;
         }
@@ -142,6 +140,33 @@
         .dark .close-button:hover,
         .dark .close-button:focus {
             color: #fefefe;
+        }
+
+        /* Force all text to be black in light mode */
+        body:not(.dark) * {
+            color: #000000 !important;
+        }
+
+        /* Override for dark mode */
+        body.dark * {
+            color: #e2e8f0 !important;
+        }
+
+        /* Specific overrides for elements that need different colors in dark mode */
+        body.dark .text-gray-200 {
+            color: #e2e8f0 !important;
+        }
+
+        body.dark .text-gray-300 {
+            color: #d1d5db !important;
+        }
+
+        body.dark .text-gray-400 {
+            color: #9ca3af !important;
+        }
+
+        body.dark .text-gray-500 {
+            color: #6b7280 !important;
         }
     </style>
 </head>
@@ -178,20 +203,20 @@
         <!-- Top Right Controls -->
         <div class="absolute top-6 right-6 flex space-x-4 z-50">
             <!-- Theme Toggle -->
-            <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black dark:text-gray-200 shadow-md transition duration-300">
+            <button id="theme-toggle" class="p-2 rounded-full glassy-box shadow-md transition duration-300">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
             </button>
             <!-- Language Toggle with Dropdown -->
             <div class="relative">
-                <button id="lang-toggle" class="p-2 rounded-full glassy-box text-black dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box shadow-md transition duration-300 flex items-center space-x-2">
                     <span id="current-lang">EN</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white dark:bg-gray-700 rounded-lg shadow-xl py-1 z-50 glassy-box">
-                    <button class="block w-full text-left px-4 py-2 text-black dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
-                    <button class="block w-full text-left px-4 py-2 text-black dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
+                    <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
+                    <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
                 </div>
             </div>
         </div>
@@ -207,7 +232,7 @@
             <div class="mt-24 p-8 rounded-xl glassy-box relative">
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;">
                     <div class="absolute top-0 left-0 w-full h-full bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                        <p class="text-gray-500 dark:text-gray-400">Video Player (C0020.mp4)</p>
+                        <p>Video Player (C0020.mp4)</p>
                     </div>
                 </div>
             </div>
@@ -215,7 +240,7 @@
 
         <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-transparent text-black dark:text-white border-2 border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl hover:scale-105 bg-transparent border-none hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
                 Book your free consultation.
             </button>
         </section>
@@ -224,8 +249,8 @@
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box">
             <div class="grid grid-cols-1 gap-8">
                 <div class="text-center transform hover:scale-105 transition duration-300">
-                    <h3 id="benefit2-title" class="text-black dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h3>
-                    <ul id="benefit2-text" class="text-black dark:text-gray-300 list-none p-0 space-y-2">
+                    <h3 id="benefit2-title" class="text-2xl font-semibold mb-3">Award-Winning</h3>
+                    <ul id="benefit2-text" class="list-none p-0 space-y-2">
                         <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
                         <li><strong>Winner of German Design Award 23</strong></li>
                         <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
@@ -239,17 +264,17 @@
     <div id="calendly-modal" class="modal">
         <div class="modal-content">
             <span class="close-button" id="close-modal">&times;</span>
-            <h2 id="modal-title" class="text-black dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
+            <h2 id="modal-title" class="text-3xl font-bold mb-6">Schedule Your Appointment</h2>
             <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe"></iframe>
         </div>
     </div>
 
     <!-- Thank You Page Content -->
     <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
-        <h1 id="thankyou-headline" class="text-black dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
+        <h1 id="thankyou-headline" class="text-5xl md:text-6xl font-extrabold mb-6">
             Thank you! Your appointment is confirmed.
         </h1>
-        <p id="thankyou-subheadline" class="text-black dark:text-gray-300 text-xl md:text-2xl mb-10">
+        <p id="thankyou-subheadline" class="text-xl md:text-2xl mb-10">
             Check your email for confirmation.
         </p>
         <button id="back-to-homepage" class="apple-button apple-button-secondary text-xl">
