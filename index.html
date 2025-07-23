@@ -166,16 +166,13 @@
             flex-shrink: 0;
         }
     </style>
-    <!-- Script to prevent flash of unstyled content (FOUC) for dark mode -->
+    <!-- Script to ensure dark mode is always loaded first unless explicitly set to light -->
     <script>
         // Check localStorage for theme preference immediately
         const savedTheme = localStorage.getItem('theme');
-        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        let isDarkMode = true; // Default to dark mode
+        let isDarkMode = true; // Always default to dark mode
         if (savedTheme === 'light') { // Only switch to light if explicitly saved as light
-            isDarkMode = false;
-        } else if (savedTheme === null && !prefersDarkMode) { // If no saved theme and system prefers light
             isDarkMode = false;
         }
 
@@ -187,6 +184,7 @@
             document.body.style.backgroundColor = '#000000'; // Ensure black background immediately
             document.documentElement.style.color = '#e2e8f0'; // Ensure light text immediately
             document.body.style.color = '#e2e8f0'; // Ensure light text immediately
+            localStorage.setItem('theme', 'dark'); // Ensure localStorage reflects dark mode
         } else {
             document.documentElement.classList.remove('dark');
             document.body.classList.remove('dark');
@@ -194,6 +192,7 @@
             document.body.style.backgroundColor = '#ffffff'; // Ensure white background immediately
             document.documentElement.style.color = '#000000'; // Ensure dark text immediately
             document.body.style.color = '#000000'; // Ensure dark text immediately
+            localStorage.setItem('theme', 'light'); // Ensure localStorage reflects light mode
         }
     </script>
 </head>
@@ -411,15 +410,9 @@
             const mainLogo = document.getElementById('main-logo'); // Changed to single logo ID
             const scheduleCtaButton = document.getElementById('schedule-cta'); // Declared here
 
-            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem('theme');
-
-            // Apply theme based on localStorage or system preference (already handled by inline script in head)
-            // This block is for updating logo and icon after initial load or theme change
             let isDarkModeInitial = true; // Default to dark mode
             if (savedTheme === 'light') { // Only switch to light if explicitly saved as light
-                isDarkModeInitial = false;
-            } else if (savedTheme === null && !prefersDarkMode) { // If no saved theme and system prefers light
                 isDarkModeInitial = false;
             }
 
