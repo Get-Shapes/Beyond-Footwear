@@ -73,7 +73,8 @@
 
         /* Glassy effect for content boxes */
         .glassy-box {
-            background: transparent; /* Changed to transparent for light mode */
+            /* Reverted to the previous white transparent gradient for light mode */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
             backdrop-filter: blur(10px) saturate(180%);
             -webkit-backdrop-filter: blur(10px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -416,7 +417,7 @@
         let currentLanguage = 'en';
 
         // Function to update text content
-        function updateContent(elements) {
+        function updateContent(elements) { // Pass elements object
             const langData = content[currentLanguage];
             if (elements.benefit2Title) elements.benefit2Title.textContent = langData.benefit2Title;
             if (elements.benefit2Text) elements.benefit2Text.innerHTML = langData.benefit2Text;
@@ -431,7 +432,7 @@
         }
 
         // Function to update the theme toggle icon
-        function updateThemeToggleIcon(elements) {
+        function updateThemeToggleIcon(elements) { // Pass elements object
             const isDarkMode = document.body.classList.contains('dark');
             if (elements.themeToggleBtn) {
                 if (isDarkMode) {
@@ -441,9 +442,10 @@
                         </svg>
                     `;
                 } else {
+                    // Corrected path for the moon icon
                     elements.themeToggleBtn.innerHTML = `
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                         </svg>
                     `;
                 }
@@ -538,9 +540,6 @@
                     elements.landingPageContent.classList.remove('hidden');
                 });
             }
-
-            // Removed all video-related logic and event listeners
-            // elements.mainVideo is no longer defined or used here.
 
             if (elements.langToggleBtn && elements.langDropdown) {
                 elements.langToggleBtn.addEventListener('click', (event) => {
