@@ -15,9 +15,7 @@
             min-height: 100vh; /* Ensure body takes full height for background */
             transition: background-color 0.3s ease;
             z-index: 0; /* Ensures content sits above it */
-            /* Default text color for light mode */
-            color: #000000 !important;
-            background-color: #ffffff !important; /* Default pure white background */
+            /* Initial background and text color will be set by the inline script below */
         }
 
         /* Force all text to black in light mode */
@@ -38,17 +36,21 @@
 
         /* Glassy effect for content boxes (Liquid Glass look) */
         .glassy-box {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)); /* Subtle gradient for light mode */
+            /* Styles for Light Mode - fully transparent with backdrop-filter */
+            background: transparent; /* Changed to fully transparent */
             backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
             -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1), 0 0 20px rgba(100, 150, 255, 0.3); /* Added a subtle blue glow */
+            border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle border for light mode */
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05); /* Very subtle shadow for light mode */
             border-radius: 1rem; /* Consistent with rounded-xl */
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
         }
 
         .dark .glassy-box {
-            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2)); /* Subtle gradient for dark mode */
+            /* Styles for Dark Mode - fully transparent with backdrop-filter */
+            background: transparent; /* Changed to fully transparent */
+            backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
+            -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 150, 255, 0.2); /* Adjusted for dark mode */
         }
@@ -138,10 +140,7 @@
             color: #fefefe; /* Adjusted for dark background */
         }
 
-        /* Specific override for language toggle button in light mode */
-        body:not(.dark) #lang-toggle {
-            background-color: #ffffff !important; /* Force solid white background in light mode */
-        }
+        /* Removed specific override for language toggle button in light mode */
 
         /* Calendly iframe container styling */
         .calendly-iframe-container {
@@ -173,12 +172,26 @@
         const savedTheme = localStorage.getItem('theme');
         const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+        let isDarkMode = false;
         if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+            isDarkMode = true;
+        }
+
+        // Apply styles directly to prevent FOUC
+        if (isDarkMode) {
             document.documentElement.classList.add('dark'); // Apply to html element for Tailwind
             document.body.classList.add('dark'); // Also apply to body for direct CSS rules
+            document.documentElement.style.backgroundColor = '#000000'; // Ensure black background immediately
+            document.body.style.backgroundColor = '#000000'; // Ensure black background immediately
+            document.documentElement.style.color = '#e2e8f0'; // Ensure light text immediately
+            document.body.style.color = '#e2e8f0'; // Ensure light text immediately
         } else {
             document.documentElement.classList.remove('dark');
             document.body.classList.remove('dark');
+            document.documentElement.style.backgroundColor = '#ffffff'; // Ensure white background immediately
+            document.body.style.backgroundColor = '#ffffff'; // Ensure white background immediately
+            document.documentElement.style.color = '#000000'; // Ensure dark text immediately
+            document.body.style.color = '#000000'; // Ensure dark text immediately
         }
     </script>
 </head>
@@ -222,7 +235,7 @@
                     <!-- SVG icon will be dynamically updated by JavaScript -->
                 </button>
                 <!-- Language Toggle Button (Direct Toggle) -->
-                <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
                     <span id="current-lang">EN</span>
                 </button>
             </div>
@@ -399,14 +412,16 @@
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem('theme');
 
-            // Apply theme based on localStorage or system preference
+            // Apply theme based on localStorage or system preference (already handled by inline script in head)
+            // This block is for updating logo and icon after initial load or theme change
+            let isDarkModeInitial = false;
             if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-                document.body.classList.add('dark');
-                document.documentElement.classList.add('dark');
+                isDarkModeInitial = true;
+            }
+
+            if (isDarkModeInitial) {
                 if (mainLogo) mainLogo.src = 'Shapes-Logo neu White.png';
             } else {
-                document.body.classList.remove('dark');
-                document.documentElement.classList.remove('dark');
                 if (mainLogo) mainLogo.src = 'Shapes-Logo neu Black.png';
             }
             updateThemeToggleIcon(); // Set initial icon on load
