@@ -3,58 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Shapes Beyond Footwear - Award-winning innovative footwear solutions. Book your free consultation today.">
-    <meta name="keywords" content="footwear, innovation, consultation, award-winning, shapes">
-    <meta name="author" content="Shapes Beyond Footwear">
-
-
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://drshapes.github.io/Beyond-Footwear/">
-    <meta property="og:title" content="Shapes Beyond Footwear">
-    <meta property="og:description" content="Award-winning innovative footwear solutions. Book your free consultation today.">
-    <meta property="og:image" content="https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://drshapes.github.io/Beyond-Footwear/">
-    <meta property="twitter:title" content="Shapes Beyond Footwear">
-    <meta property="twitter:description" content="Award-winning innovative footwear solutions. Book your free consultation today.">
-    <meta property="twitter:image" content="https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png">
-
-    <title>Shapes Beyond Footwear - Award-Winning Innovation</title>
-
+    <title>Shapes Beyond Footwear</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Urbanist -->
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Shapes Beyond Footwear",
-      "url": "https://drshapes.github.io/Beyond-Footwear/",
-      "logo": "https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png",
-      "description": "Award-winning innovative footwear solutions",
-      "award": [
-        "German Design Award 2023",
-        "German Innovation Award 2023"
-      ]
-    }
-    </script>
-    
     <style>
         body {
-            font-family: 'Urbanist', sans-serif;
-            background-color: #ffffff !important;
-            position: relative;
-            min-height: 100vh;
+            font-family: 'Urbanist', sans-serif; /* Use the Urbanist font */
+            position: relative; /* Needed for pseudo-elements */
+            min-height: 100vh; /* Ensure body takes full height for background */
             transition: background-color 0.3s ease;
-            z-index: 0;
-            color: #000000 !important;
+            z-index: 0; /* Ensures content sits above it */
+            /* Initial background and text color will be set by the inline script below */
         }
 
         /* Force all text to black in light mode */
@@ -65,65 +26,42 @@
         /* Remove background image layer and overlay */
         body::after,
         body::before {
-            content: none;
+            content: none; /* Remove pseudo-elements entirely */
         }
 
         body.dark {
-            background-color: #000000 !important;
-            color: #e2e8f0;
+            background-color: #000000 !important; /* Pure black background, forced */
+            color: #e2e8f0; /* Light text for dark background */
         }
 
-        /* Glassy effect for content boxes */
+        /* Glassy effect for content boxes (Liquid Glass look) */
         .glassy-box {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            backdrop-filter: blur(10px) saturate(180%);
-            -webkit-backdrop-filter: blur(10px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1), 0 0 20px rgba(100, 150, 255, 0.3);
-            border-radius: 1rem;
+            /* Styles for Light Mode - fully transparent with backdrop-filter */
+            background: transparent; /* Changed to fully transparent */
+            backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
+            -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
+            border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle border for light mode */
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05); /* Very subtle shadow for light mode */
+            border-radius: 1rem; /* Consistent with rounded-xl */
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
         }
 
         .dark .glassy-box {
-            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2));
+            /* Styles for Dark Mode - fully transparent with backdrop-filter */
+            background: transparent; /* Changed to fully transparent */
+            backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
+            -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 150, 255, 0.2);
-        }
-
-        /* Video container with loading background */
-        .video-container {
-            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-            background-size: 20px 20px;
-            background-image: 
-                linear-gradient(45deg, rgba(0,0,0,.1) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(0,0,0,.1) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(0,0,0,.1) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(0,0,0,.1) 75%);
-        }
-
-        .dark .video-container {
-            background: linear-gradient(45deg, #2d3748, #1a202c);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 150, 255, 0.2); /* Adjusted for dark mode */
         }
 
         /* Ensure video fills its container and maintains aspect ratio */
         .glassy-box video {
-            object-fit: contain;
+            object-fit: contain; /* Changed from 'cover' to 'contain' */
             width: 100%;
             height: 100%;
             display: block;
-            background-color: #000;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Video hover effect */
-        .glassy-box video:hover {
-            opacity: 0.95;
-        }
-
-        /* Video container positioning for overlay elements */
-        .video-container {
-            position: relative;
+            background-color: #000; /* Optional: adds black bars if needed */
         }
 
         /* Apple-style button base */
@@ -131,105 +69,91 @@
             @apply px-8 py-4 font-semibold rounded-xl transition duration-300;
         }
 
-        /* Improved button hover states */
-        .apple-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        /* Remove focus outline for all buttons */
+        /* Explicitly remove focus outline and border for all buttons */
         button:focus,
         button:focus-visible {
             outline: none !important;
             box-shadow: none !important;
-            border: none !important;
+            border: none !important; /* Added to aggressively remove any default borders */
         }
 
-        /* Loading states */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
+        /* Specific override for the schedule-cta button to ensure no blue outline or border */
+        #schedule-cta:focus,
+        #schedule-cta:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important; /* Added to aggressively remove any default borders */
         }
 
         /* Modal styling */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
             left: 0;
             top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
             justify-content: center;
             align-items: center;
         }
-
         .modal-content {
             margin: auto;
-            padding: 1.5rem;
+            padding: 1.5rem; /* Reduced padding */
             position: relative;
-            max-width: 90%;
-            width: 700px;
-            height: 95vh;
+            max-width: 90%; /* Keep max-width for responsiveness */
+            width: 700px; /* Increased default width for better Calendly display */
+            height: 95vh; /* Make it take up most of the viewport height */
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            color: #000000;
-            overflow: hidden;
-            border-radius: 1rem;
+            color: #000000; /* Default text color for modal content */
+            overflow: hidden; /* Hide modal scrollbar */
+            border-radius: 1rem; /* Keep border-radius from glassy-box */
         }
-
         .dark .modal-content {
-            color: #e2e8f0;
+            color: #e2e8f0; /* Text color for modal content in dark mode */
         }
-
         .close-button {
-            color: #000000;
+            color: #000000; /* Pure Black for light mode */
             position: absolute;
             top: 1rem;
             right: 1.5rem;
             font-size: 2rem;
             font-weight: bold;
             cursor: pointer;
-            transition: color 0.3s ease;
         }
-
         .close-button:hover,
         .close-button:focus {
-            color: #ef4444;
+            color: #000000; /* Pure black on hover */
             text-decoration: none;
             cursor: pointer;
         }
-
         .dark .close-button {
-            color: #cbd5e0;
+            color: #cbd5e0; /* Adjusted for dark background */
         }
-
         .dark .close-button:hover,
         .dark .close-button:focus {
-            color: #ef4444;
+            color: #fefefe; /* Adjusted for dark background */
         }
 
-        /* Language toggle button override */
-        body:not(.dark) #lang-toggle {
-            background-color: #ffffff !important;
-        }
+        /* Removed specific override for language toggle button in light mode */
 
         /* Calendly iframe container styling */
         .calendly-iframe-container {
             position: relative;
             width: 100%;
-            flex-grow: 1;
-            height: 0;
-            overflow: hidden;
+            flex-grow: 1; /* Allow it to take up available vertical space */
+            height: 0; /* Important for flex-grow to work correctly in a column layout */
+            overflow: hidden; /* Hide scrollbars of the container */
             border-radius: 0.5rem;
-            margin-top: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin-top: 1rem; /* Add some space below title */
+            display: flex; /* Make it a flex container for the iframe */
+            justify-content: center; /* Center iframe horizontally */
+            align-items: center; /* Center iframe vertically */
         }
 
         .calendly-iframe {
@@ -237,207 +161,41 @@
             height: 100%;
             border: 0;
         }
-
         /* Ensure modal title doesn't shrink */
         .modal-content h2 {
             flex-shrink: 0;
         }
-
-        /* Error message styling */
-        .error-message {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #dc2626;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            text-align: center;
-        }
-
-        .dark .error-message {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
-            color: #fca5a5;
-        }
     </style>
-    
-    <!-- Script to prevent flash of unstyled content (FOUC) for dark mode -->
+    <!-- Script to ensure dark mode is always loaded first unless explicitly set to light -->
     <script>
         // Check localStorage for theme preference immediately
         const savedTheme = localStorage.getItem('theme');
-        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-            document.documentElement.classList.add('dark');
-            document.body.classList.add('dark');
+        // Default to dark mode unless explicitly set to light
+        let isDarkMode = savedTheme !== 'light';
+
+        // Apply styles directly to prevent FOUC
+        if (isDarkMode) {
+            document.documentElement.classList.add('dark'); // Apply to html element for Tailwind
+            document.documentElement.style.backgroundColor = '#000000'; // Ensure black background immediately
+            document.documentElement.style.color = '#e2e8f0'; // Ensure light text immediately
+            // Set localStorage to dark if not already set
+            if (!savedTheme) {
+                localStorage.setItem('theme', 'dark');
+            }
         } else {
             document.documentElement.classList.remove('dark');
-            document.body.classList.remove('dark');
+            document.documentElement.style.backgroundColor = '#ffffff'; // Ensure white background immediately
+            document.documentElement.style.color = '#000000'; // Ensure dark text immediately
+            localStorage.setItem('theme', 'light');
         }
-
-        // Immediate video autoplay attempt - runs before DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.getElementById('mainVideo');
-            if (video) {
-                // Force sound immediately
-                video.muted = false;
-                video.volume = 0.9;
-
-                // Try to play as soon as possible
-                const immediatePlay = () => {
-                    video.muted = false;
-                    video.volume = 0.9;
-                    video.play().then(() => {
-                        console.log('🎉 Immediate autoplay successful!');
-                    }).catch(e => {
-                        console.log('⚡ Immediate autoplay blocked:', e);
-                        // Retry very quickly
-                        setTimeout(immediatePlay, 50);
-                    });
-                };
-
-                immediatePlay();
-            }
-        });
     </script>
 </head>
 <body class="text-black" oncontextmenu="return false;">
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'YOUR_GA_TRACKING_ID');
-    </script>
-
-    <!-- Facebook Pixel -->
-    <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document, 'script',
-        'https://connect.facebook.com/en_US/fbevents.js');
-        fbq('init', 'YOUR_PIXEL_ID');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
-    /></noscript>
-
-    <!-- Main Landing Page Content -->
-    <div id="landing-page-content" class="min-h-screen flex flex-col text-black-force">
-        <!-- Header Section for Logo and Controls -->
-        <header class="container mx-auto flex justify-between items-center w-full mt-8 mb-8">
-            <!-- Top Left Controls (Theme Toggle and Language) -->
-            <div class="flex space-x-4 z-50">
-                <!-- Theme Toggle -->
-                <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300" aria-label="Toggle theme">
-                    <!-- SVG icon will be dynamically updated by JavaScript -->
-                </button>
-                <!-- Language Toggle with Dropdown -->
-                <div class="relative">
-                    <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2" aria-label="Select language">
-                        <span id="current-lang">EN</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div id="lang-dropdown" class="hidden absolute left-0 mt-2 w-32 rounded-lg shadow-xl py-1 z-50 glassy-box">
-                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
-                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Logo Section -->
-            <div>
-                <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Beyond Footwear Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
-                <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Beyond Footwear Logo" class="w-48 md:w-64 h-auto hidden" ondragstart="return false;">
-            </div>
-        </header>
-
-        <!-- Hero Section -->
-        <main class="container mx-auto relative">
-            <!-- Video Section -->
-            <section class="p-8 rounded-xl glassy-box relative">
-                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;">
-                    <video id="mainVideo" autoplay playsinline loop class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
-                        <source src="Test Women 1.mp4" type="video/mp4">
-                        <source src="Zurab 1.mp4" type="video/mp4">
-                        <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
-                        <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
-                    </video>
-                </div>
-            </section>
-
-            <!-- Call to Action Section -->
-            <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-                <button id="schedule-cta" class="apple-button text-2xl md:text-3xl bg-transparent text-red-600 dark:text-red-500 hover:scale-105 shadow-md" aria-label="Schedule consultation">
-                    Book your free consultation.
-                </button>
-            </section>
-
-            <!-- Benefits Section -->
-            <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box">
-                <div class="grid grid-cols-1 gap-8">
-                    <div class="text-center transition duration-300">
-                        <h2 id="benefit2-title" class="text-black-force dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h2>
-                        <div id="benefit2-text" class="text-black-force dark:text-gray-300">
-                            <ul class="list-none p-0 space-y-2">
-                                <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
-                                <li><strong>Winner of German Design Award 23</strong></li>
-                                <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <!-- Calendly Modal -->
-    <div id="calendly-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
-        <div class="modal-content glassy-box">
-            <button class="close-button" id="close-modal" aria-label="Close modal">×</button>
-            <h2 id="modal-title" class="text-black-force dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
-            <div class="calendly-iframe-container">
-                <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe" title="Schedule appointment"></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!-- Thank You Page Content (Initially Hidden) -->
-    <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
-        <h1 id="thankyou-headline" class="text-black-force dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
-            Thank you! Your appointment is confirmed.
-        </h1>
-        <p id="thankyou-subheadline" class="text-black-force dark:text-gray-300 text-xl md:text-2xl mb-10">
-            Check your email for confirmation.
-        </p>
-        <button id="back-to-homepage" class="apple-button text-xl bg-transparent text-black-force dark:text-gray-200 border border-black dark:border-gray-200">
-            Back to Homepage
-        </button>
-    </div>
+// ... existing code ...
 
     <script>
-        // Analytics tracking function
-        function trackEvent(eventName, properties = {}) {
-            try {
-                // Google Analytics tracking
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', eventName, properties);
-                }
-                
-                // Facebook Pixel tracking
-                if (typeof fbq !== 'undefined') {
-                    fbq('track', eventName, properties);
-                }
-            } catch (error) {
-                console.warn('Analytics tracking error:', error);
-            }
-        }
-
         // Language content
         const content = {
             en: {
@@ -474,13 +232,11 @@
             }
         };
 
-        let currentLanguage = 'en';
+        let currentLanguage = 'en'; // Default language
 
         // Function to update content based on language
         function updateContent() {
             const langData = content[currentLanguage];
-
-            // Update each element directly
             const benefit2Title = document.getElementById('benefit2-title');
             const benefit2Text = document.getElementById('benefit2-text');
             const modalTitle = document.getElementById('modal-title');
@@ -498,327 +254,156 @@
             if (backToHomepage) backToHomepage.textContent = langData.backToHomepage;
             if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
             if (scheduleCtaButton) scheduleCtaButton.textContent = langData.scheduleCta;
-
-            // Update document language
-            document.documentElement.lang = currentLanguage;
         }
 
         // Function to update the theme toggle icon
         function updateThemeToggleIcon() {
             const themeToggleBtn = document.getElementById('theme-toggle');
-            const isDarkMode = document.body.classList.contains('dark');
+            const isDarkMode = document.documentElement.classList.contains('dark');
             if (themeToggleBtn) {
                 if (isDarkMode) {
                     themeToggleBtn.innerHTML = `
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
-                    `;
+                    `; // Sun icon for dark mode
                 } else {
                     themeToggleBtn.innerHTML = `
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                         </svg>
-                    `;
+                    `; // Half moon icon for light mode
                 }
             }
         }
 
-        // Function to handle video errors
-        function handleVideoError(video) {
-            console.error('Video loading error');
-            const videoContainer = video.parentElement;
-            videoContainer.innerHTML = `
-                <div class="flex items-center justify-center h-full error-message">
-                    <div>
-                        <p class="mb-4">Video temporarily unavailable.</p>
-                        <button onclick="location.reload()" class="apple-button bg-red-600 text-white hover:bg-red-700">
-                            Refresh Page
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
-
-        // DOM Content Loaded Event
+        // This ensures the DOM is fully loaded before trying to access elements
         document.addEventListener('DOMContentLoaded', () => {
-            // Get DOM elements
-            const elements = {
-                calendlyModal: document.getElementById('calendly-modal'),
-                closeModalBtn: document.getElementById('close-modal'),
-                landingPageContent: document.getElementById('landing-page-content'),
-                thankYouPage: document.getElementById('thank-you-page'),
-                backToHomepageBtn: document.getElementById('back-to-homepage'),
-                langToggleBtn: document.getElementById('lang-toggle'),
-                themeToggleBtn: document.getElementById('theme-toggle'),
-                langDropdown: document.getElementById('lang-dropdown'),
-                logoLightMode: document.getElementById('logo-light-mode'),
-                logoDarkMode: document.getElementById('logo-dark-mode'),
-                scheduleCtaButton: document.getElementById('schedule-cta'),
-                mainVideo: document.getElementById('mainVideo')
-            };
+            // DOM elements
+            const calendlyModal = document.getElementById('calendly-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const landingPageContent = document.getElementById('landing-page-content');
+            const thankYouPage = document.getElementById('thank-you-page');
+            const backToHomepageBtn = document.getElementById('back-to-homepage');
+            const langToggleBtn = document.getElementById('lang-toggle');
+            const currentLangSpan = document.getElementById('current-lang');
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const mainLogo = document.getElementById('main-logo'); // Changed to single logo ID
+            const scheduleCtaButton = document.getElementById('schedule-cta'); // Declared here
 
-            // Initialize theme
-            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const savedTheme = localStorage.getItem('theme');
-
-            if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+            // Apply dark mode class to body as well for consistency
+            const isDarkModeInitial = document.documentElement.classList.contains('dark');
+            if (isDarkModeInitial) {
                 document.body.classList.add('dark');
-                if (elements.logoLightMode) elements.logoLightMode.classList.add('hidden');
-                if (elements.logoDarkMode) elements.logoDarkMode.classList.remove('hidden');
+                document.body.style.backgroundColor = '#000000';
+                document.body.style.color = '#e2e8f0';
+                if (mainLogo) mainLogo.src = 'Shapes-Logo neu White.png';
             } else {
                 document.body.classList.remove('dark');
-                if (elements.logoLightMode) elements.logoLightMode.classList.remove('hidden');
-                if (elements.logoDarkMode) elements.logoDarkMode.classList.add('hidden');
+                document.body.style.backgroundColor = '#ffffff';
+                document.body.style.color = '#000000';
+                if (mainLogo) mainLogo.src = 'Shapes-Logo neu Black.png';
             }
+            updateThemeToggleIcon(); // Set initial icon on load
 
-            // Set initial language
+            // Set initial language based on browser preference or default to 'en'
             const browserLang = navigator.language.split('-')[0];
             const availableLangs = Object.keys(content);
             const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
             currentLanguage = initialLang;
-            updateContent();
-            updateThemeToggleIcon();
+            updateContent(); // Initial content update
 
-            // Schedule CTA Event Listener
-            if (elements.scheduleCtaButton) {
-                elements.scheduleCtaButton.addEventListener('click', () => {
-                    trackEvent('schedule_consultation_clicked', {
-                        language: currentLanguage,
-                        theme: document.body.classList.contains('dark') ? 'dark' : 'light'
-                    });
-                    if (elements.calendlyModal) {
-                        elements.calendlyModal.style.display = 'flex';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'false');
+            // Show Calendly Modal
+            if (scheduleCtaButton) {
+                scheduleCtaButton.addEventListener('click', () => {
+                    if (calendlyModal) calendlyModal.style.display = 'flex';
+                });
+            }
+
+            // Close Calendly Modal
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    if (calendlyModal) calendlyModal.style.display = 'none';
+                });
+            }
+
+            // Close modal if clicking outside content
+            if (calendlyModal) {
+                calendlyModal.addEventListener('click', (e) => {
+                    if (e.target === calendlyModal) {
+                        calendlyModal.style.display = 'none';
                     }
                 });
             }
 
-            // Close Modal Event Listeners
-            if (elements.closeModalBtn) {
-                elements.closeModalBtn.addEventListener('click', () => {
-                    if (elements.calendlyModal) {
-                        elements.calendlyModal.style.display = 'none';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
-                    }
+            // Back to Homepage from Thank You Page
+            if (backToHomepageBtn && thankYouPage && landingPageContent) {
+                backToHomepageBtn.addEventListener('click', () => {
+                    thankYouPage.classList.add('hidden');
+                    landingPageContent.classList.remove('hidden');
                 });
             }
 
-            if (elements.calendlyModal) {
-                elements.calendlyModal.addEventListener('click', (e) => {
-                    if (e.target === elements.calendlyModal) {
-                        elements.calendlyModal.style.display = 'none';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
-                    }
-                });
+            // Video looping logic
+            const mainVideo = document.getElementById('mainVideo');
+            const videoSources = [
+                'Test Women 1.mp4',
+                'Zurab 1.mp4'
+            ];
+            let currentVideoIndex = 0;
 
-                // Close modal on Escape key
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && elements.calendlyModal.style.display === 'flex') {
-                        elements.calendlyModal.style.display = 'none';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
-                    }
-                });
-            }
+            // Set initial video source on script load (or when video element is ready)
+            if (mainVideo) {
+                mainVideo.src = videoSources[currentVideoIndex];
 
-            // Back to Homepage Event Listener
-            if (elements.backToHomepageBtn && elements.thankYouPage && elements.landingPageContent) {
-                elements.backToHomepageBtn.addEventListener('click', () => {
-                    elements.thankYouPage.classList.add('hidden');
-                    elements.landingPageContent.classList.remove('hidden');
-                });
-            }
-
-            // Video Logic - AGGRESSIVE AUTOPLAY WITH SOUND (NO USER INTERACTION REQUIRED)
-            if (elements.mainVideo) {
-                const videoSources = ['Test Women 1.mp4', 'Zurab 1.mp4'];
-                let currentVideoIndex = 0;
-
-                // IMMEDIATELY configure video for sound
-                elements.mainVideo.muted = false;
-                elements.mainVideo.volume = 1.0;
-                elements.mainVideo.src = videoSources[currentVideoIndex];
-
-                // Ultra-aggressive autoplay function
-                function forcePlayWithSound() {
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 1.0;
-
-                    const playPromise = elements.mainVideo.play();
-
-                    if (playPromise !== undefined) {
-                        playPromise.then(() => {
-                            console.log("✅ Video playing with sound successfully!");
-                        }).catch(error => {
-                            console.log("❌ Autoplay blocked, trying alternative methods:", error);
-
-                            // Try again after very short delay
-                            setTimeout(() => {
-                                elements.mainVideo.muted = false;
-                                elements.mainVideo.volume = 1.0;
-                                elements.mainVideo.play().then(() => {
-                                    console.log("✅ Retry successful!");
-                                }).catch(e => {
-                                    console.log("❌ Retry failed:", e);
-                                    // One more aggressive attempt
-                                    setTimeout(() => {
-                                        elements.mainVideo.muted = false;
-                                        elements.mainVideo.volume = 1.0;
-                                        elements.mainVideo.play().catch(finalError => {
-                                            console.log("❌ Final attempt failed:", finalError);
-                                        });
-                                    }, 200);
-                                });
-                            }, 100);
-                        });
-                    }
-                }
-
-                // Try to play IMMEDIATELY - don't wait for anything
-                forcePlayWithSound();
-
-                // Force play on EVERY possible video event
-                const videoEvents = [
-                    'loadstart', 'durationchange', 'loadedmetadata',
-                    'loadeddata', 'progress', 'canplay', 'canplaythrough'
-                ];
-
-                videoEvents.forEach(eventName => {
-                    elements.mainVideo.addEventListener(eventName, () => {
-                        if (elements.mainVideo.paused) {
-                            elements.mainVideo.muted = false;
-                            elements.mainVideo.volume = 1.0;
-                            forcePlayWithSound();
-                        }
-                    });
-                });
-
-                // Handle video ended - continue with sound
-                elements.mainVideo.addEventListener('ended', () => {
+                mainVideo.addEventListener('ended', () => {
                     currentVideoIndex++;
                     if (currentVideoIndex >= videoSources.length) {
-                        currentVideoIndex = 0;
+                        currentVideoIndex = 0; // Loop back to the first video
                     }
-                    elements.mainVideo.src = videoSources[currentVideoIndex];
-                    elements.mainVideo.load();
-
-                    // Ensure sound for next video
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 1.0;
-                });
-
-                // Handle video errors
-                elements.mainVideo.addEventListener('error', () => {
-                    handleVideoError(elements.mainVideo);
-                });
-
-                // Force sound on ANY user interaction
-                elements.mainVideo.addEventListener('click', () => {
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 1.0;
-                    if (elements.mainVideo.paused) {
-                        forcePlayWithSound();
-                    }
-                });
-
-                // Force sound when page becomes visible
-                document.addEventListener('visibilitychange', () => {
-                    if (!document.hidden) {
-                        elements.mainVideo.muted = false;
-                        elements.mainVideo.volume = 1.0;
-                        if (elements.mainVideo.paused) {
-                            forcePlayWithSound();
-                        }
-                    }
-                });
-
-                // Force sound on window focus
-                window.addEventListener('focus', () => {
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 1.0;
-                    if (elements.mainVideo.paused) {
-                        forcePlayWithSound();
-                    }
-                });
-
-                // Multiple timed attempts - very aggressive
-                const attemptTimes = [50, 100, 200, 300, 500, 800, 1000, 1500, 2000];
-                attemptTimes.forEach(delay => {
-                    setTimeout(() => {
-                        if (elements.mainVideo.paused) {
-                            forcePlayWithSound();
-                        }
-                    }, delay);
-                });
-
-                // Final attempt when page is fully loaded
-                window.addEventListener('load', () => {
-                    setTimeout(() => {
-                        if (elements.mainVideo.paused) {
-                            console.log("🔄 Final load attempt...");
-                            forcePlayWithSound();
-                        }
-                    }, 100);
-                });
-
-                // Emergency fallback - try every 2 seconds for the first 10 seconds
-                let emergencyAttempts = 0;
-                const emergencyInterval = setInterval(() => {
-                    if (elements.mainVideo.paused && emergencyAttempts < 5) {
-                        console.log(`🚨 Emergency attempt ${emergencyAttempts + 1}`);
-                        forcePlayWithSound();
-                        emergencyAttempts++;
-                    } else {
-                        clearInterval(emergencyInterval);
-                    }
-                }, 2000);
-            }
-
-            // Language Toggle Event Listeners
-            if (elements.langToggleBtn && elements.langDropdown) {
-                elements.langToggleBtn.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    elements.langDropdown.classList.toggle('hidden');
-                });
-
-                elements.langDropdown.querySelectorAll('.lang-option').forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        currentLanguage = event.target.dataset.lang;
-                        updateContent();
-                        elements.langDropdown.classList.add('hidden');
-                        trackEvent('language_changed', { language: currentLanguage });
+                    mainVideo.src = videoSources[currentVideoIndex];
+                    mainVideo.load(); // Load the new video source
+                    mainVideo.play().catch(error => {
+                        console.log("Autoplay prevented after video ended:", error);
                     });
                 });
 
-                document.addEventListener('click', (event) => {
-                    if (!elements.langDropdown.contains(event.target) && !elements.langToggleBtn.contains(event.target)) {
-                        elements.langDropdown.classList.add('hidden');
-                    }
+                // Attempt to play on load (will be caught if autoplay is blocked)
+                mainVideo.play().catch(error => {
+                    console.log("Initial autoplay prevented:", error);
+                });
+            }
+
+            // Language Toggle Event Listener (Direct Toggle)
+            if (langToggleBtn) { // Check if the button exists
+                langToggleBtn.addEventListener('click', () => {
+                    currentLanguage = (currentLanguage === 'en') ? 'de' : 'en';
+                    updateContent(); // Update content based on new language
                 });
             }
 
             // Theme Toggle Event Listener
-            if (elements.themeToggleBtn && elements.logoLightMode && elements.logoDarkMode) {
-                elements.themeToggleBtn.addEventListener('click', () => {
+            if (themeToggleBtn && mainLogo) {
+                themeToggleBtn.addEventListener('click', () => {
                     document.body.classList.toggle('dark');
                     document.documentElement.classList.toggle('dark');
                     
-                    if (document.body.classList.contains('dark')) {
+                    if (document.documentElement.classList.contains('dark')) {
                         localStorage.setItem('theme', 'dark');
-                        elements.logoLightMode.classList.add('hidden');
-                        elements.logoDarkMode.classList.remove('hidden');
+                        document.body.style.backgroundColor = '#000000';
+                        document.body.style.color = '#e2e8f0';
+                        mainLogo.src = 'Shapes-Logo neu White.png';
                     } else {
                         localStorage.setItem('theme', 'light');
-                        elements.logoLightMode.classList.remove('hidden');
-                        elements.logoDarkMode.classList.add('hidden');
+                        document.body.style.backgroundColor = '#ffffff';
+                        document.body.style.color = '#000000';
+                        mainLogo.src = 'Shapes-Logo neu Black.png';
                     }
-                    updateThemeToggleIcon();
-                    trackEvent('theme_changed', { 
-                        theme: document.body.classList.contains('dark') ? 'dark' : 'light' 
-                    });
+                    updateThemeToggleIcon(); // Update icon after theme change
                 });
             }
         });
     </script>
+
 </body>
 </html>

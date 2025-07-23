@@ -171,148 +171,29 @@
         // Check localStorage for theme preference immediately
         const savedTheme = localStorage.getItem('theme');
 
-        let isDarkMode = true; // Always default to dark mode
-        if (savedTheme === 'light') { // Only switch to light if explicitly saved as light
-            isDarkMode = false;
-        }
+        // Default to dark mode unless explicitly set to light
+        let isDarkMode = savedTheme !== 'light';
 
         // Apply styles directly to prevent FOUC
         if (isDarkMode) {
             document.documentElement.classList.add('dark'); // Apply to html element for Tailwind
-            document.body.classList.add('dark'); // Also apply to body for direct CSS rules
             document.documentElement.style.backgroundColor = '#000000'; // Ensure black background immediately
-            document.body.style.backgroundColor = '#000000'; // Ensure black background immediately
             document.documentElement.style.color = '#e2e8f0'; // Ensure light text immediately
-            document.body.style.color = '#e2e8f0'; // Ensure light text immediately
-            localStorage.setItem('theme', 'dark'); // Ensure localStorage reflects dark mode
+            // Set localStorage to dark if not already set
+            if (!savedTheme) {
+                localStorage.setItem('theme', 'dark');
+            }
         } else {
             document.documentElement.classList.remove('dark');
-            document.body.classList.remove('dark');
             document.documentElement.style.backgroundColor = '#ffffff'; // Ensure white background immediately
-            document.body.style.backgroundColor = '#ffffff'; // Ensure white background immediately
             document.documentElement.style.color = '#000000'; // Ensure dark text immediately
-            document.body.style.color = '#000000'; // Ensure dark text immediately
-            localStorage.setItem('theme', 'light'); // Ensure localStorage reflects light mode
+            localStorage.setItem('theme', 'light');
         }
     </script>
 </head>
 <body class="text-black" oncontextmenu="return false;">
 
-    <!-- Google Analytics Placeholder -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'YOUR_GA_TRACKING_ID');
-    </script>
-
-    <!-- Facebook Pixel Placeholder -->
-    <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document, 'script',
-        'https://connect.facebook.com/en_US/fbevents.js');
-        fbq('init', 'YOUR_PIXEL_ID');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Facebook Pixel Placeholder -->
-
-    <!-- Main Landing Page Content -->
-    <div id="landing-page-content" class="min-h-screen flex flex-col text-black-force">
-        <!-- Header Section for Logo and Controls -->
-        <div class="container mx-auto flex justify-between items-center w-full mt-8 mb-8">
-            <!-- Top Left Controls (Theme Toggle and Language) -->
-            <div class="flex space-x-4 z-50">
-                <!-- Theme Toggle -->
-                <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300">
-                    <!-- SVG icon will be dynamically updated by JavaScript -->
-                </button>
-                <!-- Language Toggle Button (Direct Toggle) -->
-                <button id="lang-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
-                    <span id="current-lang">EN</span>
-                </button>
-            </div>
-
-            <!-- Logo Section (now top right) -->
-            <div>
-                <!-- Logo for Light Mode -->
-                <img id="main-logo" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
-            </div>
-        </div>
-
-        <!-- Hero Section -->
-        <section class="container mx-auto relative">
-            <!-- Video Section (now a standalone glassy-box) -->
-            <div class="p-8 rounded-xl glassy-box relative">
-                <!-- Video embed goes here -->
-                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg bg-black" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-                    <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload">
-                        <source src="Test Women 1.mp4" type="video/mp4">
-                        <source src="Zurab 1.mp4" type="video/mp4">
-                        <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            </div>
-        </section>
-
-        <!-- Call to Action Section -->
-        <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl bg-transparent text-red-600 dark:text-red-500 hover:scale-105 shadow-md">
-                Book your free consultation.
-            </button>
-        </section>
-
-        <!-- Benefits Section -->
-        <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box">
-            <div class="grid grid-cols-1 gap-8">
-                <!-- Benefit Card 2: Awards (Concise) -->
-                <div class="text-center transition duration-300">
-                    <h3 id="benefit2-title" class="text-black-force dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h3>
-                    <ul id="benefit2-text" class="text-black-force dark:text-gray-300 list-none p-0 space-y-2">
-                        <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
-                        <li><strong>Winner of German Design Award 23</strong></li>
-                        <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-    <!-- Calendly Modal -->
-    <div id="calendly-modal" class="modal">
-        <div class="modal-content glassy-box">
-            <span class="close-button" id="close-modal">&times;</span>
-            <h2 id="modal-title" class="text-black-force dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
-            <!-- Calendly Embed - Replace YOUR_CALENDly_LINK with your actual Calendly scheduling link -->
-            <div class="calendly-iframe-container">
-                <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe"></iframe>
-            </div>
-            <!-- Removed the "Confirm Booking" button as Calendly handles its own flow -->
-        </div>
-    </div>
-
-    <!-- Thank You Page Content (Initially Hidden) -->
-    <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
-        <h1 id="thankyou-headline" class="text-black-force dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
-            Thank you! Your appointment is confirmed.
-        </h1>
-        <p id="thankyou-subheadline" class="text-black-force dark:text-gray-300 text-xl md:text-2xl mb-10">
-            Check your email for confirmation.
-        </p>
-        <button id="back-to-homepage" class="apple-button text-xl bg-transparent text-black-force dark:text-gray-200 border border-black dark:border-gray-200">
-            Back to Homepage
-        </button>
-    </div >
+// ... existing code ...
 
     <script>
         // Language content
@@ -378,7 +259,7 @@
         // Function to update the theme toggle icon
         function updateThemeToggleIcon() {
             const themeToggleBtn = document.getElementById('theme-toggle');
-            const isDarkMode = document.body.classList.contains('dark');
+            const isDarkMode = document.documentElement.classList.contains('dark');
             if (themeToggleBtn) {
                 if (isDarkMode) {
                     themeToggleBtn.innerHTML = `
@@ -410,15 +291,17 @@
             const mainLogo = document.getElementById('main-logo'); // Changed to single logo ID
             const scheduleCtaButton = document.getElementById('schedule-cta'); // Declared here
 
-            const savedTheme = localStorage.getItem('theme');
-            let isDarkModeInitial = true; // Default to dark mode
-            if (savedTheme === 'light') { // Only switch to light if explicitly saved as light
-                isDarkModeInitial = false;
-            }
-
+            // Apply dark mode class to body as well for consistency
+            const isDarkModeInitial = document.documentElement.classList.contains('dark');
             if (isDarkModeInitial) {
+                document.body.classList.add('dark');
+                document.body.style.backgroundColor = '#000000';
+                document.body.style.color = '#e2e8f0';
                 if (mainLogo) mainLogo.src = 'Shapes-Logo neu White.png';
             } else {
+                document.body.classList.remove('dark');
+                document.body.style.backgroundColor = '#ffffff';
+                document.body.style.color = '#000000';
                 if (mainLogo) mainLogo.src = 'Shapes-Logo neu Black.png';
             }
             updateThemeToggleIcon(); // Set initial icon on load
@@ -505,11 +388,15 @@
                     document.body.classList.toggle('dark');
                     document.documentElement.classList.toggle('dark');
                     
-                    if (document.body.classList.contains('dark')) {
+                    if (document.documentElement.classList.contains('dark')) {
                         localStorage.setItem('theme', 'dark');
+                        document.body.style.backgroundColor = '#000000';
+                        document.body.style.color = '#e2e8f0';
                         mainLogo.src = 'Shapes-Logo neu White.png';
                     } else {
                         localStorage.setItem('theme', 'light');
+                        document.body.style.backgroundColor = '#ffffff';
+                        document.body.style.color = '#000000';
                         mainLogo.src = 'Shapes-Logo neu Black.png';
                     }
                     updateThemeToggleIcon(); // Update icon after theme change
