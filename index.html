@@ -166,6 +166,20 @@
             flex-shrink: 0;
         }
     </style>
+    <!-- Script to prevent flash of unstyled content (FOUC) for dark mode -->
+    <script>
+        // Check localStorage for theme preference immediately
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+            document.documentElement.classList.add('dark'); // Apply to html element for Tailwind
+            document.body.classList.add('dark'); // Also apply to body for direct CSS rules
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.body.classList.remove('dark');
+        }
+    </script>
 </head>
 <body class="text-black" oncontextmenu="return false;">
 
@@ -333,109 +347,79 @@
 
         let currentLanguage = 'en'; // Default language
 
-        // DOM elements - these are defined once and should be accessed after DOM is fully loaded
-        const benefit2Title = document.getElementById('benefit2-title');
-        const benefit2Text = document.getElementById('benefit2-text');
-        const modalTitle = document.getElementById('modal-title');
-        const calendlyModal = document.getElementById('calendly-modal');
-        const closeModalBtn = document.getElementById('close-modal');
-        const landingPageContent = document.getElementById('landing-page-content');
-        const thankYouPage = document.getElementById('thank-you-page');
-        const backToHomepageBtn = document.getElementById('back-to-homepage');
-        const langToggleBtn = document.getElementById('lang-toggle');
-        const currentLangSpan = document.getElementById('current-lang');
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const langDropdown = document.getElementById('lang-dropdown');
-        const logoLightMode = document.getElementById('logo-light-mode');
-        const logoDarkMode = document.getElementById('logo-dark-mode');
-
-
         // Function to update content based on language
         function updateContent() {
             const langData = content[currentLanguage];
+            const benefit2Title = document.getElementById('benefit2-title');
+            const benefit2Text = document.getElementById('benefit2-text');
+            const modalTitle = document.getElementById('modal-title');
+            const thankyouHeadline = document.getElementById('thankyou-headline');
+            const thankyouSubheadline = document.getElementById('thankyou-subheadline');
+            const backToHomepage = document.getElementById('back-to-homepage');
+            const currentLangSpan = document.getElementById('current-lang');
+            const scheduleCtaButton = document.getElementById('schedule-cta');
+
             if (benefit2Title) benefit2Title.textContent = langData.benefit2Title;
             if (benefit2Text) benefit2Text.innerHTML = langData.benefit2Text;
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
-            if (document.getElementById('thankyou-headline')) document.getElementById('thankyou-headline').textContent = langData.thankyouHeadline;
-            if (document.getElementById('thankyou-subheadline')) document.getElementById('thankyou-subheadline').textContent = langData.thankyouSubheadline;
-            if (backToHomepageBtn) backToHomepageBtn.textContent = langData.backToHomepage;
+            if (thankyouHeadline) thankyouHeadline.textContent = langData.thankyouHeadline;
+            if (thankyouSubheadline) thankyouSubheadline.textContent = langData.thankyouSubheadline;
+            if (backToHomepage) backToHomepage.textContent = langData.backToHomepage;
             if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
-
-            const scheduleCtaButton = document.getElementById('schedule-cta');
-            if (scheduleCtaButton) {
-                scheduleCtaButton.textContent = langData.scheduleCta;
-            }
+            if (scheduleCtaButton) scheduleCtaButton.textContent = langData.scheduleCta;
         }
-
-        // Language Toggle Event Listener (for showing/hiding dropdown)
-        langToggleBtn.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent click from immediately closing dropdown
-            langDropdown.classList.toggle('hidden');
-        });
-
-        // Event listeners for language options in the dropdown
-        langDropdown.querySelectorAll('.lang-option').forEach(button => {
-            button.addEventListener('click', (event) => {
-                currentLanguage = event.target.dataset.lang;
-                updateContent();
-                langDropdown.classList.add('hidden'); // Hide dropdown after selection
-            });
-        });
-
-        // Close dropdown if clicking outside
-        document.addEventListener('click', (event) => {
-            if (!langDropdown.contains(event.target) && !langToggleBtn.contains(event.target)) {
-                langDropdown.classList.add('hidden');
-            }
-        });
 
         // Function to update the theme toggle icon
         function updateThemeToggleIcon() {
+            const themeToggleBtn = document.getElementById('theme-toggle');
             const isDarkMode = document.body.classList.contains('dark');
-            if (isDarkMode) {
-                themeToggleBtn.innerHTML = `
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
-                `; // Sun icon for dark mode
-            } else {
-                themeToggleBtn.innerHTML = `
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path>
-                    </svg>
-                `; // Half moon icon for light mode
+            if (themeToggleBtn) {
+                if (isDarkMode) {
+                    themeToggleBtn.innerHTML = `
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    `; // Sun icon for dark mode
+                } else {
+                    themeToggleBtn.innerHTML = `
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path>
+                        </svg>
+                    `; // Half moon icon for light mode
+                }
             }
         }
 
-        // Theme Toggle Event Listener
-        themeToggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-            // Store user preference in localStorage
-            if (document.body.classList.contains('dark')) {
-                localStorage.setItem('theme', 'dark');
-                logoLightMode.classList.add('hidden');
-                logoDarkMode.classList.remove('hidden');
-            } else {
-                localStorage.setItem('theme', 'light');
-                logoLightMode.classList.remove('hidden');
-                logoDarkMode.classList.add('hidden');
-            }
-            updateThemeToggleIcon(); // Update icon after theme change
-        });
+        // This ensures the DOM is fully loaded before trying to access elements
+        document.addEventListener('DOMContentLoaded', () => {
+            // DOM elements - these are defined once and should be accessed after DOM is fully loaded
+            const benefit2Title = document.getElementById('benefit2-title');
+            const benefit2Text = document.getElementById('benefit2-text');
+            const modalTitle = document.getElementById('modal-title');
+            const calendlyModal = document.getElementById('calendly-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const landingPageContent = document.getElementById('landing-page-content');
+            const thankYouPage = document.getElementById('thank-you-page');
+            const backToHomepageBtn = document.getElementById('back-to-homepage');
+            const langToggleBtn = document.getElementById('lang-toggle');
+            const currentLangSpan = document.getElementById('current-lang');
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const langDropdown = document.getElementById('lang-dropdown');
+            const logoLightMode = document.getElementById('logo-light-mode');
+            const logoDarkMode = document.getElementById('logo-dark-mode');
+            const scheduleCtaButton = document.getElementById('schedule-cta'); // Declared here
 
-        // Check for saved theme preference and set initial language on load
-        window.onload = () => {
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem('theme');
 
             if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
                 document.body.classList.add('dark');
-                logoLightMode.classList.add('hidden');
-                logoDarkMode.classList.remove('hidden');
+                if (logoLightMode) logoLightMode.classList.add('hidden');
+                if (logoDarkMode) logoDarkMode.classList.remove('hidden');
             } else {
                 document.body.classList.remove('dark');
-                logoLightMode.classList.remove('hidden');
-                logoDarkMode.classList.add('hidden');
+                if (logoLightMode) logoLightMode.classList.remove('hidden');
+                if (logoDarkMode) logoDarkMode.classList.add('hidden');
             }
 
             // Set initial language based on browser preference or default to 'en'
@@ -445,65 +429,111 @@
             currentLanguage = initialLang;
             updateContent();
             updateThemeToggleIcon(); // Set initial icon on load
-        };
 
-        // Show Calendly Modal
-        document.addEventListener('DOMContentLoaded', () => {
-            const scheduleCtaButton = document.getElementById('schedule-cta');
+            // Show Calendly Modal
             if (scheduleCtaButton) {
                 scheduleCtaButton.addEventListener('click', () => {
-                    calendlyModal.style.display = 'flex';
+                    if (calendlyModal) calendlyModal.style.display = 'flex';
+                });
+            }
+
+            // Close Calendly Modal
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    if (calendlyModal) calendlyModal.style.display = 'none';
+                });
+            }
+
+            // Close modal if clicking outside content
+            if (calendlyModal) {
+                calendlyModal.addEventListener('click', (e) => {
+                    if (e.target === calendlyModal) {
+                        calendlyModal.style.display = 'none';
+                    }
+                });
+            }
+
+            // Back to Homepage from Thank You Page
+            if (backToHomepageBtn && thankYouPage && landingPageContent) {
+                backToHomepageBtn.addEventListener('click', () => {
+                    thankYouPage.classList.add('hidden');
+                    landingPageContent.classList.remove('hidden');
+                });
+            }
+
+            // Video looping logic
+            const mainVideo = document.getElementById('mainVideo');
+            const videoSources = [
+                'Test Women 1.mp4',
+                'Zurab 1.mp4'
+            ];
+            let currentVideoIndex = 0;
+
+            // Set initial video source on script load (or when video element is ready)
+            if (mainVideo) {
+                mainVideo.src = videoSources[currentVideoIndex];
+
+                mainVideo.addEventListener('ended', () => {
+                    currentVideoIndex++;
+                    if (currentVideoIndex >= videoSources.length) {
+                        currentVideoIndex = 0; // Loop back to the first video
+                    }
+                    mainVideo.src = videoSources[currentVideoIndex];
+                    mainVideo.load(); // Load the new video source
+                    mainVideo.play().catch(error => {
+                        console.log("Autoplay prevented after video ended:", error);
+                    });
+                });
+
+                // Attempt to play on load (will be caught if autoplay is blocked)
+                mainVideo.play().catch(error => {
+                    console.log("Initial autoplay prevented:", error);
+                });
+            }
+
+            // Language Toggle Event Listener (for showing/hiding dropdown)
+            if (langToggleBtn && langDropdown) {
+                langToggleBtn.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent click from immediately closing dropdown
+                    langDropdown.classList.toggle('hidden');
+                });
+
+                // Event listeners for language options in the dropdown
+                langDropdown.querySelectorAll('.lang-option').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        currentLanguage = event.target.dataset.lang;
+                        updateContent();
+                        langDropdown.classList.add('hidden'); // Hide dropdown after selection
+                    });
+                });
+
+                // Close dropdown if clicking outside
+                document.addEventListener('click', (event) => {
+                    if (!langDropdown.contains(event.target) && !langToggleBtn.contains(event.target)) {
+                        langDropdown.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Theme Toggle Event Listener
+            if (themeToggleBtn && logoLightMode && logoDarkMode) {
+                themeToggleBtn.addEventListener('click', () => {
+                    document.body.classList.toggle('dark');
+                    // Store user preference in localStorage
+                    if (document.body.classList.contains('dark')) {
+                        localStorage.setItem('theme', 'dark');
+                        logoLightMode.classList.add('hidden');
+                        logoDarkMode.classList.remove('hidden');
+                    } else {
+                        localStorage.setItem('theme', 'light');
+                        logoLightMode.classList.remove('hidden');
+                        logoDarkMode.classList.add('hidden');
+                    }
+                    updateThemeToggleIcon(); // Update icon after theme change
                 });
             }
         });
 
-        // Close Calendly Modal
-        closeModalBtn.addEventListener('click', () => {
-            calendlyModal.style.display = 'none';
-        });
-
-        // Close modal if clicking outside content
-        calendlyModal.addEventListener('click', (e) => {
-            if (e.target === calendlyModal) {
-                calendlyModal.style.display = 'none';
-            }
-        });
-
-        // Back to Homepage from Thank You Page
-        backToHomepageBtn.addEventListener('click', () => {
-            thankYouPage.classList.add('hidden');
-            landingPageContent.classList.remove('hidden');
-        });
-
-        // Video looping logic
-        const mainVideo = document.getElementById('mainVideo');
-        const videoSources = [
-            'Test Women 1.mp4',
-            'Zurab 1.mp4'
-        ];
-        let currentVideoIndex = 0;
-
-        // Set initial video source on script load (or when video element is ready)
-        // This is important if the video element's src is not set initially in HTML
-        mainVideo.src = videoSources[currentVideoIndex];
-
-        mainVideo.addEventListener('ended', () => {
-            currentVideoIndex++;
-            if (currentVideoIndex >= videoSources.length) {
-                currentVideoIndex = 0; // Loop back to the first video
-            }
-            mainVideo.src = videoSources[currentVideoIndex];
-            mainVideo.load(); // Load the new video source
-            mainVideo.play().catch(error => {
-                // Catch any errors if autoplay is blocked (e.g., due to browser policies)
-                console.log("Autoplay prevented after video ended:", error);
-            });
-        });
-
-        // Attempt to play on load (will be caught if autoplay is blocked)
-        mainVideo.play().catch(error => {
-            console.log("Initial autoplay prevented:", error);
-        });
     </script>
 
 </body>
