@@ -128,10 +128,7 @@
 
         /* Apple-style button base */
         .apple-button {
-            dadding:g2reme2rem;
-e           m;wght: 600;
-            rradius:0.75rem;
-            :ll .3s ease
+            padding: 2rem 2rem;
             font-weight: 600;
             border-radius: 0.75rem;
             transition: all 0.3s ease;
@@ -260,9 +257,75 @@ e           m;wght: 600;
         }
 
         .dark .error-message {
-            
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+            color: #fca5a5;
+        }
+    </style>
+    
+    <!-- Script to prevent flash of unstyled content (FOUC) for dark mode -->
+    <script>
+        // Check localStorage for theme preference immediately
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-ript</script>
+        if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+            document.documentElement.classList.add('dark');
+            document.body.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.body.classList.remove('dark');
+        }
+
+        // Immediate video autoplay attempt - runs before DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('mainVideo');
+            if (video) {
+                // Force sound immediately
+                video.muted = false;
+                video.volume = 0.9;
+
+                // Try to play as soon as possible
+                const immediatePlay = () => {
+                    video.muted = false;
+                    video.volume = 0.9;
+                    video.play().then(() => {
+                        console.log('🎉 Immediate autoplay successful!');
+                    }).catch(e => {
+                        console.log('⚡ Immediate autoplay blocked:', e);
+                        // Retry very quickly
+                        setTimeout(immediatePlay, 50);
+                    });
+                };
+
+                immediatePlay();
+            }
+        });
+    </script>
+</head>
+<body class="text-black" oncontextmenu="return false;">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_GA_TRACKING_ID');
+    </script>
+
+    <!-- Facebook Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document, 'script',
+        'https://connect.facebook.com/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID');
+        fbq('track', 'PageView');
+    </script>
     <noscript><img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
     /></noscript>
@@ -311,9 +374,41 @@ ript</script>
                 </div>
             </section>
 
-    a
+            <!-- Call to Action Section -->
+            <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
+                <button id="schedule-cta" class="apple-button text-2xl md:text-3xl bg-transparent text-red-600 dark:text-red-500 hover:scale-105 shadow-md" aria-label="Schedule consultation">
+                    Book your free consultation.
+                </button>
+            </section>
 
-    i/div>
+            <!-- Benefits Section -->
+            <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box">
+                <div class="grid grid-cols-1 gap-8">
+                    <div class="text-center transition duration-300">
+                        <h2 id="benefit2-title" class="text-black-force dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h2>
+                        <div id="benefit2-text" class="text-black-force dark:text-gray-300">
+                            <ul class="list-none p-0 space-y-2">
+                                <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
+                                <li><strong>Winner of German Design Award 23</strong></li>
+                                <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Calendly Modal -->
+    <div id="calendly-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-content glassy-box">
+            <button class="close-button" id="close-modal" aria-label="Close modal">×</button>
+            <h2 id="modal-title" class="text-black-force dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
+            <div class="calendly-iframe-container">
+                <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe" title="Schedule appointment"></iframe>
+            </div>
+        </div>
+    </div>
 
     <!-- Thank You Page Content (Initially Hidden) -->
     <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
@@ -724,11 +819,9 @@ ript</script>
                     trackEvent('theme_changed', { 
                         theme: document.body.classList.contains('dark') ? 'dark' : 'light' 
                     });
-                });Fe u whpgbm sbl
-</body>addvLieer(viibiliha', =>{
-if(!hid { .aVie.m = fas s.aV10 i(saVforcPWithSound});
- //Forcesoundonwindowfocuswindw.addEvetLienr('foc',elements.manVmt=felemtsmnVeo.volum = 1.0if(emtsminVdeopuse {frePyWSoud()//Mlptm amp-ggrsivc ttmTim=[50,100,200,300,500,800,1000,1500,2000];ampTims.forEachdelaysT(lents.manVipasdfrePyWS(},y)//Finalatmp whe pg  fulyoaddwnowloadsetTmt(()>{f (lens.minVidopsd){c.lo"🔄Fnloa attpt...")    forcePlyWihSd}
-},100);
-};
-//Egcyfbk-yevry2scodsothfit 10scodsteergcyAtmp=0emgcytervalsetInterval(eles.mainVideopaed && emegcyAttps < 5conso.log(`🚨 Emrgy tpt ${mgyAtmpts+1`);orPyWhSounmrgyAtpts++else{
-crIvalyrv}},2000
+                });
+            }
+        });
+    </script>
+</body>
+</html>
