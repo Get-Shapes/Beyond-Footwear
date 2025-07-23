@@ -197,38 +197,41 @@
     <!-- End Facebook Pixel Placeholder -->
 
     <!-- Main Landing Page Content -->
-    <div id="landing-page-content" class="min-h-screen flex flex-col text-black-force"> <!-- Added text-black-force here -->
-        <!-- Top Left Controls (Theme Toggle and Language) -->
-        <div class="absolute top-6 left-6 flex space-x-4 z-50">
-            <!-- Theme Toggle -->
-            <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300">
-                <!-- SVG icon will be dynamically updated by JavaScript -->
-            </button>
-            <!-- Language Toggle with Dropdown -->
-            <div class="relative">
-                <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
-                    <span id="current-lang">EN</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+    <div id="landing-page-content" class="min-h-screen flex flex-col text-black-force">
+        <!-- Header Section for Logo and Controls -->
+        <div class="container mx-auto flex justify-between items-center w-full mt-8 mb-8">
+            <!-- Top Left Controls (Theme Toggle and Language) -->
+            <div class="flex space-x-4 z-50">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300">
+                    <!-- SVG icon will be dynamically updated by JavaScript -->
                 </button>
-                <div id="lang-dropdown" class="hidden absolute left-0 mt-2 w-32 rounded-lg shadow-xl py-1 z-50 glassy-box">
-                    <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
-                    <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
+                <!-- Language Toggle with Dropdown -->
+                <div class="relative">
+                    <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
+                        <span id="current-lang">EN</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="lang-dropdown" class="hidden absolute left-0 mt-2 w-32 rounded-lg shadow-xl py-1 z-50 glassy-box">
+                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
+                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Logo Section (now top right) -->
+            <div>
+                <!-- Logo for Light Mode -->
+                <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
+                <!-- Logo for Dark Mode -->
+                <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Logo" class="w-48 md:w-64 h-auto hidden" ondragstart="return false;">
             </div>
         </div>
 
-        <!-- Logo Section (now top right) -->
-        <div class="absolute top-6 right-6 z-50">
-            <!-- Logo for Light Mode -->
-            <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
-            <!-- Logo for Dark Mode -->
-            <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Logo" class="w-48 md:w-64 h-auto hidden" ondragstart="return false;">
-        </div>
-
         <!-- Hero Section -->
-        <section class="container mx-auto mt-8 relative">
+        <section class="container mx-auto relative">
             <!-- Video Section (now a standalone glassy-box) -->
-            <div class="mt-24 p-8 rounded-xl glassy-box relative"> <!-- Added mt-24 to push video down, making space for logo -->
+            <div class="p-8 rounded-xl glassy-box relative">
                 <!-- Video embed goes here -->
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
                     <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload">
