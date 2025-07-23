@@ -368,26 +368,6 @@
                         <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
                         <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
                     </video>
-                    <div id="video-controls" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center space-x-4 p-2 rounded-full glassy-box">
-                        <button id="play-pause-btn" class="p-2 rounded-full text-black-force dark:text-gray-200" aria-label="Play/Pause video">
-                            <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-6.518-3.75A1 1 0 007 8.35v7.3a1 1 0 001.234.97l6.518-1.81a1 1 0 000-1.82z" />
-                            </svg>
-                            <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6" />
-                            </svg>
-                        </button>
-                        <button id="mute-btn" class="p-2 rounded-full text-black-force dark:text-gray-200" aria-label="Mute/Unmute video">
-                            <svg id="volume-on-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.54 8.46a5 5 0 010 7.07" />
-                            </svg>
-                            <svg id="volume-off-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 9L5 5m0 14l4-4m1-9v14l5 4V5l-5 4z" />
-                            </svg>
-                        </button>
-                        <input id="volume-slider" type="range" min="0" max="1" step="0.1" value="1" class="w-24 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" aria-label="Video volume slider">
-                    </div>
                 </div>
             </section>
 
@@ -761,82 +741,88 @@
                     }
                 });
 
-                // Multiple timed attempts - very aggressive
-                const attemptTimes = [50, 100, 200, 300, 500, 800, 1000, 1500, 2000];
-                attemptTimes.forEach(delay => {
-                    setTimeout(() => {
-                        if (elements.mainVideo.paused) {
-                            forcePlayWithSound();
-                        }
-                    }, delay);
+                // Force sound on ANY mouse movement over video
+                elements.mainVideo.addEventListener('mouseover', () => {
+                    elements.mainVideo.muted = false;
+                    elements.mainVideo.volume = 1.0;
                 });
 
-                // Final attempt when page is fully loaded
-                window.addEventListener('load', () => {
-                    setTimeout(() => {
-                        if (elements.mainVideo.paused) {
-                            console.log("🔄 Final load attempt...");
-                            forcePlayWithSound();
-                        }
-                    }, 100);
-                });
-
-                // Emergency fallback - try every 2 seconds for the first 10 seconds
-                let emergencyAttempts = 0;
-                const emergencyInterval = setInterval(() => {
-                    if (elements.mainVideo.paused && emergencyAttempts < 5) {
-                        console.log(`🚨 Emergency attempt ${emergencyAttempts + 1}`);
+                // Force sound on ANY touch event
+                elements.mainVideo.addEventListener('touchstart', () => {
+                    elements.mainVideo.muted = false;
+                    elements.mainVideo.volume = 1.0;
+                    if (elements.mainVideo.paused) {
                         forcePlayWithSound();
-                        emergencyAttempts++;
-                    } else {
-                        clearInterval(emergencyInterval);
                     }
-                }, 2000);
+                });
+
+                // Continuous monitoring - check every 500ms
+                setInterval(() => {
+                    if (elements.mainVideo.paused) {
+                        elements.mainVideo.muted = false;
+                        elements.mainVideo.volume = 1.0;
+                        forcePlayWithSound();
+                    }
+                }, 500);
             }
 
-            // Language Toggle Event Listeners
+            // Language Toggle Logic
             if (elements.langToggleBtn && elements.langDropdown) {
-                elements.langToggleBtn.addEventListener('click', (event) => {
-                    event.stopPropagation();
+                elements.langToggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
                     elements.langDropdown.classList.toggle('hidden');
                 });
 
-                elements.langDropdown.querySelectorAll('.lang-option').forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        currentLanguage = event.target.dataset.lang;
-                        updateContent();
-                        elements.langDropdown.classList.add('hidden');
-                        trackEvent('language_changed', { language: currentLanguage });
-                    });
-                });
-
-                document.addEventListener('click', (event) => {
-                    if (!elements.langDropdown.contains(event.target) && !elements.langToggleBtn.contains(event.target)) {
+                document.addEventListener('click', (e) => {
+                    if (!elements.langDropdown.contains(e.target) && !elements.langToggleBtn.contains(e.target)) {
                         elements.langDropdown.classList.add('hidden');
                     }
+                });
+
+                document.querySelectorAll('.lang-option').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const newLang = e.target.dataset.lang;
+                        if (newLang && content[newLang]) {
+                            currentLanguage = newLang;
+                            updateContent();
+                            elements.langDropdown.classList.add('hidden');
+                            trackEvent('language_changed', { language: newLang });
+                        }
+                    });
                 });
             }
 
-            // Theme Toggle Event Listener
-            if (elements.themeToggleBtn && elements.logoLightMode && elements.logoDarkMode) {
+            // Theme Toggle Logic
+            if (elements.themeToggleBtn) {
                 elements.themeToggleBtn.addEventListener('click', () => {
-                    document.body.classList.toggle('dark');
-                    document.documentElement.classList.toggle('dark');
+                    const isDark = document.body.classList.toggle('dark');
+                    localStorage.setItem('theme', isDark ? 'dark' : 'light');
                     
-                    if (document.body.classList.contains('dark')) {
-                        localStorage.setItem('theme', 'dark');
-                        elements.logoLightMode.classList.add('hidden');
-                        elements.logoDarkMode.classList.remove('hidden');
-                    } else {
-                        localStorage.setItem('theme', 'light');
-                        elements.logoLightMode.classList.remove('hidden');
-                        elements.logoDarkMode.classList.add('hidden');
+                    if (elements.logoLightMode && elements.logoDarkMode) {
+                        elements.logoLightMode.classList.toggle('hidden', isDark);
+                        elements.logoDarkMode.classList.toggle('hidden', !isDark);
                     }
+                    
                     updateThemeToggleIcon();
-                    trackEvent('theme_changed', { 
-                        theme: document.body.classList.contains('dark') ? 'dark' : 'light' 
-                    });
+                    trackEvent('theme_changed', { theme: isDark ? 'dark' : 'light' });
                 });
+            }
+        });
+
+        // Calendly event listener for when an event is scheduled
+        window.addEventListener('message', (e) => {
+            if (e.data.event && e.data.event.indexOf('calendly') === 0) {
+                if (e.data.event === 'calendly.event_scheduled') {
+                    // Hide landing page, show thank you page
+                    const landingPage = document.getElementById('landing-page-content');
+                    const thankYouPage = document.getElementById('thank-you-page');
+                    if (landingPage && thankYouPage) {
+                        landingPage.classList.add('hidden');
+                        thankYouPage.classList.remove('hidden');
+                    }
+                    // Optional: Track this conversion event
+                    trackEvent('calendly_event_scheduled');
+                }
             }
         });
     </script>
