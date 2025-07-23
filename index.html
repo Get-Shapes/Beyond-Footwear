@@ -220,17 +220,10 @@
                 <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300">
                     <!-- SVG icon will be dynamically updated by JavaScript -->
                 </button>
-                <!-- Language Toggle with Dropdown -->
-                <div class="relative">
-                    <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
-                        <span id="current-lang">EN</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div id="lang-dropdown" class="hidden absolute left-0 mt-2 w-32 rounded-lg shadow-xl py-1 z-50 glassy-box">
-                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
-                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
-                    </div>
-                </div>
+                <!-- Language Toggle Button (Direct Toggle) -->
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
+                    <span id="current-lang">EN</span>
+                </button>
             </div>
 
             <!-- Logo Section (now top right) -->
@@ -399,7 +392,6 @@
             const langToggleBtn = document.getElementById('lang-toggle');
             const currentLangSpan = document.getElementById('current-lang');
             const themeToggleBtn = document.getElementById('theme-toggle');
-            const langDropdown = document.getElementById('lang-dropdown');
             const mainLogo = document.getElementById('main-logo'); // Changed to single logo ID
             const scheduleCtaButton = document.getElementById('schedule-cta'); // Declared here
 
@@ -483,33 +475,14 @@
                 });
             }
 
-            // Language Toggle Event Listener (for showing/hiding dropdown)
-            if (langToggleBtn && langDropdown) {
-                langToggleBtn.addEventListener('click', (event) => {
-                    event.stopPropagation(); // Prevent click from immediately closing dropdown
-                    if (langDropdown) { // Added null check
-                        langDropdown.classList.toggle('hidden');
-                    }
-                });
-
-                // Event listeners for language options in the dropdown
-                langDropdown.querySelectorAll('.lang-option').forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        currentLanguage = event.target.dataset.lang;
-                        updateContent();
-                        if (langDropdown) { // Added null check
-                            langDropdown.classList.add('hidden'); // Hide dropdown after selection
-                        }
-                    });
-                });
-
-                // Close dropdown if clicking outside
-                document.addEventListener('click', (event) => {
-                    if (langDropdown && !langDropdown.contains(event.target) && !langToggleBtn.contains(event.target)) { // Added null check
-                        langDropdown.classList.add('hidden');
-                    }
+            // Language Toggle Event Listener (Direct Toggle)
+            if (langToggleBtn) { // Check if the button exists
+                langToggleBtn.addEventListener('click', () => {
+                    currentLanguage = (currentLanguage === 'en') ? 'de' : 'en';
+                    updateContent(); // Update content based on new language
                 });
             }
+            // Removed all dropdown-specific event listeners and logic.
 
             // Theme Toggle Event Listener
             if (themeToggleBtn && mainLogo) {
