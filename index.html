@@ -172,9 +172,11 @@
         const savedTheme = localStorage.getItem('theme');
         const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        let isDarkMode = false;
-        if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-            isDarkMode = true;
+        let isDarkMode = true; // Default to dark mode
+        if (savedTheme === 'light') { // Only switch to light if explicitly saved as light
+            isDarkMode = false;
+        } else if (savedTheme === null && !prefersDarkMode) { // If no saved theme and system prefers light
+            isDarkMode = false;
         }
 
         // Apply styles directly to prevent FOUC
@@ -414,9 +416,11 @@
 
             // Apply theme based on localStorage or system preference (already handled by inline script in head)
             // This block is for updating logo and icon after initial load or theme change
-            let isDarkModeInitial = false;
-            if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-                isDarkModeInitial = true;
+            let isDarkModeInitial = true; // Default to dark mode
+            if (savedTheme === 'light') { // Only switch to light if explicitly saved as light
+                isDarkModeInitial = false;
+            } else if (savedTheme === null && !prefersDarkMode) { // If no saved theme and system prefers light
+                isDarkModeInitial = false;
             }
 
             if (isDarkModeInitial) {
