@@ -73,7 +73,8 @@
 
         /* Glassy effect for content boxes */
         .glassy-box {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            /* Set background to transparent for light mode */
+            background: transparent; 
             backdrop-filter: blur(10px) saturate(180%);
             -webkit-backdrop-filter: blur(10px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -602,7 +603,7 @@
                 langDropdown: document.getElementById('lang-dropdown'),
                 mainLogo: document.getElementById('main-logo'),
                 scheduleCtaButton: document.getElementById('schedule-cta'),
-                mainVideo: document.getElementById('mainVideo'), // Re-added video element
+                mainVideo: document.getElementById('mainVideo'),
                 playPauseBtn: document.getElementById('play-pause-btn'),
                 playPauseIcon: document.getElementById('play-pause-icon'),
                 muteUnmuteBtn: document.getElementById('mute-unmute-btn'),
