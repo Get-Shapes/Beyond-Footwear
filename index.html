@@ -73,7 +73,6 @@
 
         /* Glassy effect for content boxes */
         .glassy-box {
-            /* Reverted to the previous white transparent gradient for light mode */
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
             backdrop-filter: blur(10px) saturate(180%);
             -webkit-backdrop-filter: blur(10px) saturate(180%);
@@ -89,11 +88,114 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 150, 255, 0.2);
         }
 
-        /* Removed video-specific styling */
-        /* .video-container { ... } */
-        /* .glassy-box video { ... } */
-        /* .glassy-box video:hover { ... } */
-        /* .video-container { ... } */
+        /* Video container with loading background */
+        .video-container {
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            background-size: 20px 20px;
+            background-image: 
+                linear-gradient(45deg, rgba(0,0,0,.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(0,0,0,.1) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(0,0,0,.1) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(0,0,0,.1) 75%);
+        }
+
+        .dark .video-container {
+            background: linear-gradient(45deg, #2d3748, #1a202c);
+        }
+
+        /* Ensure video fills its container and maintains aspect ratio */
+        .glassy-box video {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            display: block;
+            background-color: #000;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Video hover effect */
+        .glassy-box video:hover {
+            opacity: 0.95;
+        }
+
+        /* Video container positioning for overlay elements */
+        .video-container {
+            position: relative;
+        }
+
+        /* Custom video controls styling */
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            border-bottom-left-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+            transition: opacity 0.3s ease;
+            opacity: 0; /* Hidden by default */
+        }
+
+        .video-container:hover .video-controls,
+        .video-controls:focus-within {
+            opacity: 1; /* Show on hover or focus */
+        }
+
+        .video-controls button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .video-controls button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .video-controls input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            background: #d1d5db; /* light gray */
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        .video-controls input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #ef4444; /* red */
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .video-controls input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #ef4444; /* red */
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .video-time {
+            color: white;
+            font-size: 0.875rem;
+            min-width: 80px; /* Ensure space for time display */
+            text-align: center;
+        }
 
         /* Apple-style button base */
         .apple-button {
@@ -305,10 +407,37 @@
 
         <!-- Hero Section -->
         <main class="container mx-auto relative">
-            <!-- Placeholder for Video Section - now just an empty glassy box -->
-            <section class="p-8 rounded-xl glassy-box relative h-64 flex items-center justify-center">
-                <!-- This box remains, but the video player is removed -->
-                <p class="text-xl text-gray-500 dark:text-gray-400">Hero Section Content (Video Removed)</p>
+            <!-- Video Section -->
+            <section class="p-8 rounded-xl glassy-box relative">
+                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+                    <video id="mainVideo" autoplay playsinline loop class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
+                        <source src="Test Women 1.mp4" type="video/mp4">
+                        <source src="Zurab 1.mp4" type="video/mp4">
+                        <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
+                        <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
+                    </video>
+                    <!-- Custom Video Controls -->
+                    <div class="video-controls flex items-center justify-center space-x-4">
+                        <button id="play-pause-btn" aria-label="Play/Pause">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path id="play-pause-icon" d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                        <button id="mute-unmute-btn" aria-label="Mute/Unmute">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path id="volume-icon" d="M11 5L6 9H2v6h4l5 4V5z"/>
+                            </svg>
+                        </button>
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" aria-label="Volume slider">
+                        <input type="range" id="progress-slider" min="0" max="100" value="0" aria-label="Video progress slider">
+                        <span id="current-time" class="video-time">00:00</span> / <span id="duration" class="video-time">00:00</span>
+                        <button id="subtitle-toggle-btn" aria-label="Toggle subtitles">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 9.5c0-.825-.675-1.5-1.5-1.5h-11c-.825 0-1.5.675-1.5 1.5v6c0 .825.675 1.5 1.5 1.5h11c.825 0 1.5-.675 1.5-1.5v-6zM17 16H6V9.5h11V16zM13 13.5h-3v-1h3v1zM13 11.5h-3v-1h3v1z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </section>
 
             <!-- Call to Action Section -->
@@ -417,7 +546,7 @@
         let currentLanguage = 'en';
 
         // Function to update text content
-        function updateContent(elements) { // Pass elements object
+        function updateContent(elements) {
             const langData = content[currentLanguage];
             if (elements.benefit2Title) elements.benefit2Title.textContent = langData.benefit2Title;
             if (elements.benefit2Text) elements.benefit2Text.innerHTML = langData.benefit2Text;
@@ -432,7 +561,7 @@
         }
 
         // Function to update the theme toggle icon
-        function updateThemeToggleIcon(elements) { // Pass elements object
+        function updateThemeToggleIcon(elements) {
             const isDarkMode = document.body.classList.contains('dark');
             if (elements.themeToggleBtn) {
                 if (isDarkMode) {
@@ -442,7 +571,6 @@
                         </svg>
                     `;
                 } else {
-                    // Corrected path for the moon icon
                     elements.themeToggleBtn.innerHTML = `
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
@@ -450,6 +578,15 @@
                     `;
                 }
             }
+        }
+
+        // Function to format time for video player
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            const paddedMinutes = String(minutes).padStart(2, '0');
+            const paddedSeconds = String(remainingSeconds).padStart(2, '0');
+            return `${paddedMinutes}:${paddedSeconds}`;
         }
 
         // Main script execution after DOM is fully loaded
@@ -465,6 +602,16 @@
                 langDropdown: document.getElementById('lang-dropdown'),
                 mainLogo: document.getElementById('main-logo'),
                 scheduleCtaButton: document.getElementById('schedule-cta'),
+                mainVideo: document.getElementById('mainVideo'), // Re-added video element
+                playPauseBtn: document.getElementById('play-pause-btn'),
+                playPauseIcon: document.getElementById('play-pause-icon'),
+                muteUnmuteBtn: document.getElementById('mute-unmute-btn'),
+                volumeIcon: document.getElementById('volume-icon'),
+                volumeSlider: document.getElementById('volume-slider'),
+                progressSlider: document.getElementById('progress-slider'),
+                currentTimeSpan: document.getElementById('current-time'),
+                durationSpan: document.getElementById('duration'),
+                subtitleToggleBtn: document.getElementById('subtitle-toggle-btn'),
                 benefit2Title: document.getElementById('benefit2-title'),
                 benefit2Text: document.getElementById('benefit2-text'),
                 modalTitle: document.getElementById('modal-title'),
@@ -541,6 +688,161 @@
                 });
             }
 
+            // Video Player Logic
+            if (elements.mainVideo) {
+                const videoSources = ['Test Women 1.mp4', 'Zurab 1.mp4'];
+                let currentVideoIndex = 0;
+                let isMuted = false; // Track mute state for toggle
+
+                // Set initial video source and properties
+                elements.mainVideo.src = videoSources[currentVideoIndex];
+                elements.mainVideo.volume = 0.9; // Default volume
+                elements.volumeSlider.value = 0.9; // Set slider to default volume
+
+                // Aggressive Autoplay with sound
+                function forcePlayWithSound() {
+                    if (elements.mainVideo) {
+                        elements.mainVideo.muted = false;
+                        elements.mainVideo.volume = elements.volumeSlider.value; // Use slider value
+                        elements.mainVideo.play().then(() => {
+                            console.log("✅ Video playing with sound successfully!");
+                            updatePlayPauseIcon();
+                            updateVolumeIcon();
+                        }).catch(error => {
+                            console.log("❌ Autoplay blocked, trying alternative methods:", error);
+                            setTimeout(forcePlayWithSound, 100); // Retry
+                        });
+                    }
+                }
+
+                // Update Play/Pause Icon
+                function updatePlayPauseIcon() {
+                    if (elements.playPauseIcon) {
+                        if (elements.mainVideo.paused) {
+                            elements.playPauseIcon.setAttribute('d', 'M8 5v14l11-7z'); // Play icon
+                        } else {
+                            elements.playPauseIcon.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z'); // Pause icon
+                        }
+                    }
+                }
+
+                // Update Volume Icon
+                function updateVolumeIcon() {
+                    if (elements.volumeIcon) {
+                        if (elements.mainVideo.muted || elements.mainVideo.volume === 0) {
+                            elements.volumeIcon.setAttribute('d', 'M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.47 14.65 21 13.34 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 4V9l-1.27-1.27L4.27 3zM10 15.59L7.41 13H5v-2h2.41l.59-.59L10 9.41v6.18z'); // Mute icon
+                        } else if (elements.mainVideo.volume < 0.5) {
+                            elements.volumeIcon.setAttribute('d', 'M7 9v6h4l5 4V5l-5 4H7z'); // Low volume icon
+                        } else {
+                            elements.volumeIcon.setAttribute('d', 'M14 8.83v6.34L17.17 12 14 8.83zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.47 14.65 21 13.34 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 4V9l-1.27-1.27L4.27 3zM10 15.59L7.41 13H5v-2h2.41l.59-.59L10 9.41v6.18z'); // High volume icon
+                        }
+                    }
+                }
+
+                // Play/Pause Button
+                if (elements.playPauseBtn) {
+                    elements.playPauseBtn.addEventListener('click', () => {
+                        if (elements.mainVideo.paused) {
+                            elements.mainVideo.play();
+                        } else {
+                            elements.mainVideo.pause();
+                        }
+                        updatePlayPauseIcon();
+                    });
+                }
+
+                // Mute/Unmute Button
+                if (elements.muteUnmuteBtn) {
+                    elements.muteUnmuteBtn.addEventListener('click', () => {
+                        elements.mainVideo.muted = !elements.mainVideo.muted;
+                        isMuted = elements.mainVideo.muted; // Update local state
+                        updateVolumeIcon();
+                        // If unmuting and volume was 0, set to default
+                        if (!elements.mainVideo.muted && elements.mainVideo.volume === 0) {
+                            elements.mainVideo.volume = 0.9;
+                            elements.volumeSlider.value = 0.9;
+                        }
+                    });
+                }
+
+                // Volume Slider
+                if (elements.volumeSlider) {
+                    elements.volumeSlider.addEventListener('input', () => {
+                        elements.mainVideo.volume = elements.volumeSlider.value;
+                        elements.mainVideo.muted = elements.volumeSlider.value === 0;
+                        isMuted = elements.mainVideo.muted; // Update local state
+                        updateVolumeIcon();
+                    });
+                }
+
+                // Progress Slider
+                if (elements.progressSlider) {
+                    elements.progressSlider.addEventListener('input', () => {
+                        const seekTime = (elements.progressSlider.value / 100) * elements.mainVideo.duration;
+                        elements.mainVideo.currentTime = seekTime;
+                    });
+                }
+
+                // Subtitle Toggle Button
+                if (elements.subtitleToggleBtn) {
+                    elements.subtitleToggleBtn.addEventListener('click', () => {
+                        // Assuming only one text track for simplicity
+                        const textTracks = elements.mainVideo.textTracks;
+                        if (textTracks.length > 0) {
+                            const track = textTracks[0];
+                            if (track.mode === 'showing') {
+                                track.mode = 'hidden';
+                                console.log('Subtitles hidden');
+                            } else {
+                                track.mode = 'showing';
+                                console.log('Subtitles showing');
+                            }
+                        } else {
+                            console.log('No subtitle tracks available.');
+                        }
+                    });
+                }
+
+                // Video Events
+                if (elements.mainVideo) {
+                    elements.mainVideo.addEventListener('timeupdate', () => {
+                        if (elements.progressSlider && elements.currentTimeSpan && elements.mainVideo.duration) {
+                            const progress = (elements.mainVideo.currentTime / elements.mainVideo.duration) * 100;
+                            elements.progressSlider.value = progress;
+                            elements.currentTimeSpan.textContent = formatTime(elements.mainVideo.currentTime);
+                        }
+                    });
+
+                    elements.mainVideo.addEventListener('loadedmetadata', () => {
+                        if (elements.durationSpan && elements.mainVideo.duration) {
+                            elements.durationSpan.textContent = formatTime(elements.mainVideo.duration);
+                            elements.progressSlider.max = 100; // Reset max for progress slider
+                        }
+                        updatePlayPauseIcon();
+                        updateVolumeIcon(); // Set initial volume icon
+                    });
+
+                    elements.mainVideo.addEventListener('play', updatePlayPauseIcon);
+                    elements.mainVideo.addEventListener('pause', updatePlayPauseIcon);
+                    elements.mainVideo.addEventListener('volumechange', updateVolumeIcon); // Update icon if volume changes externally
+
+                    // Video looping logic
+                    elements.mainVideo.addEventListener('ended', () => {
+                        currentVideoIndex++;
+                        if (currentVideoIndex >= videoSources.length) {
+                            currentVideoIndex = 0; // Loop back to the first video
+                        }
+                        elements.mainVideo.src = videoSources[currentVideoIndex];
+                        elements.mainVideo.load(); // Load the new video source
+                        forcePlayWithSound(); // Ensure autoplay with sound for the next video
+                    });
+
+                    // Initial aggressive play attempt
+                    forcePlayWithSound();
+                }
+            }
+
+            // Language Toggle Event Listeners
             if (elements.langToggleBtn && elements.langDropdown) {
                 elements.langToggleBtn.addEventListener('click', (event) => {
                     event.stopPropagation();
@@ -578,6 +880,7 @@
                 });
             }
 
+            // Theme Toggle Event Listener
             if (elements.themeToggleBtn && elements.mainLogo) {
                 elements.themeToggleBtn.addEventListener('click', () => {
                     console.log('Toggling body and html dark class.');
