@@ -351,34 +351,12 @@
             <!-- Video Section -->
             <section class="p-8 rounded-xl glassy-box relative">
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;">
-                    <video id="mainVideo" controls autoplay playsinline loop class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
+                    <video id="mainVideo" controls autoplay playsinline loop class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto" volume="0.9">
                         <source src="Test Women 1.mp4" type="video/mp4">
                         <source src="Zurab 1.mp4" type="video/mp4">
                         <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
                         <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
                     </video>
-                    <script>
-                        // Immediate sound activation - runs as soon as video element is created
-                        (function() {
-                            const video = document.getElementById('mainVideo');
-                            if (video) {
-                                video.muted = false;
-                                video.volume = 0.9;
-
-                                // Try to play immediately
-                                video.play().catch(e => console.log('Immediate play attempt:', e));
-
-                                // Force sound on every possible event
-                                ['loadstart', 'loadedmetadata', 'canplay', 'canplaythrough'].forEach(event => {
-                                    video.addEventListener(event, function() {
-                                        this.muted = false;
-                                        this.volume = 0.9;
-                                        this.play().catch(e => console.log(`${event} play attempt:`, e));
-                                    });
-                                });
-                            }
-                        })();
-                    </script>
                 </div>
             </section>
 
@@ -640,51 +618,68 @@
                 });
             }
 
-            // Video Logic - IMMEDIATE AUTOPLAY WITH SOUND
+            // Video Logic - AGGRESSIVE AUTOPLAY WITH SOUND (NO USER INTERACTION REQUIRED)
             if (elements.mainVideo) {
                 const videoSources = ['Test Women 1.mp4', 'Zurab 1.mp4'];
                 let currentVideoIndex = 0;
 
-                // Configure video for immediate sound playback
+                // IMMEDIATELY configure video for sound
                 elements.mainVideo.muted = false;
                 elements.mainVideo.volume = 0.9;
                 elements.mainVideo.src = videoSources[currentVideoIndex];
 
-                // Force immediate autoplay with sound
-                function playVideoWithSound() {
+                // Ultra-aggressive autoplay function
+                function forcePlayWithSound() {
                     elements.mainVideo.muted = false;
                     elements.mainVideo.volume = 0.9;
 
-                    elements.mainVideo.play().then(() => {
-                        console.log("Video playing with sound successfully");
-                    }).catch(error => {
-                        console.log("Autoplay blocked, forcing play:", error);
-                        // Force play anyway
-                        setTimeout(() => {
-                            elements.mainVideo.muted = false;
-                            elements.mainVideo.volume = 0.9;
-                            elements.mainVideo.play().catch(e => console.log("Force play failed:", e));
-                        }, 50);
-                    });
+                    const playPromise = elements.mainVideo.play();
+
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            console.log("✅ Video playing with sound successfully!");
+                        }).catch(error => {
+                            console.log("❌ Autoplay blocked, trying alternative methods:", error);
+
+                            // Try again after very short delay
+                            setTimeout(() => {
+                                elements.mainVideo.muted = false;
+                                elements.mainVideo.volume = 0.9;
+                                elements.mainVideo.play().then(() => {
+                                    console.log("✅ Retry successful!");
+                                }).catch(e => {
+                                    console.log("❌ Retry failed:", e);
+                                    // One more aggressive attempt
+                                    setTimeout(() => {
+                                        elements.mainVideo.muted = false;
+                                        elements.mainVideo.volume = 0.9;
+                                        elements.mainVideo.play().catch(finalError => {
+                                            console.log("❌ Final attempt failed:", finalError);
+                                        });
+                                    }, 200);
+                                });
+                            }, 100);
+                        });
+                    }
                 }
 
-                // Start playing immediately
-                playVideoWithSound();
+                // Try to play IMMEDIATELY - don't wait for anything
+                forcePlayWithSound();
 
-                // Ensure sound on metadata load
-                elements.mainVideo.addEventListener('loadedmetadata', () => {
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 0.9;
-                    playVideoWithSound();
-                });
+                // Force play on EVERY possible video event
+                const videoEvents = [
+                    'loadstart', 'durationchange', 'loadedmetadata',
+                    'loadeddata', 'progress', 'canplay', 'canplaythrough'
+                ];
 
-                // Ensure sound when video can play
-                elements.mainVideo.addEventListener('canplay', () => {
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 0.9;
-                    if (elements.mainVideo.paused) {
-                        playVideoWithSound();
-                    }
+                videoEvents.forEach(eventName => {
+                    elements.mainVideo.addEventListener(eventName, () => {
+                        if (elements.mainVideo.paused) {
+                            elements.mainVideo.muted = false;
+                            elements.mainVideo.volume = 0.9;
+                            forcePlayWithSound();
+                        }
+                    });
                 });
 
                 // Handle video ended - continue with sound
@@ -696,13 +691,9 @@
                     elements.mainVideo.src = videoSources[currentVideoIndex];
                     elements.mainVideo.load();
 
-                    // Maintain sound for next video
+                    // Ensure sound for next video
                     elements.mainVideo.muted = false;
                     elements.mainVideo.volume = 0.9;
-
-                    elements.mainVideo.play().catch(error => {
-                        console.log("Next video autoplay failed:", error);
-                    });
                 });
 
                 // Handle video errors
@@ -710,30 +701,66 @@
                     handleVideoError(elements.mainVideo);
                 });
 
-                // Maintain sound on any interaction
+                // Force sound on ANY user interaction
                 elements.mainVideo.addEventListener('click', () => {
                     elements.mainVideo.muted = false;
                     elements.mainVideo.volume = 0.9;
                     if (elements.mainVideo.paused) {
-                        elements.mainVideo.play();
+                        forcePlayWithSound();
                     }
                 });
 
-                // Force sound on page focus
+                // Force sound when page becomes visible
+                document.addEventListener('visibilitychange', () => {
+                    if (!document.hidden) {
+                        elements.mainVideo.muted = false;
+                        elements.mainVideo.volume = 0.9;
+                        if (elements.mainVideo.paused) {
+                            forcePlayWithSound();
+                        }
+                    }
+                });
+
+                // Force sound on window focus
                 window.addEventListener('focus', () => {
                     elements.mainVideo.muted = false;
                     elements.mainVideo.volume = 0.9;
+                    if (elements.mainVideo.paused) {
+                        forcePlayWithSound();
+                    }
                 });
 
-                // Multiple attempts to ensure autoplay with sound
-                setTimeout(() => playVideoWithSound(), 100);
-                setTimeout(() => playVideoWithSound(), 300);
-                setTimeout(() => playVideoWithSound(), 500);
+                // Multiple timed attempts - very aggressive
+                const attemptTimes = [50, 100, 200, 300, 500, 800, 1000, 1500, 2000];
+                attemptTimes.forEach(delay => {
+                    setTimeout(() => {
+                        if (elements.mainVideo.paused) {
+                            forcePlayWithSound();
+                        }
+                    }, delay);
+                });
 
-                // Final attempt when fully loaded
+                // Final attempt when page is fully loaded
                 window.addEventListener('load', () => {
-                    playVideoWithSound();
+                    setTimeout(() => {
+                        if (elements.mainVideo.paused) {
+                            console.log("🔄 Final load attempt...");
+                            forcePlayWithSound();
+                        }
+                    }, 100);
                 });
+
+                // Emergency fallback - try every 2 seconds for the first 10 seconds
+                let emergencyAttempts = 0;
+                const emergencyInterval = setInterval(() => {
+                    if (elements.mainVideo.paused && emergencyAttempts < 5) {
+                        console.log(`🚨 Emergency attempt ${emergencyAttempts + 1}`);
+                        forcePlayWithSound();
+                        emergencyAttempts++;
+                    } else {
+                        clearInterval(emergencyInterval);
+                    }
+                }, 2000);
             }
 
             // Language Toggle Event Listeners
