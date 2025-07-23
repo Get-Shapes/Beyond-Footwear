@@ -15,7 +15,9 @@
             min-height: 100vh; /* Ensure body takes full height for background */
             transition: background-color 0.3s ease;
             z-index: 0; /* Ensures content sits above it */
-            /* Initial background and text color will be set by the inline script below */
+            /* Default text color for light mode */
+            color: #000000 !important;
+            background-color: #ffffff !important; /* Default pure white background */
         }
 
         /* Force all text to black in light mode */
@@ -27,6 +29,11 @@
         body::after,
         body::before {
             content: none; /* Remove pseudo-elements entirely */
+        }
+
+        body.dark {
+            background-color: #000000 !important; /* Pure black background, forced */
+            color: #e2e8f0; /* Light text for dark background */
         }
 
         /* Glassy effect for content boxes (Liquid Glass look) */
@@ -166,21 +173,12 @@
         const savedTheme = localStorage.getItem('theme');
         const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        let isDarkMode = false;
         if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-            isDarkMode = true;
-        }
-
-        if (isDarkMode) {
             document.documentElement.classList.add('dark'); // Apply to html element for Tailwind
             document.body.classList.add('dark'); // Also apply to body for direct CSS rules
-            document.body.style.backgroundColor = '#000000'; // Ensure black background immediately
-            document.body.style.color = '#e2e8f0'; // Ensure light text immediately
         } else {
             document.documentElement.classList.remove('dark');
             document.body.classList.remove('dark');
-            document.body.style.backgroundColor = '#ffffff'; // Ensure white background immediately
-            document.body.style.color = '#000000'; // Ensure dark text immediately
         }
     </script>
 </head>
@@ -401,16 +399,14 @@
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem('theme');
 
-            // Apply theme based on localStorage or system preference (already handled by inline script in head)
-            // This block is for updating logo and icon after initial load or theme change
-            let isDarkModeInitial = false;
+            // Apply theme based on localStorage or system preference
             if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-                isDarkModeInitial = true;
-            }
-
-            if (isDarkModeInitial) {
+                document.body.classList.add('dark');
+                document.documentElement.classList.add('dark');
                 if (mainLogo) mainLogo.src = 'Shapes-Logo neu White.png';
             } else {
+                document.body.classList.remove('dark');
+                document.documentElement.classList.remove('dark');
                 if (mainLogo) mainLogo.src = 'Shapes-Logo neu Black.png';
             }
             updateThemeToggleIcon(); // Set initial icon on load
