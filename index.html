@@ -259,43 +259,65 @@
         }
 
         /* Custom Video Controls Styling */
-        .video-container:hover #video-controls-container {
+        #video-controls-container {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .video-container:hover #video-controls-container,
+        .video-container.paused #video-controls-container {
             opacity: 1;
+        }
+
+        #timeline-container {
+            height: 1.25rem; /* 20px */
+            cursor: pointer;
+            padding: 0.5rem 0; /* 8px top/bottom padding */
+        }
+
+        #timeline {
+            background-color: rgba(255, 255, 255, 0.3);
+            height: 0.25rem; /* 4px */
+            width: 100%;
+            position: relative;
+            transition: height 0.2s ease;
+        }
+
+        #timeline-container:hover #timeline {
+            height: 0.375rem; /* 6px */
+        }
+
+        #timeline-progress {
+            background-color: #ef4444; /* red-500 */
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: width 0.1s linear;
+        }
+
+        #timeline-thumb {
+            width: 0.875rem; /* 14px */
+            height: 0.875rem; /* 14px */
+            background-color: #ef4444; /* red-500 */
+            border-radius: 9999px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            transition: transform 0.2s ease;
+        }
+
+        #timeline-container:hover #timeline-thumb {
+            transform: translateY(-50%) scale(1);
         }
 
         #volume-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 2px;
-            outline: none;
-            opacity: 0.7;
-            -webkit-transition: .2s;
-            transition: opacity .2s;
+            width: 0;
+            transition: width 0.2s ease-in-out;
         }
 
-        #volume-slider:hover {
-            opacity: 1;
-        }
-
-        #volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 12px;
-            height: 12px;
-            background: #fff;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        #volume-slider::-moz-range-thumb {
-            width: 12px;
-            height: 12px;
-            background: #fff;
-            border-radius: 50%;
-            cursor: pointer;
+        #volume-container:hover #volume-slider {
+            width: 6rem; /* 96px */
         }
 
         .accent-white {
@@ -305,7 +327,7 @@
 
     <!-- Script to prevent flash of unstyled content (FOUC) for dark mode -->
     <script>
-        // Check localStorage for theme preference immediately
+
         const savedTheme = localStorage.getItem('theme');
         const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
