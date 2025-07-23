@@ -168,32 +168,34 @@
     </style>
     <!-- Script to ensure dark mode is always loaded first unless explicitly set to light -->
     <script>
-        // Check localStorage for theme preference immediately
-        const savedTheme = localStorage.getItem('theme');
+        (function() {
+            // Check localStorage for theme preference immediately
+            const savedTheme = localStorage.getItem('theme');
 
-        // Default to dark mode unless explicitly set to light
-        let isDarkMode = savedTheme !== 'light';
+            // Default to dark mode unless explicitly set to light
+            const isDarkMode = savedTheme !== 'light';
 
-        // Apply styles directly to prevent FOUC
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark'); // Apply to html element for Tailwind
-            document.documentElement.style.backgroundColor = '#000000'; // Ensure black background immediately
-            document.documentElement.style.color = '#e2e8f0'; // Ensure light text immediately
-            // Set localStorage to dark if not already set
-            if (!savedTheme) {
-                localStorage.setItem('theme', 'dark');
+            // Apply styles directly to prevent FOUC
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark');
+                document.documentElement.style.backgroundColor = '#000000';
+                document.documentElement.style.color = '#e2e8f0';
+                // Set localStorage to dark if not already set
+                if (!savedTheme) {
+                    localStorage.setItem('theme', 'dark');
+                }
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.style.backgroundColor = '#ffffff';
+                document.documentElement.style.color = '#000000';
+                localStorage.setItem('theme', 'light');
             }
-        } else {
-            document.documentElement.classList.remove('dark');
-            document.documentElement.style.backgroundColor = '#ffffff'; // Ensure white background immediately
-            document.documentElement.style.color = '#000000'; // Ensure dark text immediately
-            localStorage.setItem('theme', 'light');
-        }
+        })();
     </script>
 </head>
 <body class="text-black" oncontextmenu="return false;">
 
-// ... existing code ...
+    <!-- Google Analytics Placeholder -->
 
     <script>
         // Language content
