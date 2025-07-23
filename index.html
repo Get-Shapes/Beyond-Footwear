@@ -7,6 +7,10 @@
     <meta name="keywords" content="footwear, innovation, consultation, award-winning, shapes">
     <meta name="author" content="Shapes Beyond Footwear">
 
+    <!-- Autoplay Policy -->
+    <meta name="autoplay-policy" content="user-gesture-required">
+    <meta http-equiv="Feature-Policy" content="autoplay 'self'">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://drshapes.github.io/Beyond-Footwear/">
@@ -335,12 +339,18 @@
             <!-- Video Section -->
             <section class="p-8 rounded-xl glassy-box relative">
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;">
-                    <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="metadata">
+                    <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
                         <source src="Test Women 1.mp4" type="video/mp4">
                         <source src="Zurab 1.mp4" type="video/mp4">
                         <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
                         <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
                     </video>
+<script>
+    // Set volume to 0.9 after video metadata is loaded
+    document.getElementById('mainVideo').addEventListener('loadedmetadata', function() {
+        this.volume = 0.9;
+    });
+</script>
                 </div>
             </section>
 
@@ -602,65 +612,65 @@
                 });
             }
 
-            // Video Logic with Error Handling and Sound Autoplay
+            // Video Logic with Aggressive Sound Autoplay
             if (elements.mainVideo) {
                 const videoSources = ['Test Women 1.mp4', 'Zurab 1.mp4'];
                 let currentVideoIndex = 0;
                 let hasUserInteracted = false;
 
-                // Set initial video source
+                // Set initial video source and configure for sound
                 elements.mainVideo.src = videoSources[currentVideoIndex];
+                elements.mainVideo.muted = false; // Force sound ON
+                elements.mainVideo.volume = 0.9; // Set volume to 90%
 
-                // Function to attempt autoplay with sound
-                function attemptAutoplayWithSound() {
-                    elements.mainVideo.muted = false; // Ensure sound is enabled
-                    elements.mainVideo.volume = 0.8; // Set volume to 80%
+                // Function to force autoplay with sound
+                function forceAutoplayWithSound() {
+                    // Ensure sound is always enabled
+                    elements.mainVideo.muted = false;
+                    elements.mainVideo.volume = 0.9;
 
                     return elements.mainVideo.play().then(() => {
                         console.log("Autoplay with sound successful");
+                        hasUserInteracted = true; // Mark as successful interaction
                         return true;
                     }).catch(error => {
-                        console.log("Autoplay with sound failed:", error);
-                        // Try with muted autoplay as fallback
-                        elements.mainVideo.muted = true;
-                        return elements.mainVideo.play().then(() => {
-                            console.log("Autoplay with muted sound successful");
-                            showUnmuteButton();
-                            return false;
-                        }).catch(mutedError => {
-                            console.log("All autoplay attempts failed:", mutedError);
-                            return false;
+                        console.log("Initial autoplay with sound failed, trying user interaction approach:", error);
+
+                        // Instead of falling back to muted, show a play button with sound
+                        showPlayWithSoundButton();
+                        return false;
+                    });
+                }
+
+                // Function to show play button with sound (instead of unmute button)
+                function showPlayWithSoundButton() {
+                    const playButton = document.createElement('button');
+                    playButton.innerHTML = `
+                        <svg class="w-12 h-12 mb-2" fill="white" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <div class="text-sm">Click to Play with Sound</div>
+                    `;
+                    playButton.className = 'absolute inset-0 bg-black bg-opacity-60 text-white flex flex-col items-center justify-center hover:bg-opacity-80 transition-all duration-300 z-10 cursor-pointer';
+                    playButton.style.fontSize = '16px';
+
+                    const videoContainer = elements.mainVideo.parentElement;
+                    videoContainer.appendChild(playButton);
+
+                    playButton.addEventListener('click', () => {
+                        elements.mainVideo.muted = false;
+                        elements.mainVideo.volume = 0.9;
+                        elements.mainVideo.play().then(() => {
+                            hasUserInteracted = true;
+                            playButton.remove();
+                            trackEvent('video_played_with_sound', { video: videoSources[currentVideoIndex] });
+                        }).catch(playError => {
+                            console.log("Manual play failed:", playError);
                         });
                     });
                 }
 
-                // Function to show unmute button
-                function showUnmuteButton() {
-                    if (!hasUserInteracted && elements.mainVideo.muted) {
-                        const unmuteButton = document.createElement('button');
-                        unmuteButton.innerHTML = `
-                            <svg class="w-8 h-8" fill="white" viewBox="0 0 24 24">
-                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                            </svg>
-                            <span class="ml-2">Click to Enable Sound</span>
-                        `;
-                        unmuteButton.className = 'absolute top-4 right-4 bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg flex items-center hover:bg-opacity-90 transition-all duration-300 z-10';
-                        unmuteButton.style.fontSize = '14px';
-
-                        const videoContainer = elements.mainVideo.parentElement;
-                        videoContainer.appendChild(unmuteButton);
-
-                        unmuteButton.addEventListener('click', () => {
-                            elements.mainVideo.muted = false;
-                            elements.mainVideo.volume = 0.8;
-                            hasUserInteracted = true;
-                            unmuteButton.remove();
-                            trackEvent('video_unmuted', { video: videoSources[currentVideoIndex] });
-                        });
-                    }
-                }
-
-                // Handle video ended event
+                // Handle video ended event - always maintain sound
                 elements.mainVideo.addEventListener('ended', () => {
                     currentVideoIndex++;
                     if (currentVideoIndex >= videoSources.length) {
@@ -669,11 +679,9 @@
                     elements.mainVideo.src = videoSources[currentVideoIndex];
                     elements.mainVideo.load();
 
-                    // Maintain sound settings for next video
-                    if (hasUserInteracted) {
-                        elements.mainVideo.muted = false;
-                        elements.mainVideo.volume = 0.8;
-                    }
+                    // Always maintain sound settings for next video
+                    elements.mainVideo.muted = false;
+                    elements.mainVideo.volume = 0.9;
 
                     elements.mainVideo.play().catch(error => {
                         console.log("Autoplay prevented after video ended:", error);
@@ -685,30 +693,45 @@
                     handleVideoError(elements.mainVideo);
                 });
 
-                // Handle user interaction to enable sound
+                // Handle video click - ensure sound is always on
                 elements.mainVideo.addEventListener('click', () => {
-                    if (elements.mainVideo.muted) {
+                    if (elements.mainVideo.paused) {
                         elements.mainVideo.muted = false;
-                        elements.mainVideo.volume = 0.8;
+                        elements.mainVideo.volume = 0.9;
+                        elements.mainVideo.play();
                         hasUserInteracted = true;
-                        // Remove unmute button if it exists
-                        const unmuteButton = elements.mainVideo.parentElement.querySelector('button');
-                        if (unmuteButton && unmuteButton.textContent.includes('Enable Sound')) {
-                            unmuteButton.remove();
-                        }
-                        trackEvent('video_unmuted_by_click', { video: videoSources[currentVideoIndex] });
+                        trackEvent('video_clicked_to_play', { video: videoSources[currentVideoIndex] });
                     }
                 });
 
-                // Track when user interacts with page (for autoplay policies)
+                // Handle any user interaction to enable sound immediately
                 document.addEventListener('click', () => {
-                    hasUserInteracted = true;
+                    if (!hasUserInteracted) {
+                        elements.mainVideo.muted = false;
+                        elements.mainVideo.volume = 0.9;
+                        hasUserInteracted = true;
+                    }
                 }, { once: true });
 
-                // Attempt initial autoplay with sound
+                // Handle page visibility change to maintain sound
+                document.addEventListener('visibilitychange', () => {
+                    if (!document.hidden && hasUserInteracted) {
+                        elements.mainVideo.muted = false;
+                        elements.mainVideo.volume = 0.9;
+                    }
+                });
+
+                // Attempt immediate autoplay with sound
                 setTimeout(() => {
-                    attemptAutoplayWithSound();
-                }, 500); // Small delay to ensure page is fully loaded
+                    forceAutoplayWithSound();
+                }, 100); // Shorter delay for immediate playback
+
+                // Also try when page is fully loaded
+                window.addEventListener('load', () => {
+                    if (elements.mainVideo.paused) {
+                        forceAutoplayWithSound();
+                    }
+                });
             }
 
             // Language Toggle Event Listeners
