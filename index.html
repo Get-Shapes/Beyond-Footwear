@@ -1,9 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark"> <!-- Added class="dark" here to default to dark mode -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shapes Beyond Footwear</title>
+    <!-- Script to manage theme preference and prevent FOUC -->
+    <script>
+        // This script runs before the page renders to prevent a flash of incorrect theme.
+        (function() {
+            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme'); // 'dark', 'light', or null
+
+            // If a theme is saved, use it. Otherwise, use system preference.
+            // If savedTheme is 'light' OR (no saved theme AND system prefers light), remove 'dark' class.
+            if (savedTheme === 'light' || (savedTheme === null && !prefersDarkMode)) {
+                document.documentElement.classList.remove('dark'); // Remove dark class from html
+                // Removed: document.body.classList.remove('dark'); // This line caused the error as body might not be ready
+            } else {
+                // Ensure dark mode is applied if savedTheme is 'dark' or (no saved theme AND system prefers dark)
+                document.documentElement.classList.add('dark');
+                // Removed: document.body.classList.add('dark'); // This line caused the error as body might not be ready
+            }
+        })();
+    </script>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Urbanist -->
@@ -307,7 +326,7 @@
                         <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
                     </ul>
                 `,
-                                modalTitle: "Schedule Your Appointment",
+                modalTitle: "Schedule Your Appointment",
                 thankyouHeadline: "Thank you! Your appointment is confirmed.",
                 thankyouSubheadline: "Check your email for confirmation.",
                 backToHomepage: "Back to Homepage",
@@ -425,15 +444,12 @@
 
         // Check for saved theme preference and set initial language on load
         window.onload = () => {
-            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const savedTheme = localStorage.getItem('theme');
-
-            if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-                document.body.classList.add('dark');
+            // Theme is already set by the script in the head to prevent FOUC.
+            // Just ensure logos and icons are correctly displayed based on the current body class.
+            if (document.body.classList.contains('dark')) {
                 logoLightMode.classList.add('hidden');
                 logoDarkMode.classList.remove('hidden');
             } else {
-                document.body.classList.remove('dark');
                 logoLightMode.classList.remove('hidden');
                 logoDarkMode.classList.add('hidden');
             }
