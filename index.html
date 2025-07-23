@@ -335,7 +335,7 @@
             <!-- Video Section -->
             <section class="p-8 rounded-xl glassy-box relative">
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;">
-                    <video id="mainVideo" controls autoplay playsinline muted="false" class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="metadata" autoplay="autoplay" muted>
+                    <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="metadata">
                         <source src="Test Women 1.mp4" type="video/mp4">
                         <source src="Zurab 1.mp4" type="video/mp4">
                         <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
@@ -452,30 +452,25 @@
         // Function to update content based on language
         function updateContent() {
             const langData = content[currentLanguage];
-            const elements = {
-                benefit2Title: document.getElementById('benefit2-title'),
-                benefit2Text: document.getElementById('benefit2-text'),
-                modalTitle: document.getElementById('modal-title'),
-                thankyouHeadline: document.getElementById('thankyou-headline'),
-                thankyouSubheadline: document.getElementById('thankyou-subheadline'),
-                backToHomepage: document.getElementById('back-to-homepage'),
-                currentLangSpan: document.getElementById('current-lang'),
-                scheduleCtaButton: document.getElementById('schedule-cta')
-            };
 
-            Object.keys(elements).forEach(key => {
-                const element = elements[key];
-                const content = langData[key.replace(/([A-Z])/g, (match, letter) => 
-                    letter.toLowerCase()).replace('span', 'Lang').replace('button', '')];
-                
-                if (element && content) {
-                    if (key === 'benefit2Text') {
-                        element.innerHTML = content;
-                    } else {
-                        element.textContent = content;
-                    }
-                }
-            });
+            // Update each element directly
+            const benefit2Title = document.getElementById('benefit2-title');
+            const benefit2Text = document.getElementById('benefit2-text');
+            const modalTitle = document.getElementById('modal-title');
+            const thankyouHeadline = document.getElementById('thankyou-headline');
+            const thankyouSubheadline = document.getElementById('thankyou-subheadline');
+            const backToHomepage = document.getElementById('back-to-homepage');
+            const currentLangSpan = document.getElementById('current-lang');
+            const scheduleCtaButton = document.getElementById('schedule-cta');
+
+            if (benefit2Title) benefit2Title.textContent = langData.benefit2Title;
+            if (benefit2Text) benefit2Text.innerHTML = langData.benefit2Text;
+            if (modalTitle) modalTitle.textContent = langData.modalTitle;
+            if (thankyouHeadline) thankyouHeadline.textContent = langData.thankyouHeadline;
+            if (thankyouSubheadline) thankyouSubheadline.textContent = langData.thankyouSubheadline;
+            if (backToHomepage) backToHomepage.textContent = langData.backToHomepage;
+            if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
+            if (scheduleCtaButton) scheduleCtaButton.textContent = langData.scheduleCta;
 
             // Update document language
             document.documentElement.lang = currentLanguage;
