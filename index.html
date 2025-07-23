@@ -11,16 +11,24 @@
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem('theme'); // 'dark', 'light', or null
 
-            // If a theme is saved, use it. Otherwise, use system preference.
-            // If savedTheme is 'light' OR (no saved theme AND system prefers light), remove 'dark' class.
-            if (savedTheme === 'light' || (savedTheme === null && !prefersDarkMode)) {
-                document.documentElement.classList.remove('dark'); // Remove dark class from html
-                // Removed: document.body.classList.remove('dark'); // This line caused the error as body might not be ready
-            } else {
-                // Ensure dark mode is applied if savedTheme is 'dark' or (no saved theme AND system prefers dark)
-                document.documentElement.classList.add('dark');
-                // Removed: document.body.classList.add('dark'); // This line caused the error as body might not be ready
+            // Determine if dark mode should be applied initially
+            let applyDarkMode = false;
+            if (savedTheme === 'dark') {
+                applyDarkMode = true;
+            } else if (savedTheme === 'light') {
+                applyDarkMode = false;
+            } else { // No saved theme, use system preference
+                applyDarkMode = prefersDarkMode;
             }
+
+            // Apply or remove 'dark' class on the html element immediately
+            if (applyDarkMode) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            // Note: We no longer directly manipulate document.body here to prevent TypeError,
+            // as body might not be fully available. CSS rules now target html.dark body.
         })();
     </script>
     <!-- Tailwind CSS CDN -->
@@ -49,7 +57,8 @@
             content: none; /* Remove pseudo-elements entirely */
         }
 
-        body.dark {
+        /* Apply dark mode styles to body when html has 'dark' class */
+        html.dark body { /* Changed from body.dark to html.dark body */
             background-color: #000000 !important; /* Pure black background, forced */
             color: #e2e8f0; /* Light text for dark background */
         }
@@ -130,7 +139,7 @@
             overflow: hidden; /* Hide modal scrollbar */
             border-radius: 1rem; /* Keep border-radius from glassy-box */
         }
-        .dark .modal-content {
+        html.dark .modal-content { /* Changed from .dark .modal-content to html.dark .modal-content */
             color: #e2e8f0; /* Text color for modal content */
         }
         .close-button {
@@ -148,11 +157,11 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .dark .close-button {
+        html.dark .close-button { /* Changed from .dark .close-button to html.dark .close-button */
             color: #cbd5e0; /* Adjusted for dark background */
         }
-        .dark .close-button:hover,
-        .dark .close-button:focus {
+        html.dark .close-button:hover, /* Changed from .dark .close-button:hover to html.dark .close-button:hover */
+        html.dark .close-button:focus { /* Changed from .dark .close-button:focus to html.dark .close-button:focus */
             color: #fefefe; /* Adjusted for dark background */
         }
 
@@ -380,147 +389,4 @@
             if (backToHomepageBtn) backToHomepageBtn.textContent = langData.backToHomepage;
             if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
 
-            const scheduleCtaButton = document.getElementById('schedule-cta');
-            if (scheduleCtaButton) {
-                scheduleCtaButton.textContent = langData.scheduleCta;
-            }
-        }
-
-        // Language Toggle Event Listener (for showing/hiding dropdown)
-        langToggleBtn.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent click from immediately closing dropdown
-            langDropdown.classList.toggle('hidden');
-        });
-
-        // Event listeners for language options in the dropdown
-        langDropdown.querySelectorAll('.lang-option').forEach(button => {
-            button.addEventListener('click', (event) => {
-                currentLanguage = event.target.dataset.lang;
-                updateContent();
-                langDropdown.classList.add('hidden'); // Hide dropdown after selection
-            });
-        });
-
-        // Close dropdown if clicking outside
-        document.addEventListener('click', (event) => {
-            if (!langDropdown.contains(event.target) && !langToggleBtn.contains(event.target)) {
-                langDropdown.classList.add('hidden');
-            }
-        });
-
-        // Function to update the theme toggle icon
-        function updateThemeToggleIcon() {
-            const isDarkMode = document.body.classList.contains('dark');
-            if (isDarkMode) {
-                themeToggleBtn.innerHTML = `
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
-                `; // Sun icon for dark mode
-            } else {
-                themeToggleBtn.innerHTML = `
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path>
-                    </svg>
-                `; // Half moon icon for light mode
-            }
-        }
-
-        // Theme Toggle Event Listener
-        themeToggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-            // Store user preference in localStorage
-            if (document.body.classList.contains('dark')) {
-                localStorage.setItem('theme', 'dark');
-                logoLightMode.classList.add('hidden');
-                logoDarkMode.classList.remove('hidden');
-            } else {
-                localStorage.setItem('theme', 'light');
-                logoLightMode.classList.remove('hidden');
-                logoDarkMode.classList.add('hidden');
-            }
-            updateThemeToggleIcon(); // Update icon after theme change
-        });
-
-        // Check for saved theme preference and set initial language on load
-        window.onload = () => {
-            // Theme is already set by the script in the head to prevent FOUC.
-            // Just ensure logos and icons are correctly displayed based on the current body class.
-            if (document.body.classList.contains('dark')) {
-                logoLightMode.classList.add('hidden');
-                logoDarkMode.classList.remove('hidden');
-            } else {
-                logoLightMode.classList.remove('hidden');
-                logoDarkMode.classList.add('hidden');
-            }
-
-            // Set initial language based on browser preference or default to 'en'
-            const browserLang = navigator.language.split('-')[0];
-            const availableLangs = Object.keys(content);
-            const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
-            currentLanguage = initialLang;
-            updateContent();
-            updateThemeToggleIcon(); // Set initial icon on load
-        };
-
-        // Show Calendly Modal
-        document.addEventListener('DOMContentLoaded', () => {
-            const scheduleCtaButton = document.getElementById('schedule-cta');
-            if (scheduleCtaButton) {
-                scheduleCtaButton.addEventListener('click', () => {
-                    calendlyModal.style.display = 'flex';
-                });
-            }
-        });
-
-        // Close Calendly Modal
-        closeModalBtn.addEventListener('click', () => {
-            calendlyModal.style.display = 'none';
-        });
-
-        // Close modal if clicking outside content
-        calendlyModal.addEventListener('click', (e) => {
-            if (e.target === calendlyModal) {
-                calendlyModal.style.display = 'none';
-            }
-        });
-
-        // Back to Homepage from Thank You Page
-        backToHomepageBtn.addEventListener('click', () => {
-            thankYouPage.classList.add('hidden');
-            landingPageContent.classList.remove('hidden');
-        });
-
-        // Video looping logic
-        const mainVideo = document.getElementById('mainVideo');
-        const videoSources = [
-            'Test Women 1.mp4',
-            'Zurab 1.mp4'
-        ];
-        let currentVideoIndex = 0;
-
-        // Set initial video source on script load (or when video element is ready)
-        // This is important if the video element's src is not set initially in HTML
-        mainVideo.src = videoSources[currentVideoIndex];
-
-        mainVideo.addEventListener('ended', () => {
-            currentVideoIndex++;
-            if (currentVideoIndex >= videoSources.length) {
-                currentVideoIndex = 0; // Loop back to the first video
-            }
-            mainVideo.src = videoSources[currentVideoIndex];
-            mainVideo.load(); // Load the new video source
-            mainVideo.play().catch(error => {
-                // Catch any errors if autoplay is blocked (e.g., due to browser policies)
-                console.log("Autoplay prevented after video ended:", error);
-            });
-        });
-
-        // Attempt to play on load (will be caught if autoplay is blocked)
-        mainVideo.play().catch(error => {
-            console.log("Initial autoplay prevented:", error);
-        });
-    </script>
-
-</body>
-</html>
+            const scheduleCtaButton = document.getElementById('schedule-cta
