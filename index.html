@@ -220,23 +220,16 @@
                 <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300">
                     <!-- SVG icon will be dynamically updated by JavaScript -->
                 </button>
-                <!-- Language Toggle with Dropdown -->
-                <div class="relative">
-                    <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
-                        <span id="current-lang">EN</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div id="lang-dropdown" class="hidden absolute left-0 mt-2 w-32 rounded-lg shadow-xl py-1 z-50 glassy-box">
-                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
-                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
-                    </div>
-                </div>
+                <!-- Language Toggle Button (Direct Toggle) -->
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
+                    <span id="current-lang">EN</span>
+                </button>
             </div>
 
             <!-- Logo Section (now top right) -->
             <div>
                 <!-- Logo for Light Mode -->
-                <img id="main-logo" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
+                <img id="main-logo" src="https://placehold.co/600x400/000000/FFFFFF?text=Shapes-Logo%20neu%20Black.png" alt="Shapes Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
             </div>
         </div>
 
@@ -246,9 +239,9 @@
             <div class="p-8 rounded-xl glassy-box relative">
                 <!-- Video embed goes here -->
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-                    <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload">
-                        <source src="Test Women 1.mp4" type="video/mp4">
-                        <source src="Zurab 1.mp4" type="video/mp4">
+                    <video id="mainVideo" controls playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload">
+                        <source src="https://placehold.co/600x400/000000/FFFFFF?text=Test%20Women%201.mp4" type="video/mp4">
+                        <source src="https://placehold.co/600x400/000000/FFFFFF?text=Zurab%201.mp4" type="video/mp4">
                         <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
                         Your browser does not support the video tag.
                     </video>
@@ -399,7 +392,6 @@
             const langToggleBtn = document.getElementById('lang-toggle');
             const currentLangSpan = document.getElementById('current-lang');
             const themeToggleBtn = document.getElementById('theme-toggle');
-            const langDropdown = document.getElementById('lang-dropdown');
             const mainLogo = document.getElementById('main-logo'); // Changed to single logo ID
             const scheduleCtaButton = document.getElementById('schedule-cta'); // Declared here
 
@@ -408,10 +400,12 @@
 
             if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
                 document.body.classList.add('dark');
-                if (mainLogo) mainLogo.src = 'Shapes-Logo neu White.png';
+                // Using placeholder image for the logo
+                if (mainLogo) mainLogo.src = 'https://placehold.co/600x400/000000/FFFFFF?text=Shapes-Logo%20neu%20White.png';
             } else {
                 document.body.classList.remove('dark');
-                if (mainLogo) mainLogo.src = 'Shapes-Logo neu Black.png';
+                // Using placeholder image for the logo
+                if (mainLogo) mainLogo.src = 'https://placehold.co/600x400/000000/FFFFFF?text=Shapes-Logo%20neu%20Black.png';
             }
 
             // Set initial language based on browser preference or default to 'en'
@@ -456,8 +450,8 @@
             // Video looping logic
             const mainVideo = document.getElementById('mainVideo');
             const videoSources = [
-                'Test Women 1.mp4',
-                'Zurab 1.mp4'
+                'https://placehold.co/600x400/000000/FFFFFF?text=Test%20Women%201.mp4',
+                'https://placehold.co/600x400/000000/FFFFFF?text=Zurab%201.mp4'
             ];
             let currentVideoIndex = 0;
 
@@ -472,42 +466,17 @@
                     }
                     mainVideo.src = videoSources[currentVideoIndex];
                     mainVideo.load(); // Load the new video source
-                    mainVideo.play().catch(error => {
-                        console.log("Autoplay prevented after video ended:", error);
-                    });
+                    // Removed autoplay after video ends: mainVideo.play().catch(error => { console.log("Autoplay prevented after video ended:", error); });
                 });
 
-                // Attempt to play on load (will be caught if autoplay is blocked)
-                mainVideo.play().catch(error => {
-                    console.log("Initial autoplay prevented:", error);
-                });
+                // Removed initial autoplay: mainVideo.play().catch(error => { console.log("Initial autoplay prevented:", error); });
             }
 
-            // Language Toggle Event Listener (for showing/hiding dropdown)
-            if (langToggleBtn && langDropdown) {
-                langToggleBtn.addEventListener('click', (event) => {
-                    event.stopPropagation(); // Prevent click from immediately closing dropdown
-                    if (langDropdown) { // Added null check
-                        langDropdown.classList.toggle('hidden');
-                    }
-                });
-
-                // Event listeners for language options in the dropdown
-                langDropdown.querySelectorAll('.lang-option').forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        currentLanguage = event.target.dataset.lang;
-                        updateContent();
-                        if (langDropdown) { // Added null check
-                            langDropdown.classList.add('hidden'); // Hide dropdown after selection
-                        }
-                    });
-                });
-
-                // Close dropdown if clicking outside
-                document.addEventListener('click', (event) => {
-                    if (langDropdown && !langDropdown.contains(event.target) && !langToggleBtn.contains(event.target)) { // Added null check
-                        langDropdown.classList.add('hidden');
-                    }
+            // Language Toggle Event Listener (Direct Toggle)
+            if (langToggleBtn) {
+                langToggleBtn.addEventListener('click', () => {
+                    currentLanguage = (currentLanguage === 'en') ? 'de' : 'en';
+                    updateContent();
                 });
             }
 
@@ -519,10 +488,10 @@
                     
                     if (document.body.classList.contains('dark')) {
                         localStorage.setItem('theme', 'dark');
-                        mainLogo.src = 'Shapes-Logo neu White.png';
+                        mainLogo.src = 'https://placehold.co/600x400/000000/FFFFFF?text=Shapes-Logo%20neu%20White.png';
                     } else {
                         localStorage.setItem('theme', 'light');
-                        mainLogo.src = 'Shapes-Logo neu Black.png';
+                        mainLogo.src = 'https://placehold.co/600x400/000000/FFFFFF?text=Shapes-Logo%20neu%20Black.png';
                     }
                     updateThemeToggleIcon(); // Update icon after theme change
                 });
