@@ -15,26 +15,42 @@
             min-height: 100vh; /* Ensure body takes full height for background */
             transition: background-color 0.3s ease;
             z-index: 0; /* Ensures content sits above it */
-            /* Default text color for dark mode, as light mode is removed */
-            color: #e2e8f0;
-            background-color: #000000 !important; /* Pure black background, forced for dark mode */
+            /* Default text color for light mode */
+            color: #000000 !important;
+            background-color: #ffffff !important; /* Default pure white background */
         }
 
-        /* Removed body:not(.dark) rules as light mode is eliminated */
+        /* Force all text to black in light mode */
+        body:not(.dark) .text-black-force {
+            color: #000000 !important;
+        }
+
+        /* Remove background image layer and overlay */
         body::after,
         body::before {
             content: none; /* Remove pseudo-elements entirely */
         }
 
+        body.dark {
+            background-color: #000000 !important; /* Pure black background, forced */
+            color: #e2e8f0; /* Light text for dark background */
+        }
+
         /* Glassy effect for content boxes (Liquid Glass look) */
         .glassy-box {
-            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2)); /* Subtle gradient for dark mode */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)); /* Subtle gradient for light mode */
             backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
             -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 150, 255, 0.2); /* Adjusted for dark mode */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1), 0 0 20px rgba(100, 150, 255, 0.3); /* Added a subtle blue glow */
             border-radius: 1rem; /* Consistent with rounded-xl */
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        .dark .glassy-box {
+            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2)); /* Subtle gradient for dark mode */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 150, 255, 0.2); /* Adjusted for dark mode */
         }
 
         /* Ensure video fills its container and maintains aspect ratio */
@@ -92,12 +108,15 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            color: #e2e8f0; /* Text color for modal content in dark mode */
+            color: #000000; /* Default text color for modal content */
             overflow: hidden; /* Hide modal scrollbar */
             border-radius: 1rem; /* Keep border-radius from glassy-box */
         }
+        .dark .modal-content {
+            color: #e2e8f0; /* Text color for modal content in dark mode */
+        }
         .close-button {
-            color: #cbd5e0; /* Adjusted for dark background */
+            color: #000000; /* Pure Black for light mode */
             position: absolute;
             top: 1rem;
             right: 1.5rem;
@@ -107,9 +126,21 @@
         }
         .close-button:hover,
         .close-button:focus {
-            color: #fefefe; /* Adjusted for dark background */
+            color: #000000; /* Pure black on hover */
             text-decoration: none;
             cursor: pointer;
+        }
+        .dark .close-button {
+            color: #cbd5e0; /* Adjusted for dark background */
+        }
+        .dark .close-button:hover,
+        .dark .close-button:focus {
+            color: #fefefe; /* Adjusted for dark background */
+        }
+
+        /* Specific override for language toggle button in light mode */
+        body:not(.dark) #lang-toggle {
+            background-color: #ffffff !important; /* Force solid white background in light mode */
         }
 
         /* Calendly iframe container styling */
@@ -136,11 +167,19 @@
             flex-shrink: 0;
         }
     </style>
-    <!-- Script to ensure dark mode is applied immediately -->
+    <!-- Script to prevent flash of unstyled content (FOUC) for dark mode -->
     <script>
-        // Always apply dark mode classes
-        document.documentElement.classList.add('dark');
-        document.body.classList.add('dark');
+        // Check localStorage for theme preference immediately
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+            document.documentElement.classList.add('dark'); // Apply to html element for Tailwind
+            document.body.classList.add('dark'); // Also apply to body for direct CSS rules
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.body.classList.remove('dark');
+        }
     </script>
 </head>
 <body class="text-black" oncontextmenu="return false;">
@@ -176,19 +215,22 @@
     <div id="landing-page-content" class="min-h-screen flex flex-col text-black-force">
         <!-- Header Section for Logo and Controls -->
         <div class="container mx-auto flex justify-between items-center w-full mt-8 mb-8">
-            <!-- Top Left Controls (Language Toggle) -->
+            <!-- Top Left Controls (Theme Toggle and Language) -->
             <div class="flex space-x-4 z-50">
-                <!-- Removed Theme Toggle Button -->
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300">
+                    <!-- SVG icon will be dynamically updated by JavaScript -->
+                </button>
                 <!-- Language Toggle Button (Direct Toggle) -->
-                <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-transparent text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
                     <span id="current-lang">EN</span>
                 </button>
             </div>
 
             <!-- Logo Section (now top right) -->
             <div>
-                <!-- Logo for Dark Mode (always white) -->
-                <img id="main-logo" src="Shapes-Logo neu White.png" alt="Shapes Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
+                <!-- Logo for Light Mode -->
+                <img id="main-logo" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
             </div>
         </div>
 
@@ -210,7 +252,7 @@
 
         <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl bg-transparent text-red-500 hover:scale-105 shadow-md">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl bg-transparent text-red-600 dark:text-red-500 hover:scale-105 shadow-md">
                 Book your free consultation.
             </button>
         </section>
@@ -220,8 +262,8 @@
             <div class="grid grid-cols-1 gap-8">
                 <!-- Benefit Card 2: Awards (Concise) -->
                 <div class="text-center transition duration-300">
-                    <h3 id="benefit2-title" class="text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h3>
-                    <ul id="benefit2-text" class="text-gray-300 list-none p-0 space-y-2">
+                    <h3 id="benefit2-title" class="text-black-force dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h3>
+                    <ul id="benefit2-text" class="text-black-force dark:text-gray-300 list-none p-0 space-y-2">
                         <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
                         <li><strong>Winner of German Design Award 23</strong></li>
                         <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
@@ -236,7 +278,7 @@
     <div id="calendly-modal" class="modal">
         <div class="modal-content glassy-box">
             <span class="close-button" id="close-modal">&times;</span>
-            <h2 id="modal-title" class="text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
+            <h2 id="modal-title" class="text-black-force dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
             <!-- Calendly Embed - Replace YOUR_CALENDly_LINK with your actual Calendly scheduling link -->
             <div class="calendly-iframe-container">
                 <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe"></iframe>
@@ -246,14 +288,14 @@
     </div>
 
     <!-- Thank You Page Content (Initially Hidden) -->
-    <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-black transition duration-300">
-        <h1 id="thankyou-headline" class="text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
+    <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
+        <h1 id="thankyou-headline" class="text-black-force dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
             Thank you! Your appointment is confirmed.
         </h1>
-        <p id="thankyou-subheadline" class="text-gray-300 text-xl md:text-2xl mb-10">
+        <p id="thankyou-subheadline" class="text-black-force dark:text-gray-300 text-xl md:text-2xl mb-10">
             Check your email for confirmation.
         </p>
-        <button id="back-to-homepage" class="apple-button text-xl bg-transparent text-gray-200 border border-gray-200">
+        <button id="back-to-homepage" class="apple-button text-xl bg-transparent text-black-force dark:text-gray-200 border border-black dark:border-gray-200">
             Back to Homepage
         </button>
     </div >
@@ -319,7 +361,26 @@
             if (scheduleCtaButton) scheduleCtaButton.textContent = langData.scheduleCta;
         }
 
-        // Removed updateThemeToggleIcon function as theme toggle is removed
+        // Function to update the theme toggle icon
+        function updateThemeToggleIcon() {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const isDarkMode = document.body.classList.contains('dark');
+            if (themeToggleBtn) {
+                if (isDarkMode) {
+                    themeToggleBtn.innerHTML = `
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    `; // Sun icon for dark mode
+                } else {
+                    themeToggleBtn.innerHTML = `
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    `; // Half moon icon for light mode
+                }
+            }
+        }
 
         // This ensures the DOM is fully loaded before trying to access elements
         document.addEventListener('DOMContentLoaded', () => {
@@ -331,11 +392,24 @@
             const backToHomepageBtn = document.getElementById('back-to-homepage');
             const langToggleBtn = document.getElementById('lang-toggle');
             const currentLangSpan = document.getElementById('current-lang');
+            const themeToggleBtn = document.getElementById('theme-toggle');
             const mainLogo = document.getElementById('main-logo'); // Changed to single logo ID
             const scheduleCtaButton = document.getElementById('schedule-cta'); // Declared here
 
-            // Initial logo setting for dark mode (always white)
-            if (mainLogo) mainLogo.src = 'Shapes-Logo neu White.png';
+            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
+
+            // Apply theme based on localStorage or system preference
+            if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+                document.body.classList.add('dark');
+                document.documentElement.classList.add('dark');
+                if (mainLogo) mainLogo.src = 'Shapes-Logo neu White.png';
+            } else {
+                document.body.classList.remove('dark');
+                document.documentElement.classList.remove('dark');
+                if (mainLogo) mainLogo.src = 'Shapes-Logo neu Black.png';
+            }
+            updateThemeToggleIcon(); // Set initial icon on load
 
             // Set initial language based on browser preference or default to 'en'
             const browserLang = navigator.language.split('-')[0];
@@ -410,6 +484,23 @@
                 langToggleBtn.addEventListener('click', () => {
                     currentLanguage = (currentLanguage === 'en') ? 'de' : 'en';
                     updateContent(); // Update content based on new language
+                });
+            }
+
+            // Theme Toggle Event Listener
+            if (themeToggleBtn && mainLogo) {
+                themeToggleBtn.addEventListener('click', () => {
+                    document.body.classList.toggle('dark');
+                    document.documentElement.classList.toggle('dark');
+                    
+                    if (document.body.classList.contains('dark')) {
+                        localStorage.setItem('theme', 'dark');
+                        mainLogo.src = 'Shapes-Logo neu White.png';
+                    } else {
+                        localStorage.setItem('theme', 'light');
+                        mainLogo.src = 'Shapes-Logo neu Black.png';
+                    }
+                    updateThemeToggleIcon(); // Update icon after theme change
                 });
             }
         });
