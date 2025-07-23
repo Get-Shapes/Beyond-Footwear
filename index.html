@@ -384,11 +384,26 @@
             const landingPageContent = document.getElementById('landing-page-content');
             const thankYouPage = document.getElementById('thank-you-page');
             const backToHomepageBtn = document.getElementById('back-to-homepage');
-            const langToggleBtn = document.getElementById('lang-toggle'); // Re-added langToggleBtn
-            const currentLangSpan = document.getElementById('current-lang'); // Re-added currentLangSpan
+            const langToggleBtn = document.getElementById('lang-toggle');
+            const currentLangSpan = document.getElementById('current-lang');
             const themeToggleBtn = document.getElementById('theme-toggle');
             const mainLogo = document.getElementById('main-logo');
             const scheduleCtaButton = document.getElementById('schedule-cta');
+
+            // Debugging: Log the elements to console to check if they are found
+            console.log('--- DOM Element Checks ---');
+            console.log('calendlyModal:', calendlyModal);
+            console.log('closeModalBtn:', closeModalBtn);
+            console.log('landingPageContent:', landingPageContent);
+            console.log('thankYouPage:', thankYouPage);
+            console.log('backToHomepageBtn:', backToHomepageBtn);
+            console.log('langToggleBtn:', langToggleBtn); // Crucial for this error
+            console.log('currentLangSpan:', currentLangSpan); // Also crucial
+            console.log('themeToggleBtn:', themeToggleBtn);
+            console.log('mainLogo:', mainLogo);
+            console.log('scheduleCtaButton:', scheduleCtaButton);
+            console.log('--------------------------');
+
 
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem('theme');
@@ -466,11 +481,14 @@
             }
 
             // Language Toggle Event Listener (Direct Toggle)
+            // Added explicit check for langToggleBtn before adding event listener
             if (langToggleBtn) {
                 langToggleBtn.addEventListener('click', () => {
                     currentLanguage = (currentLanguage === 'en') ? 'de' : 'en';
                     updateContent(); // Update content based on new language
                 });
+            } else {
+                console.error("Error: 'lang-toggle' button not found. Language toggle will not function.");
             }
 
             // Theme Toggle Event Listener
