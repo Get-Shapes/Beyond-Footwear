@@ -864,15 +864,109 @@
                 elements.themeToggleBtn.addEventListener('click', () => {
                     const isDark = document.body.classList.toggle('dark');
                     localStorage.setItem('theme', isDark ? 'dark' : 'light');
-                    
+
                     if (elements.logoLightMode && elements.logoDarkMode) {
                         elements.logoLightMode.classList.toggle('hidden', isDark);
                         elements.logoDarkMode.classList.toggle('hidden', !isDark);
                     }
-                    
+
                     updateThemeToggleIcon();
                     trackEvent('theme_changed', { theme: isDark ? 'dark' : 'light' });
                 });
+            }
+
+            // Custom Video Player Logic
+            const video = elements.mainVideo;
+            if (video) {
+                const videoContainer = video.closest('.video-container');
+                const playPauseBtn = document.getElementById('play-pause-btn');
+                const playIcon = document.getElementById('play-icon');
+                const pauseIcon = document.getElementById('pause-icon');
+                const muteBtn = document.getElementById('mute-btn');
+                const volumeHighIcon = document.getElementById('volume-high-icon');
+                const volumeOffIcon = document.getElementById('volume-off-icon');
+                const volumeSlider = document.getElementById('volume-slider');
+                const fullscreenBtn = document.getElementById('fullscreen-btn');
+                const fullscreenOpenIcon = document.getElementById('fullscreen-open-icon');
+                const fullscreenCloseIcon = document.getElementById('fullscreen-close-icon');
+
+                // Play/Pause
+                const togglePlayPause = () => {
+                    if (video.paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                };
+
+                const updatePlayPauseIcon = () => {
+                    if (video.paused) {
+                        playIcon.classList.remove('hidden');
+                        pauseIcon.classList.add('hidden');
+                    } else {
+                        playIcon.classList.add('hidden');
+                        pauseIcon.classList.remove('hidden');
+                    }
+                };
+
+                playPauseBtn.addEventListener('click', togglePlayPause);
+                video.addEventListener('click', togglePlayPause);
+                video.addEventListener('play', updatePlayPauseIcon);
+                video.addEventListener('pause', updatePlayPauseIcon);
+
+                // Mute/Volume
+                const toggleMute = () => {
+                    video.muted = !video.muted;
+                };
+
+                const updateVolumeIcons = () => {
+                    if (video.muted || video.volume === 0) {
+                        volumeHighIcon.classList.add('hidden');
+                        volumeOffIcon.classList.remove('hidden');
+                    } else {
+                        volumeHighIcon.classList.remove('hidden');
+                        volumeOffIcon.classList.add('hidden');
+                    }
+                };
+
+                muteBtn.addEventListener('click', toggleMute);
+                volumeSlider.addEventListener('input', (e) => {
+                    video.volume = e.target.value;
+                    video.muted = e.target.value == 0;
+                });
+                video.addEventListener('volumechange', () => {
+                    volumeSlider.value = video.volume;
+                    updateVolumeIcons();
+                });
+
+                // Fullscreen
+                const toggleFullscreen = () => {
+                    if (!document.fullscreenElement) {
+                        videoContainer.requestFullscreen().catch(err => {
+                            alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                        });
+                    } else {
+                        document.exitFullscreen();
+                    }
+                };
+
+                const updateFullscreenIcons = () => {
+                    if (!document.fullscreenElement) {
+                        fullscreenOpenIcon.classList.remove('hidden');
+                        fullscreenCloseIcon.classList.add('hidden');
+                    } else {
+                        fullscreenOpenIcon.classList.add('hidden');
+                        fullscreenCloseIcon.classList.remove('hidden');
+                    }
+                };
+
+                fullscreenBtn.addEventListener('click', toggleFullscreen);
+                document.addEventListener('fullscreenchange', updateFullscreenIcons);
+
+                // Initial state
+                updatePlayPauseIcon();
+                updateVolumeIcons();
+                updateFullscreenIcons();
             }
         });
 
