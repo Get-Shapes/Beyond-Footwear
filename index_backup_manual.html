@@ -6,28 +6,28 @@
     <meta name="description" content="Shapes Beyond Footwear - Award-winning innovative footwear solutions. Book your free consultation today.">
     <meta name="keywords" content="footwear, innovation, consultation, award-winning, shapes">
     <meta name="author" content="Shapes Beyond Footwear">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://drshapes.github.io/Beyond-Footwear/">
     <meta property="og:title" content="Shapes Beyond Footwear">
     <meta property="og:description" content="Award-winning innovative footwear solutions. Book your free consultation today.">
     <meta property="og:image" content="https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png">
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://drshapes.github.io/Beyond-Footwear/">
     <meta property="twitter:title" content="Shapes Beyond Footwear">
     <meta property="twitter:description" content="Award-winning innovative footwear solutions. Book your free consultation today.">
     <meta property="twitter:image" content="https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png">
-    
+
     <title>Shapes Beyond Footwear - Award-Winning Innovation</title>
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Urbanist -->
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
@@ -335,12 +335,28 @@
             <!-- Video Section -->
             <section class="p-8 rounded-xl glassy-box relative">
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;">
-                    <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="metadata">
+                    <video id="mainVideo" controls autoplay muted playsinline loop class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
                         <source src="Test Women 1.mp4" type="video/mp4">
                         <source src="Zurab 1.mp4" type="video/mp4">
                         <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
                         <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
                     </video>
+<script>
+    // Immediately enable sound and set volume after video loads
+    document.getElementById('mainVideo').addEventListener('loadedmetadata', function() {
+        this.muted = false;
+        this.volume = 0.9;
+    });
+
+    // Force unmute on first user interaction
+    document.addEventListener('click', function() {
+        const video = document.getElementById('mainVideo');
+        if (video) {
+            video.muted = false;
+            video.volume = 0.9;
+        }
+    }, { once: true });
+</script>
                 </div>
             </section>
 
@@ -452,30 +468,25 @@
         // Function to update content based on language
         function updateContent() {
             const langData = content[currentLanguage];
-            const elements = {
-                benefit2Title: document.getElementById('benefit2-title'),
-                benefit2Text: document.getElementById('benefit2-text'),
-                modalTitle: document.getElementById('modal-title'),
-                thankyouHeadline: document.getElementById('thankyou-headline'),
-                thankyouSubheadline: document.getElementById('thankyou-subheadline'),
-                backToHomepage: document.getElementById('back-to-homepage'),
-                currentLangSpan: document.getElementById('current-lang'),
-                scheduleCtaButton: document.getElementById('schedule-cta')
-            };
 
-            Object.keys(elements).forEach(key => {
-                const element = elements[key];
-                const content = langData[key.replace(/([A-Z])/g, (match, letter) => 
-                    letter.toLowerCase()).replace('span', 'Lang').replace('button', '')];
-                
-                if (element && content) {
-                    if (key === 'benefit2Text') {
-                        element.innerHTML = content;
-                    } else {
-                        element.textContent = content;
-                    }
-                }
-            });
+            // Update each element directly
+            const benefit2Title = document.getElementById('benefit2-title');
+            const benefit2Text = document.getElementById('benefit2-text');
+            const modalTitle = document.getElementById('modal-title');
+            const thankyouHeadline = document.getElementById('thankyou-headline');
+            const thankyouSubheadline = document.getElementById('thankyou-subheadline');
+            const backToHomepage = document.getElementById('back-to-homepage');
+            const currentLangSpan = document.getElementById('current-lang');
+            const scheduleCtaButton = document.getElementById('schedule-cta');
+
+            if (benefit2Title) benefit2Title.textContent = langData.benefit2Title;
+            if (benefit2Text) benefit2Text.innerHTML = langData.benefit2Text;
+            if (modalTitle) modalTitle.textContent = langData.modalTitle;
+            if (thankyouHeadline) thankyouHeadline.textContent = langData.thankyouHeadline;
+            if (thankyouSubheadline) thankyouSubheadline.textContent = langData.thankyouSubheadline;
+            if (backToHomepage) backToHomepage.textContent = langData.backToHomepage;
+            if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
+            if (scheduleCtaButton) scheduleCtaButton.textContent = langData.scheduleCta;
 
             // Update document language
             document.documentElement.lang = currentLanguage;
@@ -495,270 +506,253 @@
                 } else {
                     themeToggleBtn.innerHTML = `
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                         </svg>
                     `;
                 }
             }
         }
 
-        // Function to handle video errors
+        // Video error handling function
         function handleVideoError(video) {
-            console.error('Video loading error');
-            const videoContainer = video.parentElement;
-            videoContainer.innerHTML = `
-                <div class="flex items-center justify-center h-full error-message">
-                    <div>
-                        <p class="mb-4">Video temporarily unavailable.</p>
-                        <button onclick="location.reload()" class="apple-button bg-red-600 text-white hover:bg-red-700">
-                            Refresh Page
-                        </button>
-                    </div>
-                </div>
-            `;
+            console.warn('Video failed to load:', video.src);
+            
+            // Try the next source
+            const sources = video.querySelectorAll('source');
+            let currentSourceIndex = -1;
+            
+            // Find current source index
+            for (let i = 0; i < sources.length; i++) {
+                if (sources[i].src === video.currentSrc) {
+                    currentSourceIndex = i;
+                    break;
+                }
+            }
+            
+            // Try next source
+            if (currentSourceIndex < sources.length - 1) {
+                const nextSource = sources[currentSourceIndex + 1];
+                video.src = nextSource.src;
+                video.load();
+            } else {
+                // All sources failed, show error message
+                const videoContainer = video.closest('.video-container');
+                if (videoContainer) {
+                    videoContainer.innerHTML = `
+                        <div class="error-message">
+                            <p>Unable to load video. Please check your internet connection and try again.</p>
+                            <button onclick="location.reload()" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                                Retry
+                            </button>
+                        </div>
+                    `;
+                }
+            }
         }
 
         // DOM Content Loaded Event
-        document.addEventListener('DOMContentLoaded', () => {
-            // Get DOM elements
-            const elements = {
-                calendlyModal: document.getElementById('calendly-modal'),
-                closeModalBtn: document.getElementById('close-modal'),
-                landingPageContent: document.getElementById('landing-page-content'),
-                thankYouPage: document.getElementById('thank-you-page'),
-                backToHomepageBtn: document.getElementById('back-to-homepage'),
-                langToggleBtn: document.getElementById('lang-toggle'),
-                themeToggleBtn: document.getElementById('theme-toggle'),
-                langDropdown: document.getElementById('lang-dropdown'),
-                logoLightMode: document.getElementById('logo-light-mode'),
-                logoDarkMode: document.getElementById('logo-dark-mode'),
-                scheduleCtaButton: document.getElementById('schedule-cta'),
-                mainVideo: document.getElementById('mainVideo')
-            };
-
-            // Initialize theme
-            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const savedTheme = localStorage.getItem('theme');
-
-            if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-                document.body.classList.add('dark');
-                if (elements.logoLightMode) elements.logoLightMode.classList.add('hidden');
-                if (elements.logoDarkMode) elements.logoDarkMode.classList.remove('hidden');
-            } else {
-                document.body.classList.remove('dark');
-                if (elements.logoLightMode) elements.logoLightMode.classList.remove('hidden');
-                if (elements.logoDarkMode) elements.logoDarkMode.classList.add('hidden');
-            }
-
-            // Set initial language
-            const browserLang = navigator.language.split('-')[0];
-            const availableLangs = Object.keys(content);
-            const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
-            currentLanguage = initialLang;
-            updateContent();
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme toggle icon
             updateThemeToggleIcon();
+            
+            // Initialize content
+            updateContent();
 
-            // Schedule CTA Event Listener
-            if (elements.scheduleCtaButton) {
-                elements.scheduleCtaButton.addEventListener('click', () => {
-                    trackEvent('schedule_consultation_clicked', {
-                        language: currentLanguage,
-                        theme: document.body.classList.contains('dark') ? 'dark' : 'light'
-                    });
-                    if (elements.calendlyModal) {
-                        elements.calendlyModal.style.display = 'flex';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'false');
-                    }
-                });
-            }
-
-            // Close Modal Event Listeners
-            if (elements.closeModalBtn) {
-                elements.closeModalBtn.addEventListener('click', () => {
-                    if (elements.calendlyModal) {
-                        elements.calendlyModal.style.display = 'none';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
-                    }
-                });
-            }
-
-            if (elements.calendlyModal) {
-                elements.calendlyModal.addEventListener('click', (e) => {
-                    if (e.target === elements.calendlyModal) {
-                        elements.calendlyModal.style.display = 'none';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
-                    }
-                });
-
-                // Close modal on Escape key
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && elements.calendlyModal.style.display === 'flex') {
-                        elements.calendlyModal.style.display = 'none';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
-                    }
-                });
-            }
-
-            // Back to Homepage Event Listener
-            if (elements.backToHomepageBtn && elements.thankYouPage && elements.landingPageContent) {
-                elements.backToHomepageBtn.addEventListener('click', () => {
-                    elements.thankYouPage.classList.add('hidden');
-                    elements.landingPageContent.classList.remove('hidden');
-                });
-            }
-
-            // Video Logic with Error Handling and Sound Autoplay
-            if (elements.mainVideo) {
-                const videoSources = ['Test Women 1.mp4', 'Zurab 1.mp4'];
-                let currentVideoIndex = 0;
-                let hasUserInteracted = false;
-
-                // Set initial video source
-                elements.mainVideo.src = videoSources[currentVideoIndex];
-
-                // Function to attempt autoplay with sound
-                function attemptAutoplayWithSound() {
-                    elements.mainVideo.muted = false; // Ensure sound is enabled
-                    elements.mainVideo.volume = 0.8; // Set volume to 80%
+            // Theme toggle functionality
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function() {
+                    const isDarkMode = document.body.classList.contains('dark');
+                    const logoLight = document.getElementById('logo-light-mode');
+                    const logoDark = document.getElementById('logo-dark-mode');
                     
-                    return elements.mainVideo.play().then(() => {
-                        console.log("Autoplay with sound successful");
-                        return true;
-                    }).catch(error => {
-                        console.log("Autoplay with sound failed:", error);
-                        // Try with muted autoplay as fallback
-                        elements.mainVideo.muted = true;
-                        return elements.mainVideo.play().then(() => {
-                            console.log("Autoplay with muted sound successful");
-                            showUnmuteButton();
-                            return false;
-                        }).catch(mutedError => {
-                            console.log("All autoplay attempts failed:", mutedError);
-                            return false;
-                        });
-                    });
-                }
-
-                // Function to show unmute button
-                function showUnmuteButton() {
-                    if (!hasUserInteracted && elements.mainVideo.muted) {
-                        const unmuteButton = document.createElement('button');
-                        unmuteButton.innerHTML = `
-                            <svg class="w-8 h-8" fill="white" viewBox="0 0 24 24">
-                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                            </svg>
-                            <span class="ml-2">Click to Enable Sound</span>
-                        `;
-                        unmuteButton.className = 'absolute top-4 right-4 bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg flex items-center hover:bg-opacity-90 transition-all duration-300 z-10';
-                        unmuteButton.style.fontSize = '14px';
-                        
-                        const videoContainer = elements.mainVideo.parentElement;
-                        videoContainer.appendChild(unmuteButton);
-                        
-                        unmuteButton.addEventListener('click', () => {
-                            elements.mainVideo.muted = false;
-                            elements.mainVideo.volume = 0.8;
-                            hasUserInteracted = true;
-                            unmuteButton.remove();
-                            trackEvent('video_unmuted', { video: videoSources[currentVideoIndex] });
-                        });
-                    }
-                }
-
-                // Handle video ended event
-                elements.mainVideo.addEventListener('ended', () => {
-                    currentVideoIndex++;
-                    if (currentVideoIndex >= videoSources.length) {
-                        currentVideoIndex = 0;
-                    }
-                    elements.mainVideo.src = videoSources[currentVideoIndex];
-                    elements.mainVideo.load();
-                    
-                    // Maintain sound settings for next video
-                    if (hasUserInteracted) {
-                        elements.mainVideo.muted = false;
-                        elements.mainVideo.volume = 0.8;
-                    }
-                    
-                    elements.mainVideo.play().catch(error => {
-                        console.log("Autoplay prevented after video ended:", error);
-                    });
-                });
-
-                // Handle video errors
-                elements.mainVideo.addEventListener('error', () => {
-                    handleVideoError(elements.mainVideo);
-                });
-
-                // Handle user interaction to enable sound
-                elements.mainVideo.addEventListener('click', () => {
-                    if (elements.mainVideo.muted) {
-                        elements.mainVideo.muted = false;
-                        elements.mainVideo.volume = 0.8;
-                        hasUserInteracted = true;
-                        // Remove unmute button if it exists
-                        const unmuteButton = elements.mainVideo.parentElement.querySelector('button');
-                        if (unmuteButton && unmuteButton.textContent.includes('Enable Sound')) {
-                            unmuteButton.remove();
-                        }
-                        trackEvent('video_unmuted_by_click', { video: videoSources[currentVideoIndex] });
-                    }
-                });
-
-                // Track when user interacts with page (for autoplay policies)
-                document.addEventListener('click', () => {
-                    hasUserInteracted = true;
-                }, { once: true });
-
-                // Attempt initial autoplay with sound
-                setTimeout(() => {
-                    attemptAutoplayWithSound();
-                }, 500); // Small delay to ensure page is fully loaded
-            }
-
-            // Language Toggle Event Listeners
-            if (elements.langToggleBtn && elements.langDropdown) {
-                elements.langToggleBtn.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    elements.langDropdown.classList.toggle('hidden');
-                });
-
-                elements.langDropdown.querySelectorAll('.lang-option').forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        currentLanguage = event.target.dataset.lang;
-                        updateContent();
-                        elements.langDropdown.classList.add('hidden');
-                        trackEvent('language_changed', { language: currentLanguage });
-                    });
-                });
-
-                document.addEventListener('click', (event) => {
-                    if (!elements.langDropdown.contains(event.target) && !elements.langToggleBtn.contains(event.target)) {
-                        elements.langDropdown.classList.add('hidden');
-                    }
-                });
-            }
-
-            // Theme Toggle Event Listener
-            if (elements.themeToggleBtn && elements.logoLightMode && elements.logoDarkMode) {
-                elements.themeToggleBtn.addEventListener('click', () => {
-                    document.body.classList.toggle('dark');
-                    document.documentElement.classList.toggle('dark');
-                    
-                    if (document.body.classList.contains('dark')) {
-                        localStorage.setItem('theme', 'dark');
-                        elements.logoLightMode.classList.add('hidden');
-                        elements.logoDarkMode.classList.remove('hidden');
-                    } else {
+                    if (isDarkMode) {
+                        // Switch to light mode
+                        document.documentElement.classList.remove('dark');
+                        document.body.classList.remove('dark');
                         localStorage.setItem('theme', 'light');
-                        elements.logoLightMode.classList.remove('hidden');
-                        elements.logoDarkMode.classList.add('hidden');
+                        
+                        // Show light logo, hide dark logo
+                        if (logoLight) logoLight.classList.remove('hidden');
+                        if (logoDark) logoDark.classList.add('hidden');
+                        
+                        trackEvent('theme_changed', { theme: 'light' });
+                    } else {
+                        // Switch to dark mode
+                        document.documentElement.classList.add('dark');
+                        document.body.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                        
+                        // Show dark logo, hide light logo
+                        if (logoLight) logoLight.classList.add('hidden');
+                        if (logoDark) logoDark.classList.remove('hidden');
+                        
+                        trackEvent('theme_changed', { theme: 'dark' });
                     }
+                    
                     updateThemeToggleIcon();
-                    trackEvent('theme_changed', { 
-                        theme: document.body.classList.contains('dark') ? 'dark' : 'light' 
+                });
+            }
+
+            // Language toggle functionality
+            const langToggleBtn = document.getElementById('lang-toggle');
+            const langDropdown = document.getElementById('lang-dropdown');
+            const langOptions = document.querySelectorAll('.lang-option');
+
+            if (langToggleBtn && langDropdown) {
+                langToggleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    langDropdown.classList.toggle('hidden');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function() {
+                    langDropdown.classList.add('hidden');
+                });
+
+                // Language option selection
+                langOptions.forEach(option => {
+                    option.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const selectedLang = this.getAttribute('data-lang');
+                        if (selectedLang !== currentLanguage) {
+                            currentLanguage = selectedLang;
+                            updateContent();
+                            trackEvent('language_changed', { language: selectedLang });
+                        }
+                        langDropdown.classList.add('hidden');
                     });
                 });
+            }
+
+            // Video setup and error handling
+            const mainVideo = document.getElementById('mainVideo');
+            if (mainVideo) {
+                // Add error event listener
+                mainVideo.addEventListener('error', function() {
+                    handleVideoError(this);
+                });
+
+                // Add load event listener for successful loading
+                mainVideo.addEventListener('loadeddata', function() {
+                    console.log('Video loaded successfully');
+                });
+
+                // Set up video looping
+                mainVideo.addEventListener('ended', function() {
+                    this.currentTime = 0;
+                    this.play().catch(e => console.warn('Auto-replay failed:', e));
+                });
+
+                // Handle autoplay policy restrictions
+                const playPromise = mainVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.warn('Autoplay was prevented:', error);
+                        // Video will show play button for user interaction
+                    });
+                }
+            }
+
+            // Modal functionality
+            const scheduleCtaBtn = document.getElementById('schedule-cta');
+            const calendlyModal = document.getElementById('calendly-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+
+            if (scheduleCtaBtn && calendlyModal) {
+                scheduleCtaBtn.addEventListener('click', function() {
+                    calendlyModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                    trackEvent('modal_opened', { modal_type: 'calendly' });
+                });
+            }
+
+            if (closeModalBtn && calendlyModal) {
+                closeModalBtn.addEventListener('click', function() {
+                    calendlyModal.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Restore scrolling
+                    trackEvent('modal_closed', { modal_type: 'calendly' });
+                });
+            }
+
+            // Close modal when clicking outside
+            if (calendlyModal) {
+                calendlyModal.addEventListener('click', function(e) {
+                    if (e.target === calendlyModal) {
+                        calendlyModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        trackEvent('modal_closed', { modal_type: 'calendly', method: 'outside_click' });
+                    }
+                });
+            }
+
+            // Thank you page functionality
+            const backToHomepageBtn = document.getElementById('back-to-homepage');
+            const landingPageContent = document.getElementById('landing-page-content');
+            const thankYouPage = document.getElementById('thank-you-page');
+
+            if (backToHomepageBtn && landingPageContent && thankYouPage) {
+                backToHomepageBtn.addEventListener('click', function() {
+                    thankYouPage.classList.add('hidden');
+                    landingPageContent.classList.remove('hidden');
+                    if (calendlyModal) {
+                        calendlyModal.style.display = 'none';
+                    }
+                    document.body.style.overflow = 'auto';
+                    trackEvent('back_to_homepage_clicked');
+                });
+            }
+
+            // Listen for Calendly events (if available)
+            window.addEventListener('message', function(e) {
+                if (e.data.event && e.data.event.indexOf('calendly') === 0) {
+                    if (e.data.event === 'calendly.event_scheduled') {
+                        // Hide modal and show thank you page
+                        if (calendlyModal) calendlyModal.style.display = 'none';
+                        if (landingPageContent) landingPageContent.classList.add('hidden');
+                        if (thankYouPage) thankYouPage.classList.remove('hidden');
+                        document.body.style.overflow = 'auto';
+                        
+                        trackEvent('appointment_scheduled', {
+                            event_type: e.data.event_type || 'unknown',
+                            invitee_email: e.data.invitee ? e.data.invitee.email : 'unknown'
+                        });
+                    }
+                }
+            });
+
+            // Initialize logo visibility based on current theme
+            const isDarkMode = document.body.classList.contains('dark');
+            const logoLight = document.getElementById('logo-light-mode');
+            const logoDark = document.getElementById('logo-dark-mode');
+            
+            if (isDarkMode) {
+                if (logoLight) logoLight.classList.add('hidden');
+                if (logoDark) logoDark.classList.remove('hidden');
+            } else {
+                if (logoLight) logoLight.classList.remove('hidden');
+                if (logoDark) logoDark.classList.add('hidden');
+            }
+
+            // Track page load
+            trackEvent('page_loaded', {
+                theme: isDarkMode ? 'dark' : 'light',
+                language: currentLanguage
+            });
+        });
+
+        // Handle page visibility changes for video
+        document.addEventListener('visibilitychange', function() {
+            const mainVideo = document.getElementById('mainVideo');
+            if (mainVideo) {
+                if (document.hidden) {
+                    mainVideo.pause();
+                } else {
+                    // Only auto-resume if video was playing
+                    if (!mainVideo.paused) {
+                        mainVideo.play().catch(e => console.warn('Resume play failed:', e));
+                    }
+                }
             }
         });
     </script>
