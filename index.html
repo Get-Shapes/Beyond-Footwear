@@ -88,41 +88,11 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 150, 255, 0.2);
         }
 
-        /* Video container with loading background */
-        .video-container {
-            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-            background-size: 20px 20px;
-            background-image: 
-                linear-gradient(45deg, rgba(0,0,0,.1) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(0,0,0,.1) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(0,0,0,.1) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(0,0,0,.1) 75%);
-        }
-
-        .dark .video-container {
-            background: linear-gradient(45deg, #2d3748, #1a202c);
-        }
-
-        /* Ensure video fills its container and maintains aspect ratio */
-        .glassy-box video {
-            object-fit: contain;
-            width: 100%;
-            height: 100%;
-            display: block;
-            background-color: #000;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Video hover effect */
-        .glassy-box video:hover {
-            opacity: 0.95;
-        }
-
-        /* Video container positioning for overlay elements */
-        .video-container {
-            position: relative;
-        }
+        /* Removed video-specific styling */
+        /* .video-container { ... } */
+        /* .glassy-box video { ... } */
+        /* .glassy-box video:hover { ... } */
+        /* .video-container { ... } */
 
         /* Apple-style button base */
         .apple-button {
@@ -273,31 +243,6 @@
             document.documentElement.classList.remove('dark');
             document.body.classList.remove('dark');
         }
-
-        // Immediate video autoplay attempt - runs before DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.getElementById('mainVideo');
-            if (video) {
-                // Force sound immediately
-                video.muted = false;
-                video.volume = 0.9;
-
-                // Try to play as soon as possible
-                const immediatePlay = () => {
-                    video.muted = false;
-                    video.volume = 0.9;
-                    video.play().then(() => {
-                        console.log('🎉 Immediate autoplay successful!');
-                    }).catch(e => {
-                        console.log('⚡ Immediate autoplay blocked:', e);
-                        // Retry very quickly
-                        setTimeout(immediatePlay, 50);
-                    });
-                };
-
-                immediatePlay();
-            }
-        });
     </script>
 </head>
 <body class="text-black" oncontextmenu="return false;">
@@ -359,16 +304,10 @@
 
         <!-- Hero Section -->
         <main class="container mx-auto relative">
-            <!-- Video Section -->
-            <section class="p-8 rounded-xl glassy-box relative">
-                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;">
-                    <video id="mainVideo" autoplay playsinline loop class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
-                        <source src="Test Women 1.mp4" type="video/mp4">
-                        <source src="Zurab 1.mp4" type="video/mp4">
-                        <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
-                        <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
-                    </video>
-                </div>
+            <!-- Placeholder for Video Section - now just an empty glassy box -->
+            <section class="p-8 rounded-xl glassy-box relative h-64 flex items-center justify-center">
+                <!-- This box remains, but the video player is removed -->
+                <p class="text-xl text-gray-500 dark:text-gray-400">Hero Section Content (Video Removed)</p>
             </section>
 
             <!-- Call to Action Section -->
@@ -477,7 +416,7 @@
         let currentLanguage = 'en';
 
         // Function to update text content
-        function updateContent(elements) { // Pass elements object
+        function updateContent(elements) {
             const langData = content[currentLanguage];
             if (elements.benefit2Title) elements.benefit2Title.textContent = langData.benefit2Title;
             if (elements.benefit2Text) elements.benefit2Text.innerHTML = langData.benefit2Text;
@@ -488,12 +427,11 @@
             if (elements.currentLangSpan) elements.currentLangSpan.textContent = langData.currentLang;
             if (elements.scheduleCtaButton) elements.scheduleCtaButton.textContent = langData.scheduleCta;
             
-            // Update document language
             document.documentElement.lang = currentLanguage;
         }
 
         // Function to update the theme toggle icon
-        function updateThemeToggleIcon(elements) { // Pass elements object
+        function updateThemeToggleIcon(elements) {
             const isDarkMode = document.body.classList.contains('dark');
             if (elements.themeToggleBtn) {
                 if (isDarkMode) {
@@ -505,34 +443,15 @@
                 } else {
                     elements.themeToggleBtn.innerHTML = `
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                         </svg>
                     `;
                 }
             }
         }
 
-        // Function to handle video errors
-        function handleVideoError(video) {
-            console.error('Video loading error for source:', video.currentSrc || video.src);
-            const videoContainer = video.parentElement;
-            if (videoContainer) {
-                videoContainer.innerHTML = `
-                    <div class="flex items-center justify-center h-full error-message">
-                        <div>
-                            <p class="mb-4">Video temporarily unavailable.</p>
-                            <button onclick="location.reload()" class="apple-button bg-red-600 text-white hover:bg-red-700">
-                                Refresh Page
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
         // Main script execution after DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
-            // Get all DOM elements here, inside DOMContentLoaded
             const elements = {
                 calendlyModal: document.getElementById('calendly-modal'),
                 closeModalBtn: document.getElementById('close-modal'),
@@ -544,7 +463,6 @@
                 langDropdown: document.getElementById('lang-dropdown'),
                 mainLogo: document.getElementById('main-logo'),
                 scheduleCtaButton: document.getElementById('schedule-cta'),
-                mainVideo: document.getElementById('mainVideo'),
                 benefit2Title: document.getElementById('benefit2-title'),
                 benefit2Text: document.getElementById('benefit2-text'),
                 modalTitle: document.getElementById('modal-title'),
@@ -553,14 +471,12 @@
                 currentLangSpan: document.getElementById('current-lang')
             };
 
-            // Debugging: Check if any element is null after retrieval
             for (const key in elements) {
                 if (elements[key] === null) {
                     console.error(`ERROR: Element with ID '${key}' is null. Please ensure it exists in your HTML.`);
                 }
             }
 
-            // Initial theme application for logos
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem('theme');
 
@@ -570,17 +486,14 @@
                 if (elements.mainLogo) elements.mainLogo.src = 'Shapes-Logo neu Black.png';
             }
 
-            // Set initial language based on browser preference or default to 'en'
             const browserLang = navigator.language.split('-')[0];
             const availableLangs = Object.keys(content);
             const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
             currentLanguage = initialLang;
             
-            // Call updateContent and updateThemeToggleIcon with the elements object
             updateContent(elements);
             updateThemeToggleIcon(elements);
 
-            // Event Listeners (ensure elements are not null before adding listeners)
             if (elements.scheduleCtaButton) {
                 elements.scheduleCtaButton.addEventListener('click', () => {
                     trackEvent('schedule_consultation_clicked', {
@@ -611,7 +524,6 @@
                     }
                 });
 
-                // Close modal on Escape key
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape' && elements.calendlyModal.style.display === 'flex') {
                         elements.calendlyModal.style.display = 'none';
@@ -627,178 +539,46 @@
                 });
             }
 
-            // Video Logic - AGGRESSIVE AUTOPLAY WITH SOUND (NO USER INTERACTION REQUIRED)
-            if (elements.mainVideo) {
-                const videoSources = ['Test Women 1.mp4', 'Zurab 1.mp4'];
-                let currentVideoIndex = 0;
+            // Removed all video-related logic and event listeners
+            // elements.mainVideo is no longer defined or used here.
 
-                // IMMEDIATELY configure video for sound
-                elements.mainVideo.muted = false;
-                elements.mainVideo.volume = 1.0;
-                elements.mainVideo.src = videoSources[currentVideoIndex];
-
-                // Ultra-aggressive autoplay function
-                function forcePlayWithSound() {
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 1.0;
-
-                    const playPromise = elements.mainVideo.play();
-
-                    if (playPromise !== undefined) {
-                        playPromise.then(() => {
-                            console.log("✅ Video playing with sound successfully!");
-                        }).catch(error => {
-                            console.log("❌ Autoplay blocked, trying alternative methods:", error);
-
-                            // Try again after very short delay
-                            setTimeout(() => {
-                                elements.mainVideo.muted = false;
-                                elements.mainVideo.volume = 1.0;
-                                elements.mainVideo.play().then(() => {
-                                    console.log("✅ Retry successful!");
-                                }).catch(e => {
-                                    console.log("❌ Retry failed:", e);
-                                    // One more aggressive attempt
-                                    setTimeout(() => {
-                                        elements.mainVideo.muted = false;
-                                        elements.mainVideo.volume = 1.0;
-                                        elements.mainVideo.play().catch(finalError => {
-                                            console.log("❌ Final attempt failed:", finalError);
-                                        });
-                                    }, 200);
-                                });
-                            }, 100);
-                        });
-                    }
-                }
-
-                // Try to play IMMEDIATELY - don't wait for anything
-                forcePlayWithSound();
-
-                // Force play on EVERY possible video event
-                const videoEvents = [
-                    'loadstart', 'durationchange', 'loadedmetadata',
-                    'loadeddata', 'progress', 'canplay', 'canplaythrough'
-                ];
-
-                videoEvents.forEach(eventName => {
-                    elements.mainVideo.addEventListener(eventName, () => {
-                        if (elements.mainVideo.paused) {
-                            elements.mainVideo.muted = false;
-                            elements.mainVideo.volume = 1.0;
-                            forcePlayWithSound();
-                        }
-                    });
-                });
-
-                // Handle video ended - continue with sound
-                elements.mainVideo.addEventListener('ended', () => {
-                    currentVideoIndex++;
-                    if (currentVideoIndex >= videoSources.length) {
-                        currentVideoIndex = 0;
-                    }
-                    elements.mainVideo.src = videoSources[currentVideoIndex];
-                    elements.mainVideo.load();
-
-                    // Ensure sound for next video
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 1.0;
-                });
-
-                // Handle video errors
-                elements.mainVideo.addEventListener('error', () => {
-                    handleVideoError(elements.mainVideo);
-                });
-
-                // Force sound on ANY user interaction
-                elements.mainVideo.addEventListener('click', () => {
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 1.0;
-                    if (elements.mainVideo.paused) {
-                        forcePlayWithSound();
-                    }
-                });
-
-                // Force sound when page becomes visible
-                document.addEventListener('visibilitychange', () => {
-                    if (!document.hidden) {
-                        elements.mainVideo.muted = false;
-                        elements.mainVideo.volume = 1.0;
-                        if (elements.mainVideo.paused) {
-                            forcePlayWithSound();
-                        }
-                    }
-                });
-
-                // Force sound on window focus
-                window.addEventListener('focus', () => {
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 1.0;
-                    if (elements.mainVideo.paused) {
-                        forcePlayWithSound();
-                    }
-                });
-
-                // Multiple timed attempts - very aggressive
-                const attemptTimes = [50, 100, 200, 300, 500, 800, 1000, 1500, 2000];
-                attemptTimes.forEach(delay => {
-                    setTimeout(() => {
-                        if (elements.mainVideo.paused) {
-                            forcePlayWithSound();
-                        }
-                    }, delay);
-                });
-
-                // Final attempt when page is fully loaded
-                window.addEventListener('load', () => {
-                    setTimeout(() => {
-                        if (elements.mainVideo.paused) {
-                            console.log("🔄 Final load attempt...");
-                            forcePlayWithSound();
-                        }
-                    }, 100);
-                });
-
-                // Emergency fallback - try every 2 seconds for the first 10 seconds
-                let emergencyAttempts = 0;
-                const emergencyInterval = setInterval(() => {
-                    if (elements.mainVideo.paused && emergencyAttempts < 5) {
-                        console.log(`🚨 Emergency attempt ${emergencyAttempts + 1}`);
-                        forcePlayWithSound();
-                        emergencyAttempts++;
-                    } else {
-                        clearInterval(emergencyInterval);
-                    }
-                }, 2000);
-            }
-
-            // Language Toggle Event Listeners
             if (elements.langToggleBtn && elements.langDropdown) {
                 elements.langToggleBtn.addEventListener('click', (event) => {
                     event.stopPropagation();
-                    console.log('Toggling langDropdown classList. Current:', elements.langDropdown.classList.contains('hidden'));
-                    elements.langDropdown.classList.toggle('hidden');
+                    try {
+                        console.log('Toggling langDropdown classList. Current:', elements.langDropdown.classList.contains('hidden'));
+                        elements.langDropdown.classList.toggle('hidden');
+                    } catch (e) {
+                        console.error("Error toggling langDropdown classList:", e);
+                    }
                 });
 
                 elements.langDropdown.querySelectorAll('.lang-option').forEach(button => {
                     button.addEventListener('click', (event) => {
                         currentLanguage = event.target.dataset.lang;
-                        updateContent(elements); // Pass elements
-                        console.log('Adding hidden to langDropdown classList after selection.');
-                        elements.langDropdown.classList.add('hidden');
+                        updateContent(elements);
+                        try {
+                            console.log('Adding hidden to langDropdown classList after selection.');
+                            elements.langDropdown.classList.add('hidden');
+                        } catch (e) {
+                            console.error("Error adding hidden to langDropdown classList:", e);
+                        }
                         trackEvent('language_changed', { language: currentLanguage });
                     });
                 });
 
                 document.addEventListener('click', (event) => {
                     if (!elements.langDropdown.contains(event.target) && !elements.langToggleBtn.contains(event.target)) {
-                        console.log('Adding hidden to langDropdown classList on outside click.');
-                        elements.langDropdown.classList.add('hidden');
+                        try {
+                            console.log('Adding hidden to langDropdown classList on outside click.');
+                            elements.langDropdown.classList.add('hidden');
+                        } catch (e) {
+                            console.error("Error adding hidden to langDropdown classList on outside click:", e);
+                        }
                     }
                 });
             }
 
-            // Theme Toggle Event Listener
             if (elements.themeToggleBtn && elements.mainLogo) {
                 elements.themeToggleBtn.addEventListener('click', () => {
                     console.log('Toggling body and html dark class.');
@@ -812,7 +592,7 @@
                         localStorage.setItem('theme', 'light');
                         elements.mainLogo.src = 'Shapes-Logo neu Black.png';
                     }
-                    updateThemeToggleIcon(elements); // Pass elements
+                    updateThemeToggleIcon(elements);
                     trackEvent('theme_changed', { 
                         theme: document.body.classList.contains('dark') ? 'dark' : 'light' 
                     });
