@@ -152,22 +152,24 @@
         }
 
         .video-controls button {
-            background: rgba(255, 255, 255, 0.1); /* Slightly visible background for buttons */
-            border: none;
+            background: rgba(255, 255, 255, 0.05); /* Very subtle background */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
             color: white;
             cursor: pointer;
-            padding: 0.75rem; /* Larger touch target */
-            border-radius: 9999px; /* Fully rounded */
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            display: flex; /* For centering SVG */
+            padding: 0.75rem;
+            border-radius: 9999px;
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0; /* Prevent shrinking */
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Initial subtle shadow */
         }
 
         .video-controls button:hover {
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.2); /* More visible on hover */
             transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
         }
 
         .video-controls button svg {
