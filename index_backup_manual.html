@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shapes Beyond Footwear - Award-winning innovative footwear solutions. Book your free consultation today.">
+    <meta name="keywords" content="footwear, innovation, consultation, award-winning, shapes">
+    <meta name="author" content="Shapes Beyond Footwear">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://drshapes.github.io/Beyond-Footwear/">
+    <meta property="og:title" content="Shapes Beyond Footwear">
+    <meta property="og:description" content="Award-winning innovative footwear solutions. Book your free consultation today.">
+    <meta property="og:image" content="https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://drshapes.github.io/Beyond-Footwear/">
+    <meta property="twitter:title" content="Shapes Beyond Footwear">
+    <meta property="twitter:description" content="Award-winning innovative footwear solutions. Book your free consultation today.">
+    <meta property="twitter:image" content="https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png">
+    
+    <title>Shapes Beyond Footwear - Award-Winning Innovation</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Urbanist -->
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Shapes Beyond Footwear",
+      "url": "https://drshapes.github.io/Beyond-Footwear/",
+      "logo": "https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png",
+      "description": "Award-winning innovative footwear solutions",
+      "award": [
+        "German Design Award 2023",
+        "German Innovation Award 2023"
+      ]
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Urbanist', sans-serif;
+            background-color: #ffffff !important;
+            position: relative;
+            min-height: 100vh;
+            transition: background-color 0.3s ease;
+            z-index: 0;
+            color: #000000 !important;
+        }
+
+        /* Force all text to black in light mode */
+        body:not(.dark) .text-black-force {
+            color: #000000 !important;
+        }
+
+        /* Remove background image layer and overlay */
+        body::after,
+        body::before {
+            content: none;
+        }
+
+        body.dark {
+            background-color: #000000 !important;
+            color: #e2e8f0;
+        }
+
+        /* Glassy effect for content boxes */
+        .glassy-box {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1), 0 0 20px rgba(100, 150, 255, 0.3);
+            border-radius: 1rem;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        .dark .glassy-box {
+            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 150, 255, 0.2);
+        }
+
+        /* Video container with loading background */
+        .video-container {
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            background-size: 20px 20px;
+            background-image: 
+                linear-gradient(45deg, rgba(0,0,0,.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(0,0,0,.1) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(0,0,0,.1) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(0,0,0,.1) 75%);
+        }
+
+        .dark .video-container {
+            background: linear-gradient(45deg, #2d3748, #1a202c);
+        }
+
+        /* Ensure video fills its container and maintains aspect ratio */
+        .glassy-box video {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            display: block;
+            background-color: #000;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Video hover effect */
+        .glassy-box video:hover {
+            opacity: 0.95;
+        }
+
+        /* Video container positioning for overlay elements */
+        .video-container {
+            position: relative;
+        }
+
+        /* Apple-style button base */
+        .apple-button {
+            @apply px-8 py-4 font-semibold rounded-xl transition duration-300;
+        }
+
+        /* Improved button hover states */
+        .apple-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Remove focus outline for all buttons */
+        button:focus,
+        button:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        /* Loading states */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            margin: auto;
+            padding: 1.5rem;
+            position: relative;
+            max-width: 90%;
+            width: 700px;
+            height: 95vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            color: #000000;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+
+        .dark .modal-content {
+            color: #e2e8f0;
+        }
+
+        .close-button {
+            color: #000000;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #ef4444;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .dark .close-button {
+            color: #cbd5e0;
+        }
+
+        .dark .close-button:hover,
+        .dark .close-button:focus {
+            color: #ef4444;
+        }
+
+        /* Language toggle button override */
+        body:not(.dark) #lang-toggle {
+            background-color: #ffffff !important;
+        }
+
+        /* Calendly iframe container styling */
+        .calendly-iframe-container {
+            position: relative;
+            width: 100%;
+            flex-grow: 1;
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .calendly-iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Ensure modal title doesn't shrink */
+        .modal-content h2 {
+            flex-shrink: 0;
+        }
+
+        /* Error message styling */
+        .error-message {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #dc2626;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .dark .error-message {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+            color: #fca5a5;
+        }
+    </style>
+    
+    <!-- Script to prevent flash of unstyled content (FOUC) for dark mode -->
+    <script>
+        // Check localStorage for theme preference immediately
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+            document.documentElement.classList.add('dark');
+            document.body.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.body.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="text-black" oncontextmenu="return false;">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_GA_TRACKING_ID');
+    </script>
+
+    <!-- Facebook Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document, 'script',
+        'https://connect.facebook.com/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
+    /></noscript>
+
+    <!-- Main Landing Page Content -->
+    <div id="landing-page-content" class="min-h-screen flex flex-col text-black-force">
+        <!-- Header Section for Logo and Controls -->
+        <header class="container mx-auto flex justify-between items-center w-full mt-8 mb-8">
+            <!-- Top Left Controls (Theme Toggle and Language) -->
+            <div class="flex space-x-4 z-50">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300" aria-label="Toggle theme">
+                    <!-- SVG icon will be dynamically updated by JavaScript -->
+                </button>
+                <!-- Language Toggle with Dropdown -->
+                <div class="relative">
+                    <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2" aria-label="Select language">
+                        <span id="current-lang">EN</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="lang-dropdown" class="hidden absolute left-0 mt-2 w-32 rounded-lg shadow-xl py-1 z-50 glassy-box">
+                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
+                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logo Section -->
+            <div>
+                <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Beyond Footwear Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
+                <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Beyond Footwear Logo" class="w-48 md:w-64 h-auto hidden" ondragstart="return false;">
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="container mx-auto relative">
+            <!-- Video Section -->
+            <section class="p-8 rounded-xl glassy-box relative">
+                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;">
+                    <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="metadata">
+                        <source src="Test Women 1.mp4" type="video/mp4">
+                        <source src="Zurab 1.mp4" type="video/mp4">
+                        <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
+                        <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
+                    </video>
+                </div>
+            </section>
+
+            <!-- Call to Action Section -->
+            <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
+                <button id="schedule-cta" class="apple-button text-2xl md:text-3xl bg-transparent text-red-600 dark:text-red-500 hover:scale-105 shadow-md" aria-label="Schedule consultation">
+                    Book your free consultation.
+                </button>
+            </section>
+
+            <!-- Benefits Section -->
+            <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box">
+                <div class="grid grid-cols-1 gap-8">
+                    <div class="text-center transition duration-300">
+                        <h2 id="benefit2-title" class="text-black-force dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h2>
+                        <div id="benefit2-text" class="text-black-force dark:text-gray-300">
+                            <ul class="list-none p-0 space-y-2">
+                                <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
+                                <li><strong>Winner of German Design Award 23</strong></li>
+                                <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Calendly Modal -->
+    <div id="calendly-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-content glassy-box">
+            <button class="close-button" id="close-modal" aria-label="Close modal">×</button>
+            <h2 id="modal-title" class="text-black-force dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
+            <div class="calendly-iframe-container">
+                <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe" title="Schedule appointment"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thank You Page Content (Initially Hidden) -->
+    <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
+        <h1 id="thankyou-headline" class="text-black-force dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
+            Thank you! Your appointment is confirmed.
+        </h1>
+        <p id="thankyou-subheadline" class="text-black-force dark:text-gray-300 text-xl md:text-2xl mb-10">
+            Check your email for confirmation.
+        </p>
+        <button id="back-to-homepage" class="apple-button text-xl bg-transparent text-black-force dark:text-gray-200 border border-black dark:border-gray-200">
+            Back to Homepage
+        </button>
+    </div>
+
+    <script>
+        // Analytics tracking function
+        function trackEvent(eventName, properties = {}) {
+            try {
+                // Google Analytics tracking
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', eventName, properties);
+                }
+                
+                // Facebook Pixel tracking
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', eventName, properties);
+                }
+            } catch (error) {
+                console.warn('Analytics tracking error:', error);
+            }
+        }
+
+        // Language content
+        const content = {
+            en: {
+                scheduleCta: "Book your free consultation.",
+                benefit2Title: "Award-Winning",
+                benefit2Text: `
+                    <ul class="list-none p-0 space-y-2">
+                        <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
+                        <li><strong>Winner of German Design Award 23</strong></li>
+                        <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
+                    </ul>
+                `,
+                modalTitle: "Schedule Your Appointment",
+                thankyouHeadline: "Thank you! Your appointment is confirmed.",
+                thankyouSubheadline: "Check your email for confirmation.",
+                backToHomepage: "Back to Homepage",
+                currentLang: "EN"
+            },
+            de: {
+                scheduleCta: "Buche deine kostenlose Beratung.",
+                benefit2Title: "Preisgekrönt",
+                benefit2Text: `
+                    <ul class="list-none p-0 space-y-2">
+                        <li>Mehrfache Nominierungen für Wellness & Spa Innovation Award & German Design Award</li>
+                        <li><strong>Gewinner des German Design Award 23</strong></li>
+                        <li><strong>Gewinner des German Innovation Award 23</strong> (Medizin & Gesundheit)</li>
+                    </ul>
+                `,
+                modalTitle: "Termin vereinbaren",
+                thankyouHeadline: "Vielen Dank! Ihr Termin ist bestätigt.",
+                thankyouSubheadline: "Bitte überprüfen Sie Ihre E-Mails zur Bestätigung.",
+                backToHomepage: "Zurück zur Startseite",
+                currentLang: "DE"
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        // Function to update content based on language
+        function updateContent() {
+            const langData = content[currentLanguage];
+            const elements = {
+                benefit2Title: document.getElementById('benefit2-title'),
+                benefit2Text: document.getElementById('benefit2-text'),
+                modalTitle: document.getElementById('modal-title'),
+                thankyouHeadline: document.getElementById('thankyou-headline'),
+                thankyouSubheadline: document.getElementById('thankyou-subheadline'),
+                backToHomepage: document.getElementById('back-to-homepage'),
+                currentLangSpan: document.getElementById('current-lang'),
+                scheduleCtaButton: document.getElementById('schedule-cta')
+            };
+
+            Object.keys(elements).forEach(key => {
+                const element = elements[key];
+                const content = langData[key.replace(/([A-Z])/g, (match, letter) => 
+                    letter.toLowerCase()).replace('span', 'Lang').replace('button', '')];
+                
+                if (element && content) {
+                    if (key === 'benefit2Text') {
+                        element.innerHTML = content;
+                    } else {
+                        element.textContent = content;
+                    }
+                }
+            });
+
+            // Update document language
+            document.documentElement.lang = currentLanguage;
+        }
+
+        // Function to update the theme toggle icon
+        function updateThemeToggleIcon() {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const isDarkMode = document.body.classList.contains('dark');
+            if (themeToggleBtn) {
+                if (isDarkMode) {
+                    themeToggleBtn.innerHTML = `
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    `;
+                } else {
+                    themeToggleBtn.innerHTML = `
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path>
+                        </svg>
+                    `;
+                }
+            }
+        }
+
+        // Function to handle video errors
+        function handleVideoError(video) {
+            console.error('Video loading error');
+            const videoContainer = video.parentElement;
+            videoContainer.innerHTML = `
+                <div class="flex items-center justify-center h-full error-message">
+                    <div>
+                        <p class="mb-4">Video temporarily unavailable.</p>
+                        <button onclick="location.reload()" class="apple-button bg-red-600 text-white hover:bg-red-700">
+                            Refresh Page
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // DOM Content Loaded Event
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get DOM elements
+            const elements = {
+                calendlyModal: document.getElementById('calendly-modal'),
+                closeModalBtn: document.getElementById('close-modal'),
+                landingPageContent: document.getElementById('landing-page-content'),
+                thankYouPage: document.getElementById('thank-you-page'),
+                backToHomepageBtn: document.getElementById('back-to-homepage'),
+                langToggleBtn: document.getElementById('lang-toggle'),
+                themeToggleBtn: document.getElementById('theme-toggle'),
+                langDropdown: document.getElementById('lang-dropdown'),
+                logoLightMode: document.getElementById('logo-light-mode'),
+                logoDarkMode: document.getElementById('logo-dark-mode'),
+                scheduleCtaButton: document.getElementById('schedule-cta'),
+                mainVideo: document.getElementById('mainVideo')
+            };
+
+            // Initialize theme
+            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+                document.body.classList.add('dark');
+                if (elements.logoLightMode) elements.logoLightMode.classList.add('hidden');
+                if (elements.logoDarkMode) elements.logoDarkMode.classList.remove('hidden');
+            } else {
+                document.body.classList.remove('dark');
+                if (elements.logoLightMode) elements.logoLightMode.classList.remove('hidden');
+                if (elements.logoDarkMode) elements.logoDarkMode.classList.add('hidden');
+            }
+
+            // Set initial language
+            const browserLang = navigator.language.split('-')[0];
+            const availableLangs = Object.keys(content);
+            const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
+            currentLanguage = initialLang;
+            updateContent();
+            updateThemeToggleIcon();
+
+            // Schedule CTA Event Listener
+            if (elements.scheduleCtaButton) {
+                elements.scheduleCtaButton.addEventListener('click', () => {
+                    trackEvent('schedule_consultation_clicked', {
+                        language: currentLanguage,
+                        theme: document.body.classList.contains('dark') ? 'dark' : 'light'
+                    });
+                    if (elements.calendlyModal) {
+                        elements.calendlyModal.style.display = 'flex';
+                        elements.calendlyModal.setAttribute('aria-hidden', 'false');
+                    }
+                });
+            }
+
+            // Close Modal Event Listeners
+            if (elements.closeModalBtn) {
+                elements.closeModalBtn.addEventListener('click', () => {
+                    if (elements.calendlyModal) {
+                        elements.calendlyModal.style.display = 'none';
+                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
+                    }
+                });
+            }
+
+            if (elements.calendlyModal) {
+                elements.calendlyModal.addEventListener('click', (e) => {
+                    if (e.target === elements.calendlyModal) {
+                        elements.calendlyModal.style.display = 'none';
+                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
+                    }
+                });
+
+                // Close modal on Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && elements.calendlyModal.style.display === 'flex') {
+                        elements.calendlyModal.style.display = 'none';
+                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
+                    }
+                });
+            }
+
+            // Back to Homepage Event Listener
+            if (elements.backToHomepageBtn && elements.thankYouPage && elements.landingPageContent) {
+                elements.backToHomepageBtn.addEventListener('click', () => {
+                    elements.thankYouPage.classList.add('hidden');
+                    elements.landingPageContent.classList.remove('hidden');
+                });
+            }
+
+            // Video Logic with Error Handling and Sound Autoplay
+            if (elements.mainVideo) {
+                const videoSources = ['Test Women 1.mp4', 'Zurab 1.mp4'];
+                let currentVideoIndex = 0;
+                let hasUserInteracted = false;
+
+                // Set initial video source
+                elements.mainVideo.src = videoSources[currentVideoIndex];
+
+                // Function to attempt autoplay with sound
+                function attemptAutoplayWithSound() {
+                    elements.mainVideo.muted = false; // Ensure sound is enabled
+                    elements.mainVideo.volume = 0.8; // Set volume to 80%
+                    
+                    return elements.mainVideo.play().then(() => {
+                        console.log("Autoplay with sound successful");
+                        return true;
+                    }).catch(error => {
+                        console.log("Autoplay with sound failed:", error);
+                        // Try with muted autoplay as fallback
+                        elements.mainVideo.muted = true;
+                        return elements.mainVideo.play().then(() => {
+                            console.log("Autoplay with muted sound successful");
+                            showUnmuteButton();
+                            return false;
+                        }).catch(mutedError => {
+                            console.log("All autoplay attempts failed:", mutedError);
+                            return false;
+                        });
+                    });
+                }
+
+                // Function to show unmute button
+                function showUnmuteButton() {
+                    if (!hasUserInteracted && elements.mainVideo.muted) {
+                        const unmuteButton = document.createElement('button');
+                        unmuteButton.innerHTML = `
+                            <svg class="w-8 h-8" fill="white" viewBox="0 0 24 24">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                            <span class="ml-2">Click to Enable Sound</span>
+                        `;
+                        unmuteButton.className = 'absolute top-4 right-4 bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg flex items-center hover:bg-opacity-90 transition-all duration-300 z-10';
+                        unmuteButton.style.fontSize = '14px';
+                        
+                        const videoContainer = elements.mainVideo.parentElement;
+                        videoContainer.appendChild(unmuteButton);
+                        
+                        unmuteButton.addEventListener('click', () => {
+                            elements.mainVideo.muted = false;
+                            elements.mainVideo.volume = 0.8;
+                            hasUserInteracted = true;
+                            unmuteButton.remove();
+                            trackEvent('video_unmuted', { video: videoSources[currentVideoIndex] });
+                        });
+                    }
+                }
+
+                // Handle video ended event
+                elements.mainVideo.addEventListener('ended', () => {
+                    currentVideoIndex++;
+                    if (currentVideoIndex >= videoSources.length) {
+                        currentVideoIndex = 0;
+                    }
+                    elements.mainVideo.src = videoSources[currentVideoIndex];
+                    elements.mainVideo.load();
+                    
+                    // Maintain sound settings for next video
+                    if (hasUserInteracted) {
+                        elements.mainVideo.muted = false;
+                        elements.mainVideo.volume = 0.8;
+                    }
+                    
+                    elements.mainVideo.play().catch(error => {
+                        console.log("Autoplay prevented after video ended:", error);
+                    });
+                });
+
+                // Handle video errors
+                elements.mainVideo.addEventListener('error', () => {
+                    handleVideoError(elements.mainVideo);
+                });
+
+                // Handle user interaction to enable sound
+                elements.mainVideo.addEventListener('click', () => {
+                    if (elements.mainVideo.muted) {
+                        elements.mainVideo.muted = false;
+                        elements.mainVideo.volume = 0.8;
+                        hasUserInteracted = true;
+                        // Remove unmute button if it exists
+                        const unmuteButton = elements.mainVideo.parentElement.querySelector('button');
+                        if (unmuteButton && unmuteButton.textContent.includes('Enable Sound')) {
+                            unmuteButton.remove();
+                        }
+                        trackEvent('video_unmuted_by_click', { video: videoSources[currentVideoIndex] });
+                    }
+                });
+
+                // Track when user interacts with page (for autoplay policies)
+                document.addEventListener('click', () => {
+                    hasUserInteracted = true;
+                }, { once: true });
+
+                // Attempt initial autoplay with sound
+                setTimeout(() => {
+                    attemptAutoplayWithSound();
+                }, 500); // Small delay to ensure page is fully loaded
+            }
+
+            // Language Toggle Event Listeners
+            if (elements.langToggleBtn && elements.langDropdown) {
+                elements.langToggleBtn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    elements.langDropdown.classList.toggle('hidden');
+                });
+
+                elements.langDropdown.querySelectorAll('.lang-option').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        currentLanguage = event.target.dataset.lang;
+                        updateContent();
+                        elements.langDropdown.classList.add('hidden');
+                        trackEvent('language_changed', { language: currentLanguage });
+                    });
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!elements.langDropdown.contains(event.target) && !elements.langToggleBtn.contains(event.target)) {
+                        elements.langDropdown.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Theme Toggle Event Listener
+            if (elements.themeToggleBtn && elements.logoLightMode && elements.logoDarkMode) {
+                elements.themeToggleBtn.addEventListener('click', () => {
+                    document.body.classList.toggle('dark');
+                    document.documentElement.classList.toggle('dark');
+                    
+                    if (document.body.classList.contains('dark')) {
+                        localStorage.setItem('theme', 'dark');
+                        elements.logoLightMode.classList.add('hidden');
+                        elements.logoDarkMode.classList.remove('hidden');
+                    } else {
+                        localStorage.setItem('theme', 'light');
+                        elements.logoLightMode.classList.remove('hidden');
+                        elements.logoDarkMode.classList.add('hidden');
+                    }
+                    updateThemeToggleIcon();
+                    trackEvent('theme_changed', { 
+                        theme: document.body.classList.contains('dark') ? 'dark' : 'light' 
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
