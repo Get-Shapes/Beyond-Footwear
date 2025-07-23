@@ -7,7 +7,9 @@
     <meta name="keywords" content="footwear, innovation, consultation, award-winning, shapes">
     <meta name="author" content="Shapes Beyond Footwear">
 
-
+    <!-- Autoplay Policy -->
+    <meta name="autoplay-policy" content="user-gesture-required">
+    <meta http-equiv="Feature-Policy" content="autoplay 'self'">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -24,24 +26,6 @@
     <meta property="twitter:image" content="https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png">
 
     <title>Shapes Beyond Footwear - Award-Winning Innovation</title>
-
-    <!-- Prevent FOUC (Flash of Unstyled Content) for dark mode -->
-    <script>
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-            if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-                document.documentElement.classList.add('dark');
-                document.documentElement.style.backgroundColor = '#000000';
-                document.documentElement.style.color = '#e2e8f0';
-            } else {
-                document.documentElement.classList.remove('dark');
-                document.documentElement.style.backgroundColor = '#ffffff';
-                document.documentElement.style.color = '#000000';
-            }
-        })();
-    </script>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -277,7 +261,17 @@
         }
     </style>
     
+    <!-- Script to prevent flash of unstyled content (FOUC) for dark mode -->
+    <script>
+        // Check localStorage for theme preference immediately
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+        if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+            document.documentElement.classList.add('dark');
+            document.body.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
             document.body.classList.remove('dark');
         }
     </script>
@@ -345,34 +339,16 @@
             <!-- Video Section -->
             <section class="p-8 rounded-xl glassy-box relative">
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;">
-                    <video id="mainVideo" controls autoplay muted playsinline loop class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
+                    <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
                         <source src="Test Women 1.mp4" type="video/mp4">
                         <source src="Zurab 1.mp4" type="video/mp4">
                         <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
                         <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
                     </video>
 <script>
-    // Force video to play with sound immediately
-    const video = document.getElementById('mainVideo');
-    video.muted = false;
-    video.volume = 0.9;
-
-    // Ensure sound is enabled as soon as possible
-    video.addEventListener('loadstart', function() {
-        this.muted = false;
+    // Set volume to 0.9 after video metadata is loaded
+    document.getElementById('mainVideo').addEventListener('loadedmetadata', function() {
         this.volume = 0.9;
-    });
-
-    video.addEventListener('loadedmetadata', function() {
-        this.muted = false;
-        this.volume = 0.9;
-        this.play();
-    });
-
-    video.addEventListener('canplay', function() {
-        this.muted = false;
-        this.volume = 0.9;
-        this.play();
     });
 </script>
                 </div>
@@ -406,7 +382,7 @@
     <!-- Calendly Modal -->
     <div id="calendly-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal-content glassy-box">
-            <button class="close-button" id="close-modal" aria-label="Close modal">&times;</button>
+            <button class="close-button" id="close-modal" aria-label="Close modal">×</button>
             <h2 id="modal-title" class="text-black-force dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
             <div class="calendly-iframe-container">
                 <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe" title="Schedule appointment"></iframe>
@@ -524,7 +500,7 @@
                 } else {
                     themeToggleBtn.innerHTML = `
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                         </svg>
                     `;
                 }
@@ -574,7 +550,7 @@
                 if (elements.logoLightMode) elements.logoLightMode.classList.add('hidden');
                 if (elements.logoDarkMode) elements.logoDarkMode.classList.remove('hidden');
             } else {
-                document.body.className = document.documentElement.className;
+                document.body.classList.remove('dark');
                 if (elements.logoLightMode) elements.logoLightMode.classList.remove('hidden');
                 if (elements.logoDarkMode) elements.logoDarkMode.classList.add('hidden');
             }
@@ -636,144 +612,65 @@
                 });
             }
 
-            // Video Logic with Immediate Sound Autoplay - NO USER INTERACTION REQUIRED
+            // Video Logic with Aggressive Sound Autoplay
             if (elements.mainVideo) {
                 const videoSources = ['Test Women 1.mp4', 'Zurab 1.mp4'];
                 let currentVideoIndex = 0;
+                let hasUserInteracted = false;
 
-                // Force sound ON from the start - no muting
-                elements.mainVideo.muted = false;
-                elements.mainVideo.volume = 0.9;
+                // Set initial video source and configure for sound
                 elements.mainVideo.src = videoSources[currentVideoIndex];
+                elements.mainVideo.muted = false; // Force sound ON
+                elements.mainVideo.volume = 0.9; // Set volume to 90%
 
-                // Aggressive autoplay with sound - try multiple times
-                function forcePlayWithSound() {
+                // Function to force autoplay with sound
+                function forceAutoplayWithSound() {
+                    // Ensure sound is always enabled
                     elements.mainVideo.muted = false;
                     elements.mainVideo.volume = 0.9;
 
-                    elements.mainVideo.play().then(() => {
-                        console.log("Video playing with sound successfully");
-                    }).catch(error => {
-                        console.log("Autoplay attempt failed, retrying:", error);
-                        // Retry after short delay
-                        setTimeout(() => {
-                            elements.mainVideo.muted = false;
-                            elements.mainVideo.volume = 0.9;
-                            elements.mainVideo.play().catch(e => console.log("Retry failed:", e));
-                        }, 100);
-                    });
-                }
-
-                // Try to play immediately
-                forcePlayWithSound();
-
-                // Try again when metadata loads
-                elements.mainVideo.addEventListener('loadedmetadata', () => {
-                    forcePlayWithSound();
-                });
-
-                // Try again when video can play
-                elements.mainVideo.addEventListener('canplay', () => {
-                    forcePlayWithSound();
-                });
-
-                // Handle video ended event - switch to next video with sound
-                elements.mainVideo.addEventListener('ended', () => {
-                    currentVideoIndex++;
-                    if (currentVideoIndex >= videoSources.length) {
-                        currentVideoIndex = 0;
-                    }
-                    elements.mainVideo.src = videoSources[currentVideoIndex];
-                    elements.mainVideo.load();
-
-                    // Ensure sound stays on for next video
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 0.9;
-
-                    elements.mainVideo.play().catch(error => {
-                        console.log("Next video autoplay failed:", error);
-                    });
-                });
-
-                // Handle video errors
-                elements.mainVideo.addEventListener('error', () => {
-                    handleVideoError(elements.mainVideo);
-                });
-
-                // Ensure sound is always on when video is clicked
-                elements.mainVideo.addEventListener('click', () => {
-                    elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 0.9;
-                    if (elements.mainVideo.paused) {
-                        elements.mainVideo.play();
-                    }
-                });
-
-                // Force sound on page visibility change
-                document.addEventListener('visibilitychange', () => {
-                    if (!document.hidden) {
-                        elements.mainVideo.muted = false;
-                        elements.mainVideo.volume = 0.9;
-                    }
-                });
-
-                // Multiple retry attempts for autoplay with sound
-                setTimeout(() => forcePlayWithSound(), 50);
-                setTimeout(() => forcePlayWithSound(), 200);
-                setTimeout(() => forcePlayWithSound(), 500);
-
-                // Final attempt when page fully loads
-                window.addEventListener('load', () => {
-                    forcePlayWithSound();
-                });
-            }
-                function enableSoundAfterAutoplay() {
                     return elements.mainVideo.play().then(() => {
-                        console.log("Autoplay started successfully");
-                        // Immediately try to unmute
-                        setTimeout(() => {
-                            elements.mainVideo.muted = false;
-                            elements.mainVideo.volume = 0.9;
-                            console.log("Sound enabled after autoplay");
-                        }, 100);
+                        console.log("Autoplay with sound successful");
+                        hasUserInteracted = true; // Mark as successful interaction
                         return true;
                     }).catch(error => {
-                        console.log("Autoplay failed:", error);
-                        // Show unmute button if autoplay fails completely
-                        showUnmuteButton();
+                        console.log("Initial autoplay with sound failed, trying user interaction approach:", error);
+
+                        // Instead of falling back to muted, show a play button with sound
+                        showPlayWithSoundButton();
                         return false;
                     });
                 }
 
-                // Function to show unmute button
-                function showUnmuteButton() {
-                    const unmuteButton = document.createElement('button');
-                    unmuteButton.innerHTML = `
+                // Function to show play button with sound (instead of unmute button)
+                function showPlayWithSoundButton() {
+                    const playButton = document.createElement('button');
+                    playButton.innerHTML = `
                         <svg class="w-12 h-12 mb-2" fill="white" viewBox="0 0 24 24">
-                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            <path d="M8 5v14l11-7z"/>
                         </svg>
-                        <div class="text-sm">Click to Enable Sound</div>
+                        <div class="text-sm">Click to Play with Sound</div>
                     `;
-                    unmuteButton.className = 'absolute inset-0 bg-black bg-opacity-60 text-white flex flex-col items-center justify-center hover:bg-opacity-80 transition-all duration-300 z-10 cursor-pointer';
-                    unmuteButton.style.fontSize = '16px';
+                    playButton.className = 'absolute inset-0 bg-black bg-opacity-60 text-white flex flex-col items-center justify-center hover:bg-opacity-80 transition-all duration-300 z-10 cursor-pointer';
+                    playButton.style.fontSize = '16px';
 
                     const videoContainer = elements.mainVideo.parentElement;
-                    videoContainer.appendChild(unmuteButton);
+                    videoContainer.appendChild(playButton);
 
-                    unmuteButton.addEventListener('click', () => {
+                    playButton.addEventListener('click', () => {
                         elements.mainVideo.muted = false;
                         elements.mainVideo.volume = 0.9;
                         elements.mainVideo.play().then(() => {
                             hasUserInteracted = true;
-                            unmuteButton.remove();
-                            trackEvent('video_unmuted_manually', { video: videoSources[currentVideoIndex] });
+                            playButton.remove();
+                            trackEvent('video_played_with_sound', { video: videoSources[currentVideoIndex] });
                         }).catch(playError => {
                             console.log("Manual play failed:", playError);
                         });
                     });
                 }
 
-                // Handle video ended event - switch to next video
+                // Handle video ended event - always maintain sound
                 elements.mainVideo.addEventListener('ended', () => {
                     currentVideoIndex++;
                     if (currentVideoIndex >= videoSources.length) {
@@ -782,12 +679,12 @@
                     elements.mainVideo.src = videoSources[currentVideoIndex];
                     elements.mainVideo.load();
 
-                    // Maintain sound settings for next video
+                    // Always maintain sound settings for next video
                     elements.mainVideo.muted = false;
                     elements.mainVideo.volume = 0.9;
 
                     elements.mainVideo.play().catch(error => {
-                        console.log("Next video autoplay failed:", error);
+                        console.log("Autoplay prevented after video ended:", error);
                     });
                 });
 
@@ -807,9 +704,9 @@
                     }
                 });
 
-                // Enable sound on any user interaction
+                // Handle any user interaction to enable sound immediately
                 document.addEventListener('click', () => {
-                    if (!hasUserInteracted && !elements.mainVideo.muted) {
+                    if (!hasUserInteracted) {
                         elements.mainVideo.muted = false;
                         elements.mainVideo.volume = 0.9;
                         hasUserInteracted = true;
@@ -824,15 +721,15 @@
                     }
                 });
 
-                // Start autoplay immediately
+                // Attempt immediate autoplay with sound
                 setTimeout(() => {
-                    enableSoundAfterAutoplay();
-                }, 50);
+                    forceAutoplayWithSound();
+                }, 100); // Shorter delay for immediate playback
 
                 // Also try when page is fully loaded
                 window.addEventListener('load', () => {
                     if (elements.mainVideo.paused) {
-                        enableSoundAfterAutoplay();
+                        forceAutoplayWithSound();
                     }
                 });
             }
