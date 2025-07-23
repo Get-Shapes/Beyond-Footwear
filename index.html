@@ -166,20 +166,6 @@
             flex-shrink: 0;
         }
     </style>
-    <!-- Script to prevent flash of unstyled content (FOUC) for dark mode -->
-    <script>
-        // Check localStorage for theme preference immediately
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-            document.documentElement.classList.add('dark'); // Apply to html element for Tailwind
-            document.body.classList.add('dark'); // Also apply to body for direct CSS rules
-        } else {
-            document.documentElement.classList.remove('dark');
-            document.body.classList.remove('dark');
-        }
-    </script>
 </head>
 <body class="text-black" oncontextmenu="return false;">
 
