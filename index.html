@@ -476,45 +476,34 @@
 
         let currentLanguage = 'en';
 
-        // Function to update text content (can remain outside DOMContentLoaded as it gets elements on demand)
-        function updateContent() {
+        // Function to update text content
+        function updateContent(elements) { // Pass elements object
             const langData = content[currentLanguage];
-            // Get elements inside here, or pass them as arguments if they are frequently used
-            const benefit2Title = document.getElementById('benefit2-title');
-            const benefit2Text = document.getElementById('benefit2-text');
-            const modalTitle = document.getElementById('modal-title');
-            const thankyouHeadline = document.getElementById('thankyou-headline');
-            const thankyouSubheadline = document.getElementById('thankyou-subheadline');
-            const backToHomepage = document.getElementById('back-to-homepage');
-            const currentLangSpan = document.getElementById('current-lang');
-            const scheduleCtaButton = document.getElementById('schedule-cta');
-
-            if (benefit2Title) benefit2Title.textContent = langData.benefit2Title;
-            if (benefit2Text) benefit2Text.innerHTML = langData.benefit2Text;
-            if (modalTitle) modalTitle.textContent = langData.modalTitle;
-            if (thankyouHeadline) thankyouHeadline.textContent = langData.thankyouHeadline;
-            if (thankyouSubheadline) thankyouSubheadline.textContent = langData.thankyouSubheadline;
-            if (backToHomepage) backToHomepage.textContent = langData.backToHomepage;
-            if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
-            if (scheduleCtaButton) scheduleCtaButton.textContent = langData.scheduleCta;
+            if (elements.benefit2Title) elements.benefit2Title.textContent = langData.benefit2Title;
+            if (elements.benefit2Text) elements.benefit2Text.innerHTML = langData.benefit2Text;
+            if (elements.modalTitle) elements.modalTitle.textContent = langData.modalTitle;
+            if (elements.thankyouHeadline) elements.thankyouHeadline.textContent = langData.thankyouHeadline;
+            if (elements.thankyouSubheadline) elements.thankyouSubheadline.textContent = langData.thankyouSubheadline;
+            if (elements.backToHomepageBtn) elements.backToHomepageBtn.textContent = langData.backToHomepage;
+            if (elements.currentLangSpan) elements.currentLangSpan.textContent = langData.currentLang;
+            if (elements.scheduleCtaButton) elements.scheduleCtaButton.textContent = langData.scheduleCta;
             
             // Update document language
             document.documentElement.lang = currentLanguage;
         }
 
-        // Function to update the theme toggle icon (can remain outside)
-        function updateThemeToggleIcon() {
-            const themeToggleBtn = document.getElementById('theme-toggle');
+        // Function to update the theme toggle icon
+        function updateThemeToggleIcon(elements) { // Pass elements object
             const isDarkMode = document.body.classList.contains('dark');
-            if (themeToggleBtn) {
+            if (elements.themeToggleBtn) {
                 if (isDarkMode) {
-                    themeToggleBtn.innerHTML = `
+                    elements.themeToggleBtn.innerHTML = `
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
                     `;
                 } else {
-                    themeToggleBtn.innerHTML = `
+                    elements.themeToggleBtn.innerHTML = `
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                         </svg>
@@ -525,7 +514,7 @@
 
         // Function to handle video errors
         function handleVideoError(video) {
-            console.error('Video loading error');
+            console.error('Video loading error for source:', video.currentSrc || video.src);
             const videoContainer = video.parentElement;
             if (videoContainer) {
                 videoContainer.innerHTML = `
@@ -553,21 +542,32 @@
                 langToggleBtn: document.getElementById('lang-toggle'),
                 themeToggleBtn: document.getElementById('theme-toggle'),
                 langDropdown: document.getElementById('lang-dropdown'),
-                mainLogo: document.getElementById('main-logo'), // Changed to single logo ID
+                mainLogo: document.getElementById('main-logo'),
                 scheduleCtaButton: document.getElementById('schedule-cta'),
-                mainVideo: document.getElementById('mainVideo')
+                mainVideo: document.getElementById('mainVideo'),
+                benefit2Title: document.getElementById('benefit2-title'),
+                benefit2Text: document.getElementById('benefit2-text'),
+                modalTitle: document.getElementById('modal-title'),
+                thankyouHeadline: document.getElementById('thankyou-headline'),
+                thankyouSubheadline: document.getElementById('thankyou-subheadline'),
+                currentLangSpan: document.getElementById('current-lang')
             };
+
+            // Debugging: Check if any element is null after retrieval
+            for (const key in elements) {
+                if (elements[key] === null) {
+                    console.error(`ERROR: Element with ID '${key}' is null. Please ensure it exists in your HTML.`);
+                }
+            }
 
             // Initial theme application for logos
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem('theme');
 
             if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-                // document.body.classList.add('dark'); // Already handled by the script in head
-                if (elements.mainLogo) elements.mainLogo.src = 'Shapes-Logo neu White.png'; // Update src for dark mode
+                if (elements.mainLogo) elements.mainLogo.src = 'Shapes-Logo neu White.png';
             } else {
-                // document.body.classList.remove('dark'); // Already handled by the script in head
-                if (elements.mainLogo) elements.mainLogo.src = 'Shapes-Logo neu Black.png'; // Update src for light mode
+                if (elements.mainLogo) elements.mainLogo.src = 'Shapes-Logo neu Black.png';
             }
 
             // Set initial language based on browser preference or default to 'en'
@@ -575,8 +575,10 @@
             const availableLangs = Object.keys(content);
             const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
             currentLanguage = initialLang;
-            updateContent(); // Call updateContent after all elements are defined
-            updateThemeToggleIcon(); // Call updateThemeToggleIcon after themeToggleBtn is defined
+            
+            // Call updateContent and updateThemeToggleIcon with the elements object
+            updateContent(elements);
+            updateThemeToggleIcon(elements);
 
             // Event Listeners (ensure elements are not null before adding listeners)
             if (elements.scheduleCtaButton) {
@@ -774,13 +776,15 @@
             if (elements.langToggleBtn && elements.langDropdown) {
                 elements.langToggleBtn.addEventListener('click', (event) => {
                     event.stopPropagation();
+                    console.log('Toggling langDropdown classList. Current:', elements.langDropdown.classList.contains('hidden'));
                     elements.langDropdown.classList.toggle('hidden');
                 });
 
                 elements.langDropdown.querySelectorAll('.lang-option').forEach(button => {
                     button.addEventListener('click', (event) => {
                         currentLanguage = event.target.dataset.lang;
-                        updateContent();
+                        updateContent(elements); // Pass elements
+                        console.log('Adding hidden to langDropdown classList after selection.');
                         elements.langDropdown.classList.add('hidden');
                         trackEvent('language_changed', { language: currentLanguage });
                     });
@@ -788,25 +792,27 @@
 
                 document.addEventListener('click', (event) => {
                     if (!elements.langDropdown.contains(event.target) && !elements.langToggleBtn.contains(event.target)) {
+                        console.log('Adding hidden to langDropdown classList on outside click.');
                         elements.langDropdown.classList.add('hidden');
                     }
                 });
             }
 
             // Theme Toggle Event Listener
-            if (elements.themeToggleBtn && elements.mainLogo) { // Check for mainLogo here
+            if (elements.themeToggleBtn && elements.mainLogo) {
                 elements.themeToggleBtn.addEventListener('click', () => {
+                    console.log('Toggling body and html dark class.');
                     document.body.classList.toggle('dark');
                     document.documentElement.classList.toggle('dark');
                     
                     if (document.body.classList.contains('dark')) {
                         localStorage.setItem('theme', 'dark');
-                        elements.mainLogo.src = 'Shapes-Logo neu White.png'; // Update src
+                        elements.mainLogo.src = 'Shapes-Logo neu White.png';
                     } else {
                         localStorage.setItem('theme', 'light');
-                        elements.mainLogo.src = 'Shapes-Logo neu Black.png'; // Update src
+                        elements.mainLogo.src = 'Shapes-Logo neu Black.png';
                     }
-                    updateThemeToggleIcon();
+                    updateThemeToggleIcon(elements); // Pass elements
                     trackEvent('theme_changed', { 
                         theme: document.body.classList.contains('dark') ? 'dark' : 'light' 
                     });
