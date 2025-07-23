@@ -11,7 +11,7 @@
     <style>
         body {
             font-family: 'Urbanist', sans-serif; /* Use the Urbanist font */
-            background-color: #ffffff !important; /* Default pure white background, forced */
+            /* Removed background-color: #ffffff !important; to prevent white flash in dark mode */
             position: relative; /* Needed for pseudo-elements */
             min-height: 100vh; /* Ensure body takes full height for background */
             transition: background-color 0.3s ease;
@@ -135,11 +135,6 @@
         .dark .close-button:hover,
         .dark .close-button:focus {
             color: #fefefe; /* Adjusted for dark background */
-        }
-
-        /* Specific override for language toggle button in light mode */
-        body:not(.dark) #lang-toggle {
-            background-color: #ffffff !important; /* Force solid white background in light mode */
         }
 
         /* Calendly iframe container styling */
