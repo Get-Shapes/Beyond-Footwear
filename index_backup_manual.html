@@ -352,18 +352,38 @@
 <script>
     // Immediately enable sound and set volume after video loads
     document.getElementById('mainVideo').addEventListener('loadedmetadata', function() {
+            <!-- Video Section -->
+            <section class="p-8 rounded-xl glassy-box relative">
+                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;">
+                    <video id="mainVideo" controls autoplay playsinline loop class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
+                        <source src="Test Women 1.mp4" type="video/mp4">
+                        <source src="Zurab 1.mp4" type="video/mp4">
+                        <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
+                        <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
+                    </video>
+<script>
+    // Force video to play with sound immediately
+    const video = document.getElementById('mainVideo');
+    video.muted = false;
+    video.volume = 0.9;
+
+    // Ensure sound is enabled as soon as possible
+    video.addEventListener('loadstart', function() {
         this.muted = false;
         this.volume = 0.9;
     });
 
-    // Force unmute on first user interaction
-    document.addEventListener('click', function() {
-        const video = document.getElementById('mainVideo');
-        if (video) {
-            video.muted = false;
-            video.volume = 0.9;
-        }
-    }, { once: true });
+    video.addEventListener('loadedmetadata', function() {
+        this.muted = false;
+        this.volume = 0.9;
+        this.play();
+    });
+
+    video.addEventListener('canplay', function() {
+        this.muted = false;
+        this.volume = 0.9;
+        this.play();
+    });
 </script>
                 </div>
             </section>
@@ -633,33 +653,97 @@
                 });
             }
 
-            // Video setup and error handling
+            // Video Logic with Immediate Sound Autoplay - NO USER INTERACTION REQUIRED
             const mainVideo = document.getElementById('mainVideo');
             if (mainVideo) {
-                // Add error event listener
-                mainVideo.addEventListener('error', function() {
-                    handleVideoError(this);
-                });
+                const videoSources = ['Test Women 1.mp4', 'Zurab 1.mp4'];
+                let currentVideoIndex = 0;
 
-                // Add load event listener for successful loading
-                mainVideo.addEventListener('loadeddata', function() {
-                    console.log('Video loaded successfully');
-                });
+                // Force sound ON from the start - no muting
+                mainVideo.muted = false;
+                mainVideo.volume = 0.9;
+                mainVideo.src = videoSources[currentVideoIndex];
 
-                // Set up video looping
-                mainVideo.addEventListener('ended', function() {
-                    this.currentTime = 0;
-                    this.play().catch(e => console.warn('Auto-replay failed:', e));
-                });
+                // Aggressive autoplay with sound - try multiple times
+                function forcePlayWithSound() {
+                    mainVideo.muted = false;
+                    mainVideo.volume = 0.9;
 
-                // Handle autoplay policy restrictions
-                const playPromise = mainVideo.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.warn('Autoplay was prevented:', error);
-                        // Video will show play button for user interaction
+                    mainVideo.play().then(() => {
+                        console.log("Video playing with sound successfully");
+                    }).catch(error => {
+                        console.log("Autoplay attempt failed, retrying:", error);
+                        // Retry after short delay
+                        setTimeout(() => {
+                            mainVideo.muted = false;
+                            mainVideo.volume = 0.9;
+                            mainVideo.play().catch(e => console.log("Retry failed:", e));
+                        }, 100);
                     });
                 }
+
+                // Try to play immediately
+                forcePlayWithSound();
+
+                // Try again when metadata loads
+                mainVideo.addEventListener('loadedmetadata', () => {
+                    forcePlayWithSound();
+                });
+
+                // Try again when video can play
+                mainVideo.addEventListener('canplay', () => {
+                    forcePlayWithSound();
+                });
+
+                // Handle video ended event - switch to next video with sound
+                mainVideo.addEventListener('ended', () => {
+                    currentVideoIndex++;
+                    if (currentVideoIndex >= videoSources.length) {
+                        currentVideoIndex = 0;
+                    }
+                    mainVideo.src = videoSources[currentVideoIndex];
+                    mainVideo.load();
+
+                    // Ensure sound stays on for next video
+                    mainVideo.muted = false;
+                    mainVideo.volume = 0.9;
+
+                    mainVideo.play().catch(error => {
+                        console.log("Next video autoplay failed:", error);
+                    });
+                });
+
+                // Handle video errors
+                mainVideo.addEventListener('error', () => {
+                    handleVideoError(mainVideo);
+                });
+
+                // Ensure sound is always on when video is clicked
+                mainVideo.addEventListener('click', () => {
+                    mainVideo.muted = false;
+                    mainVideo.volume = 0.9;
+                    if (mainVideo.paused) {
+                        mainVideo.play();
+                    }
+                });
+
+                // Force sound on page visibility change
+                document.addEventListener('visibilitychange', () => {
+                    if (!document.hidden) {
+                        mainVideo.muted = false;
+                        mainVideo.volume = 0.9;
+                    }
+                });
+
+                // Multiple retry attempts for autoplay with sound
+                setTimeout(() => forcePlayWithSound(), 50);
+                setTimeout(() => forcePlayWithSound(), 200);
+                setTimeout(() => forcePlayWithSound(), 500);
+
+                // Final attempt when page fully loads
+                window.addEventListener('load', () => {
+                    forcePlayWithSound();
+                });
             }
 
             // Modal functionality

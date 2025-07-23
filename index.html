@@ -352,20 +352,28 @@
                         <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
                     </video>
 <script>
-    // Immediately enable sound and set volume after video loads
-    document.getElementById('mainVideo').addEventListener('loadedmetadata', function() {
+    // Force video to play with sound immediately
+    const video = document.getElementById('mainVideo');
+    video.muted = false;
+    video.volume = 0.9;
+
+    // Ensure sound is enabled as soon as possible
+    video.addEventListener('loadstart', function() {
         this.muted = false;
         this.volume = 0.9;
     });
 
-    // Force unmute on first user interaction
-    document.addEventListener('click', function() {
-        const video = document.getElementById('mainVideo');
-        if (video) {
-            video.muted = false;
-            video.volume = 0.9;
-        }
-    }, { once: true });
+    video.addEventListener('loadedmetadata', function() {
+        this.muted = false;
+        this.volume = 0.9;
+        this.play();
+    });
+
+    video.addEventListener('canplay', function() {
+        this.muted = false;
+        this.volume = 0.9;
+        this.play();
+    });
 </script>
                 </div>
             </section>
@@ -628,18 +636,97 @@
                 });
             }
 
-            // Video Logic with Immediate Sound Autoplay
+            // Video Logic with Immediate Sound Autoplay - NO USER INTERACTION REQUIRED
             if (elements.mainVideo) {
                 const videoSources = ['Test Women 1.mp4', 'Zurab 1.mp4'];
                 let currentVideoIndex = 0;
-                let hasUserInteracted = false;
 
-                // Set initial video source and configure for immediate sound
-                elements.mainVideo.src = videoSources[currentVideoIndex];
-                elements.mainVideo.muted = true; // Start muted for autoplay compliance
+                // Force sound ON from the start - no muting
+                elements.mainVideo.muted = false;
                 elements.mainVideo.volume = 0.9;
+                elements.mainVideo.src = videoSources[currentVideoIndex];
 
-                // Function to enable sound immediately after autoplay starts
+                // Aggressive autoplay with sound - try multiple times
+                function forcePlayWithSound() {
+                    elements.mainVideo.muted = false;
+                    elements.mainVideo.volume = 0.9;
+
+                    elements.mainVideo.play().then(() => {
+                        console.log("Video playing with sound successfully");
+                    }).catch(error => {
+                        console.log("Autoplay attempt failed, retrying:", error);
+                        // Retry after short delay
+                        setTimeout(() => {
+                            elements.mainVideo.muted = false;
+                            elements.mainVideo.volume = 0.9;
+                            elements.mainVideo.play().catch(e => console.log("Retry failed:", e));
+                        }, 100);
+                    });
+                }
+
+                // Try to play immediately
+                forcePlayWithSound();
+
+                // Try again when metadata loads
+                elements.mainVideo.addEventListener('loadedmetadata', () => {
+                    forcePlayWithSound();
+                });
+
+                // Try again when video can play
+                elements.mainVideo.addEventListener('canplay', () => {
+                    forcePlayWithSound();
+                });
+
+                // Handle video ended event - switch to next video with sound
+                elements.mainVideo.addEventListener('ended', () => {
+                    currentVideoIndex++;
+                    if (currentVideoIndex >= videoSources.length) {
+                        currentVideoIndex = 0;
+                    }
+                    elements.mainVideo.src = videoSources[currentVideoIndex];
+                    elements.mainVideo.load();
+
+                    // Ensure sound stays on for next video
+                    elements.mainVideo.muted = false;
+                    elements.mainVideo.volume = 0.9;
+
+                    elements.mainVideo.play().catch(error => {
+                        console.log("Next video autoplay failed:", error);
+                    });
+                });
+
+                // Handle video errors
+                elements.mainVideo.addEventListener('error', () => {
+                    handleVideoError(elements.mainVideo);
+                });
+
+                // Ensure sound is always on when video is clicked
+                elements.mainVideo.addEventListener('click', () => {
+                    elements.mainVideo.muted = false;
+                    elements.mainVideo.volume = 0.9;
+                    if (elements.mainVideo.paused) {
+                        elements.mainVideo.play();
+                    }
+                });
+
+                // Force sound on page visibility change
+                document.addEventListener('visibilitychange', () => {
+                    if (!document.hidden) {
+                        elements.mainVideo.muted = false;
+                        elements.mainVideo.volume = 0.9;
+                    }
+                });
+
+                // Multiple retry attempts for autoplay with sound
+                setTimeout(() => forcePlayWithSound(), 50);
+                setTimeout(() => forcePlayWithSound(), 200);
+                setTimeout(() => forcePlayWithSound(), 500);
+
+                // Final attempt when page fully loads
+                window.addEventListener('load', () => {
+                    forcePlayWithSound();
+                });
+            }
                 function enableSoundAfterAutoplay() {
                     return elements.mainVideo.play().then(() => {
                         console.log("Autoplay started successfully");
