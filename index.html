@@ -362,21 +362,7 @@
             <!-- Video Section -->
             <section class="p-8 rounded-xl glassy-box relative">
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;">
-                    <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
-                        <source src="Test Women 1.mp4" type="video/mp4">
-                        <source src="Zurab 1.mp4" type="video/mp4">
-                        <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
-                        <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
-                    </video>
-<script>
-</script>
-                </div>
-            </section>
-
-            <!-- Video Section -->
-            <section class="p-8 rounded-xl glassy-box relative">
-                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;">
-                    <video id="mainVideo" controls autoplay playsinline loop class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto" volume="0.9">
+                    <video id="mainVideo" autoplay playsinline loop class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
                         <source src="Test Women 1.mp4" type="video/mp4">
                         <source src="Zurab 1.mp4" type="video/mp4">
                         <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
@@ -650,13 +636,13 @@
 
                 // IMMEDIATELY configure video for sound
                 elements.mainVideo.muted = false;
-                elements.mainVideo.volume = 0.9;
+                elements.mainVideo.volume = 1.0; // Set volume to max
                 elements.mainVideo.src = videoSources[currentVideoIndex];
 
                 // Ultra-aggressive autoplay function
                 function forcePlayWithSound() {
                     elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 0.9;
+                    elements.mainVideo.volume = 1.0;
 
                     const playPromise = elements.mainVideo.play();
 
@@ -669,7 +655,7 @@
                             // Try again after very short delay
                             setTimeout(() => {
                                 elements.mainVideo.muted = false;
-                                elements.mainVideo.volume = 0.9;
+                                elements.mainVideo.volume = 1.0;
                                 elements.mainVideo.play().then(() => {
                                     console.log("✅ Retry successful!");
                                 }).catch(e => {
@@ -677,7 +663,7 @@
                                     // One more aggressive attempt
                                     setTimeout(() => {
                                         elements.mainVideo.muted = false;
-                                        elements.mainVideo.volume = 0.9;
+                                        elements.mainVideo.volume = 1.0;
                                         elements.mainVideo.play().catch(finalError => {
                                             console.log("❌ Final attempt failed:", finalError);
                                         });
@@ -701,7 +687,7 @@
                     elements.mainVideo.addEventListener(eventName, () => {
                         if (elements.mainVideo.paused) {
                             elements.mainVideo.muted = false;
-                            elements.mainVideo.volume = 0.9;
+                            elements.mainVideo.volume = 1.0;
                             forcePlayWithSound();
                         }
                     });
@@ -718,7 +704,7 @@
 
                     // Ensure sound for next video
                     elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 0.9;
+                    elements.mainVideo.volume = 1.0;
                 });
 
                 // Handle video errors
@@ -729,7 +715,7 @@
                 // Force sound on ANY user interaction
                 elements.mainVideo.addEventListener('click', () => {
                     elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 0.9;
+                    elements.mainVideo.volume = 1.0;
                     if (elements.mainVideo.paused) {
                         forcePlayWithSound();
                     }
@@ -739,7 +725,7 @@
                 document.addEventListener('visibilitychange', () => {
                     if (!document.hidden) {
                         elements.mainVideo.muted = false;
-                        elements.mainVideo.volume = 0.9;
+                        elements.mainVideo.volume = 1.0;
                         if (elements.mainVideo.paused) {
                             forcePlayWithSound();
                         }
@@ -749,7 +735,7 @@
                 // Force sound on window focus
                 window.addEventListener('focus', () => {
                     elements.mainVideo.muted = false;
-                    elements.mainVideo.volume = 0.9;
+                    elements.mainVideo.volume = 1.0;
                     if (elements.mainVideo.paused) {
                         forcePlayWithSound();
                     }
