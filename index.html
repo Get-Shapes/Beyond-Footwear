@@ -368,6 +368,26 @@
                         <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
                         <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
                     </video>
+                    <div id="video-controls" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center space-x-4 p-2 rounded-full glassy-box">
+                        <button id="play-pause-btn" class="p-2 rounded-full text-black-force dark:text-gray-200" aria-label="Play/Pause video">
+                            <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-6.518-3.75A1 1 0 007 8.35v7.3a1 1 0 001.234.97l6.518-1.81a1 1 0 000-1.82z" />
+                            </svg>
+                            <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6" />
+                            </svg>
+                        </button>
+                        <button id="mute-btn" class="p-2 rounded-full text-black-force dark:text-gray-200" aria-label="Mute/Unmute video">
+                            <svg id="volume-on-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.54 8.46a5 5 0 010 7.07" />
+                            </svg>
+                            <svg id="volume-off-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 9L5 5m0 14l4-4m1-9v14l5 4V5l-5 4z" />
+                            </svg>
+                        </button>
+                        <input id="volume-slider" type="range" min="0" max="1" step="0.1" value="1" class="w-24 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" aria-label="Video volume slider">
+                    </div>
                 </div>
             </section>
 
