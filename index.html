@@ -7,8 +7,6 @@
     <meta name="keywords" content="footwear, innovation, consultation, award-winning, shapes">
     <meta name="author" content="Shapes Beyond Footwear">
 
-
-
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://drshapes.github.io/Beyond-Footwear/">
@@ -355,8 +353,7 @@
 
             <!-- Logo Section -->
             <div>
-                <img id="logo-light-mode" src="Shapes-Logo neu Black.png" alt="Shapes Beyond Footwear Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
-                <img id="logo-dark-mode" src="Shapes-Logo neu White.png" alt="Shapes Beyond Footwear Logo" class="w-48 md:w-64 h-auto hidden" ondragstart="return false;">
+                <img id="main-logo" src="Shapes-Logo neu Black.png" alt="Shapes Beyond Footwear Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
             </div>
         </header>
 
@@ -479,11 +476,10 @@
 
         let currentLanguage = 'en';
 
-        // Function to update content based on language
+        // Function to update text content (can remain outside DOMContentLoaded as it gets elements on demand)
         function updateContent() {
             const langData = content[currentLanguage];
-
-            // Update each element directly
+            // Get elements inside here, or pass them as arguments if they are frequently used
             const benefit2Title = document.getElementById('benefit2-title');
             const benefit2Text = document.getElementById('benefit2-text');
             const modalTitle = document.getElementById('modal-title');
@@ -501,12 +497,12 @@
             if (backToHomepage) backToHomepage.textContent = langData.backToHomepage;
             if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
             if (scheduleCtaButton) scheduleCtaButton.textContent = langData.scheduleCta;
-
+            
             // Update document language
             document.documentElement.lang = currentLanguage;
         }
 
-        // Function to update the theme toggle icon
+        // Function to update the theme toggle icon (can remain outside)
         function updateThemeToggleIcon() {
             const themeToggleBtn = document.getElementById('theme-toggle');
             const isDarkMode = document.body.classList.contains('dark');
@@ -531,21 +527,23 @@
         function handleVideoError(video) {
             console.error('Video loading error');
             const videoContainer = video.parentElement;
-            videoContainer.innerHTML = `
-                <div class="flex items-center justify-center h-full error-message">
-                    <div>
-                        <p class="mb-4">Video temporarily unavailable.</p>
-                        <button onclick="location.reload()" class="apple-button bg-red-600 text-white hover:bg-red-700">
-                            Refresh Page
-                        </button>
+            if (videoContainer) {
+                videoContainer.innerHTML = `
+                    <div class="flex items-center justify-center h-full error-message">
+                        <div>
+                            <p class="mb-4">Video temporarily unavailable.</p>
+                            <button onclick="location.reload()" class="apple-button bg-red-600 text-white hover:bg-red-700">
+                                Refresh Page
+                            </button>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+            }
         }
 
-        // DOM Content Loaded Event
+        // Main script execution after DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
-            // Get DOM elements
+            // Get all DOM elements here, inside DOMContentLoaded
             const elements = {
                 calendlyModal: document.getElementById('calendly-modal'),
                 closeModalBtn: document.getElementById('close-modal'),
@@ -555,35 +553,32 @@
                 langToggleBtn: document.getElementById('lang-toggle'),
                 themeToggleBtn: document.getElementById('theme-toggle'),
                 langDropdown: document.getElementById('lang-dropdown'),
-                logoLightMode: document.getElementById('logo-light-mode'),
-                logoDarkMode: document.getElementById('logo-dark-mode'),
+                mainLogo: document.getElementById('main-logo'), // Changed to single logo ID
                 scheduleCtaButton: document.getElementById('schedule-cta'),
                 mainVideo: document.getElementById('mainVideo')
             };
 
-            // Initialize theme
+            // Initial theme application for logos
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem('theme');
 
             if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
-                document.body.classList.add('dark');
-                if (elements.logoLightMode) elements.logoLightMode.classList.add('hidden');
-                if (elements.logoDarkMode) elements.logoDarkMode.classList.remove('hidden');
+                // document.body.classList.add('dark'); // Already handled by the script in head
+                if (elements.mainLogo) elements.mainLogo.src = 'Shapes-Logo neu White.png'; // Update src for dark mode
             } else {
-                document.body.classList.remove('dark');
-                if (elements.logoLightMode) elements.logoLightMode.classList.remove('hidden');
-                if (elements.logoDarkMode) elements.logoDarkMode.classList.add('hidden');
+                // document.body.classList.remove('dark'); // Already handled by the script in head
+                if (elements.mainLogo) elements.mainLogo.src = 'Shapes-Logo neu Black.png'; // Update src for light mode
             }
 
-            // Set initial language
+            // Set initial language based on browser preference or default to 'en'
             const browserLang = navigator.language.split('-')[0];
             const availableLangs = Object.keys(content);
             const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
             currentLanguage = initialLang;
-            updateContent();
-            updateThemeToggleIcon();
+            updateContent(); // Call updateContent after all elements are defined
+            updateThemeToggleIcon(); // Call updateThemeToggleIcon after themeToggleBtn is defined
 
-            // Schedule CTA Event Listener
+            // Event Listeners (ensure elements are not null before adding listeners)
             if (elements.scheduleCtaButton) {
                 elements.scheduleCtaButton.addEventListener('click', () => {
                     trackEvent('schedule_consultation_clicked', {
@@ -597,7 +592,6 @@
                 });
             }
 
-            // Close Modal Event Listeners
             if (elements.closeModalBtn) {
                 elements.closeModalBtn.addEventListener('click', () => {
                     if (elements.calendlyModal) {
@@ -624,7 +618,6 @@
                 });
             }
 
-            // Back to Homepage Event Listener
             if (elements.backToHomepageBtn && elements.thankYouPage && elements.landingPageContent) {
                 elements.backToHomepageBtn.addEventListener('click', () => {
                     elements.thankYouPage.classList.add('hidden');
@@ -801,19 +794,17 @@
             }
 
             // Theme Toggle Event Listener
-            if (elements.themeToggleBtn && elements.logoLightMode && elements.logoDarkMode) {
+            if (elements.themeToggleBtn && elements.mainLogo) { // Check for mainLogo here
                 elements.themeToggleBtn.addEventListener('click', () => {
                     document.body.classList.toggle('dark');
                     document.documentElement.classList.toggle('dark');
                     
                     if (document.body.classList.contains('dark')) {
                         localStorage.setItem('theme', 'dark');
-                        elements.logoLightMode.classList.add('hidden');
-                        elements.logoDarkMode.classList.remove('hidden');
+                        elements.mainLogo.src = 'Shapes-Logo neu White.png'; // Update src
                     } else {
                         localStorage.setItem('theme', 'light');
-                        elements.logoLightMode.classList.remove('hidden');
-                        elements.logoDarkMode.classList.add('hidden');
+                        elements.mainLogo.src = 'Shapes-Logo neu Black.png'; // Update src
                     }
                     updateThemeToggleIcon();
                     trackEvent('theme_changed', { 
