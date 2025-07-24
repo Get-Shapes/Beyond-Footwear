@@ -69,7 +69,7 @@
 
         /* Apple-style button base */
         .apple-button {
-            @apply px-8 py-4 font-semibold rounded-xl transition duration-300;
+            @apply px-12 py-4 font-semibold rounded-xl transition duration-300; /* Increased px from 8 to 12 */
         }
 
         /* Explicitly remove focus outline and border for all buttons */
@@ -259,9 +259,9 @@
                 <!-- Video embed goes here -->
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg bg-black" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
                     <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload">
-                        <source src="Test Women 1.mp4" type="video/mp4">
                         <source src="Zurab 1.mp4" type="video/mp4">
-                        <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
+                        <!-- Removed 'Test Women 1.mp4' source -->
+                        <!-- Removed track tag as it's not needed for a single video without explicit subtitles -->
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -270,7 +270,7 @@
 
         <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl glassy-box text-white hover:scale-105 shadow-md" style="background-color: rgba(220, 38, 38, 0.6);">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl glassy-box text-white hover:scale-105" style="background-color: rgba(220, 38, 38, 0.6);">
                 Book your free consultation.
             </button>
         </section>
@@ -495,8 +495,7 @@
             // Video looping logic
             const mainVideo = document.getElementById('mainVideo');
             const videoSources = [
-                'Test Women 1.mp4',
-                'Zurab 1.mp4'
+                'Zurab 1.mp4' // Only Zurab video
             ];
             let currentVideoIndex = 0;
 
