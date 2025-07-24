@@ -281,15 +281,17 @@
                 <!-- Benefit Card 2: Awards (Concise) -->
                 <div class="text-center transition duration-300">
                     <h3 id="benefit2-title" class="text-2xl font-semibold mb-3">Award-Winning</h3>
-                    <ul id="benefit2-text" class="list-none p-0 space-y-2">
-                        <li><strong>Nominee of German Design Award 24</strong></li>
-                        <li>
-                            <strong>Nominee of the Wellness & Spa Innovation Award 24</strong>
-                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mt-2 h-20 object-contain" ondragstart="return false;">
+                    <ul id="benefit2-text" class="list-none p-0 space-y-6">
+                        <li class="flex flex-col items-center">
+                            <strong>Nominee of German Design Award 24</strong>
                         </li>
-                        <li>
+                        <li class="flex flex-col items-center">
+                            <strong>Nominee of the Wellness & Spa Innovation Award 24</strong>
+                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
+                        </li>
+                        <li class="flex flex-col items-center">
                             <strong>Winner of German Innovation Award 23</strong> (Medical & Health)
-                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mt-2 h-20 object-contain" ondragstart="return false;">
+                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
                         </li>
                     </ul>
                 </div>
@@ -331,15 +333,17 @@
                 scheduleCta: "Book your free consultation.",
                 benefit2Title: "Award-Winning",
                 benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li><strong>Nominee of German Design Award 24</strong></li>
-                        <li>
-                            <strong>Nominee of the Wellness & Spa Innovation Award 24</strong>
-                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mt-2 h-20 object-contain" ondragstart="return false;">
+                    <ul class="list-none p-0 space-y-6">
+                        <li class="flex flex-col items-center">
+                            <strong>Nominee of German Design Award 24</strong>
                         </li>
-                        <li>
+                        <li class="flex flex-col items-center">
+                            <strong>Nominee of the Wellness & Spa Innovation Award 24</strong>
+                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
+                        </li>
+                        <li class="flex flex-col items-center">
                             <strong>Winner of German Innovation Award 23</strong> (Medical & Health)
-                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mt-2 h-20 object-contain" ondragstart="return false;">
+                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
                         </li>
                     </ul>
                 `,
@@ -353,15 +357,17 @@
                 scheduleCta: "Buche deine kostenlose Beratung.",
                 benefit2Title: "Preisgekrönt",
                 benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li><strong>Nominee des German Design Award 24</strong></li>
-                        <li>
+                    <ul class="list-none p-0 space-y-6">
+                        <li class="flex flex-col items-center">
+                            <strong>Nominee des German Design Award 24</strong>
+                        </li>
+                        <li class="flex flex-col items-center">
                             <strong>Nominee des Wellness & Spa Innovation Award 24</strong>
-                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mt-2 h-20 object-contain" ondragstart="return false;">
+                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
                         </li>
                         <li>
                             <strong>Gewinner des German Innovation Award 23</strong> (Medizin & Gesundheit)
-                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mt-2 h-20 object-contain" ondragstart="return false;">
+                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
                         </li>
                     </ul>
                 `,
@@ -406,7 +412,7 @@
                 if (!isLightModeActive) { // If light-mode is NOT active, it's dark mode
                     themeToggleBtn.innerHTML = `
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.128 6.062a.75.75 0 10-1.06-1.06l-1.59 1.59a.75.75 0 001.06 1.06l1.59-1.59zM2.25 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3a.75.75 0 01-.75-.75zM6.062 16.872a.75.75 0 101.06 1.06l1.59-1.59a.75.75 0 00-1.06-1.06l-1.59 1.59zM12 18.75a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0v-2.25a.75.75 0 01.75-.75zM16.872 17.938a.75.75 0 101.06 1.06l1.59-1.59a.75.75 0 00-1.06-1.06l-1.59 1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM17.938 7.128a.75.75 0 10-1.06-1.06l-1.59 1.59a.75.75 0 001.06 1.06l1.59-1.59zM12 15a3 3 0 100-6 3 3 0 000 6z"/>
                         </svg>
                     `; // Sun icon for dark mode
                 } else { // It's light mode
