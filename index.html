@@ -69,7 +69,13 @@
 
         /* Apple-style button base */
         .apple-button {
-            @apply px-32 py-6 font-semibold rounded-xl transition duration-300; /* Increased px from 24 to 32 */
+            /* Adjusted padding and min-width */
+            padding: 1.5rem 4rem; /* py-6 is 1.5rem, px-40 was 10rem, trying 4rem for more space */
+            min-width: 350px; /* Set a minimum width for the button */
+            font-weight: 600; /* font-semibold */
+            border-radius: 1rem; /* rounded-xl */
+            transition: all 0.3s ease; /* transition duration-300 */
+            display: inline-block; /* Ensure padding applies correctly */
         }
 
         /* Explicitly remove focus outline and border for all buttons */
@@ -383,6 +389,7 @@
 
         // Function to update content based on language
         function updateContent() {
+            console.log("Updating content for language:", currentLanguage);
             const langData = content[currentLanguage];
             const benefit2Title = document.getElementById('benefit2-title');
             const benefit2Text = document.getElementById('benefit2-text');
@@ -406,8 +413,8 @@
         // Function to update the theme toggle icon
         function updateThemeToggleIcon() {
             const themeToggleBtn = document.getElementById('theme-toggle');
-            // Check for 'light-mode' class on html element to determine current theme
             const isLightModeActive = document.documentElement.classList.contains('light-mode');
+            console.log("Updating theme icon. Is light mode active:", isLightModeActive);
             if (themeToggleBtn) {
                 if (!isLightModeActive) { // If light-mode is NOT active, it's dark mode
                     themeToggleBtn.innerHTML = `
@@ -464,6 +471,7 @@
             // Show Calendly Modal
             if (scheduleCtaButton) {
                 scheduleCtaButton.addEventListener('click', () => {
+                    console.log("Schedule CTA button clicked!");
                     if (calendlyModal) calendlyModal.style.display = 'flex';
                 });
             }
@@ -471,6 +479,7 @@
             // Close Calendly Modal
             if (closeModalBtn) {
                 closeModalBtn.addEventListener('click', () => {
+                    console.log("Close modal button clicked!");
                     if (calendlyModal) calendlyModal.style.display = 'none';
                 });
             }
@@ -479,6 +488,7 @@
             if (calendlyModal) {
                 calendlyModal.addEventListener('click', (e) => {
                     if (e.target === calendlyModal) {
+                        console.log("Clicked outside modal, closing.");
                         calendlyModal.style.display = 'none';
                     }
                 });
@@ -487,6 +497,7 @@
             // Back to Homepage from Thank You Page
             if (backToHomepageBtn && thankYouPage && landingPageContent) {
                 backToHomepageBtn.addEventListener('click', () => {
+                    console.log("Back to homepage button clicked!");
                     thankYouPage.classList.add('hidden');
                     landingPageContent.classList.remove('hidden');
                 });
@@ -504,6 +515,7 @@
                 mainVideo.src = videoSources[currentVideoIndex];
 
                 mainVideo.addEventListener('ended', () => {
+                    console.log("Video ended, switching to next video.");
                     currentVideoIndex++;
                     if (currentVideoIndex >= videoSources.length) {
                         currentVideoIndex = 0; // Loop back to the first video
@@ -524,6 +536,7 @@
             // Language Toggle Event Listener (Direct Toggle)
             if (langToggleBtn) { // Check if the button exists
                 langToggleBtn.addEventListener('click', () => {
+                    console.log("Language toggle clicked!");
                     currentLanguage = (currentLanguage === 'en') ? 'de' : 'en';
                     updateContent(); // Update content based on new language
                 });
@@ -532,6 +545,7 @@
             // Theme Toggle Event Listener
             if (themeToggleBtn && mainLogo) {
                 themeToggleBtn.addEventListener('click', () => {
+                    console.log("Theme toggle clicked!");
                     // Toggle the 'light-mode' class on both html and body
                     document.documentElement.classList.toggle('light-mode');
                     document.body.classList.toggle('light-mode');
