@@ -26,10 +26,10 @@
             color: #000000 !important; /* Pure black text in light mode */
         }
 
-        /* Force all text to black in light mode, if not already covered by html.light-mode */
-        body:not(.dark) .text-black-force {
+        /* Removed: Force all text to black in light mode, if not already covered by html.light-mode */
+        /* body:not(.dark) .text-black-force {
             color: #000000 !important;
-        }
+        } */
 
         /* Remove background image layer and overlay */
         body::after,
@@ -200,7 +200,7 @@
         }
     </script>
 </head>
-<body class="text-black" oncontextmenu="return false;">
+<body oncontextmenu="return false;">
 
     <!-- Google Analytics Placeholder -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID"></script>
@@ -230,17 +230,17 @@
     <!-- End Facebook Pixel Placeholder -->
 
     <!-- Main Landing Page Content -->
-    <div id="landing-page-content" class="min-h-screen flex flex-col text-black-force">
+    <div id="landing-page-content" class="min-h-screen flex flex-col">
         <!-- Header Section for Logo and Controls -->
         <div class="container mx-auto flex justify-between items-center w-full mt-8 mb-8">
             <!-- Top Left Controls (Theme Toggle and Language) -->
             <div class="flex space-x-4 z-50">
                 <!-- Theme Toggle -->
-                <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300">
+                <button id="theme-toggle" class="p-2 rounded-full glassy-box shadow-md transition duration-300">
                     <!-- SVG icon will be dynamically updated by JavaScript -->
                 </button>
                 <!-- Language Toggle Button (Direct Toggle) -->
-                <button id="lang-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2">
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box shadow-md transition duration-300 flex items-center space-x-2">
                     <span id="current-lang">EN</span>
                 </button>
             </div>
@@ -280,8 +280,8 @@
             <div class="grid grid-cols-1 gap-8">
                 <!-- Benefit Card 2: Awards (Concise) -->
                 <div class="text-center transition duration-300">
-                    <h3 id="benefit2-title" class="text-black-force dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h3>
-                    <ul id="benefit2-text" class="text-black-force dark:text-gray-300 list-none p-0 space-y-2">
+                    <h3 id="benefit2-title" class="text-2xl font-semibold mb-3">Award-Winning</h3>
+                    <ul id="benefit2-text" class="list-none p-0 space-y-2">
                         <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
                         <li><strong>Winner of German Design Award 23</strong></li>
                         <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
@@ -296,7 +296,7 @@
     <div id="calendly-modal" class="modal">
         <div class="modal-content glassy-box">
             <span class="close-button" id="close-modal">&times;</span>
-            <h2 id="modal-title" class="text-black-force dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
+            <h2 id="modal-title" class="text-3xl font-bold mb-6">Schedule Your Appointment</h2>
             <!-- Calendly Embed - Replace YOUR_CALENDly_LINK with your actual Calendly scheduling link -->
             <div class="calendly-iframe-container">
                 <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe"></iframe>
@@ -307,13 +307,13 @@
 
     <!-- Thank You Page Content (Initially Hidden) -->
     <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
-        <h1 id="thankyou-headline" class="text-black-force dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
+        <h1 id="thankyou-headline" class="text-5xl md:text-6xl font-extrabold mb-6">
             Thank you! Your appointment is confirmed.
         </h1>
-        <p id="thankyou-subheadline" class="text-black-force dark:text-gray-300 text-xl md:text-2xl mb-10">
+        <p id="thankyou-subheadline" class="text-xl md:text-2xl mb-10">
             Check your email for confirmation.
         </p>
-        <button id="back-to-homepage" class="apple-button text-xl bg-transparent text-black-force dark:text-gray-200 border border-black dark:border-gray-200">
+        <button id="back-to-homepage" class="apple-button text-xl bg-transparent border border-black dark:border-gray-200">
             Back to Homepage
         </button>
     </div >
