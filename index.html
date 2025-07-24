@@ -270,7 +270,7 @@
 
         <!-- Call to Action Section -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl bg-red-600 text-white hover:bg-red-700 hover:scale-105 shadow-md">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl glassy-box text-white hover:scale-105 shadow-md" style="background-color: rgba(220, 38, 38, 0.6);">
                 Book your free consultation.
             </button>
         </section>
@@ -286,12 +286,12 @@
                             <strong>Nominee of German Design Award 24</strong>
                         </li>
                         <li class="flex flex-col items-center">
+                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mb-2 h-16 object-contain" ondragstart="return false;">
                             <strong>Nominee of the Wellness & Spa Innovation Award 24</strong>
-                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
                         </li>
                         <li class="flex flex-col items-center">
+                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mb-2 h-16 object-contain" ondragstart="return false;">
                             <strong>Winner of German Innovation Award 23</strong> (Medical & Health)
-                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
                         </li>
                     </ul>
                 </div>
@@ -338,12 +338,12 @@
                             <strong>Nominee of German Design Award 24</strong>
                         </li>
                         <li class="flex flex-col items-center">
+                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mb-2 h-16 object-contain" ondragstart="return false;">
                             <strong>Nominee of the Wellness & Spa Innovation Award 24</strong>
-                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
                         </li>
                         <li class="flex flex-col items-center">
+                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mb-2 h-16 object-contain" ondragstart="return false;">
                             <strong>Winner of German Innovation Award 23</strong> (Medical & Health)
-                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
                         </li>
                     </ul>
                 `,
@@ -355,19 +355,19 @@
             },
             de: {
                 scheduleCta: "Buche deine kostenlose Beratung.",
-                benefit2Title: "Awards & Nominierungen", // Changed from "Preisgekrönt"
+                benefit2Title: "Awards & Nominierungen",
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-6">
                         <li class="flex flex-col items-center">
                             <strong>Nominee des German Design Award 24</strong>
                         </li>
                         <li class="flex flex-col items-center">
+                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mb-2 h-16 object-contain" ondragstart="return false;">
                             <strong>Nominee des Wellness & Spa Innovation Award 24</strong>
-                            <img src="wellness_spa_innovation_nominiert_logo_2024_randlos.jpg" alt="Wellness & Spa Innovation Award 2024 Nominee Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
                         </li>
                         <li>
+                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mb-2 h-16 object-contain" ondragstart="return false;">
                             <strong>Gewinner des German Innovation Award 23</strong> (Medizin & Gesundheit)
-                            <img src="GIA_HO_MC_RGB.svg" alt="German Innovation Award 2023 Winner Logo" class="mx-auto mt-4 h-16 object-contain" ondragstart="return false;">
                         </li>
                     </ul>
                 `,
@@ -388,7 +388,7 @@
             const benefit2Text = document.getElementById('benefit2-text');
             const modalTitle = document.getElementById('modal-title');
             const thankyouHeadline = document.getElementById('thankyou-headline');
-            const thankyouSubheadline = document.getElementById('thankyou-subheadline'); // Corrected ID here
+            const thankyouSubheadline = document.getElementById('thankyou-subheadline');
             const backToHomepage = document.getElementById('back-to-homepage');
             const currentLangSpan = document.getElementById('current-lang');
             const scheduleCtaButton = document.getElementById('schedule-cta');
