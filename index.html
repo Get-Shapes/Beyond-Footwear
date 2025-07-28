@@ -261,6 +261,37 @@
                 flex-wrap: nowrap; /* Prevent buttons from wrapping */
             }
         }
+
+        /* New styles for cookie info modal */
+        #cookie-info-modal .modal-content {
+            max-width: 800px; /* Wider for more text */
+            height: 90vh; /* Allow more vertical space */
+            overflow-y: auto; /* Enable scrolling for content */
+            text-align: left; /* Align text left */
+        }
+
+        #cookie-info-modal .modal-content h2 {
+            text-align: center; /* Center title */
+            margin-bottom: 1.5rem;
+        }
+
+        #cookie-info-modal .modal-content h3 {
+            font-size: 1.5rem; /* Larger subheadings */
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        #cookie-info-modal .modal-content p,
+        #cookie-info-modal .modal-content ul {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        #cookie-info-modal .modal-content ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
     </style>
     <!-- Script to ensure dark mode is always loaded first unless explicitly set to light -->
     <script>
@@ -405,11 +436,45 @@
     <div id="cookie-banner" class="hidden">
         <p class="text-sm md:text-base">
             We use cookies to ensure you get the best experience on our website. By continuing to use this site, you agree to our use of cookies.
-            <a href="#" class="text-blue-400 hover:underline ml-1">Learn more</a>.
+            <a href="#" id="learn-more-cookies" class="text-blue-400 hover:underline ml-1">Learn more</a>.
         </p>
         <div class="cookie-buttons">
             <button id="accept-cookies" class="accept-button">Accept All</button>
             <button id="decline-cookies" class="decline-button">Decline</button>
+        </div>
+    </div>
+
+    <!-- Cookie Information Modal -->
+    <div id="cookie-info-modal" class="modal">
+        <div class="modal-content glassy-box">
+            <span class="close-button" id="close-cookie-info-modal">&times;</span>
+            <h2 id="cookie-info-title" class="text-3xl font-bold">Cookie Information</h2>
+            <div class="text-content mt-4">
+                <p id="cookie-info-intro">
+                    This website uses cookies to enhance your browsing experience and to understand how you interact with our site. By using our website, you consent to our use of cookies in accordance with this policy.
+                </p>
+
+                <h3 id="cookie-info-what-are-cookies">What Are Cookies?</h3>
+                <p>
+                    Cookies are small text files stored on your device (computer, tablet, mobile) when you visit certain web pages. They are widely used to make websites work more efficiently, as well as to provide information to the owners of the site.
+                </p>
+
+                <h3 id="cookie-info-how-we-use-cookies">How We Use Cookies</h3>
+                <p>We use cookies for the following purposes:</p>
+                <ul>
+                    <li id="cookie-info-essential"><strong>Essential Cookies:</strong> These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms.</li>
+                    <li id="cookie-info-analytics"><strong>Analytics Cookies:</strong> These cookies allow us to count visits and traffic sources, so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site. All information these cookies collect is aggregated and therefore anonymous.</li>
+                    <li id="cookie-info-marketing"><strong>Marketing Cookies:</strong> These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device.</li>
+                </ul>
+
+                <h3 id="cookie-info-managing-cookies">Managing Your Cookie Preferences</h3>
+                <p>
+                    You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.
+                </p>
+                <p id="cookie-info-contact">
+                    For more detailed information about how we use cookies and your choices, please contact us.
+                </p>
+            </div>
         </div>
     </div>
 
@@ -426,7 +491,22 @@
                 cookieMessage: "We use cookies to ensure you get the best experience on our website. By continuing to use this site, you agree to our use of cookies.",
                 cookieLearnMore: "Learn more",
                 cookieAccept: "Accept All",
-                cookieDecline: "Decline"
+                cookieDecline: "Decline",
+                cookieInfoTitle: "Cookie Information",
+                cookieInfoIntro: "This website uses cookies to enhance your browsing experience and to understand how you interact with our site. By using our website, you consent to our use of cookies in accordance with this policy.",
+                cookieInfoWhatAreCookies: "What Are Cookies?",
+                cookieInfoWhatAreCookiesText: "Cookies are small text files stored on your device (computer, tablet, mobile) when you visit certain web pages. They are widely used to make websites work more efficiently, as well as to provide information to the owners of the site.",
+                cookieInfoHowWeUseCookies: "How We Use Cookies",
+                cookieInfoHowWeUseCookiesText: "We use cookies for the following purposes:",
+                cookieInfoEssential: "Essential Cookies:",
+                cookieInfoEssentialText: "These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms.",
+                cookieInfoAnalytics: "Analytics Cookies:",
+                cookieInfoAnalyticsText: "These cookies allow us to count visits and traffic sources, so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site. All information these cookies collect is aggregated and therefore anonymous.",
+                cookieInfoMarketing: "Marketing Cookies:",
+                cookieInfoMarketingText: "These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device.",
+                cookieInfoManagingCookies: "Managing Your Cookie Preferences",
+                cookieInfoManagingCookiesText: "You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.",
+                cookieInfoContact: "For more detailed information about how we use cookies and your choices, please contact us."
             },
             de: {
                 scheduleCta: "Buche deine kostenlose Beratung.",
@@ -438,7 +518,22 @@
                 cookieMessage: "Wir verwenden Cookies, um sicherzustellen, dass Sie die beste Erfahrung auf unserer Website erhalten. Durch die weitere Nutzung dieser Website stimmen Sie der Verwendung von Cookies zu.",
                 cookieLearnMore: "Mehr erfahren",
                 cookieAccept: "Alle akzeptieren",
-                cookieDecline: "Ablehnen"
+                cookieDecline: "Ablehnen",
+                cookieInfoTitle: "Cookie-Informationen",
+                cookieInfoIntro: "Diese Website verwendet Cookies, um Ihr Browser-Erlebnis zu verbessern und zu verstehen, wie Sie mit unserer Website interagieren. Durch die Nutzung unserer Website stimmen Sie unserer Verwendung von Cookies gemäß dieser Richtlinie zu.",
+                cookieInfoWhatAreCookies: "Was sind Cookies?",
+                cookieInfoWhatAreCookiesText: "Cookies sind kleine Textdateien, die auf Ihrem Gerät (Computer, Tablet, Mobiltelefon) gespeichert werden, wenn Sie bestimmte Webseiten besuchen. Sie werden häufig verwendet, um Websites effizienter zu gestalten und den Eigentümern der Website Informationen zur Verfügung zu stellen.",
+                cookieInfoHowWeUseCookies: "Wie wir Cookies verwenden",
+                cookieInfoHowWeUseCookiesText: "Wir verwenden Cookies für die folgenden Zwecke:",
+                cookieInfoEssential: "Essentielle Cookies:",
+                cookieInfoEssentialText: "Diese Cookies sind für die Funktion der Website notwendig und können in unseren Systemen nicht deaktiviert werden. Sie werden in der Regel nur als Reaktion auf von Ihnen getätigte Aktionen gesetzt, die einer Dienstanfrage gleichkommen, wie das Festlegen Ihrer Datenschutzeinstellungen, das Anmelden oder das Ausfüllen von Formularen.",
+                cookieInfoAnalytics: "Analyse-Cookies:",
+                cookieInfoAnalyticsText: "Diese Cookies ermöglichen es uns, Besuche und Traffic-Quellen zu zählen, um die Leistung unserer Website zu messen und zu verbessern. Sie helfen uns zu wissen, welche Seiten am beliebtesten und am wenigsten beliebt sind und wie sich Besucher auf der Website bewegen. Alle Informationen, die diese Cookies sammeln, sind aggregiert und daher anonym.",
+                cookieInfoMarketing: "Marketing-Cookies:",
+                cookieInfoMarketingText: "Diese Cookies können über unsere Website von unseren Werbepartnern gesetzt werden. Sie können von diesen Unternehmen verwendet werden, um ein Profil Ihrer Interessen zu erstellen und Ihnen relevante Werbung auf anderen Websites anzuzeigen. Sie speichern keine direkten persönlichen Informationen, sondern basieren auf der eindeutigen Identifizierung Ihres Browsers und Internetgeräts.",
+                cookieInfoManagingCookies: "Verwaltung Ihrer Cookie-Einstellungen",
+                cookieInfoManagingCookiesText: "Sie haben das Recht zu entscheiden, ob Sie Cookies akzeptieren oder ablehnen möchten. Sie können Ihren Browser so einstellen, dass er alle oder einige Browser-Cookies ablehnt oder Sie benachrichtigt, wenn Websites Cookies setzen oder darauf zugreifen. Wenn Sie Cookies deaktivieren oder ablehnen, beachten Sie bitte, dass einige Teile dieser Website möglicherweise nicht zugänglich sind oder nicht richtig funktionieren.",
+                cookieInfoContact: "Für detailliertere Informationen zur Verwendung von Cookies und Ihren Wahlmöglichkeiten kontaktieren Sie uns bitte."
             }
         };
 
@@ -457,16 +552,26 @@
 
             // Cookie banner elements
             const cookieMessageElement = document.querySelector('#cookie-banner p');
-            const cookieLearnMoreElement = document.querySelector('#cookie-banner a');
+            const cookieLearnMoreElement = document.getElementById('learn-more-cookies'); // Get by ID now
             const cookieAcceptButton = document.getElementById('accept-cookies');
             const cookieDeclineButton = document.getElementById('decline-cookies');
 
-            // Removed Consultation Questions Section elements
-            // const consultationQuestionsTitle = document.getElementById('consultation-questions-title');
-            // const consultationQuestionsDescription = document.getElementById('consultation-questions-description');
-            // const userGoalsInput = document.getElementById('user-goals-input');
-            // const generateQuestionsBtn = document.getElementById('generate-questions-btn');
-            // const loadingIndicator = document.getElementById('loading-indicator');
+            // Cookie Info Modal elements
+            const cookieInfoTitle = document.getElementById('cookie-info-title');
+            const cookieInfoIntro = document.getElementById('cookie-info-intro');
+            const cookieInfoWhatAreCookies = document.getElementById('cookie-info-what-are-cookies');
+            const cookieInfoWhatAreCookiesText = document.getElementById('cookie-info-what-are-cookies-text'); // New ID
+            const cookieInfoHowWeUseCookies = document.getElementById('cookie-info-how-we-use-cookies');
+            const cookieInfoHowWeUseCookiesText = document.getElementById('cookie-info-how-we-use-cookies-text'); // New ID
+            const cookieInfoEssential = document.getElementById('cookie-info-essential');
+            const cookieInfoEssentialText = document.getElementById('cookie-info-essential-text'); // New ID
+            const cookieInfoAnalytics = document.getElementById('cookie-info-analytics');
+            const cookieInfoAnalyticsText = document.getElementById('cookie-info-analytics-text'); // New ID
+            const cookieInfoMarketing = document.getElementById('cookie-info-marketing');
+            const cookieInfoMarketingText = document.getElementById('cookie-info-marketing-text'); // New ID
+            const cookieInfoManagingCookies = document.getElementById('cookie-info-managing-cookies');
+            const cookieInfoManagingCookiesText = document.getElementById('cookie-info-managing-cookies-text'); // New ID
+            const cookieInfoContact = document.getElementById('cookie-info-contact');
 
 
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
@@ -479,17 +584,27 @@
             // Update cookie banner content
             if (cookieMessageElement) {
                 // Reconstruct the paragraph to include the link
-                cookieMessageElement.innerHTML = `${langData.cookieMessage} <a href="#" class="text-blue-400 hover:underline ml-1">${langData.cookieLearnMore}</a>.`;
+                cookieMessageElement.innerHTML = `${langData.cookieMessage} <a href="#" id="learn-more-cookies" class="text-blue-400 hover:underline ml-1">${langData.cookieLearnMore}</a>.`;
             }
             if (cookieAcceptButton) cookieAcceptButton.textContent = langData.cookieAccept;
             if (cookieDeclineButton) cookieDeclineButton.textContent = langData.cookieDecline;
 
-            // Removed updates for Consultation Questions Section content
-            // if (consultationQuestionsTitle) consultationQuestionsTitle.textContent = langData.consultationQuestionsTitle;
-            // if (consultationQuestionsDescription) consultationQuestionsDescription.textContent = langData.consultationQuestionsDescription;
-            // if (userGoalsInput) userGoalsInput.placeholder = langData.userGoalsPlaceholder;
-            // if (generateQuestionsBtn) generateQuestionsBtn.textContent = langData.generateQuestionsBtn;
-            // if (loadingIndicator) loadingIndicator.textContent = langData.loadingQuestions;
+            // Update Cookie Info Modal content
+            if (cookieInfoTitle) cookieInfoTitle.textContent = langData.cookieInfoTitle;
+            if (cookieInfoIntro) cookieInfoIntro.textContent = langData.cookieInfoIntro;
+            if (cookieInfoWhatAreCookies) cookieInfoWhatAreCookies.textContent = langData.cookieInfoWhatAreCookies;
+            if (cookieInfoWhatAreCookiesText) cookieInfoWhatAreCookiesText.textContent = langData.cookieInfoWhatAreCookiesText;
+            if (cookieInfoHowWeUseCookies) cookieInfoHowWeUseCookies.textContent = langData.cookieInfoHowWeUseCookies;
+            if (cookieInfoHowWeUseCookiesText) cookieInfoHowWeUseCookiesText.textContent = langData.cookieInfoHowWeUseCookiesText;
+            if (cookieInfoEssential) cookieInfoEssential.textContent = langData.cookieInfoEssential;
+            if (cookieInfoEssentialText) cookieInfoEssentialText.textContent = langData.cookieInfoEssentialText;
+            if (cookieInfoAnalytics) cookieInfoAnalytics.textContent = langData.cookieInfoAnalytics;
+            if (cookieInfoAnalyticsText) cookieInfoAnalyticsText.textContent = langData.cookieInfoAnalyticsText;
+            if (cookieInfoMarketing) cookieInfoMarketing.textContent = langData.cookieInfoMarketing;
+            if (cookieInfoMarketingText) cookieInfoMarketingText.textContent = langData.cookieInfoMarketingText;
+            if (cookieInfoManagingCookies) cookieInfoManagingCookies.textContent = langData.cookieInfoManagingCookies;
+            if (cookieInfoManagingCookiesText) cookieInfoManagingCookiesText.textContent = langData.cookieInfoManagingCookiesText;
+            if (cookieInfoContact) cookieInfoContact.textContent = langData.cookieInfoContact;
         }
 
         // Function to update the theme toggle icon
@@ -532,12 +647,12 @@
             const cookieBanner = document.getElementById('cookie-banner');
             const acceptCookiesBtn = document.getElementById('accept-cookies');
             const declineCookiesBtn = document.getElementById('decline-cookies');
+            const learnMoreCookiesLink = document.getElementById('learn-more-cookies'); // Get the link
 
-            // Removed Consultation Questions Section elements
-            // const userGoalsInput = document.getElementById('user-goals-input');
-            // const generateQuestionsBtn = document.getElementById('generate-questions-btn');
-            // const questionsOutput = document.getElementById('questions-output');
-            // const loadingIndicator = document.getElementById('loading-indicator');
+            // Cookie Info Modal elements
+            const cookieInfoModal = document.getElementById('cookie-info-modal');
+            const closeCookieInfoModalBtn = document.getElementById('close-cookie-info-modal');
+
 
             // Initial theme application (already handled by inline script in head for FOUC prevention)
             // This block is for updating logo and icon based on the *initial* state
@@ -586,6 +701,31 @@
                     console.log("Cookies declined. Some features might be limited.");
                 });
             }
+
+            // Open Cookie Info Modal
+            if (learnMoreCookiesLink) {
+                learnMoreCookiesLink.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default link behavior
+                    if (cookieInfoModal) cookieInfoModal.style.display = 'flex';
+                });
+            }
+
+            // Close Cookie Info Modal
+            if (closeCookieInfoModalBtn) {
+                closeCookieInfoModalBtn.addEventListener('click', () => {
+                    if (cookieInfoModal) cookieInfoModal.style.display = 'none';
+                });
+            }
+
+            // Close Cookie Info Modal if clicking outside content
+            if (cookieInfoModal) {
+                cookieInfoModal.addEventListener('click', (e) => {
+                    if (e.target === cookieInfoModal) {
+                        cookieInfoModal.style.display = 'none';
+                    }
+                });
+            }
+
 
             // Show Calendly Modal from main CTA
             if (scheduleCtaButton) {
@@ -682,55 +822,6 @@
                     updateThemeToggleIcon(); // Update icon after theme change
                 });
             }
-
-            // Removed Gemini API Integration for Consultation Questions
-            // if (generateQuestionsBtn && userGoalsInput && questionsOutput && loadingIndicator) {
-            //     generateQuestionsBtn.addEventListener('click', async () => {
-            //         const userGoals = userGoalsInput.value.trim();
-            //         if (!userGoals) {
-            //             questionsOutput.innerHTML = '<p class="text-red-400">Please enter your fitness goals.</p>';
-            //             questionsOutput.classList.remove('hidden');
-            //             return;
-            //         }
-
-            //         questionsOutput.classList.remove('hidden');
-            //         questionsOutput.innerHTML = ''; // Clear previous output
-            //         loadingIndicator.classList.remove('hidden'); // Show loading indicator
-
-            //         try {
-            //             let chatHistory = [];
-            //             const prompt = `Based on the following fitness goals: "${userGoals}", generate 3-5 insightful questions a person might want to ask during a consultation about innovative fitness technology and performance enhancement. Format them as a numbered list.`;
-            //             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-
-            //             const payload = { contents: chatHistory };
-            //             const apiKey = ""; // Canvas will provide this at runtime
-            //             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-            //             const response = await fetch(apiUrl, {
-            //                 method: 'POST',
-            //                 headers: { 'Content-Type': 'application/json' },
-            //                 body: JSON.stringify(payload)
-            //             });
-
-            //             const result = await response.json();
-            //             loadingIndicator.classList.add('hidden'); // Hide loading indicator
-
-            //             if (result.candidates && result.candidates.length > 0 &&
-            //                 result.candidates[0].content && result.candidates[0].content.parts &&
-            //                 result.candidates[0].content.parts.length > 0) {
-            //                 const text = result.candidates[0].content.parts[0].text;
-            //                 questionsOutput.innerHTML = `<h3 class="font-semibold mb-2">Suggested Questions:</h3>${text}`;
-            //             } else {
-            //                 questionsOutput.innerHTML = '<p class="text-red-400">Failed to generate questions. Please try again.</p>';
-            //                 console.error('Gemini API response structure unexpected:', result);
-            //             }
-            //         } catch (error) {
-            //             loadingIndicator.classList.add('hidden'); // Hide loading indicator
-            //             questionsOutput.innerHTML = '<p class="text-red-400">An error occurred while generating questions. Please try again later.</p>';
-            //             console.error('Error calling Gemini API:', error);
-            //         }
-            //     });
-            // }
         });
     </script>
 
