@@ -241,7 +241,13 @@
     <div id="landing-page-content" class="min-h-screen flex flex-col">
         <!-- Header Section for Logo and Controls -->
         <div class="container mx-auto flex justify-between items-center w-full mt-8 mb-8">
-            <!-- Top Left Controls (Theme Toggle and Language) -->
+            <!-- Logo Section (now top left) -->
+            <div>
+                <!-- Logo for Light Mode -->
+                <img id="main-logo" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="w-[225px] h-[112.5px] object-contain" ondragstart="return false;">
+            </div>
+
+            <!-- Top Right Controls (Theme Toggle and Language) -->
             <div class="flex space-x-4 z-50">
                 <!-- Theme Toggle -->
                 <button id="theme-toggle" class="p-2 rounded-full glassy-box shadow-md transition duration-300">
@@ -251,12 +257,6 @@
                 <button id="lang-toggle" class="p-2 rounded-full glassy-box shadow-md transition duration-300 flex items-center space-x-2">
                     <span id="current-lang">EN</span>
                 </button>
-            </div>
-
-            <!-- Logo Section (now top right) -->
-            <div>
-                <!-- Logo for Light Mode -->
-                <img id="main-logo" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="w-[225px] h-[112.5px] object-contain" ondragstart="return false;">
             </div>
         </div>
 
@@ -280,6 +280,20 @@
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
             <button id="schedule-cta" class="apple-button text-2xl md:text-3xl glassy-box text-white hover:scale-105" style="background-color: rgba(220, 38, 38, 0.6);">
                 Book your free consultation.
+            </button>
+        </section>
+
+        <!-- New Text Booking Section -->
+        <section id="text-booking-section" class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
+            <h2 id="text-booking-title" class="text-3xl font-bold mb-4">Why Book a Consultation?</h2>
+            <p id="text-booking-paragraph1" class="text-lg leading-relaxed">
+                Our free consultation offers a personalized session to discuss your fitness goals and how our innovative Shapes technology can help you achieve them. Learn about our award-winning solutions and how they can transform your performance and well-being.
+            </p>
+            <p id="text-booking-paragraph2" class="text-lg leading-relaxed mt-4 mb-6">
+                Discover the path to being faster, better, stronger, and more balanced. This is your opportunity to ask questions and understand the science behind our success.
+            </p>
+            <button id="book-in-text-section-cta" class="apple-button text-xl glassy-box text-white hover:scale-105" style="background-color: rgba(220, 38, 38, 0.6);">
+                Schedule Your Free Session
             </button>
         </section>
 
@@ -330,7 +344,11 @@
                 thankyouHeadline: "Thank you! Your appointment is confirmed.",
                 thankyouSubheadline: "Check your email for confirmation.",
                 backToHomepage: "Back to Homepage",
-                currentLang: "EN"
+                currentLang: "EN",
+                textBookingTitle: "Why Book a Consultation?", // New text for the section title
+                textBookingParagraph1: "Our free consultation offers a personalized session to discuss your fitness goals and how our innovative Shapes technology can help you achieve them. Learn about our award-winning solutions and how they can transform your performance and well-being.", // New text for the section
+                textBookingParagraph2: "Discover the path to being faster, better, stronger, and more balanced. This is your opportunity to ask questions and understand the science behind our success.", // New text for the section
+                bookInTextSectionCta: "Schedule Your Free Session"
             },
             de: {
                 scheduleCta: "Buche deine kostenlose Beratung.",
@@ -338,7 +356,11 @@
                 thankyouHeadline: "Vielen Dank! Ihr Termin ist bestätigt.",
                 thankyouSubheadline: "Bitte überprüfen Sie Ihre E-Mails zur Bestätigung.",
                 backToHomepage: "Zur Startseite",
-                currentLang: "DE"
+                currentLang: "DE",
+                textBookingTitle: "Warum eine Beratung buchen?", // New text for the section title
+                textBookingParagraph1: "Unsere kostenlose Beratung bietet eine personalisierte Sitzung, um Ihre Fitnessziele zu besprechen und wie unsere innovative Shapes-Technologie Ihnen dabei helfen kann, diese zu erreichen. Erfahren Sie mehr über unsere preisgekrönten Lösungen und wie sie Ihre Leistung und Ihr Wohlbefinden verändern können.", // New text for the section
+                textBookingParagraph2: "Entdecken Sie den Weg, um schneller, besser, stärker und ausgeglichener zu werden. Dies ist Ihre Gelegenheit, Fragen zu stellen und die Wissenschaft hinter unserem Erfolg zu verstehen.", // New text for the section
+                bookInTextSectionCta: "Kostenlose Sitzung planen"
             }
         };
 
@@ -348,7 +370,6 @@
         function updateContent() {
             console.log("Updating content for language:", currentLanguage);
             const langData = content[currentLanguage];
-            // Removed benefit2Title and benefit2Text as they are no longer in use
             const modalTitle = document.getElementById('modal-title');
             const thankyouHeadline = document.getElementById('thankyou-headline');
             const thankyouSubheadline = document.getElementById('thankyou-subheadline');
@@ -356,13 +377,25 @@
             const currentLangSpan = document.getElementById('current-lang');
             const scheduleCtaButton = document.getElementById('schedule-cta');
 
-            // Removed updates for benefit2Title and benefit2Text
+            // New elements for the Text Booking section
+            const textBookingTitle = document.getElementById('text-booking-title');
+            const textBookingParagraph1 = document.getElementById('text-booking-paragraph1');
+            const textBookingParagraph2 = document.getElementById('text-booking-paragraph2');
+            const bookInTextSectionCta = document.getElementById('book-in-text-section-cta');
+
+
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
             if (thankyouHeadline) thankyouHeadline.textContent = langData.thankyouHeadline;
             if (thankyouSubheadline) thankyouSubheadline.textContent = langData.thankyouSubheadline;
             if (backToHomepage) backToHomepage.textContent = langData.backToHomepage;
             if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
             if (scheduleCtaButton) scheduleCtaButton.textContent = langData.scheduleCta;
+
+            // Update Text Booking section content
+            if (textBookingTitle) textBookingTitle.textContent = langData.textBookingTitle;
+            if (textBookingParagraph1) textBookingParagraph1.textContent = langData.textBookingParagraph1;
+            if (textBookingParagraph2) textBookingParagraph2.textContent = langData.textBookingParagraph2;
+            if (bookInTextSectionCta) bookInTextSectionCta.textContent = langData.bookInTextSectionCta;
         }
 
         // Function to update the theme toggle icon
@@ -400,6 +433,7 @@
             const themeToggleBtn = document.getElementById('theme-toggle');
             const mainLogo = document.getElementById('main-logo'); // Changed to single logo ID
             const scheduleCtaButton = document.getElementById('schedule-cta'); // Declared here
+            const bookInTextSectionCta = document.getElementById('book-in-text-section-cta'); // New button
 
             // Initial theme application (already handled by inline script in head for FOUC prevention)
             // This block is for updating logo and icon based on the *initial* state
@@ -423,10 +457,18 @@
             currentLanguage = initialLang;
             updateContent(); // Initial content update
 
-            // Show Calendly Modal
+            // Show Calendly Modal from main CTA
             if (scheduleCtaButton) {
                 scheduleCtaButton.addEventListener('click', () => {
                     console.log("Schedule CTA button clicked!");
+                    if (calendlyModal) calendlyModal.style.display = 'flex';
+                });
+            }
+
+            // Show Calendly Modal from new text section CTA
+            if (bookInTextSectionCta) {
+                bookInTextSectionCta.addEventListener('click', () => {
+                    console.log("Book in Text Section CTA button clicked!");
                     if (calendlyModal) calendlyModal.style.display = 'flex';
                 });
             }
