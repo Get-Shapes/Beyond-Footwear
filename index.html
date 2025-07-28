@@ -613,7 +613,7 @@
                     You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.
                 </p>
                 <p id="cookie-info-contact">
-                    For more detailed information about how we use cookies and your choices, please contact us.
+                    For more detailed information about how we use cookies and your choices, please contact us. <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>.
                 </p>
             </div>
         </div>
@@ -807,7 +807,10 @@
             if (cookieInfoMarketingText) cookieInfoMarketingText.textContent = langData.cookieInfoMarketingText;
             if (cookieInfoManagingCookies) cookieInfoManagingCookies.textContent = langData.cookieInfoManagingCookies;
             if (cookieInfoManagingCookiesText) cookieInfoManagingCookiesText.textContent = langData.cookieInfoManagingCookiesText;
-            if (cookieInfoContact) cookieInfoContact.textContent = langData.cookieInfoContact;
+            if (cookieInfoContact) {
+                // The email address is hardcoded in the HTML, so only update the preceding text
+                cookieInfoContact.innerHTML = langData.cookieInfoContact + ` <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>.`;
+            }
         }
 
         // Function to update the theme toggle icon
