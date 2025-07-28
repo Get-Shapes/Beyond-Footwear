@@ -617,7 +617,7 @@
                     You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.
                 </p>
                 <p id="cookie-info-contact">
-                    For more detailed information about how we use cookies and your choices, please contact us. <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. To check our <a href="#" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a> for more details of what cookies we do use.
+                    For more detailed information about how we use cookies and your choices, please contact us. <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a detailed list of the cookies we use, please refer to our <a href="#" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a>.
                 </p>
             </div>
         </div>
@@ -863,7 +863,7 @@
             if (cookieInfoManagingCookiesText) cookieInfoManagingCookiesText.textContent = langData.cookieInfoManagingCookiesText;
             if (cookieInfoContact) {
                 // The email address is hardcoded in the HTML, so only update the preceding text
-                cookieInfoContact.innerHTML = langData.cookieInfoContact + ` <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. To check our <a href="#" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a> for more details of what cookies we do use.`;
+                cookieInfoContact.innerHTML = langData.cookieInfoContact + ` <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a detailed list of the cookies we use, please refer to our <a href="#" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a>.`;
             }
 
             // Update Imprint Modal content
@@ -1120,4 +1120,191 @@
 
             // Close Cookie Info Modal
             if (closeCookieInfoModalBtn) {
-                closeCookieInfoModalBtn.addEventListene
+                closeCookieInfoModalBtn.addEventListener('click', () => {
+                    if (cookieInfoModal) {
+                        cookieInfoModal.style.display = 'none';
+                        console.log("Cookie info modal closed. Current display:", cookieInfoModal.style.display, "Computed Display:", getComputedStyle(cookieInfoModal).display);
+                    }
+                });
+            }
+
+            // Close Cookie Info Modal if clicking outside content
+            if (cookieInfoModal) {
+                cookieInfoModal.addEventListener('click', (e) => {
+                    if (e.target === cookieInfoModal) {
+                        if (cookieInfoModal) {
+                            cookieInfoModal.style.display = 'none';
+                            console.log("Clicked outside cookie info modal. Current display:", cookieInfoModal.style.display, "Computed Display:", getComputedStyle(cookieInfoModal).display);
+                        }
+                    }
+                });
+            }
+
+            // Open Imprint from Cookie Info Modal
+            if (cookieInfoImprintLink) {
+                cookieInfoImprintLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (cookieInfoModal) cookieInfoModal.style.display = 'none'; // Close cookie info modal
+                    if (imprintModal) imprintModal.style.display = 'flex'; // Open imprint modal
+                });
+            }
+
+            // Close Cookie Preferences Modal (new)
+            if (closeCookiePreferencesModalBtn) {
+                closeCookiePreferencesModalBtn.addEventListener('click', () => {
+                    console.log("Closing preferences modal without saving. Re-showing banner.");
+                    if (cookiePreferencesModal) {
+                        cookiePreferencesModal.style.display = 'none';
+                        console.log("Cookie preferences modal hidden. Current display:", cookiePreferencesModal.style.display, "Computed Display:", getComputedStyle(cookiePreferencesModal).display);
+                    }
+                    // If preferences modal is closed without saving, show the main banner again
+                    if (cookieBanner) {
+                        cookieBanner.classList.remove('hidden');
+                        console.log("Cookie banner re-shown after preferences modal close. ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
+                    }
+                });
+            }
+
+            // Close Cookie Preferences Modal if clicking outside content (new)
+            if (cookiePreferencesModal) {
+                cookiePreferencesModal.addEventListener('click', (e) => {
+                    if (e.target === cookiePreferencesModal) {
+                        console.log("Clicked outside preferences modal. Re-showing banner.");
+                        if (cookiePreferencesModal) {
+                            cookiePreferencesModal.style.display = 'none';
+                            console.log("Cookie preferences modal hidden. Current display:", cookiePreferencesModal.style.display, "Computed Display:", getComputedStyle(cookiePreferencesModal).display);
+                        }
+                        // If preferences modal is closed by clicking outside, show the main banner again
+                        if (cookieBanner) {
+                            cookieBanner.classList.remove('hidden');
+                            console.log("Cookie banner re-shown after preferences modal outside click. ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
+                        }
+                    }
+                });
+            }
+
+            // Open Imprint Modal from Footer
+            if (imprintLink) {
+                imprintLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (imprintModal) imprintModal.style.display = 'flex';
+                });
+            }
+
+            // Close Imprint Modal
+            if (closeImprintModalBtn) {
+                closeImprintModalBtn.addEventListener('click', () => {
+                    if (imprintModal) imprintModal.style.display = 'none';
+                });
+            }
+
+            // Close Imprint Modal if clicking outside content
+            if (imprintModal) {
+                imprintModal.addEventListener('click', (e) => {
+                    if (e.target === imprintModal) {
+                        if (imprintModal) imprintModal.style.display = 'none';
+                    }
+                });
+            }
+
+
+            // Show Calendly Modal from main CTA
+            if (scheduleCtaButton) {
+                scheduleCtaButton.addEventListener('click', () => {
+                    console.log("Schedule CTA button clicked!");
+                    if (calendlyModal) calendlyModal.style.display = 'flex';
+                });
+            }
+
+            // Close Calendly Modal
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    console.log("Close modal button clicked!");
+                    if (calendlyModal) calendlyModal.style.display = 'none';
+                });
+            }
+
+            // Close modal if clicking outside content
+            if (calendlyModal) {
+                calendlyModal.addEventListener('click', (e) => {
+                    if (e.target === calendlyModal) {
+                        console.log("Clicked outside modal, closing.");
+                        calendlyModal.style.display = 'none';
+                    }
+                });
+            }
+
+            // Back to Homepage from Thank You Page
+            if (backToHomepageBtn && thankYouPage && landingPageContent) {
+                backToHomepageBtn.addEventListener('click', () => {
+                    console.log("Back to homepage button clicked!");
+                    thankYouPage.classList.add('hidden');
+                    landingPageContent.classList.remove('hidden');
+                });
+            }
+
+            // Video looping logic
+            const mainVideo = document.getElementById('mainVideo');
+            const videoSources = [
+                'Zurab 1.mp4' // Only Zurab video
+            ];
+            let currentVideoIndex = 0;
+
+            // Set initial video source on script load (or when video element is ready)
+            if (mainVideo) {
+                mainVideo.src = videoSources[currentVideoIndex];
+
+                mainVideo.addEventListener('ended', () => {
+                    console.log("Video ended, switching to next video.");
+                    currentVideoIndex++;
+                    if (currentVideoIndex >= videoSources.length) {
+                        currentVideoIndex = 0; // Loop back to the first video
+                    }
+                    mainVideo.src = videoSources[currentVideoIndex];
+                    mainVideo.load(); // Load the new video source
+                    mainVideo.play().catch(error => {
+                        console.log("Autoplay prevented after video ended:", error);
+                    });
+                });
+
+                // Attempt to play on load (will be caught if autoplay is blocked)
+                mainVideo.play().catch(error => {
+                    console.log("Initial autoplay prevented:", error);
+                });
+            }
+
+            // Language Toggle Event Listener (Direct Toggle)
+            if (langToggleBtn) { // Check if the button exists
+                langToggleBtn.addEventListener('click', () => {
+                    console.log("Language toggle clicked!");
+                    currentLanguage = (currentLanguage === 'en') ? 'de' : 'en';
+                    updateContent(); // Update content based on new language
+                });
+            }
+
+            // Theme Toggle Event Listener
+            if (themeToggleBtn && mainLogo) {
+                themeToggleBtn.addEventListener('click', () => {
+                    console.log("Theme toggle clicked!");
+                    // Toggle the 'light-mode' class on both html and body
+                    document.documentElement.classList.toggle('light-mode');
+                    document.body.classList.toggle('light-mode');
+                    
+                    // Update localStorage and logo based on the new state
+                    if (document.documentElement.classList.contains('light-mode')) {
+                        localStorage.setItem('theme', 'light');
+                        mainLogo.src = 'Shapes-Logo neu Black.png';
+                        if (cookieBanner) cookieBanner.classList.add('light-mode'); // Apply light mode to banner
+                    } else {
+                        localStorage.setItem('theme', 'dark');
+                        mainLogo.src = 'Shapes-Logo neu White.png';
+                        if (cookieBanner) cookieBanner.classList.remove('light-mode'); // Remove light mode from banner
+                    }
+                    updateThemeToggleIcon(); // Update icon after theme change
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
