@@ -188,7 +188,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            padding: 1.5rem; /* Increased padding */
+            padding: 1rem 1.5rem; /* Smaller vertical padding */
             background-color: rgba(0, 0, 0, 0.7); /* Darker, semi-transparent background */
             backdrop-filter: blur(8px); /* Subtle blur */
             -webkit-backdrop-filter: blur(8px);
@@ -199,7 +199,7 @@
             flex-direction: column; /* Stack items vertically on small screens */
             align-items: center; /* Center items horizontally */
             justify-content: center;
-            gap: 1rem; /* Space between elements */
+            gap: 0.75rem; /* Smaller gap between elements */
             border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle top border */
             box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3); /* Shadow for depth */
         }
@@ -213,13 +213,13 @@
 
         #cookie-banner .cookie-buttons-main {
             display: flex;
-            gap: 1rem; /* Space between buttons */
+            gap: 0.75rem; /* Smaller gap between buttons */
             flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
             justify-content: center;
         }
 
         #cookie-banner button {
-            padding: 0.75rem 1.5rem;
+            padding: 0.6rem 1.2rem; /* Smaller button padding */
             border-radius: 0.5rem;
             font-weight: 600;
             cursor: pointer;
@@ -296,19 +296,10 @@
             box-shadow: 0 4px 10px rgba(100, 150, 255, 0.1); /* Lighter blue shadow */
         }
 
-        #cookie-preferences-container {
-            width: 100%;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
+        /* Removed #cookie-preferences-container styles as it's now a modal */
 
-        #cookie-banner.light-mode #cookie-preferences-container {
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        #cookie-preferences-container {
+             /* This div is now part of the modal, so these styles are moved to the modal-content */
         }
 
         #cookie-preferences-container label {
@@ -394,6 +385,38 @@
         #cookie-info-modal .modal-content ul {
             list-style-type: disc;
             margin-left: 1.5rem;
+        }
+
+        /* New styles for cookie preferences modal */
+        #cookie-preferences-modal .modal-content {
+            max-width: 600px; /* Adjust width for preferences */
+            height: auto; /* Height based on content */
+            max-height: 90vh; /* Max height for responsiveness */
+            overflow-y: auto; /* Enable scrolling for content */
+            text-align: left;
+            padding: 2rem; /* More padding for better look */
+        }
+
+        #cookie-preferences-modal .modal-content h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        #cookie-preferences-modal .modal-content label {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        #cookie-preferences-modal .modal-content label span.text-xs {
+            margin-left: 0.5rem;
+            font-size: 0.875rem; /* Tailwind text-sm */
+            line-height: 1.25rem; /* Tailwind leading-5 */
+        }
+
+        #cookie-preferences-modal .modal-content button {
+            margin-top: 1.5rem;
+            display: block; /* Make button full width */
+            width: 100%;
         }
     </style>
     <!-- Script to ensure dark mode is always loaded first unless explicitly set to light -->
@@ -548,28 +571,6 @@
             <button id="decline-all-cookies" class="decline-all-button">Decline All</button>
             <button id="manage-preferences-button" class="manage-preferences-button">Manage Preferences</button>
         </div>
-
-        <div id="cookie-preferences-container" class="hidden w-full mt-4 p-4 rounded-lg glassy-box">
-            <h3 class="text-xl font-semibold mb-3" id="cookie-preferences-title">Your Cookie Preferences</h3>
-            <div class="flex flex-col gap-3">
-                <label for="essential-cookies">
-                    <input type="checkbox" id="essential-cookies" checked disabled>
-                    <span id="essential-cookies-label">Essential Cookies</span>
-                    <span class="text-xs text-gray-400" id="essential-cookies-description">(Always active, necessary for site functionality)</span>
-                </label>
-                <label for="analytics-cookies">
-                    <input type="checkbox" id="analytics-cookies">
-                    <span id="analytics-cookies-label">Analytics Cookies</span>
-                    <span class="text-xs text-gray-400" id="analytics-cookies-description">(Help us understand how you use our site to improve it)</span>
-                </label>
-                <label for="marketing-cookies">
-                    <input type="checkbox" id="marketing-cookies">
-                    <span id="marketing-cookies-label">Marketing Cookies</span>
-                    <span class="text-xs text-gray-400" id="marketing-cookies-description">(Used to show you relevant ads on other platforms)</span>
-                </label>
-            </div>
-            <button id="save-preferences-button" class="save-preferences-button mt-6 w-full md:w-auto">Save Preferences</button>
-        </div>
     </div>
 
     <!-- Cookie Information Modal -->
@@ -606,6 +607,32 @@
         </div>
     </div>
 
+    <!-- Cookie Preferences Modal -->
+    <div id="cookie-preferences-modal" class="modal">
+        <div class="modal-content glassy-box">
+            <span class="close-button" id="close-cookie-preferences-modal">&times;</span>
+            <h3 class="text-xl font-semibold mb-3" id="cookie-preferences-title">Your Cookie Preferences</h3>
+            <div class="flex flex-col gap-3 w-full">
+                <label for="essential-cookies">
+                    <input type="checkbox" id="essential-cookies" checked disabled>
+                    <span id="essential-cookies-label">Essential Cookies</span>
+                    <span class="text-xs text-gray-400" id="essential-cookies-description">(Always active, necessary for site functionality)</span>
+                </label>
+                <label for="analytics-cookies">
+                    <input type="checkbox" id="analytics-cookies">
+                    <span id="analytics-cookies-label">Analytics Cookies</span>
+                    <span class="text-xs text-gray-400" id="analytics-cookies-description">(Help us understand how you use our site to improve it)</span>
+                </label>
+                <label for="marketing-cookies">
+                    <input type="checkbox" id="marketing-cookies">
+                    <span id="marketing-cookies-label">Marketing Cookies</span>
+                    <span class="text-xs text-gray-400" id="marketing-cookies-description">(Used to show you relevant ads on other platforms)</span>
+                </label>
+            </div>
+            <button id="save-preferences-button" class="save-preferences-button mt-6 w-full md:w-auto">Save Preferences</button>
+        </div>
+    </div>
+
     <script>
         // Language content
         const content = {
@@ -634,7 +661,7 @@
                 cookieInfoWhatAreCookies: "What Are Cookies?",
                 cookieInfoWhatAreCookiesText: "Cookies are small text files stored on your device (computer, tablet, mobile) when you visit certain web pages. They are widely used to make websites work more efficiently, as well as to provide information to the owners of the site.",
                 cookieInfoHowWeUseCookies: "How We Use Cookies",
-                cookieInfoHowWeUseCookiesText: "We use cookies for the following purposes:",
+                cookieInfoHowWeWeUseCookiesText: "We use cookies for the following purposes:",
                 cookieInfoEssential: "Essential Cookies:",
                 cookieInfoEssentialText: "These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms.",
                 cookieInfoAnalytics: "Analytics Cookies:",
@@ -699,17 +726,17 @@
             // Cookie banner elements
             const cookieMessageTextElement = document.getElementById('cookie-message-text');
             const cookieLearnMoreElement = document.getElementById('learn-more-cookies');
-            const acceptAllCookiesBtn = document.getElementById('accept-all-cookies'); // Changed ID
-            const declineAllCookiesBtn = document.getElementById('decline-all-cookies'); // Changed ID
-            const managePreferencesBtn = document.getElementById('manage-preferences-button'); // New
-            const savePreferencesBtn = document.getElementById('save-preferences-button'); // New
-            const cookiePreferencesTitle = document.getElementById('cookie-preferences-title'); // New
-            const essentialCookiesLabel = document.getElementById('essential-cookies-label'); // New
-            const essentialCookiesDescription = document.getElementById('essential-cookies-description'); // New
-            const analyticsCookiesLabel = document.getElementById('analytics-cookies-label'); // New
-            const analyticsCookiesDescription = document.getElementById('analytics-cookies-description'); // New
-            const marketingCookiesLabel = document.getElementById('marketing-cookies-label'); // New
-            const marketingCookiesDescription = document.getElementById('marketing-cookies-description'); // New
+            const acceptAllCookiesBtn = document.getElementById('accept-all-cookies');
+            const declineAllCookiesBtn = document.getElementById('decline-all-cookies');
+            const managePreferencesBtn = document.getElementById('manage-preferences-button');
+            const savePreferencesBtn = document.getElementById('save-preferences-button');
+            const cookiePreferencesTitle = document.getElementById('cookie-preferences-title');
+            const essentialCookiesLabel = document.getElementById('essential-cookies-label');
+            const essentialCookiesDescription = document.getElementById('essential-cookies-description');
+            const analyticsCookiesLabel = document.getElementById('analytics-cookies-label');
+            const analyticsCookiesDescription = document.getElementById('analytics-cookies-description');
+            const marketingCookiesLabel = document.getElementById('marketing-cookies-label');
+            const marketingCookiesDescription = document.getElementById('marketing-cookies-description');
 
 
             // Cookie Info Modal elements
@@ -861,7 +888,7 @@
             const declineAllCookiesBtn = document.getElementById('decline-all-cookies');
             const managePreferencesBtn = document.getElementById('manage-preferences-button');
             const savePreferencesBtn = document.getElementById('save-preferences-button');
-            const cookiePreferencesContainer = document.getElementById('cookie-preferences-container');
+            // const cookiePreferencesContainer = document.getElementById('cookie-preferences-container'); // No longer needed directly in banner
             const essentialCookiesCheckbox = document.getElementById('essential-cookies');
             const analyticsCookiesCheckbox = document.getElementById('analytics-cookies');
             const marketingCookiesCheckbox = document.getElementById('marketing-cookies');
@@ -870,6 +897,10 @@
             // Cookie Info Modal elements
             const cookieInfoModal = document.getElementById('cookie-info-modal');
             const closeCookieInfoModalBtn = document.getElementById('close-cookie-info-modal');
+
+            // Cookie Preferences Modal elements (new)
+            const cookiePreferencesModal = document.getElementById('cookie-preferences-modal');
+            const closeCookiePreferencesModalBtn = document.getElementById('close-cookie-preferences-modal');
 
 
             // Initial theme application (already handled by inline script in head for FOUC prevention)
@@ -936,8 +967,14 @@
 
             if (managePreferencesBtn) {
                 managePreferencesBtn.addEventListener('click', () => {
-                    if (cookiePreferencesContainer) {
-                        cookiePreferencesContainer.classList.toggle('hidden');
+                    if (cookiePreferencesModal) {
+                        // Ensure checkboxes reflect current consent before opening
+                        const currentConsent = JSON.parse(localStorage.getItem('cookieConsent')) || { essential: true, analytics: false, marketing: false };
+                        if (essentialCookiesCheckbox) essentialCookiesCheckbox.checked = currentConsent.essential;
+                        if (analyticsCookiesCheckbox) analyticsCookiesCheckbox.checked = currentConsent.analytics;
+                        if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = currentConsent.marketing;
+
+                        cookiePreferencesModal.style.display = 'flex';
                     }
                 });
             }
@@ -951,7 +988,7 @@
                     };
                     localStorage.setItem('cookieConsent', JSON.stringify(consent));
                     if (cookieBanner) cookieBanner.classList.add('hidden');
-                    if (cookiePreferencesContainer) cookiePreferencesContainer.classList.add('hidden');
+                    if (cookiePreferencesModal) cookiePreferencesModal.style.display = 'none'; // Close the preferences modal
                     loadExternalScripts(consent);
                 });
             }
@@ -979,6 +1016,23 @@
                     }
                 });
             }
+
+            // Close Cookie Preferences Modal (new)
+            if (closeCookiePreferencesModalBtn) {
+                closeCookiePreferencesModalBtn.addEventListener('click', () => {
+                    if (cookiePreferencesModal) cookiePreferencesModal.style.display = 'none';
+                });
+            }
+
+            // Close Cookie Preferences Modal if clicking outside content (new)
+            if (cookiePreferencesModal) {
+                cookiePreferencesModal.addEventListener('click', (e) => {
+                    if (e.target === cookiePreferencesModal) {
+                        cookiePreferencesModal.style.display = 'none';
+                    }
+                });
+            }
+
 
             // Show Calendly Modal from main CTA
             if (scheduleCtaButton) {
