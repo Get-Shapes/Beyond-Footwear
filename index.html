@@ -71,11 +71,11 @@
 
         /* Glassy effect for content boxes */
         .glassy-box {
-            /* Changed background to a very subtle white with low opacity */
-            background: rgba(255, 255, 255, 0.05);
+            /* Adjusted background for light mode to be more transparent white */
+            background: rgba(255, 255, 255, 0.1); /* Slightly more opaque white for better visibility */
             backdrop-filter: blur(10px) saturate(180%);
             -webkit-backdrop-filter: blur(10px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.3); /* Slightly more visible white border */
+            border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle black border for light mode */
             /* Adjusted box-shadow for a cleaner, whiter look in light mode */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Lighter, less prominent shadow */
             border-radius: 1rem;
@@ -358,7 +358,12 @@
         const savedTheme = localStorage.getItem('theme');
         const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+        // Force dark mode on initial load if no preference is saved
+        if (savedTheme === null) {
+            localStorage.setItem('theme', 'dark');
+            document.documentElement.classList.add('dark');
+            document.body.classList.add('dark');
+        } else if (savedTheme === 'dark') {
             document.documentElement.classList.add('dark');
             document.body.classList.add('dark');
         } else {
@@ -641,7 +646,21 @@
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem('theme');
 
-            if (savedTheme === 'dark' || (savedTheme === null && prefersDarkMode)) {
+            // Set initial theme based on localStorage or force dark
+            if (savedTheme === null) {
+                localStorage.setItem('theme', 'dark');
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            } else if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark');
+            }
+
+
+            if (document.body.classList.contains('dark')) {
                 if (elements.mainLogo) elements.mainLogo.src = 'Shapes-Logo neu White.png';
             } else {
                 if (elements.mainLogo) elements.mainLogo.src = 'Shapes-Logo neu Black.png';
