@@ -6,14 +6,18 @@
     <title>Shapes Beyond Footwear</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Urbanist -->
+    <!-- Google Fonts - Urbanist (kept as fallback) -->
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Adobe Fonts (Typekit) Link -->
+    <link rel="stylesheet" href="https://use.typekit.net/af/c4767b/00000000000000003b9acb20/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3">
+
     <style>
         /* Default to dark mode styles for html and body */
         html, body {
             background-color: #000000 !important; /* Pure black background by default */
             color: #e2e8f0; /* Light text by default */
-            font-family: 'Urbanist', sans-serif; /* Use the Urbanist font */
+            /* IMPORTANT: Replace 'Your-Typekit-Font-Name' with the actual font-family name from your Adobe Fonts project */
+            font-family: 'Your-Typekit-Font-Name', 'Urbanist', sans-serif; /* Use Typekit font, with Urbanist as fallback */
             position: relative; /* Needed for pseudo-elements */
             min-height: 100vh; /* Ensure body takes full height for background */
             transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
@@ -622,7 +626,6 @@
                 </label>
                 <label for="marketing-cookies">
                     <input type="checkbox" id="marketing-cookies">
-                    <span id="marketing-cookies-label">Marketing Cookies</span>
                     <span class="text-xs text-gray-400" id="marketing-cookies-description">(Used to show you relevant ads on other platforms)</span>
                 </label>
             </div>
