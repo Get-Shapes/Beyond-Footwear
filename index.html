@@ -444,8 +444,17 @@
         #privacy-policy-modal .modal-content {
             max-width: 800px; /* Wider for more text */
             height: 90vh; /* Allow more vertical space */
-            overflow-y: auto; /* Enable scrolling for content */
             text-align: left; /* Align text left */
+            display: flex; /* Ensure flex container */
+            flex-direction: column; /* Ensure column direction */
+            padding-bottom: 1.5rem; /* Add padding to the bottom of the modal content if needed to prevent close button overlap */
+        }
+
+        /* Add styles for the text-content div specifically within the privacy policy modal */
+        #privacy-policy-modal .modal-content .text-content {
+            flex-grow: 1; /* Allow text content to fill available space */
+            overflow-y: auto; /* Make this specific div scrollable */
+            padding-right: 0.5rem; /* Add a little padding to the right for scrollbar clearance */
         }
     </style>
     <!-- Script to ensure dark mode is always loaded first unless explicitly set to light -->
@@ -865,7 +874,7 @@
             const essentialCookiesDescription = document.getElementById('essential-cookies-description');
             const analyticsCookiesLabel = document.getElementById('analytics-cookies-label');
             const analyticsCookiesDescription = document.getElementById('analytics-cookies-description');
-            // Removed marketingCookiesLabel and marketingCookiesDescription
+
 
             // Cookie Info Modal elements
             const cookieInfoTitle = document.getElementById('cookie-info-title');
@@ -878,7 +887,6 @@
             const cookieInfoEssentialText = document.getElementById('cookie-info-essential-text');
             const cookieInfoAnalytics = document.getElementById('cookie-info-analytics');
             const cookieInfoAnalyticsText = document.getElementById('cookie-info-analytics-text');
-            // Removed cookieInfoMarketing and cookieInfoMarketingText
             const cookieInfoManagingCookies = document.getElementById('cookie-info-managing-cookies');
             const cookieInfoManagingCookiesText = document.getElementById('cookie-info-managing-cookies-text');
             const cookieInfoContact = document.getElementById('cookie-info-contact');
@@ -1305,10 +1313,9 @@
                     e.preventDefault();
                     if (cookiePreferencesModal) {
                         // Ensure checkboxes reflect current consent before opening
-                        const currentConsent = JSON.parse(localStorage.getItem('cookieConsent')) || { essential: true, analytics: false }; // Marketing removed
+                        const currentConsent = JSON.parse(localStorage.getItem('cookieConsent')) || { essential: true, analytics: false };
                         if (essentialCookiesCheckbox) essentialCookiesCheckbox.checked = currentConsent.essential;
                         if (analyticsCookiesCheckbox) analyticsCookiesCheckbox.checked = currentConsent.analytics;
-                        // if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = currentConsent.marketing; // Removed marketing checkbox
 
                         cookiePreferencesModal.style.display = 'flex';
                     }
