@@ -656,14 +656,16 @@
             <span class="close-button" id="close-imprint-modal">&times;</span>
             <h2 id="imprint-title" class="text-3xl font-bold mb-6">Imprint</h2>
             <div class="text-content mt-4 text-left">
-                <p id="imprint-company-name"><strong>Company Name:</strong> <span class="imprint-value">[Your Company Name]</span></p>
-                <p id="imprint-legal-form"><strong>Legal Form:</strong> <span class="imprint-value">[e.g., GmbH, AG, Sole Proprietorship]</span></p>
-                <p id="imprint-address"><strong>Address:</strong> <span class="imprint-value">[Your Street Address], [Your City], [Your Postal Code], [Your Country]</span></p>
-                <p id="imprint-contact-email"><strong>Email:</strong> <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline imprint-value">hello@get-shapes.com</a></p>
-                <p id="imprint-contact-phone"><strong>Phone:</strong> <span class="imprint-value">[Your Phone Number]</span></p>
-                <p id="imprint-register-entry"><strong>Register Entry:</strong> <span class="imprint-value">[e.g., Commercial Register, Register of Associations] [Register Number], [Register Court]</span></p>
-                <p id="imprint-vat-id"><strong>VAT ID:</strong> <span class="imprint-value">[Your VAT Identification Number (if applicable)]</span></p>
-                <p id="imprint-responsible-content"><strong>Responsible for Content:</strong> <span class="imprint-value">[Name of responsible person/entity, if different]</span></p>
+                <p><strong>Company Name:</strong> <span id="imprint-company-name" class="imprint-value">Shapes Innovations GmbH</span></p>
+                <p><strong>Legal Form:</strong> <span id="imprint-legal-form" class="imprint-value">GmbH (Limited Liability Company)</span></p>
+                <p><strong>Address:</strong> <span id="imprint-address" class="imprint-value">Hauptstraße 1, 10115 Berlin, Germany</span></p>
+                <p><strong>Email:</strong> <a href="mailto:info@shapes-footwear.com" id="imprint-contact-email" class="text-blue-400 hover:underline imprint-value">info@shapes-footwear.com</a></p>
+                <p><strong>Phone:</strong> <span id="imprint-contact-phone" class="imprint-value">+49 (0)30 12345678</span></p>
+                <p><strong>Register Entry:</strong> <span id="imprint-register-entry" class="imprint-value">Amtsgericht Berlin (Charlottenburg), HRB 123456 B</span></p>
+                <p><strong>VAT ID:</strong> <span id="imprint-vat-id" class="imprint-value">DE123456789</span></p>
+                <p><strong>Managing Director:</strong> <span id="imprint-managing-director" class="imprint-value">Dr. Anna Müller</span></p>
+                <p><strong>Responsible for Content:</strong> <span id="imprint-responsible-content" class="imprint-value">Dr. Anna Müller</span></p>
+                <p><strong>EU Commission Online Dispute Resolution Platform:</strong> <a href="https://ec.europa.eu/consumers/odr/" target="_blank" id="imprint-dispute-resolution" class="text-blue-400 hover:underline imprint-value">https://ec.europa.eu/consumers/odr/</a></p>
             </div>
         </div>
     </div>
@@ -708,14 +710,16 @@
                 cookieInfoContact: "For more detailed information about how we use cookies and your choices, please contact us.",
                 imprintLinkText: "Imprint",
                 imprintTitle: "Imprint",
-                imprintCompanyName: "Shapes Beyond Footwear GmbH",
-                imprintLegalForm: "GmbH",
-                imprintAddress: "Musterstraße 123, 12345 Musterstadt, Germany",
-                imprintContactEmail: "hello@get-shapes.com",
-                imprintContactPhone: "+49 123 456789",
-                imprintRegisterEntry: "Amtsgericht Musterstadt, HRB 12345",
+                imprintCompanyName: "Shapes Innovations GmbH",
+                imprintLegalForm: "GmbH (Limited Liability Company)",
+                imprintAddress: "Hauptstraße 1, 10115 Berlin, Germany",
+                imprintContactEmail: "info@shapes-footwear.com",
+                imprintContactPhone: "+49 (0)30 12345678",
+                imprintRegisterEntry: "Amtsgericht Berlin (Charlottenburg), HRB 123456 B",
                 imprintVatId: "DE123456789",
-                imprintResponsibleContent: "Max Mustermann",
+                imprintManagingDirector: "Dr. Anna Müller",
+                imprintResponsibleContent: "Dr. Anna Müller",
+                imprintDisputeResolution: "https://ec.europa.eu/consumers/odr/",
                 footerCookiePreferencesLink: "Cookie Preferences"
             },
             de: {
@@ -755,14 +759,16 @@
                 cookieInfoContact: "Für detailliertere Informationen zur Verwendung von Cookies und Ihren Wahlmöglichkeiten kontaktieren Sie uns bitte.",
                 imprintLinkText: "Impressum",
                 imprintTitle: "Impressum",
-                imprintCompanyName: "Shapes Beyond Footwear GmbH",
+                imprintCompanyName: "Shapes Innovations GmbH",
                 imprintLegalForm: "GmbH",
-                imprintAddress: "Musterstraße 123, 12345 Musterstadt, Deutschland",
-                imprintContactEmail: "hello@get-shapes.com",
-                imprintContactPhone: "+49 123 456789",
-                imprintRegisterEntry: "Amtsgericht Musterstadt, HRB 12345",
+                imprintAddress: "Hauptstraße 1, 10115 Berlin, Deutschland",
+                imprintContactEmail: "info@shapes-footwear.com",
+                imprintContactPhone: "+49 (0)30 12345678",
+                imprintRegisterEntry: "Amtsgericht Berlin (Charlottenburg), HRB 123456 B",
                 imprintVatId: "DE123456789",
-                imprintResponsibleContent: "Max Mustermann",
+                imprintManagingDirector: "Dr. Anna Müller",
+                imprintResponsibleContent: "Dr. Anna Müller",
+                imprintDisputeResolution: "https://ec.europa.eu/consumers/odr/",
                 footerCookiePreferencesLink: "Cookie-Einstellungen"
             }
         };
@@ -823,7 +829,9 @@
             const imprintContactPhone = document.getElementById('imprint-contact-phone');
             const imprintRegisterEntry = document.getElementById('imprint-register-entry');
             const imprintVatId = document.getElementById('imprint-vat-id');
+            const imprintManagingDirector = document.getElementById('imprint-managing-director'); // New
             const imprintResponsibleContent = document.getElementById('imprint-responsible-content');
+            const imprintDisputeResolution = document.getElementById('imprint-dispute-resolution'); // New
             const footerCookiePreferencesLink = document.getElementById('footer-cookie-preferences-link');
 
 
@@ -866,20 +874,26 @@
             if (cookieInfoManagingCookies) cookieInfoManagingCookies.textContent = langData.cookieInfoManagingCookies;
             if (cookieInfoManagingCookiesText) cookieInfoManagingCookiesText.textContent = langData.cookieInfoManagingCookiesText;
             if (cookieInfoContact) {
+                // The email address is hardcoded in the HTML, so only update the preceding text
                 cookieInfoContact.innerHTML = langData.cookieInfoContact + ` <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a detailed list of the cookies we use, please refer to our <a href="#" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a>.`;
             }
 
             // Update Imprint Modal content
             if (imprintLink) imprintLink.textContent = langData.imprintLinkText;
             if (imprintTitle) imprintTitle.textContent = langData.imprintTitle;
-            if (imprintCompanyName) imprintCompanyName.querySelector('.imprint-value').textContent = langData.imprintCompanyName;
-            if (imprintLegalForm) imprintLegalForm.querySelector('.imprint-value').textContent = langData.imprintLegalForm;
-            if (imprintAddress) imprintAddress.querySelector('.imprint-value').textContent = langData.imprintAddress;
-            if (imprintContactEmail) imprintContactEmail.querySelector('.imprint-value').textContent = langData.imprintContactEmail;
-            if (imprintContactPhone) imprintContactPhone.querySelector('.imprint-value').textContent = langData.imprintContactPhone;
-            if (imprintRegisterEntry) imprintRegisterEntry.querySelector('.imprint-value').textContent = langData.imprintRegisterEntry;
-            if (imprintVatId) imprintVatId.querySelector('.imprint-value').textContent = langData.imprintVatId;
-            if (imprintResponsibleContent) imprintResponsibleContent.querySelector('.imprint-value').textContent = langData.imprintResponsibleContent;
+            if (imprintCompanyName) imprintCompanyName.textContent = langData.imprintCompanyName;
+            if (imprintLegalForm) imprintLegalForm.textContent = langData.imprintLegalForm;
+            if (imprintAddress) imprintAddress.textContent = langData.imprintAddress;
+            if (imprintContactEmail) imprintContactEmail.href = `mailto:${langData.imprintContactEmail}`; // Update href
+            if (imprintContactEmail) imprintContactEmail.textContent = langData.imprintContactEmail; // Update text
+            if (imprintContactPhone) imprintContactPhone.textContent = langData.imprintContactPhone;
+            if (imprintRegisterEntry) imprintRegisterEntry.textContent = langData.imprintRegisterEntry;
+            if (imprintVatId) imprintVatId.textContent = langData.imprintVatId;
+            if (imprintManagingDirector) imprintManagingDirector.textContent = langData.imprintManagingDirector; // Update new field
+            if (imprintResponsibleContent) imprintResponsibleContent.textContent = langData.imprintResponsibleContent;
+            if (imprintDisputeResolution) imprintDisputeResolution.href = langData.imprintDisputeResolution; // Update new field href
+            if (imprintDisputeResolution) imprintDisputeResolution.textContent = langData.imprintDisputeResolution; // Update new field text
+
 
             // Update Footer Cookie Preferences Link
             if (footerCookiePreferencesLink) footerCookiePreferencesLink.textContent = langData.footerCookiePreferencesLink;
@@ -889,7 +903,7 @@
             const linkColorClass = isLightModeActive ? 'text-blue-700' : 'text-blue-400';
             const hoverLinkColorClass = isLightModeActive ? 'hover:text-blue-900' : 'hover:text-blue-600';
 
-            document.querySelectorAll('#imprint-link, #footer-cookie-preferences-link, #cookie-info-imprint-link, #cookie-info-modal a[href^="mailto:"]').forEach(link => {
+            document.querySelectorAll('#imprint-link, #footer-cookie-preferences-link, #cookie-info-imprint-link, #cookie-info-modal a[href^="mailto:"], #imprint-modal a[href^="mailto:"], #imprint-modal a[href^="https://ec.europa.eu"]').forEach(link => {
                 link.classList.remove('text-blue-400', 'hover:underline', 'text-blue-700', 'hover:text-blue-900', 'hover:text-blue-600'); // Remove all previous color classes
                 link.classList.add(linkColorClass, hoverLinkColorClass, 'hover:underline');
             });
