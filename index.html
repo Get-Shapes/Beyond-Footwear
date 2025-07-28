@@ -223,29 +223,31 @@
             border-radius: 0.5rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease, color 0.3s ease; /* Added border-color and color to transition */
             white-space: nowrap; /* Prevent button text from wrapping */
         }
 
         #cookie-banner button.accept-button {
-            background-color: rgba(34, 197, 94, 0.8); /* Greenish, semi-transparent */
-            color: white;
-            border: 1px solid rgba(34, 197, 94, 0.6);
+            background-color: transparent; /* Made transparent */
+            color: #22c55e; /* Green text */
+            border: 1px solid #22c55e; /* Green border */
         }
 
         #cookie-banner button.accept-button:hover {
-            background-color: rgba(34, 197, 94, 1);
+            background-color: #22c55e; /* Solid green on hover */
+            color: white; /* White text on hover */
             transform: translateY(-2px);
         }
 
         #cookie-banner button.decline-button {
-            background-color: rgba(220, 38, 38, 0.8); /* Reddish, semi-transparent */
-            color: white;
-            border: 1px solid rgba(220, 38, 38, 0.6);
+            background-color: transparent; /* Made transparent */
+            color: #ef4444; /* Red text */
+            border: 1px solid #ef4444; /* Red border */
         }
 
         #cookie-banner button.decline-button:hover {
-            background-color: rgba(220, 38, 38, 1);
+            background-color: #ef4444; /* Solid red on hover */
+            color: white; /* White text on hover */
             transform: translateY(-2px);
         }
 
@@ -361,6 +363,22 @@
             </button>
         </section>
 
+        <!-- New Consultation Question Generator Section -->
+        <section id="consultation-questions-section" class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
+            <h2 id="consultation-questions-title" class="text-3xl font-bold mb-4">Prepare for Your Consultation</h2>
+            <p id="consultation-questions-description" class="text-lg leading-relaxed mb-6">
+                Tell us about your fitness goals or what you'd like to achieve, and we'll suggest some questions you might want to ask during your free consultation.
+            </p>
+            <textarea id="user-goals-input" class="w-full p-4 rounded-lg bg-gray-700 text-white placeholder-gray-400 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 glassy-box" rows="4" placeholder="e.g., I want to improve my running speed, increase strength, or enhance overall balance."></textarea>
+            <button id="generate-questions-btn" class="apple-button text-xl glassy-box text-white hover:scale-105" style="background-color: rgba(60, 150, 255, 0.6);">
+                Generate Consultation Questions ✨
+            </button>
+            <div id="questions-output" class="mt-8 text-left p-4 rounded-lg bg-gray-800 glassy-box hidden">
+                <p id="loading-indicator" class="text-center text-gray-400 hidden">Generating questions...</p>
+                <!-- Generated questions will appear here -->
+            </div>
+        </section>
+
         <!-- Benefits Section - Replaced with Image -->
         <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box flex justify-center items-center">
             <img src="Abbinder-home_final.jpg" alt="Be faster. Be better. Be stronger. Be balanced. With Shapes." class="w-full h-auto object-contain rounded-xl" ondragstart="return false;">
@@ -424,7 +442,12 @@
                 cookieMessage: "We use cookies to ensure you get the best experience on our website. By continuing to use this site, you agree to our use of cookies.",
                 cookieLearnMore: "Learn more",
                 cookieAccept: "Accept All",
-                cookieDecline: "Decline"
+                cookieDecline: "Decline",
+                consultationQuestionsTitle: "Prepare for Your Consultation",
+                consultationQuestionsDescription: "Tell us about your fitness goals or what you'd like to achieve, and we'll suggest some questions you might want to ask during your free consultation.",
+                userGoalsPlaceholder: "e.g., I want to improve my running speed, increase strength, or enhance overall balance.",
+                generateQuestionsBtn: "Generate Consultation Questions ✨",
+                loadingQuestions: "Generating questions..."
             },
             de: {
                 scheduleCta: "Buche deine kostenlose Beratung.",
@@ -436,7 +459,12 @@
                 cookieMessage: "Wir verwenden Cookies, um sicherzustellen, dass Sie die beste Erfahrung auf unserer Website erhalten. Durch die weitere Nutzung dieser Website stimmen Sie der Verwendung von Cookies zu.",
                 cookieLearnMore: "Mehr erfahren",
                 cookieAccept: "Alle akzeptieren",
-                cookieDecline: "Ablehnen"
+                cookieDecline: "Ablehnen",
+                consultationQuestionsTitle: "Bereiten Sie sich auf Ihre Beratung vor",
+                consultationQuestionsDescription: "Erzählen Sie uns von Ihren Fitnesszielen oder dem, was Sie erreichen möchten, und wir schlagen Ihnen einige Fragen vor, die Sie während Ihrer kostenlosen Beratung stellen könnten.",
+                userGoalsPlaceholder: "z.B. Ich möchte meine Laufgeschwindigkeit verbessern, Kraft aufbauen oder mein allgemeines Gleichgewicht verbessern.",
+                generateQuestionsBtn: "Beratungsfragen generieren ✨",
+                loadingQuestions: "Fragen werden generiert..."
             }
         };
 
@@ -459,6 +487,13 @@
             const cookieAcceptButton = document.getElementById('accept-cookies');
             const cookieDeclineButton = document.getElementById('decline-cookies');
 
+            // Consultation Questions Section elements
+            const consultationQuestionsTitle = document.getElementById('consultation-questions-title');
+            const consultationQuestionsDescription = document.getElementById('consultation-questions-description');
+            const userGoalsInput = document.getElementById('user-goals-input');
+            const generateQuestionsBtn = document.getElementById('generate-questions-btn');
+            const loadingIndicator = document.getElementById('loading-indicator');
+
 
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
             if (thankyouHeadline) thankyouHeadline.textContent = langData.thankyouHeadline;
@@ -474,6 +509,13 @@
             }
             if (cookieAcceptButton) cookieAcceptButton.textContent = langData.cookieAccept;
             if (cookieDeclineButton) cookieDeclineButton.textContent = langData.cookieDecline;
+
+            // Update Consultation Questions Section content
+            if (consultationQuestionsTitle) consultationQuestionsTitle.textContent = langData.consultationQuestionsTitle;
+            if (consultationQuestionsDescription) consultationQuestionsDescription.textContent = langData.consultationQuestionsDescription;
+            if (userGoalsInput) userGoalsInput.placeholder = langData.userGoalsPlaceholder;
+            if (generateQuestionsBtn) generateQuestionsBtn.textContent = langData.generateQuestionsBtn;
+            if (loadingIndicator) loadingIndicator.textContent = langData.loadingQuestions;
         }
 
         // Function to update the theme toggle icon
@@ -516,6 +558,12 @@
             const cookieBanner = document.getElementById('cookie-banner');
             const acceptCookiesBtn = document.getElementById('accept-cookies');
             const declineCookiesBtn = document.getElementById('decline-cookies');
+
+            // Consultation Questions Section elements
+            const userGoalsInput = document.getElementById('user-goals-input');
+            const generateQuestionsBtn = document.getElementById('generate-questions-btn');
+            const questionsOutput = document.getElementById('questions-output');
+            const loadingIndicator = document.getElementById('loading-indicator');
 
             // Initial theme application (already handled by inline script in head for FOUC prevention)
             // This block is for updating logo and icon based on the *initial* state
@@ -658,6 +706,55 @@
                         if (cookieBanner) cookieBanner.classList.remove('light-mode'); // Remove light mode from banner
                     }
                     updateThemeToggleIcon(); // Update icon after theme change
+                });
+            }
+
+            // Gemini API Integration for Consultation Questions
+            if (generateQuestionsBtn && userGoalsInput && questionsOutput && loadingIndicator) {
+                generateQuestionsBtn.addEventListener('click', async () => {
+                    const userGoals = userGoalsInput.value.trim();
+                    if (!userGoals) {
+                        questionsOutput.innerHTML = '<p class="text-red-400">Please enter your fitness goals.</p>';
+                        questionsOutput.classList.remove('hidden');
+                        return;
+                    }
+
+                    questionsOutput.classList.remove('hidden');
+                    questionsOutput.innerHTML = ''; // Clear previous output
+                    loadingIndicator.classList.remove('hidden'); // Show loading indicator
+
+                    try {
+                        let chatHistory = [];
+                        const prompt = `Based on the following fitness goals: "${userGoals}", generate 3-5 insightful questions a person might want to ask during a consultation about innovative fitness technology and performance enhancement. Format them as a numbered list.`;
+                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+                        const payload = { contents: chatHistory };
+                        const apiKey = ""; // Canvas will provide this at runtime
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+                        loadingIndicator.classList.add('hidden'); // Hide loading indicator
+
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            questionsOutput.innerHTML = `<h3 class="font-semibold mb-2">Suggested Questions:</h3>${text}`;
+                        } else {
+                            questionsOutput.innerHTML = '<p class="text-red-400">Failed to generate questions. Please try again.</p>';
+                            console.error('Gemini API response structure unexpected:', result);
+                        }
+                    } catch (error) {
+                        loadingIndicator.classList.add('hidden'); // Hide loading indicator
+                        questionsOutput.innerHTML = '<p class="text-red-400">An error occurred while generating questions. Please try again later.</p>';
+                        console.error('Error calling Gemini API:', error);
+                    }
                 });
             }
         });
