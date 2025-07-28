@@ -470,25 +470,6 @@
         gtag('config', 'YOUR_GA_TRACKING_ID');
     </script> -->
 
-    <!-- Facebook Pixel Placeholder -->
-    <!-- These scripts will be conditionally loaded by JavaScript -->
-    <!-- <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document, 'script',
-        'https://connect.facebook.com/en_US/fbevents.js');
-        fbq('init', 'YOUR_PIXEL_ID');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
-    /></noscript> -->
-    <!-- End Facebook Pixel Placeholder -->
-
     <!-- Main Landing Page Content -->
     <div id="landing-page-content" class="min-h-screen flex flex-col">
         <!-- Header Section for Logo and Controls -->
@@ -520,8 +501,6 @@
                 <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg bg-black" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
                     <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload">
                         <source src="Zurab 1.mp4" type="video/mp4">
-                        <!-- Removed 'Test Women 1.mp4' source -->
-                        <!-- Removed track tag as it's not needed for a single video without explicit subtitles -->
                         Your browser does browser not support the video tag.
                     </video>
                 </div>
@@ -546,7 +525,7 @@
             <div class="mt-2 flex justify-center space-x-4">
                 <a href="#" id="imprint-link" class="hover:underline"></a>
                 <a href="#" id="footer-cookie-preferences-link" class="hover:underline"></a>
-                <a href="#" id="privacy-policy-link" class="hover:underline"></a> <!-- Added Privacy Policy link -->
+                <a href="#" id="privacy-policy-link" class="hover:underline"></a>
             </div>
         </footer>
 
@@ -1048,8 +1027,8 @@
 
         // Function to load external scripts conditionally
         function loadExternalScripts(consent) {
-            // Remove existing GA and FB Pixel scripts if they were loaded previously
-            document.querySelectorAll('[data-script-type="analytics"], [data-script-type="marketing"]').forEach(el => el.remove());
+            // Remove existing GA scripts if they were loaded previously
+            document.querySelectorAll('[data-script-type="analytics"]').forEach(el => el.remove());
 
             if (consent.analytics) {
                 // Google Analytics
@@ -1067,30 +1046,7 @@
                     console.log("Google Analytics loaded.");
                 };
             }
-
-            if (consent.marketing) {
-                // Facebook Pixel
-                const fbScript = document.createElement('script');
-                fbScript.setAttribute('data-script-type', 'marketing');
-                fbScript.innerHTML = `
-                    !function(f,b,e,v,n,t,s)
-                    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                    if(!f._fbq)f._fbq=n;n.push=n;n.push=n;n.loaded=!0;n.version='2.0';
-                    n.queue=[];t=b.createElement(e);t.async=!0;
-                    t.src=v;s=b.getElementsByTagName(e)[0];
-                    s.parentNode.insertBefore(t,s)}(window, document, 'script',
-                    'https://connect.facebook.com/en_US/fbevents.js');
-                    fbq('init', 'YOUR_PIXEL_ID');
-                    fbq('track', 'PageView');
-                    console.log("Facebook Pixel loaded.");
-                `;
-                document.head.appendChild(fbScript);
-                const fbNoScript = document.createElement('noscript');
-                fbNoScript.setAttribute('data-script-type', 'marketing');
-                fbNoScript.innerHTML = `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/>`;
-                document.body.appendChild(fbNoScript);
-            }
+            // Removed Facebook Pixel loading logic
         }
 
 
@@ -1185,6 +1141,7 @@
                 }
                 if (essentialCookiesCheckbox) essentialCookiesCheckbox.checked = cookieConsent.essential;
                 if (analyticsCookiesCheckbox) analyticsCookiesCheckbox.checked = cookieConsent.analytics;
+                // Since marketing cookies are no longer relevant for Facebook Pixel, ensure it's false if no other marketing tools are used
                 if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = cookieConsent.marketing;
                 loadExternalScripts(cookieConsent); // Load scripts based on stored consent
             }
@@ -1193,7 +1150,7 @@
             // Event Listeners for Cookie Banner Buttons
             if (acceptAllCookiesBtn) {
                 acceptAllCookiesBtn.addEventListener('click', () => {
-                    const consent = { essential: true, analytics: true, marketing: true };
+                    const consent = { essential: true, analytics: true, marketing: marketingCookiesCheckbox ? marketingCookiesCheckbox.checked : false }; // Marketing consent remains if other tools are added later
                     localStorage.setItem('cookieConsent', JSON.stringify(consent));
                     if (cookieBanner) {
                         cookieBanner.classList.add('hidden');
