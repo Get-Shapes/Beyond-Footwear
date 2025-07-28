@@ -544,9 +544,9 @@
         <footer class="container mx-auto mt-8 mb-8 text-center text-gray-400 text-sm">
             © 2024 Shape Industries @ Sport. All rights reserved
             <div class="mt-2 flex justify-center space-x-4">
-                <!-- Removed text-blue-400 from here to allow dynamic styling -->
                 <a href="#" id="imprint-link" class="hover:underline"></a>
                 <a href="#" id="footer-cookie-preferences-link" class="hover:underline"></a>
+                <a href="#" id="privacy-policy-link" class="hover:underline"></a> <!-- Added Privacy Policy link -->
             </div>
         </footer>
 
@@ -677,16 +677,13 @@
             <span class="close-button" id="close-privacy-policy-modal">&times;</span>
             <h2 id="privacy-policy-title" class="text-3xl font-bold mb-6">Privacy Policy</h2>
             <div class="text-content mt-4 text-left">
-                <p id="privacy-policy-intro">
-                    This Privacy Policy explains how [Your Company Name] collects, uses, and protects your personal data when you visit our website. We are committed to protecting your privacy and ensuring the security of your personal information.
-                </p>
+                <p id="privacy-policy-intro"></p>
                 
                 <h3>Data Controller</h3>
-                <p>The data controller responsible for the processing of your personal data on this website is:</p>
-                <p><strong id="privacy-policy-company-name">Shapes Innovations GmbH</strong><br>
-                <span id="privacy-policy-address">Musterstraße 123, 12345 Musterstadt, Germany</span><br>
-                Email: <a href="mailto:info@shapes-footwear.com" id="privacy-policy-contact-email" class="text-blue-400 hover:underline">info@shapes-footwear.com</a><br>
-                Phone: <span id="privacy-policy-contact-phone">+49 (0)30 987654321</span></p>
+                <p><strong id="privacy-policy-company-name"></strong><br>
+                <span id="privacy-policy-address"></span><br>
+                Email: <a href="#" id="privacy-policy-contact-email" class="text-blue-400 hover:underline"></a><br>
+                Phone: <span id="privacy-policy-contact-phone"></span></p>
 
                 <h3>Types of Data Collected</h3>
                 <p>We may collect and process the following types of personal data:</p>
@@ -785,18 +782,18 @@
                 imprintContactEmail: "hello@get-shapes.com",
                 imprintContactPhone: "+49 (0)30 987654321",
                 imprintRegisterEntry: "District Court of Saarbrücken HRB 105861",
-                imprintVatId: "DE123456789",
+                imprintVatId: "DE123456789", // Placeholder for VAT ID
                 imprintManagingDirector: "Sascha Zeissler",
                 imprintResponsibleContent: "Sascha Zeissler",
                 imprintDisputeResolution: "https://ec.europa.eu/consumers/odr/",
                 footerCookiePreferencesLink: "Cookie Preferences",
                 privacyPolicyLinkText: "Privacy Policy",
                 privacyPolicyTitle: "Privacy Policy",
-                privacyPolicyIntro: "This Privacy Policy explains how Shapes Innovations GmbH collects, uses, and protects your personal data when you visit our website. We are committed to protecting your privacy and ensuring the security of your personal information.",
-                privacyPolicyCompany: "Shapes Innovations GmbH",
-                privacyPolicyAddress: "Bismarckstraße 22, 66111 Saarbrücken, Germany", // Updated to match imprint
-                privacyPolicyContactEmail: "hello@get-shapes.com", // Updated to match imprint
-                privacyPolicyContactPhone: "+49 (0)30 987654321", // Updated to match imprint
+                privacyPolicyIntro: "This Privacy Policy explains how {companyName} collects, uses, and protects your personal data when you visit our website. We are committed to protecting your privacy and ensuring the security of your personal information.",
+                privacyPolicyCompany: "Shapes Innovations GmbH", // This will be dynamically updated
+                privacyPolicyAddress: "Bismarckstraße 22, 66111 Saarbrücken, Germany", // This will be dynamically updated
+                privacyPolicyContactEmail: "hello@get-shapes.com", // This will be dynamically updated
+                privacyPolicyContactPhone: "+49 (0)30 987654321", // This will be dynamically updated
             },
             de: {
                 scheduleCta: "Buche deine kostenlose Beratung.",
@@ -841,18 +838,18 @@
                 imprintContactEmail: "hello@get-shapes.com",
                 imprintContactPhone: "+49 (0)30 987654321",
                 imprintRegisterEntry: "Amtsgericht Saarbrücken HRB 105861",
-                imprintVatId: "DE123456789",
+                imprintVatId: "DE123456789", // Placeholder for VAT ID
                 imprintManagingDirector: "Sascha Zeissler",
                 imprintResponsibleContent: "Sascha Zeissler",
                 imprintDisputeResolution: "https://ec.europa.eu/consumers/odr/",
                 footerCookiePreferencesLink: "Cookie-Einstellungen",
                 privacyPolicyLinkText: "Datenschutzerklärung",
                 privacyPolicyTitle: "Datenschutzerklärung",
-                privacyPolicyIntro: "Diese Datenschutzerklärung erläutert, wie Shapes Innovations GmbH Ihre personenbezogenen Daten beim Besuch unserer Website sammelt, verwendet und schützt. Wir verpflichten uns, Ihre Privatsphäre zu schützen und die Sicherheit Ihrer persönlichen Daten zu gewährleisten.",
-                privacyPolicyCompany: "Shapes Innovations GmbH",
-                privacyPolicyAddress: "Bismarckstraße 22, 66111 Saarbrücken, Deutschland", // Updated to match imprint
-                privacyPolicyContactEmail: "hello@get-shapes.com", // Updated to match imprint
-                privacyPolicyContactPhone: "+49 (0)30 987654321", // Updated to match imprint
+                privacyPolicyIntro: "Diese Datenschutzerklärung erläutert, wie {companyName} Ihre personenbezogenen Daten beim Besuch unserer Website sammelt, verwendet und schützt. Wir verpflichten uns, Ihre Privatsphäre zu schützen und die Sicherheit Ihrer persönlichen Daten zu gewährleisten.",
+                privacyPolicyCompany: "Shapes Innovations GmbH", // This will be dynamically updated
+                privacyPolicyAddress: "Bismarckstraße 22, 66111 Saarbrücken, Deutschland", // This will be dynamically updated
+                privacyPolicyContactEmail: "hello@get-shapes.com", // This will be dynamically updated
+                privacyPolicyContactPhone: "+49 (0)30 987654321", // This will be dynamically updated
             }
         };
 
@@ -901,7 +898,7 @@
             const cookieInfoManagingCookiesText = document.getElementById('cookie-info-managing-cookies-text');
             const cookieInfoContact = document.getElementById('cookie-info-contact');
             const cookieInfoImprintLink = document.getElementById('cookie-info-imprint-link');
-            const cookieInfoPrivacyPolicyLink = document.getElementById('cookie-info-privacy-policy-link'); // New
+            const cookieInfoPrivacyPolicyLink = document.getElementById('cookie-info-privacy-policy-link');
 
             // Imprint Modal elements
             const imprintLink = document.getElementById('imprint-link');
@@ -918,8 +915,8 @@
             const imprintDisputeResolution = document.getElementById('imprint-dispute-resolution');
             const footerCookiePreferencesLink = document.getElementById('footer-cookie-preferences-link');
 
-            // Privacy Policy Modal elements (New)
-            const privacyPolicyLink = document.getElementById('privacy-policy-link'); // New footer link
+            // Privacy Policy Modal elements
+            const privacyPolicyLink = document.getElementById('privacy-policy-link');
             const privacyPolicyTitle = document.getElementById('privacy-policy-title');
             const privacyPolicyIntro = document.getElementById('privacy-policy-intro');
             const privacyPolicyCompanyName = document.getElementById('privacy-policy-company-name');
@@ -944,11 +941,11 @@
             if (savePreferencesBtn) savePreferencesBtn.textContent = langData.cookieSavePreferences;
             if (cookiePreferencesTitle) cookiePreferencesTitle.textContent = langData.cookiePreferencesTitle;
             if (essentialCookiesLabel) essentialCookiesLabel.textContent = langData.essentialCookiesLabel;
-            if (essentialCookiesDescription) essentialCookiesDescription.textContent = langData.currentLang === 'en' ? "(Always active, necessary for site functionality)" : "(Immer aktiv, notwendig für die Website-Funktionalität)";
+            if (essentialCookiesDescription) essentialCookiesDescription.textContent = langData.essentialCookiesDescription;
             if (analyticsCookiesLabel) analyticsCookiesLabel.textContent = langData.analyticsCookiesLabel;
-            if (analyticsCookiesDescription) analyticsCookiesDescription.textContent = langData.currentLang === 'en' ? "(Help us understand how you use our site to improve it)" : "(Helfen uns zu verstehen, wie Sie unsere Website nutzen, um sie zu verbessern)";
+            if (analyticsCookiesDescription) analyticsCookiesDescription.textContent = langData.analyticsCookiesDescription;
             if (marketingCookiesLabel) marketingCookiesLabel.textContent = langData.marketingCookiesLabel;
-            if (marketingCookiesDescription) marketingCookiesDescription.textContent = langData.currentLang === 'en' ? "(Used to show you relevant ads on other platforms)" : "(Wird verwendet, um Ihnen relevante Anzeigen auf anderen Plattformen anzuzeigen)";
+            if (marketingCookiesDescription) marketingCookiesDescription.textContent = langData.marketingCookiesDescription;
 
 
             // Update Cookie Info Modal content
@@ -991,15 +988,19 @@
             // Update Footer Cookie Preferences Link
             if (footerCookiePreferencesLink) footerCookiePreferencesLink.textContent = langData.footerCookiePreferencesLink;
 
-            // Update Privacy Policy Modal content (New)
+            // Update Privacy Policy Modal content
             if (privacyPolicyLink) privacyPolicyLink.textContent = langData.privacyPolicyLinkText;
             if (privacyPolicyTitle) privacyPolicyTitle.textContent = langData.privacyPolicyTitle;
-            if (privacyPolicyIntro) privacyPolicyIntro.textContent = langData.privacyPolicyIntro;
-            if (privacyPolicyCompanyName) privacyPolicyCompanyName.textContent = langData.imprintCompanyName; // Re-use imprint data
-            if (privacyPolicyAddress) privacyPolicyAddress.textContent = langData.imprintAddress; // Re-use imprint data
-            if (privacyPolicyContactEmail) privacyPolicyContactEmail.href = `mailto:${langData.imprintContactEmail}`; // Re-use imprint data
-            if (privacyPolicyContactEmail) privacyPolicyContactEmail.textContent = langData.imprintContactEmail; // Re-use imprint data
-            if (privacyPolicyContactPhone) privacyPolicyContactPhone.textContent = langData.imprintContactPhone; // Re-use imprint data
+            if (privacyPolicyIntro) {
+                privacyPolicyIntro.textContent = langData.privacyPolicyIntro.replace('{companyName}', langData.imprintCompanyName);
+            }
+            if (privacyPolicyCompanyName) privacyPolicyCompanyName.textContent = langData.imprintCompanyName;
+            if (privacyPolicyAddress) privacyPolicyAddress.textContent = langData.imprintAddress;
+            if (privacyPolicyContactEmail) {
+                privacyPolicyContactEmail.href = `mailto:${langData.imprintContactEmail}`;
+                privacyPolicyContactEmail.textContent = langData.imprintContactEmail;
+            }
+            if (privacyPolicyContactPhone) privacyPolicyContactPhone.textContent = langData.imprintContactPhone;
 
 
             // Update link colors based on theme
@@ -1008,7 +1009,7 @@
             const hoverLinkColorClass = isLightModeActive ? 'hover:text-blue-900' : 'hover:text-blue-600';
 
             // Apply blue colors to modal links
-            document.querySelectorAll('#cookie-info-imprint-link, #cookie-info-privacy-policy-link, #cookie-info-modal a[href^="mailto:"], #imprint-modal a[href^="mailto:"], #imprint-modal a[href^="https://ec.europa.eu"], #privacy-policy-modal a[href^="mailto:"], #privacy-policy-link').forEach(link => {
+            document.querySelectorAll('#cookie-info-imprint-link, #cookie-info-privacy-policy-link, #cookie-info-modal a[href^="mailto:"], #imprint-modal a[href^="mailto:"], #imprint-modal a[href^="https://ec.europa.eu"], #privacy-policy-modal a[href^="mailto:"]').forEach(link => {
                 link.classList.remove('text-blue-400', 'hover:underline', 'text-blue-700', 'hover:text-blue-900', 'hover:text-blue-600', 'text-gray-400', 'hover:text-gray-200', 'text-black', 'hover:text-gray-700');
                 link.classList.add(linkColorClass, hoverLinkColorClass, 'hover:underline');
             });
@@ -1017,7 +1018,7 @@
             const footerLinkColorClass = isLightModeActive ? 'text-black' : 'text-gray-400';
             const footerHoverLinkColorClass = isLightModeActive ? 'hover:text-gray-700' : 'hover:text-gray-200';
 
-            document.querySelectorAll('#imprint-link, #footer-cookie-preferences-link').forEach(link => {
+            document.querySelectorAll('#imprint-link, #footer-cookie-preferences-link, #privacy-policy-link').forEach(link => {
                 link.classList.remove('text-blue-400', 'hover:underline', 'text-blue-700', 'hover:text-blue-900', 'hover:text-blue-600', 'text-gray-400', 'hover:text-gray-200', 'text-black', 'hover:text-gray-700');
                 link.classList.add(footerLinkColorClass, footerHoverLinkColorClass, 'hover:underline');
             });
@@ -1122,7 +1123,7 @@
             const cookieInfoModal = document.getElementById('cookie-info-modal');
             const closeCookieInfoModalBtn = document.getElementById('close-cookie-info-modal');
             const cookieInfoImprintLink = document.getElementById('cookie-info-imprint-link');
-            const cookieInfoPrivacyPolicyLink = document.getElementById('cookie-info-privacy-policy-link'); // New
+            const cookieInfoPrivacyPolicyLink = document.getElementById('cookie-info-privacy-policy-link');
 
             // Cookie Preferences Modal elements (new)
             const cookiePreferencesModal = document.getElementById('cookie-preferences-modal');
@@ -1137,7 +1138,7 @@
             // Privacy Policy Modal elements (New)
             const privacyPolicyModal = document.getElementById('privacy-policy-modal');
             const closePrivacyPolicyModalBtn = document.getElementById('close-privacy-policy-modal');
-            const privacyPolicyLink = document.getElementById('privacy-policy-link'); // New footer link
+            const privacyPolicyLink = document.getElementById('privacy-policy-link');
 
 
             // Initial theme application (already handled by inline script in head for FOUC prevention)
@@ -1300,7 +1301,7 @@
                 });
             }
 
-            // Open Privacy Policy from Cookie Info Modal (New)
+            // Open Privacy Policy from Cookie Info Modal
             if (cookieInfoPrivacyPolicyLink) {
                 cookieInfoPrivacyPolicyLink.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1309,7 +1310,7 @@
                 });
             }
 
-            // Close Cookie Preferences Modal (new)
+            // Close Cookie Preferences Modal
             if (closeCookiePreferencesModalBtn) {
                 closeCookiePreferencesModalBtn.addEventListener('click', () => {
                     console.log("Closing preferences modal without saving. Re-showing banner.");
@@ -1325,7 +1326,7 @@
                 });
             }
 
-            // Close Cookie Preferences Modal if clicking outside content (new)
+            // Close Cookie Preferences Modal if clicking outside content
             if (cookiePreferencesModal) {
                 cookiePreferencesModal.addEventListener('click', (e) => {
                     if (e.target === cookiePreferencesModal) {
@@ -1383,7 +1384,7 @@
                 });
             }
 
-            // Open Privacy Policy Modal from Footer (New)
+            // Open Privacy Policy Modal from Footer
             if (privacyPolicyLink) {
                 privacyPolicyLink.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1391,14 +1392,14 @@
                 });
             }
 
-            // Close Privacy Policy Modal (New)
+            // Close Privacy Policy Modal
             if (closePrivacyPolicyModalBtn) {
                 closePrivacyPolicyModalBtn.addEventListener('click', () => {
                     if (privacyPolicyModal) privacyPolicyModal.style.display = 'none';
                 });
             }
 
-            // Close Privacy Policy Modal if clicking outside content (New)
+            // Close Privacy Policy Modal if clicking outside content
             if (privacyPolicyModal) {
                 privacyPolicyModal.addEventListener('click', (e) => {
                     if (e.target === privacyPolicyModal) {
