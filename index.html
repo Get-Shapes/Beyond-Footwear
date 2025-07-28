@@ -949,6 +949,7 @@
             // Event Listeners for Cookie Banner Buttons
             if (acceptAllCookiesBtn) {
                 acceptAllCookiesBtn.addEventListener('click', () => {
+                    console.log("Accept All Cookies clicked. Hiding banner.");
                     const consent = { essential: true, analytics: true, marketing: true };
                     localStorage.setItem('cookieConsent', JSON.stringify(consent));
                     if (cookieBanner) cookieBanner.classList.add('hidden');
@@ -958,6 +959,7 @@
 
             if (declineAllCookiesBtn) {
                 declineAllCookiesBtn.addEventListener('click', () => {
+                    console.log("Decline All Cookies clicked. Hiding banner.");
                     const consent = { essential: true, analytics: false, marketing: false }; // Essential always true
                     localStorage.setItem('cookieConsent', JSON.stringify(consent));
                     if (cookieBanner) cookieBanner.classList.add('hidden');
@@ -967,6 +969,8 @@
 
             if (managePreferencesBtn) {
                 managePreferencesBtn.addEventListener('click', () => {
+                    console.log("Manage Preferences clicked. Hiding main banner and showing preferences modal.");
+                    if (cookieBanner) cookieBanner.classList.add('hidden'); // Hide main banner
                     if (cookiePreferencesModal) {
                         // Ensure checkboxes reflect current consent before opening
                         const currentConsent = JSON.parse(localStorage.getItem('cookieConsent')) || { essential: true, analytics: false, marketing: false };
@@ -981,13 +985,14 @@
 
             if (savePreferencesBtn) {
                 savePreferencesBtn.addEventListener('click', () => {
+                    console.log("Save Preferences clicked. Hiding preferences modal and banner.");
                     const consent = {
                         essential: true, // Essential is always true
                         analytics: analyticsCookiesCheckbox ? analyticsCookiesCheckbox.checked : false,
                         marketing: marketingCookiesCheckbox ? marketingCookiesCheckbox.checked : false
                     };
                     localStorage.setItem('cookieConsent', JSON.stringify(consent));
-                    if (cookieBanner) cookieBanner.classList.add('hidden');
+                    if (cookieBanner) cookieBanner.classList.add('hidden'); // Ensure banner is hidden
                     if (cookiePreferencesModal) cookiePreferencesModal.style.display = 'none'; // Close the preferences modal
                     loadExternalScripts(consent);
                 });
@@ -1020,7 +1025,10 @@
             // Close Cookie Preferences Modal (new)
             if (closeCookiePreferencesModalBtn) {
                 closeCookiePreferencesModalBtn.addEventListener('click', () => {
+                    console.log("Closing preferences modal without saving. Showing banner.");
                     if (cookiePreferencesModal) cookiePreferencesModal.style.display = 'none';
+                    // If preferences modal is closed without saving, show the main banner again
+                    if (cookieBanner) cookieBanner.classList.remove('hidden');
                 });
             }
 
@@ -1028,7 +1036,10 @@
             if (cookiePreferencesModal) {
                 cookiePreferencesModal.addEventListener('click', (e) => {
                     if (e.target === cookiePreferencesModal) {
+                        console.log("Clicked outside preferences modal. Showing banner.");
                         cookiePreferencesModal.style.display = 'none';
+                        // If preferences modal is closed by clicking outside, show the main banner again
+                        if (cookieBanner) cookieBanner.classList.remove('hidden');
                     }
                 });
             }
