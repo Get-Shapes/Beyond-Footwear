@@ -138,7 +138,8 @@
         /* Specific styles for cookie info and preferences modals in light mode */
         html.light-mode #cookie-info-modal .modal-content,
         html.light-mode #cookie-preferences-modal .modal-content,
-        html.light-mode #imprint-modal .modal-content { /* Added imprint modal */
+        html.light-mode #imprint-modal .modal-content,
+        html.light-mode #privacy-policy-modal .modal-content { /* Added imprint modal and privacy policy modal */
             color: #ffffff !important; /* White text in light mode for these modals */
             background-color: rgba(0, 0, 0, 0.7) !important; /* Dark background for contrast */
             border: 1px solid rgba(255, 255, 255, 0.1) !important; /* Light border */
@@ -438,6 +439,14 @@
         .hidden {
             display: none !important;
         }
+
+        /* New styles for privacy policy modal to ensure scrollability */
+        #privacy-policy-modal .modal-content {
+            max-width: 800px; /* Wider for more text */
+            height: 90vh; /* Allow more vertical space */
+            overflow-y: auto; /* Enable scrolling for content */
+            text-align: left; /* Align text left */
+        }
     </style>
     <!-- Script to ensure dark mode is always loaded first unless explicitly set to light -->
     <script>
@@ -668,6 +677,7 @@
                 <p>We may collect and process the following types of personal data:</p>
                 <ul>
                     <li><strong>Usage Data:</strong> Information about how you use our website, including IP address, browser type, operating system, referral URLs, pages viewed, and access times. This data is collected automatically through cookies and similar technologies.</li>
+                    <li><strong>Analytics Data:</strong> Information collected by Google Analytics, such as pages visited, time spent on site, and user demographics (if enabled and consented).</li>
                     <li><strong>Contact Data:</strong> Information you provide when contacting us through forms or email, such as your name, email address, and message content.</li>
                     <li><strong>Booking Data:</strong> Information provided when scheduling a consultation, which may include your name, email, and any details you provide related to your appointment.</li>
                     <!-- Removed Marketing Cookies from this list -->
@@ -680,6 +690,7 @@
                     <li>To improve our website's functionality and user experience.</li>
                     <li>To respond to your inquiries and provide customer support.</li>
                     <li>To analyze website usage and trends for marketing and optimization purposes (with your consent for non-essential cookies).</li>
+                    <li>Analyzing website usage and performance with Google Analytics (with your consent for analytics cookies).</li>
                     <li>To comply with legal obligations.</li>
                 </ul>
 
