@@ -543,8 +543,9 @@
         <!-- Footer Section -->
         <footer class="container mx-auto mt-8 mb-8 text-center text-gray-400 text-sm">
             © 2024 Shape Industries @ Sport. All rights reserved
-            <div class="mt-2">
+            <div class="mt-2 flex justify-center space-x-4">
                 <a href="#" id="imprint-link" class="text-blue-400 hover:underline"></a>
+                <a href="#" id="footer-cookie-preferences-link" class="text-blue-400 hover:underline"></a>
             </div>
         </footer>
 
@@ -655,14 +656,14 @@
             <span class="close-button" id="close-imprint-modal">&times;</span>
             <h2 id="imprint-title" class="text-3xl font-bold mb-6">Imprint</h2>
             <div class="text-content mt-4 text-left">
-                <p id="imprint-company-name"><strong>Company Name:</strong> [Your Company Name]</p>
-                <p id="imprint-legal-form"><strong>Legal Form:</strong> [e.g., GmbH, AG, Sole Proprietorship]</p>
-                <p id="imprint-address"><strong>Address:</strong> [Your Street Address], [Your City], [Your Postal Code], [Your Country]</p>
-                <p id="imprint-contact-email"><strong>Email:</strong> <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a></p>
-                <p id="imprint-contact-phone"><strong>Phone:</strong> [Your Phone Number]</p>
-                <p id="imprint-register-entry"><strong>Register Entry:</strong> [e.g., Commercial Register, Register of Associations] [Register Number], [Register Court]</p>
-                <p id="imprint-vat-id"><strong>VAT ID:</strong> [Your VAT Identification Number (if applicable)]</p>
-                <p id="imprint-responsible-content"><strong>Responsible for Content:</strong> [Name of responsible person/entity, if different]</p>
+                <p id="imprint-company-name"><strong>Company Name:</strong> <span class="imprint-value">[Your Company Name]</span></p>
+                <p id="imprint-legal-form"><strong>Legal Form:</strong> <span class="imprint-value">[e.g., GmbH, AG, Sole Proprietorship]</span></p>
+                <p id="imprint-address"><strong>Address:</strong> <span class="imprint-value">[Your Street Address], [Your City], [Your Postal Code], [Your Country]</span></p>
+                <p id="imprint-contact-email"><strong>Email:</strong> <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline imprint-value">hello@get-shapes.com</a></p>
+                <p id="imprint-contact-phone"><strong>Phone:</strong> <span class="imprint-value">[Your Phone Number]</span></p>
+                <p id="imprint-register-entry"><strong>Register Entry:</strong> <span class="imprint-value">[e.g., Commercial Register, Register of Associations] [Register Number], [Register Court]</span></p>
+                <p id="imprint-vat-id"><strong>VAT ID:</strong> <span class="imprint-value">[Your VAT Identification Number (if applicable)]</span></p>
+                <p id="imprint-responsible-content"><strong>Responsible for Content:</strong> <span class="imprint-value">[Name of responsible person/entity, if different]</span></p>
             </div>
         </div>
     </div>
@@ -714,7 +715,8 @@
                 imprintContactPhone: "+49 123 456789",
                 imprintRegisterEntry: "Amtsgericht Musterstadt, HRB 12345",
                 imprintVatId: "DE123456789",
-                imprintResponsibleContent: "Max Mustermann"
+                imprintResponsibleContent: "Max Mustermann",
+                footerCookiePreferencesLink: "Cookie Preferences"
             },
             de: {
                 scheduleCta: "Buche deine kostenlose Beratung.",
@@ -760,7 +762,8 @@
                 imprintContactPhone: "+49 123 456789",
                 imprintRegisterEntry: "Amtsgericht Musterstadt, HRB 12345",
                 imprintVatId: "DE123456789",
-                imprintResponsibleContent: "Max Mustermann"
+                imprintResponsibleContent: "Max Mustermann",
+                footerCookiePreferencesLink: "Cookie-Einstellungen"
             }
         };
 
@@ -821,6 +824,7 @@
             const imprintRegisterEntry = document.getElementById('imprint-register-entry');
             const imprintVatId = document.getElementById('imprint-vat-id');
             const imprintResponsibleContent = document.getElementById('imprint-responsible-content');
+            const footerCookiePreferencesLink = document.getElementById('footer-cookie-preferences-link');
 
 
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
@@ -862,21 +866,33 @@
             if (cookieInfoManagingCookies) cookieInfoManagingCookies.textContent = langData.cookieInfoManagingCookies;
             if (cookieInfoManagingCookiesText) cookieInfoManagingCookiesText.textContent = langData.cookieInfoManagingCookiesText;
             if (cookieInfoContact) {
-                // The email address is hardcoded in the HTML, so only update the preceding text
                 cookieInfoContact.innerHTML = langData.cookieInfoContact + ` <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a detailed list of the cookies we use, please refer to our <a href="#" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a>.`;
             }
 
             // Update Imprint Modal content
             if (imprintLink) imprintLink.textContent = langData.imprintLinkText;
             if (imprintTitle) imprintTitle.textContent = langData.imprintTitle;
-            if (imprintCompanyName) imprintCompanyName.innerHTML = `<strong>Company Name:</strong> ${langData.imprintCompanyName}`;
-            if (imprintLegalForm) imprintLegalForm.innerHTML = `<strong>Legal Form:</strong> ${langData.imprintLegalForm}`;
-            if (imprintAddress) imprintAddress.innerHTML = `<strong>Address:</strong> ${langData.imprintAddress}`;
-            if (imprintContactEmail) imprintContactEmail.innerHTML = `<strong>Email:</strong> <a href="mailto:${langData.imprintContactEmail}" class="text-blue-400 hover:underline">${langData.imprintContactEmail}</a>`;
-            if (imprintContactPhone) imprintContactPhone.innerHTML = `<strong>Phone:</strong> ${langData.imprintContactPhone}`;
-            if (imprintRegisterEntry) imprintRegisterEntry.innerHTML = `<strong>Register Entry:</strong> ${langData.imprintRegisterEntry}`;
-            if (imprintVatId) imprintVatId.innerHTML = `<strong>VAT ID:</strong> ${langData.imprintVatId}`;
-            if (imprintResponsibleContent) imprintResponsibleContent.innerHTML = `<strong>Responsible for Content:</strong> ${langData.imprintResponsibleContent}`;
+            if (imprintCompanyName) imprintCompanyName.querySelector('.imprint-value').textContent = langData.imprintCompanyName;
+            if (imprintLegalForm) imprintLegalForm.querySelector('.imprint-value').textContent = langData.imprintLegalForm;
+            if (imprintAddress) imprintAddress.querySelector('.imprint-value').textContent = langData.imprintAddress;
+            if (imprintContactEmail) imprintContactEmail.querySelector('.imprint-value').textContent = langData.imprintContactEmail;
+            if (imprintContactPhone) imprintContactPhone.querySelector('.imprint-value').textContent = langData.imprintContactPhone;
+            if (imprintRegisterEntry) imprintRegisterEntry.querySelector('.imprint-value').textContent = langData.imprintRegisterEntry;
+            if (imprintVatId) imprintVatId.querySelector('.imprint-value').textContent = langData.imprintVatId;
+            if (imprintResponsibleContent) imprintResponsibleContent.querySelector('.imprint-value').textContent = langData.imprintResponsibleContent;
+
+            // Update Footer Cookie Preferences Link
+            if (footerCookiePreferencesLink) footerCookiePreferencesLink.textContent = langData.footerCookiePreferencesLink;
+
+            // Update link colors based on theme
+            const isLightModeActive = document.documentElement.classList.contains('light-mode');
+            const linkColorClass = isLightModeActive ? 'text-blue-700' : 'text-blue-400';
+            const hoverLinkColorClass = isLightModeActive ? 'hover:text-blue-900' : 'hover:text-blue-600';
+
+            document.querySelectorAll('#imprint-link, #footer-cookie-preferences-link, #cookie-info-imprint-link, #cookie-info-modal a[href^="mailto:"]').forEach(link => {
+                link.classList.remove('text-blue-400', 'hover:underline', 'text-blue-700', 'hover:text-blue-900', 'hover:text-blue-600'); // Remove all previous color classes
+                link.classList.add(linkColorClass, hoverLinkColorClass, 'hover:underline');
+            });
         }
 
         // Function to update the theme toggle icon
@@ -987,6 +1003,7 @@
             const imprintModal = document.getElementById('imprint-modal');
             const closeImprintModalBtn = document.getElementById('close-imprint-modal');
             const imprintLink = document.getElementById('imprint-link');
+            const footerCookiePreferencesLink = document.getElementById('footer-cookie-preferences-link');
 
 
             // Initial theme application (already handled by inline script in head for FOUC prevention)
@@ -1191,6 +1208,22 @@
                 });
             }
 
+            // Open Cookie Preferences from Footer
+            if (footerCookiePreferencesLink) {
+                footerCookiePreferencesLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (cookiePreferencesModal) {
+                        // Ensure checkboxes reflect current consent before opening
+                        const currentConsent = JSON.parse(localStorage.getItem('cookieConsent')) || { essential: true, analytics: false, marketing: false };
+                        if (essentialCookiesCheckbox) essentialCookiesCheckbox.checked = currentConsent.essential;
+                        if (analyticsCookiesCheckbox) analyticsCookiesCheckbox.checked = currentConsent.analytics;
+                        if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = currentConsent.marketing;
+
+                        cookiePreferencesModal.style.display = 'flex';
+                    }
+                });
+            }
+
             // Close Imprint Modal
             if (closeImprintModalBtn) {
                 closeImprintModalBtn.addEventListener('click', () => {
@@ -1301,6 +1334,7 @@
                         if (cookieBanner) cookieBanner.classList.remove('light-mode'); // Remove light mode from banner
                     }
                     updateThemeToggleIcon(); // Update icon after theme change
+                    updateContent(); // Re-apply link colors based on new theme
                 });
             }
         });
