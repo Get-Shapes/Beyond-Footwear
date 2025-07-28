@@ -456,6 +456,22 @@
             overflow-y: auto; /* Make this specific div scrollable */
             padding-right: 0.5rem; /* Add a little padding to the right for scrollbar clearance */
         }
+
+        /* Styles for imprint modal to ensure scrollability */
+        #imprint-modal .modal-content {
+            max-width: 800px; /* Wider for more text */
+            height: 90vh; /* Allow more vertical space */
+            text-align: left; /* Align text left */
+            display: flex; /* Ensure flex container */
+            flex-direction: column; /* Ensure column direction */
+            padding-bottom: 1.5rem; /* Add padding to the bottom of the modal content if needed to prevent close button overlap */
+        }
+
+        #imprint-modal .modal-content .text-content {
+            flex-grow: 1; /* Allow text content to fill available space */
+            overflow-y: auto; /* Make this specific div scrollable */
+            padding-right: 0.5rem; /* Add a little padding to the right for scrollbar clearance */
+        }
     </style>
     <!-- Script to ensure dark mode is always loaded first unless explicitly set to light -->
     <script>
@@ -815,7 +831,7 @@
                 cookieInfoTitle: "Cookie-Informationen",
                 cookieInfoIntro: "Diese Website verwendet Cookies, um Ihr Browser-Erlebnis zu verbessern und zu verstehen, wie Sie mit unserer Website interagieren. Durch die Nutzung unserer Website stimmen Sie unserer Verwendung von Cookies gemäß dieser Richtlinie zu.",
                 cookieInfoWhatAreCookies: "Was sind Cookies?",
-                cookieInfoWhatAreCookiesText: "Cookies sind kleine Textdateien, die auf Ihrem Gerät (Computer, Tablet, Mobiltelefon) gespeichert werden, wenn Sie bestimmte Webseiten besuchen. Sie werden häufig verwendet, um Websites effizienter zu gestalten und den Eigentümern der Website Informationen zur Verfügung zu stellen.",
+                cookieInfoWhatAreCookiesText: "Cookies sind kleine Textdateien, die auf Ihrem Gerät (Computer, Tablet, Mobiltelefon) gespeichert werden, wenn Sie bestimmte Webseiten besuchen. Sie werden häufig verwendet, um Websites effizienter zu gestalten und den Eigentütern der Website Informationen zur Verfügung zu stellen.",
                 cookieInfoHowWeUseCookies: "Wie wir Cookies verwenden",
                 cookieInfoHowWeUseCookiesText: "Wir verwenden Cookies für die folgenden Zwecke:",
                 cookieInfoEssential: "Essentielle Cookies:",
@@ -1251,8 +1267,17 @@
             if (cookieInfoImprintLink) {
                 cookieInfoImprintLink.addEventListener('click', (e) => {
                     e.preventDefault();
-                    if (cookieInfoModal) cookieInfoModal.style.display = 'none'; // Close cookie info modal
-                    if (imprintModal) imprintModal.style.display = 'flex'; // Open imprint modal
+                    console.log("Imprint link clicked from cookie info modal.");
+                    if (cookieInfoModal) {
+                        cookieInfoModal.style.display = 'none'; // Close cookie info modal
+                        console.log("Cookie info modal hidden.");
+                    }
+                    if (imprintModal) {
+                        imprintModal.style.display = 'flex'; // Open imprint modal
+                        console.log("Imprint modal displayed. Current display:", imprintModal.style.display);
+                    } else {
+                        console.log("Imprint modal element not found!");
+                    }
                 });
             }
 
@@ -1260,8 +1285,17 @@
             if (cookieInfoPrivacyPolicyLink) {
                 cookieInfoPrivacyPolicyLink.addEventListener('click', (e) => {
                     e.preventDefault();
-                    if (cookieInfoModal) cookieInfoModal.style.display = 'none'; // Close cookie info modal
-                    if (privacyPolicyModal) privacyPolicyModal.style.display = 'flex'; // Open privacy policy modal
+                    console.log("Privacy Policy link clicked from cookie info modal.");
+                    if (cookieInfoModal) {
+                        cookieInfoModal.style.display = 'none'; // Close cookie info modal
+                        console.log("Cookie info modal hidden.");
+                    }
+                    if (privacyPolicyModal) {
+                        privacyPolicyModal.style.display = 'flex'; // Open privacy policy modal
+                        console.log("Privacy Policy modal displayed. Current display:", privacyPolicyModal.style.display);
+                    } else {
+                        console.log("Privacy Policy modal element not found!");
+                    }
                 });
             }
 
