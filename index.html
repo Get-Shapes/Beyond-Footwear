@@ -638,8 +638,8 @@
                 <h3 id="cookie-info-how-we-use-cookies">How We Use Cookies</h3>
                 <p id="cookie-info-how-we-use-cookies-text">We use cookies for the following purposes:</p>
                 <ul>
-                    <li><strong id="cookie-info-essential">Essential Cookies:</strong> <span id="cookie-info-essential-text">These cookies are strictly necessary for the core functionality of our website, such as managing user sessions, remembering your cookie preferences, and enabling secure areas. Without these cookies, the website cannot function properly. They do not store any personally identifiable information.</span></li>
-                    <li><strong id="cookie-info-analytics">Analytics Cookies:</strong> <span id="cookie-info-analytics-text">These cookies allow us to collect information about how visitors use our website, such as which pages are visited most often, how long users stay on a page, and if they encounter any errors. This data helps us to analyze and improve the performance and design of our website. All information collected by these cookies is aggregated and anonymous.</span></li>
+                    <li><strong>Essential Cookies:</strong> <span id="cookie-info-essential-text">These cookies are strictly necessary for the core functionality of our website, such as managing user sessions, remembering your cookie preferences, and enabling secure areas. Without these cookies, the website cannot function properly. They do not store any personally identifiable information.</span></li>
+                    <li><strong>Analytics Cookies:</strong> <span id="cookie-info-analytics-text">These cookies allow us to collect information about how visitors use our website, such as which pages are visited most often, how long users stay on a page, and if they encounter any errors. This data helps us to analyze and improve the performance and design of our website. All information collected by these cookies is aggregated and anonymous.</span></li>
                     <!-- Removed Marketing Cookies from this list -->
                 </ul>
 
@@ -648,7 +648,7 @@
                     You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.
                 </p>
                 <p id="cookie-info-contact">
-                    For more detailed information about how we use cookies and your choices, please contact us at <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <a href="javascript:void(0);" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a> and our <a href="javascript:void(0);" id="cookie-info-privacy-policy-link" class="text-blue-400 hover:underline">Privacy Policy</a>.
+                    For more detailed information about how we use cookies and your choices, please contact us at <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <span id="cookie-info-imprint-link-span" class="text-blue-400 hover:underline cursor-pointer">imprint</span> and our <span id="cookie-info-privacy-policy-link-span" class="text-blue-400 hover:underline cursor-pointer">Privacy Policy</span>.
                 </p>
             </div>
         </div>
@@ -918,8 +918,6 @@
             const cookieInfoManagingCookies = document.getElementById('cookie-info-managing-cookies');
             const cookieInfoManagingCookiesText = document.getElementById('cookie-info-managing-cookies-text');
             const cookieInfoContact = document.getElementById('cookie-info-contact');
-            const cookieInfoImprintLink = document.getElementById('cookie-info-imprint-link');
-            const cookieInfoPrivacyPolicyLink = document.getElementById('cookie-info-privacy-policy-link');
 
             // Imprint Modal elements
             const imprintLink = document.getElementById('imprint-link');
@@ -982,7 +980,8 @@
             if (cookieInfoManagingCookiesText) cookieInfoManagingCookiesText.textContent = langData.cookieInfoManagingCookiesText;
             if (cookieInfoContact) {
                 // Update the entire innerHTML to include the new Privacy Policy link
-                cookieInfoContact.innerHTML = `${langData.cookieInfoContact} <a href="mailto:${langData.imprintContactEmail}" class="text-blue-400 hover:underline">${langData.imprintContactEmail}</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <a href="javascript:void(0);" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a> and our <a href="javascript:void(0);" id="cookie-info-privacy-policy-link" class="text-blue-400 hover:underline">Privacy Policy</a>.`;
+                // Changed <a> to <span> and added cursor-pointer class
+                cookieInfoContact.innerHTML = `${langData.cookieInfoContact} <a href="mailto:${langData.imprintContactEmail}" class="text-blue-400 hover:underline">${langData.imprintContactEmail}</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <span id="cookie-info-imprint-link-span" class="text-blue-400 hover:underline cursor-pointer">imprint</span> and our <span id="cookie-info-privacy-policy-link-span" class="text-blue-400 hover:underline cursor-pointer">Privacy Policy</span>.`;
             }
 
             // Update Imprint Modal content
@@ -1026,7 +1025,7 @@
             const hoverLinkColorClass = isLightModeActive ? 'hover:text-blue-900' : 'hover:text-blue-600';
 
             // Apply blue colors to modal links
-            document.querySelectorAll('#cookie-info-imprint-link, #cookie-info-privacy-policy-link, #cookie-info-modal a[href^="mailto:"], #imprint-modal a[href^="mailto:"], #imprint-modal a[href^="https://ec.europa.eu"], #privacy-policy-modal a[href^="mailto:"]').forEach(link => {
+            document.querySelectorAll('#cookie-info-modal a[href^="mailto:"], #imprint-modal a[href^="mailto:"], #imprint-modal a[href^="https://ec.europa.eu"], #privacy-policy-modal a[href^="mailto:"], #cookie-info-imprint-link-span, #cookie-info-privacy-policy-link-span').forEach(link => {
                 link.classList.remove('text-blue-400', 'hover:underline', 'text-blue-700', 'hover:text-blue-900', 'hover:text-blue-600', 'text-gray-400', 'hover:text-gray-200', 'text-black', 'hover:text-gray-700');
                 link.classList.add(linkColorClass, hoverLinkColorClass, 'hover:underline');
             });
@@ -1075,9 +1074,43 @@
             }
         }
 
+        // Event handler functions for the links
+        function openImprintModalFromCookieInfo(e) {
+            console.log("Imprint link span clicked from cookie info modal.");
+            const cookieInfoModal = document.getElementById('cookie-info-modal');
+            const imprintModal = document.getElementById('imprint-modal');
+            if (cookieInfoModal) {
+                cookieInfoModal.style.display = 'none'; // Close cookie info modal
+                console.log("Cookie info modal hidden. Current display:", cookieInfoModal.style.display);
+            }
+            if (imprintModal) {
+                imprintModal.style.display = 'flex'; // Open imprint modal
+                console.log("Imprint modal displayed. Current display:", imprintModal.style.display);
+            } else {
+                console.log("Imprint modal element not found!");
+            }
+        }
+
+        function openPrivacyPolicyModalFromCookieInfo(e) {
+            console.log("Privacy Policy link span clicked from cookie info modal.");
+            const cookieInfoModal = document.getElementById('cookie-info-modal');
+            const privacyPolicyModal = document.getElementById('privacy-policy-modal');
+            if (cookieInfoModal) {
+                cookieInfoModal.style.display = 'none'; // Close cookie info modal
+                console.log("Cookie info modal hidden. Current display:", cookieInfoModal.style.display);
+            }
+            if (privacyPolicyModal) {
+                privacyPolicyModal.style.display = 'flex'; // Open privacy policy modal
+                console.log("Privacy Policy modal displayed. Current display:", privacyPolicyModal.style.display);
+            } else {
+                console.log("Privacy Policy modal element not found!");
+            }
+        }
+
 
         // This ensures the DOM is fully loaded before trying to access elements
         document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOMContentLoaded fired.");
             // DOM elements
             const calendlyModal = document.getElementById('calendly-modal');
             const closeModalBtn = document.getElementById('close-modal');
@@ -1104,8 +1137,9 @@
             // Cookie Info Modal elements
             const cookieInfoModal = document.getElementById('cookie-info-modal');
             const closeCookieInfoModalBtn = document.getElementById('close-cookie-info-modal');
-            const cookieInfoImprintLink = document.getElementById('cookie-info-imprint-link');
-            const cookieInfoPrivacyPolicyLink = document.getElementById('cookie-info-privacy-policy-link');
+            // These are now spans, handled by event delegation on cookieInfoModal
+            // const cookieInfoImprintLink = document.getElementById('cookie-info-imprint-link');
+            // const cookieInfoPrivacyPolicyLink = document.getElementById('cookie-info-privacy-policy-link');
 
             // Cookie Preferences Modal elements (new)
             const cookiePreferencesModal = document.getElementById('cookie-preferences-modal');
@@ -1144,6 +1178,7 @@
             const availableLangs = Object.keys(content);
             const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
             currentLanguage = initialLang;
+            console.log("Calling updateContent for initial language.");
             updateContent(); // Initial content update
 
             // Cookie Consent Logic - Read and apply stored preferences
@@ -1273,40 +1308,13 @@
                         }
                     }
                 });
-            }
 
-            // Open Imprint from Cookie Info Modal
-            if (cookieInfoImprintLink) {
-                cookieInfoImprintLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    console.log("Imprint link clicked from cookie info modal.");
-                    if (cookieInfoModal) {
-                        cookieInfoModal.style.display = 'none'; // Close cookie info modal
-                        console.log("Cookie info modal hidden.");
-                    }
-                    if (imprintModal) {
-                        imprintModal.style.display = 'flex'; // Open imprint modal
-                        console.log("Imprint modal displayed. Current display:", imprintModal.style.display);
-                    } else {
-                        console.log("Imprint modal element not found!");
-                    }
-                });
-            }
-
-            // Open Privacy Policy from Cookie Info Modal
-            if (cookieInfoPrivacyPolicyLink) {
-                cookieInfoPrivacyPolicyLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    console.log("Privacy Policy link clicked from cookie info modal.");
-                    if (cookieInfoModal) {
-                        cookieInfoModal.style.display = 'none'; // Close cookie info modal
-                        console.log("Cookie info modal hidden.");
-                    }
-                    if (privacyPolicyModal) {
-                        privacyPolicyModal.style.display = 'flex'; // Open privacy policy modal
-                        console.log("Privacy Policy modal displayed. Current display:", privacyPolicyModal.style.display);
-                    } else {
-                        console.log("Privacy Policy modal element not found!");
+                // Event delegation for imprint and privacy policy links within cookieInfoModal
+                cookieInfoModal.addEventListener('click', (e) => {
+                    if (e.target.id === 'cookie-info-imprint-link-span') {
+                        openImprintModalFromCookieInfo();
+                    } else if (e.target.id === 'cookie-info-privacy-policy-link-span') {
+                        openPrivacyPolicyModalFromCookieInfo();
                     }
                 });
             }
