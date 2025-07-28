@@ -3,392 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Shapes Beyond Footwear - Award-winning innovative footwear solutions. Book your free consultation today.">
-    <meta name="keywords" content="footwear, innovation, consultation, award-winning, shapes">
-    <meta name="author" content="Shapes Beyond Footwear">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://drshapes.github.io/Beyond-Footwear/">
-    <meta property="og:title" content="Shapes Beyond Footwear">
-    <meta property="og:description" content="Award-winning innovative footwear solutions. Book your property="og:image" content="https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://drshapes.github.io/Beyond-Footwear/">
-    <meta property="twitter:title" content="Shapes Beyond Footwear">
-    <meta property="twitter:description" content="Award-winning innovative footwear solutions. Book your property="twitter:image" content="https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png">
-
-    <title>Shapes Beyond Footwear - Award-Winning Innovation</title>
-
+    <title>Shapes Beyond Footwear</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Urbanist -->
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Shapes Beyond Footwear",
-      "url": "https://drshapes.github.io/Beyond-Footwear/",
-      "logo": "https://drshapes.github.io/Beyond-Footwear/Shapes-Logo neu Black.png",
-      "description": "Award-winning innovative footwear solutions",
-      "award": [
-        "German Design Award 2023",
-        "German Innovation Award 2023"
-      ]
-    }
-    </script>
-    
     <style>
-        body {
-            font-family: 'Urbanist', sans-serif;
-            background-color: #ffffff !important;
-            position: relative;
-            min-height: 100vh;
-            transition: background-color 0.3s ease;
-            z-index: 0;
-            color: #000000 !important;
+        /* Default to dark mode styles for html and body */
+        html, body {
+            background-color: #000000 !important; /* Pure black background by default */
+            color: #e2e8f0; /* Light text by default */
+            font-family: 'Urbanist', sans-serif; /* Use the Urbanist font */
+            position: relative; /* Needed for pseudo-elements */
+            min-height: 100vh; /* Ensure body takes full height for background */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+            z-index: 0; /* Ensures content sits above it */
         }
 
-        /* Force all text to black in light mode */
-        body:not(.dark) .text-black-force {
-            color: #000000 !important;
+        /* Styles for light mode when 'light-mode' class is active */
+        html.light-mode, body.light-mode {
+            background-color: #ffffff !important; /* Pure white background in light mode */
+            color: #000000 !important; /* Pure black text in light mode */
         }
+
+        /* Removed: Force all text to black in light mode, if not already covered by html.light-mode */
+        /* body:not(.dark) .text-black-force {
+            color: #000000 !important;
+        } */
 
         /* Remove background image layer and overlay */
         body::after,
         body::before {
-            content: none;
+            content: none; /* Remove pseudo-elements entirely */
         }
 
-        body.dark {
-            background-color: #000000 !important;
-            color: #e2e8f0;
-        }
-
-        /* Glassy effect for content boxes */
+        /* Glassy effect for content boxes (Liquid Glass look) */
         .glassy-box {
-            /* Adjusted background for light mode to be more transparent white */
-            background: rgba(255, 255, 255, 0.1); /* Slightly more opaque white for better visibility */
-            backdrop-filter: blur(10px) saturate(180%);
-            -webkit-backdrop-filter: blur(10px) saturate(180%);
-            border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle black border for light mode */
-            /* Adjusted box-shadow for a cleaner, whiter look in light mode */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Lighter, less prominent shadow */
-            border-radius: 1rem;
+            background: transparent; /* Fully transparent for both modes */
+            backdrop-filter: blur(10px) saturate(180%); /* Frosted glass with saturation */
+            -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
+            border-radius: 1rem; /* Consistent with rounded-xl */
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
         }
 
-        .dark .glassy-box {
-            background: linear-gradient(135deg, rgba(45, 55, 72, 0.3), rgba(45, 55, 72, 0.2));
+        /* Borders and shadows specific to dark mode for glassy-box */
+        html:not(.light-mode) .glassy-box, body:not(.light-mode) .glassy-box {
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 150, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 150, 255, 0.2); /* Adjusted for dark mode */
         }
 
-        /* Video container with loading background */
-        .video-container {
-            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-            background-size: 20px 20px;
-            background-image: 
-                linear-gradient(45deg, rgba(0,0,0,.1) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(0,0,0,.1) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(0,0,0,.1) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(0,0,0,.1) 75%);
-        }
-
-        .dark .video-container {
-            background: linear-gradient(45deg, #2d3748, #1a202c);
+        /* Borders and shadows specific to light mode for glassy-box */
+        html.light-mode .glassy-box, body.light-mode .glassy-box {
+            border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle border for light mode */
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05); /* Very subtle shadow for light mode */
         }
 
         /* Ensure video fills its container and maintains aspect ratio */
         .glassy-box video {
-            object-fit: contain;
+            object-fit: contain; /* Changed from 'cover' to 'contain' */
             width: 100%;
             height: 100%;
             display: block;
-            background-color: #000;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Video hover effect */
-        .glassy-box video:hover {
-            opacity: 0.95;
-        }
-
-        /* Video container positioning for overlay elements */
-        .video-container {
-            position: relative;
-        }
-
-        /* Custom video controls styling - IMPROVED */
-        .video-controls {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1.5rem;
-            border-bottom-left-radius: 1rem;
-            border-bottom-right-radius: 1rem;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            opacity: 0;
-            transform: translateY(100%);
-        }
-
-        .video-container:hover .video-controls,
-        .video-controls:focus-within {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .video-controls button {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            cursor: pointer;
-            padding: 0.75rem;
-            border-radius: 9999px;
-            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .video-controls button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .video-controls button svg {
-            width: 1.5rem;
-            height: 1.5rem;
-        }
-
-        .video-controls input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 3px;
-            outline: none;
-            cursor: pointer;
-            flex-grow: 1;
-            margin: 0 0.5rem;
-        }
-
-        .video-controls input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            background: #ef4444;
-            border-radius: 50%;
-            cursor: grab;
-            box-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
-            margin-top: -6px;
-        }
-
-        .video-controls input[type="range"]::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            background: #ef4444;
-            border-radius: 50%;
-            cursor: grab;
-            box-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
-        }
-
-        .video-time {
-            color: #e2e8f0;
-            font-size: 0.95rem;
-            min-width: 70px;
-            text-align: center;
-            font-weight: 500;
+            background-color: #000; /* Optional: adds black bars if needed */
         }
 
         /* Apple-style button base */
         .apple-button {
-            padding: 2rem 2rem;
-            font-weight: 600;
-            border-radius: 0.75rem;
-            transition: all 0.3s ease;
+            /* Adjusted padding and min-width */
+            padding: 1.5rem 3.5rem; /* Reduced horizontal padding slightly */
+            min-width: 320px; /* Reduced min-width slightly */
+            font-weight: 600; /* font-semibold */
+            border-radius: 1rem; /* rounded-xl */
+            transition: all 0.3s ease; /* transition duration-300 */
+            display: inline-block; /* Ensure padding applies correctly */
         }
 
-        /* Improved button hover states */
-        .apple-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        /* Remove focus outline for all buttons */
+        /* Explicitly remove focus outline and border for all buttons */
         button:focus,
         button:focus-visible {
             outline: none !important;
             box-shadow: none !important;
-            border: none !important;
+            border: none !important; /* Added to aggressively remove any default borders */
         }
 
-        /* Loading states */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
+        /* Specific override for the schedule-cta button to ensure no blue outline or border */
+        #schedule-cta:focus,
+        #schedule-cta:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important; /* Added to aggressively remove any default borders */
         }
 
         /* Modal styling */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
             left: 0;
             top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
             justify-content: center;
             align-items: center;
         }
-
         .modal-content {
             margin: auto;
-            padding: 1.5rem;
+            padding: 1.5rem; /* Reduced padding */
             position: relative;
-            max-width: 90%;
-            width: 700px;
-            height: 95vh;
+            max-width: 90%; /* Keep max-width for responsiveness */
+            width: 700px; /* Increased default width for better Calendly display */
+            height: 95vh; /* Make it take up most of the viewport height */
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            color: #000000;
-            overflow: hidden;
-            border-radius: 1rem;
+            color: #000000; /* Default text color for modal content */
+            overflow: hidden; /* Hide modal scrollbar */
+            border-radius: 1rem; /* Keep border-radius from glassy-box */
         }
-
-        .dark .modal-content {
-            color: #e2e8f0;
+        /* Modal content text color based on theme */
+        html.light-mode .modal-content {
+            color: #000000; /* Black text for modal content in light mode */
+        }
+        html:not(.light-mode) .modal-content {
+            color: #e2e8f0; /* Light text for modal content in dark mode */
         }
 
         .close-button {
-            color: #000000;
+            color: #000000; /* Pure Black for light mode */
             position: absolute;
             top: 1rem;
             right: 1.5rem;
             font-size: 2rem;
             font-weight: bold;
             cursor: pointer;
-            transition: color 0.3s ease;
         }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: #ef4444;
-            text-decoration: none;
-            cursor: pointer;
+        /* Close button color based on theme */
+        html.light-mode .close-button {
+            color: #000000; /* Pure black on hover in light mode */
         }
-
-        .dark .close-button {
-            color: #cbd5e0;
+        html:not(.light-mode) .close-button {
+            color: #cbd5e0; /* Adjusted for dark background */
         }
-
-        .dark .close-button:hover,
-        .dark .close-button:focus {
-            color: #ef4444;
+        html.light-mode .close-button:hover,
+        html.light-mode .close-button:focus {
+            color: #000000; /* Pure black on hover */
         }
-
-        /* Language toggle button override */
-        body:not(.dark) #lang-toggle {
-            background-color: #ffffff !important;
+        html:not(.light-mode) .close-button:hover,
+        html:not(.light-mode) .close-button:focus {
+            color: #fefefe; /* Adjusted for dark background */
         }
 
         /* Calendly iframe container styling */
         .calendly-iframe-container {
             position: relative;
             width: 100%;
-            flex-grow: 1;
-            height: 0;
-            overflow: hidden;
+            flex-grow: 1; /* Allow it to take up available vertical space */
+            height: 0; /* Important for flex-grow to work correctly in a column layout */
+            overflow: hidden; /* Hide scrollbars of the container */
             border-radius: 0.5rem;
-            margin-top: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin-top: 1rem; /* Add some space below title */
+            display: flex; /* Make it a flex container for the iframe */
+            justify-content: center; /* Center iframe horizontally */
+            align-items: center; /* Center iframe vertically */
         }
 
         .calendly-iframe {
             width: 100%;
             height: 100%;
             border: 0;
+            /* Attempt to influence color scheme - may not work due to cross-origin policy */
+            color-scheme: light;
         }
-
         /* Ensure modal title doesn't shrink */
         .modal-content h2 {
             flex-shrink: 0;
         }
-
-        /* Error message styling */
-        .error-message {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #dc2626;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            text-align: center;
-        }
-
-        .dark .error-message {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
-            color: #fca5a5;
-        }
-
-        /* New style for the red glassy button */
-        .glassy-red-button {
-            background: rgba(142, 11, 11, 0.1); /* Transparent red background */
-            border: 1px solid rgba(142, 11, 11, 0.3); /* Subtle red border */
-            box-shadow: 0 4px 15px rgba(142, 11, 11, 0.1); /* Subtle red shadow */
-            backdrop-filter: blur(10px) saturate(180%);
-            -webkit-backdrop-filter: blur(10px) saturate(180%);
-        }
-
-        .glassy-red-button:hover {
-            background-color: rgba(142, 11, 11, 0.2); /* More visible on hover */
-            box-shadow: 0 8px 20px rgba(142, 11, 11, 0.2); /* Enhanced shadow on hover */
-        }
     </style>
-    
-    <!-- Script to prevent flash of unstyled content (FOUC) for dark mode -->
+    <!-- Script to ensure dark mode is always loaded first unless explicitly set to light -->
     <script>
         // Check localStorage for theme preference immediately
         const savedTheme = localStorage.getItem('theme');
-        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        // Force dark mode on initial load if no preference is saved
-        if (savedTheme === null) {
-            localStorage.setItem('theme', 'dark');
-            document.documentElement.classList.add('dark');
-            document.body.classList.add('dark');
-        } else if (savedTheme === 'dark') {
-            document.documentElement.classList.add('dark');
-            document.body.classList.add('dark');
+        // Assume dark mode by default
+        let isLightMode = false;
+        if (savedTheme === 'light') {
+            isLightMode = true;
+        }
+
+        // Apply theme classes immediately to prevent FOUC
+        if (isLightMode) {
+            document.documentElement.classList.add('light-mode');
+            document.body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light');
         } else {
-            document.documentElement.classList.remove('dark');
-            document.body.classList.remove('dark');
+            // Ensure dark mode classes are present if not in light mode
+            document.documentElement.classList.remove('light-mode');
+            document.body.classList.remove('light-mode');
+            // Tailwind's dark class is applied dynamically, so we don't remove it here.
+            // The default CSS handles the dark mode appearance.
+            localStorage.setItem('theme', 'dark'); // Ensure localStorage reflects dark mode
         }
     </script>
 </head>
-<body class="text-black" oncontextmenu="return false;">
+<body oncontextmenu="return false;">
 
-    <!-- Google Analytics -->
+    <!-- Google Analytics Placeholder -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -397,7 +219,7 @@
         gtag('config', 'YOUR_GA_TRACKING_ID');
     </script>
 
-    <!-- Facebook Pixel -->
+    <!-- Facebook Pixel Placeholder -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -413,144 +235,97 @@
     <noscript><img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
     /></noscript>
+    <!-- End Facebook Pixel Placeholder -->
 
     <!-- Main Landing Page Content -->
-    <div id="landing-page-content" class="min-h-screen flex flex-col text-black-force">
+    <div id="landing-page-content" class="min-h-screen flex flex-col">
         <!-- Header Section for Logo and Controls -->
-        <header class="container mx-auto flex justify-between items-center w-full mt-8 mb-8">
+        <div class="container mx-auto flex justify-between items-center w-full mt-8 mb-8">
             <!-- Top Left Controls (Theme Toggle and Language) -->
             <div class="flex space-x-4 z-50">
                 <!-- Theme Toggle -->
-                <button id="theme-toggle" class="p-2 rounded-full glassy-box text-black-force dark:text-gray-200 shadow-md transition duration-300" aria-label="Toggle theme">
+                <button id="theme-toggle" class="p-2 rounded-full glassy-box shadow-md transition duration-300">
                     <!-- SVG icon will be dynamically updated by JavaScript -->
                 </button>
-                <!-- Language Toggle with Dropdown -->
-                <div class="relative">
-                    <button id="lang-toggle" class="p-2 rounded-full glassy-box bg-white dark:bg-gray-700 text-black-force dark:text-gray-200 shadow-md transition duration-300 flex items-center space-x-2" aria-label="Select language">
-                        <span id="current-lang">EN</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div id="lang-dropdown" class="hidden absolute left-0 mt-2 w-32 rounded-lg shadow-xl py-1 z-50 glassy-box">
-                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="en">English</button>
-                        <button class="block w-full text-left px-4 py-2 text-black-force dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 lang-option" data-lang="de">Deutsch</button>
-                    </div>
-                </div>
+                <!-- Language Toggle Button (Direct Toggle) -->
+                <button id="lang-toggle" class="p-2 rounded-full glassy-box shadow-md transition duration-300 flex items-center space-x-2">
+                    <span id="current-lang">EN</span>
+                </button>
             </div>
 
-            <!-- Logo Section -->
+            <!-- Logo Section (now top right) -->
             <div>
-                <img id="main-logo" src="Shapes-Logo neu Black.png" alt="Shapes Beyond Footwear Logo" class="w-48 md:w-64 h-auto" ondragstart="return false;">
+                <!-- Logo for Light Mode -->
+                <img id="main-logo" src="Shapes-Logo neu Black.png" alt="Shapes Logo" class="w-[225px] h-[112.5px] object-contain" ondragstart="return false;">
             </div>
-        </header>
+        </div>
 
         <!-- Hero Section -->
-        <main class="container mx-auto relative">
-            <!-- Video Section -->
-            <section class="p-8 rounded-xl glassy-box relative">
-                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg video-container" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-                    <video id="mainVideo" autoplay playsinline loop muted class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload" preload="auto">
-                        <source src="Test Women 1.mp4" type="video/mp4">
+        <section class="container mx-auto relative">
+            <!-- Video Section (now a standalone glassy-box) -->
+            <div class="p-8 rounded-xl glassy-box relative">
+                <!-- Video embed goes here -->
+                <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg bg-black" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+                    <video id="mainVideo" controls autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain rounded-lg" controlsList="nodownload">
                         <source src="Zurab 1.mp4" type="video/mp4">
-                        <track kind="subtitles" label="English" src="SHAPES_Presentation_Subtitles.vtt" srclang="en" default>
-                        <p>Your browser does not support the video tag. <a href="Test Women 1.mp4" class="text-blue-600 hover:text-blue-800">Download the video</a> instead.</p>
+                        <!-- Removed 'Test Women 1.mp4' source -->
+                        <!-- Removed track tag as it's not needed for a single video without explicit subtitles -->
+                        Your browser does browser not support the video tag.
                     </video>
-                    <!-- Custom Video Controls -->
-                    <div class="video-controls flex items-center justify-center space-x-4">
-                        <button id="play-pause-btn" aria-label="Play/Pause">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path id="play-pause-icon" d="M8 5v14l11-7z"/>
-                            </svg>
-                        </button>
-                        <button id="mute-unmute-btn" aria-label="Mute/Unmute">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path id="volume-icon" d="M11 5L6 9H2v6h4l5 4V5z"/>
-                            </svg>
-                        </button>
-                        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" aria-label="Volume slider">
-                        <input type="range" id="progress-slider" min="0" max="100" value="0" aria-label="Video progress slider">
-                        <span id="current-time" class="video-time">00:00</span> / <span id="duration" class="video-time">00:00</span>
-                        <button id="subtitle-toggle-btn" aria-label="Toggle subtitles">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18 9.5c0-.825-.675-1.5-1.5-1.5h-11c-.825 0-1.5.675-1.5 1.5v6c0 .825.675 1.5 1.5 1.5h11c.825 0 1.5-.675 1.5-1.5v-6zM17 16H6V9.5h11V16zM13 13.5h-3v-1h3v1zM13 11.5h-3v-1h3v1z"/>
-                            </svg>
-                        </button>
-                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Call to Action Section -->
-            <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
-                <button id="schedule-cta" class="apple-button text-2xl md:text-3xl text-white glassy-red-button hover:scale-105" aria-label="Schedule consultation">
-                    Book your free consultation.
-                </button>
-            </section>
+        <!-- Call to Action Section -->
+        <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box text-center">
+            <button id="schedule-cta" class="apple-button text-2xl md:text-3xl glassy-box text-white hover:scale-105" style="background-color: rgba(220, 38, 38, 0.6);">
+                Book your free consultation.
+            </button>
+        </section>
 
-            <!-- Benefits Section - Replaced with Image -->
-            <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box flex justify-center items-center">
-                <img src="Abbinder-home_final.jpg" alt="Awards and Partnerships" class="max-w-full h-auto rounded-lg shadow-md">
-            </section>
-        </main>
+        <!-- Benefits Section - Replaced with Image -->
+        <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box flex justify-center items-center">
+            <img src="Abbinder-home_final.jpg" alt="Be faster. Be better. Be stronger. Be balanced. With Shapes." class="w-full h-auto object-contain rounded-xl" ondragstart="return false;">
+        </section>
 
         <!-- Footer Section -->
-        <footer class="container mx-auto mt-8 mb-4 text-center text-gray-500 text-sm dark:text-gray-400">
+        <footer class="container mx-auto mt-8 mb-8 text-center text-gray-400 text-sm">
             © 2024 Shape Industries @ Sport. All rights reserved
         </footer>
+
     </div>
 
     <!-- Calendly Modal -->
-    <div id="calendly-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+    <div id="calendly-modal" class="modal">
         <div class="modal-content glassy-box">
-            <button class="close-button" id="close-modal" aria-label="Close modal">×</button>
-            <h2 id="modal-title" class="text-black-force dark:text-gray-200 text-3xl font-bold mb-6">Schedule Your Appointment</h2>
+            <span class="close-button" id="close-modal">&times;</span>
+            <h2 id="modal-title" class="text-3xl font-bold mb-6">Schedule Your Appointment</h2>
+            <!-- Calendly Embed - Replace YOUR_CALENDly_LINK with your actual Calendly scheduling link -->
             <div class="calendly-iframe-container">
-                <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe" title="Schedule appointment"></iframe>
+                <iframe src="https://calendly.com/sascha-get-shapes/30min" class="calendly-iframe"></iframe>
             </div>
+            <!-- Removed the "Confirm Booking" button as Calendly handles its own flow -->
         </div>
     </div>
 
     <!-- Thank You Page Content (Initially Hidden) -->
     <div id="thank-you-page" class="hidden min-h-screen flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800 transition duration-300">
-        <h1 id="thankyou-headline" class="text-black-force dark:text-gray-100 text-5xl md:text-6xl font-extrabold mb-6">
+        <h1 id="thankyou-headline" class="text-5xl md:text-6xl font-extrabold mb-6">
             Thank you! Your appointment is confirmed.
         </h1>
-        <p id="thankyou-subheadline" class="text-black-force dark:text-gray-300 text-xl md:text-2xl mb-10">
+        <p id="thankyou-subheadline" class="text-xl md:text-2xl mb-10">
             Check your email for confirmation.
         </p>
-        <button id="back-to-homepage" class="apple-button text-xl bg-transparent text-black-force dark:text-gray-200 border border-black dark:border-gray-200">
+        <button id="back-to-homepage" class="apple-button text-xl bg-transparent border border-black dark:border-gray-200">
             Back to Homepage
         </button>
-    </div>
+    </div >
 
     <script>
-        // Analytics tracking function
-        function trackEvent(eventName, properties = {}) {
-            try {
-                // Google Analytics tracking
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', eventName, properties);
-                }
-                
-                // Facebook Pixel tracking
-                if (typeof fbq !== 'undefined') {
-                    fbq('track', eventName, properties);
-                }
-            } catch (error) {
-                console.warn('Analytics tracking error:', error);
-            }
-        }
-
         // Language content
         const content = {
             en: {
                 scheduleCta: "Book your free consultation.",
-                benefit2Title: "Award-Winning", // This title is no longer displayed but kept for consistency
-                benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
-                        <li><strong>Winner of German Design Award 23</strong></li>
-                        <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
-                    </ul>
-                `, // This text is no longer displayed but kept for consistency
                 modalTitle: "Schedule Your Appointment",
                 thankyouHeadline: "Thank you! Your appointment is confirmed.",
                 thankyouSubheadline: "Check your email for confirmation.",
@@ -559,389 +334,190 @@
             },
             de: {
                 scheduleCta: "Buche deine kostenlose Beratung.",
-                benefit2Title: "Preisgekrönt", // This title is no longer displayed but kept for consistency
-                benefit2Text: `
-                    <ul class="list-none p-0 space-y-2">
-                        <li>Mehrfache Nominierungen für Wellness & Spa Innovation Award & German Design Award</li>
-                        <li><strong>Gewinner des German Design Award 23</strong></li>
-                        <li><strong>Gewinner des German Innovation Award 23</strong> (Medizin & Gesundheit)</li>
-                    </ul>
-                `, // This text is no longer displayed but kept for consistency
                 modalTitle: "Termin vereinbaren",
                 thankyouHeadline: "Vielen Dank! Ihr Termin ist bestätigt.",
                 thankyouSubheadline: "Bitte überprüfen Sie Ihre E-Mails zur Bestätigung.",
-                backToHomepage: "Zurück zur Startseite",
+                backToHomepage: "Zur Startseite",
                 currentLang: "DE"
             }
         };
 
-        let currentLanguage = 'en';
+        let currentLanguage = 'en'; // Default language
 
-        // Function to update text content
-        function updateContent(elements) {
+        // Function to update content based on language
+        function updateContent() {
+            console.log("Updating content for language:", currentLanguage);
             const langData = content[currentLanguage];
-            // Removed direct updates for benefit2Title and benefit2Text as they are replaced by an image
-            if (elements.modalTitle) elements.modalTitle.textContent = langData.modalTitle;
-            if (elements.thankyouHeadline) elements.thankyouHeadline.textContent = langData.thankyouHeadline;
-            if (elements.thankyouSubheadline) elements.thankyouSubheadline.textContent = langData.thankyouSubheadline;
-            if (elements.backToHomepageBtn) elements.backToHomepageBtn.textContent = langData.backToHomepage;
-            if (elements.currentLangSpan) elements.currentLangSpan.textContent = langData.currentLang;
-            if (elements.scheduleCtaButton) elements.scheduleCtaButton.textContent = langData.scheduleCta;
-            
-            document.documentElement.lang = currentLanguage;
+            // Removed benefit2Title and benefit2Text as they are no longer in use
+            const modalTitle = document.getElementById('modal-title');
+            const thankyouHeadline = document.getElementById('thankyou-headline');
+            const thankyouSubheadline = document.getElementById('thankyou-subheadline');
+            const backToHomepage = document.getElementById('back-to-homepage');
+            const currentLangSpan = document.getElementById('current-lang');
+            const scheduleCtaButton = document.getElementById('schedule-cta');
+
+            // Removed updates for benefit2Title and benefit2Text
+            if (modalTitle) modalTitle.textContent = langData.modalTitle;
+            if (thankyouHeadline) thankyouHeadline.textContent = langData.thankyouHeadline;
+            if (thankyouSubheadline) thankyouSubheadline.textContent = langData.thankyouSubheadline;
+            if (backToHomepage) backToHomepage.textContent = langData.backToHomepage;
+            if (currentLangSpan) currentLangSpan.textContent = langData.currentLang;
+            if (scheduleCtaButton) scheduleCtaButton.textContent = langData.scheduleCta;
         }
 
         // Function to update the theme toggle icon
-        function updateThemeToggleIcon(elements) {
-            const isDarkMode = document.body.classList.contains('dark');
-            if (elements.themeToggleBtn) {
-                if (isDarkMode) {
-                    elements.themeToggleBtn.innerHTML = `
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12h1m15.325-4.275l-.707-.707M4.675 19.325l-.707-.707m12.728 0l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        function updateThemeToggleIcon() {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const isLightModeActive = document.documentElement.classList.contains('light-mode');
+            console.log("Updating theme icon. Is light mode active:", isLightModeActive);
+            if (themeToggleBtn) {
+                if (!isLightModeActive) { // If light-mode is NOT active, it's dark mode
+                    themeToggleBtn.innerHTML = `
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.128 6.062a.75.75 0 10-1.06-1.06l-1.59 1.59a.75.75 0 001.06 1.06l1.59-1.59zM2.25 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3a.75.75 0 01-.75-.75zM6.062 16.872a.75.75 0 101.06 1.06l1.59-1.59a.75.75 0 00-1.06-1.06l-1.59 1.59zM12 18.75a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0v-2.25a.75.75 0 01.75-.75zM16.872 17.938a.75.75 0 101.06 1.06l1.59-1.59a.75.75 0 00-1.06-1.06l-1.59 1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM17.938 7.128a.75.75 0 10-1.06-1.06l-1.59 1.59a.75.75 0 001.06 1.06l1.59-1.59zM12 15a3 3 0 100-6 3 3 0 000 6z"/>
                         </svg>
-                    `;
-                } else {
-                    elements.themeToggleBtn.innerHTML = `
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    `; // Sun icon for dark mode
+                } else { // It's light mode
+                    themeToggleBtn.innerHTML = `
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                         </svg>
-                    `;
+                    `; // Half moon icon for light mode
                 }
             }
         }
 
-        // Function to format time for video player
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = Math.floor(seconds % 60);
-            const paddedMinutes = String(minutes).padStart(2, '0');
-            const paddedSeconds = String(remainingSeconds).padStart(2, '0');
-            return `${paddedMinutes}:${paddedSeconds}`;
-        }
-
-        // Main script execution after DOM is fully loaded
+        // This ensures the DOM is fully loaded before trying to access elements
         document.addEventListener('DOMContentLoaded', () => {
-            const elements = {
-                calendlyModal: document.getElementById('calendly-modal'),
-                closeModalBtn: document.getElementById('close-modal'),
-                landingPageContent: document.getElementById('landing-page-content'),
-                thankYouPage: document.getElementById('thank-you-page'),
-                backToHomepageBtn: document.getElementById('back-to-homepage'),
-                langToggleBtn: document.getElementById('lang-toggle'),
-                themeToggleBtn: document.getElementById('theme-toggle'),
-                langDropdown: document.getElementById('lang-dropdown'),
-                mainLogo: document.getElementById('main-logo'),
-                scheduleCtaButton: document.getElementById('schedule-cta'),
-                mainVideo: document.getElementById('mainVideo'),
-                playPauseBtn: document.getElementById('play-pause-btn'),
-                playPauseIcon: document.getElementById('play-pause-icon'),
-                muteUnmuteBtn: document.getElementById('mute-unmute-btn'),
-                volumeIcon: document.getElementById('volume-icon'),
-                volumeSlider: document.getElementById('volume-slider'),
-                progressSlider: document.getElementById('progress-slider'),
-                currentTimeSpan: document.getElementById('current-time'),
-                durationSpan: document.getElementById('duration'),
-                subtitleToggleBtn: document.getElementById('subtitle-toggle-btn'),
-                // Removed references to benefit2Title and benefit2Text as they are replaced by an image
-                modalTitle: document.getElementById('modal-title'),
-                thankyouHeadline: document.getElementById('thankyou-headline'),
-                thankyouSubheadline: document.getElementById('thankyou-subheadline'),
-                currentLangSpan: document.getElementById('current-lang')
-            };
+            // DOM elements
+            const calendlyModal = document.getElementById('calendly-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const landingPageContent = document.getElementById('landing-page-content');
+            const thankYouPage = document.getElementById('thank-you-page');
+            const backToHomepageBtn = document.getElementById('back-to-homepage');
+            const langToggleBtn = document.getElementById('lang-toggle');
+            const currentLangSpan = document.getElementById('current-lang');
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const mainLogo = document.getElementById('main-logo'); // Changed to single logo ID
+            const scheduleCtaButton = document.getElementById('schedule-cta'); // Declared here
 
-            // Debugging: Check if any element is null after retrieval
-            for (const key in elements) {
-                if (elements[key] === null) {
-                    console.error(`ERROR: Element with ID '${key}' is null. Please ensure it exists in your HTML.`);
-                }
-            }
-
-            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            // Initial theme application (already handled by inline script in head for FOUC prevention)
+            // This block is for updating logo and icon based on the *initial* state
             const savedTheme = localStorage.getItem('theme');
-
-            // Set initial theme based on localStorage or force dark
-            if (savedTheme === null) {
-                localStorage.setItem('theme', 'dark');
-                document.documentElement.classList.add('dark');
-                document.body.classList.add('dark');
-            } else if (savedTheme === 'dark') {
-                document.documentElement.classList.add('dark');
-                document.body.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-                document.body.classList.remove('dark');
+            let isLightModeInitial = false;
+            if (savedTheme === 'light') {
+                isLightModeInitial = true;
             }
 
-
-            if (document.body.classList.contains('dark')) {
-                if (elements.mainLogo) elements.mainLogo.src = 'Shapes-Logo neu White.png';
+            if (isLightModeInitial) {
+                if (mainLogo) mainLogo.src = 'Shapes-Logo neu Black.png';
             } else {
-                if (elements.mainLogo) elements.mainLogo.src = 'Shapes-Logo neu Black.png';
+                if (mainLogo) mainLogo.src = 'Shapes-Logo neu White.png';
             }
+            updateThemeToggleIcon(); // Set initial icon on load
 
+            // Set initial language based on browser preference or default to 'en'
             const browserLang = navigator.language.split('-')[0];
             const availableLangs = Object.keys(content);
             const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
             currentLanguage = initialLang;
-            
-            // Call updateContent and updateThemeToggleIcon with the elements object AFTER elements are retrieved
-            updateContent(elements);
-            updateThemeToggleIcon(elements);
+            updateContent(); // Initial content update
 
-            if (elements.scheduleCtaButton) {
-                elements.scheduleCtaButton.addEventListener('click', () => {
-                    trackEvent('schedule_consultation_clicked', {
-                        language: currentLanguage,
-                        theme: document.body.classList.contains('dark') ? 'dark' : 'light'
-                    });
-                    if (elements.calendlyModal) {
-                        elements.calendlyModal.style.display = 'flex';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'false');
+            // Show Calendly Modal
+            if (scheduleCtaButton) {
+                scheduleCtaButton.addEventListener('click', () => {
+                    console.log("Schedule CTA button clicked!");
+                    if (calendlyModal) calendlyModal.style.display = 'flex';
+                });
+            }
+
+            // Close Calendly Modal
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    console.log("Close modal button clicked!");
+                    if (calendlyModal) calendlyModal.style.display = 'none';
+                });
+            }
+
+            // Close modal if clicking outside content
+            if (calendlyModal) {
+                calendlyModal.addEventListener('click', (e) => {
+                    if (e.target === calendlyModal) {
+                        console.log("Clicked outside modal, closing.");
+                        calendlyModal.style.display = 'none';
                     }
                 });
             }
 
-            if (elements.closeModalBtn) {
-                elements.closeModalBtn.addEventListener('click', () => {
-                    if (elements.calendlyModal) {
-                        elements.calendlyModal.style.display = 'none';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
-                    }
+            // Back to Homepage from Thank You Page
+            if (backToHomepageBtn && thankYouPage && landingPageContent) {
+                backToHomepageBtn.addEventListener('click', () => {
+                    console.log("Back to homepage button clicked!");
+                    thankYouPage.classList.add('hidden');
+                    landingPageContent.classList.remove('hidden');
                 });
             }
 
-            if (elements.calendlyModal) {
-                elements.calendlyModal.addEventListener('click', (e) => {
-                    if (e.target === elements.calendlyModal) {
-                        elements.calendlyModal.style.display = 'none';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
-                    }
-                });
+            // Video looping logic
+            const mainVideo = document.getElementById('mainVideo');
+            const videoSources = [
+                'Zurab 1.mp4' // Only Zurab video
+            ];
+            let currentVideoIndex = 0;
 
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && elements.calendlyModal.style.display === 'flex') {
-                        elements.calendlyModal.style.display = 'none';
-                        elements.calendlyModal.setAttribute('aria-hidden', 'true');
-                    }
-                });
-            }
+            // Set initial video source on script load (or when video element is ready)
+            if (mainVideo) {
+                mainVideo.src = videoSources[currentVideoIndex];
 
-            if (elements.backToHomepageBtn && elements.thankYouPage && elements.landingPageContent) {
-                elements.backToHomepageBtn.addEventListener('click', () => {
-                    elements.thankYouPage.classList.add('hidden');
-                    elements.landingPageContent.classList.remove('hidden');
-                });
-            }
-
-            // Video Player Logic
-            if (elements.mainVideo) {
-                const videoSources = ['Test Women 1.mp4', 'Zurab 1.mp4'];
-                let currentVideoIndex = 0;
-                
-                // Set initial video source and properties
-                elements.mainVideo.src = videoSources[currentVideoIndex];
-                elements.mainVideo.muted = true; // Start muted to allow autoplay
-                elements.mainVideo.volume = 0.9; // Default volume (will be applied if unmuted)
-                if (elements.volumeSlider) {
-                    elements.volumeSlider.value = 0.9; // Set slider to default volume
-                }
-
-                // Function to attempt play (primarily for unmuting or after user interaction)
-                function tryPlay() {
-                    if (elements.mainVideo.paused) {
-                        elements.mainVideo.play().then(() => {
-                            console.log("✅ Video playing successfully!");
-                            updatePlayPauseIcon();
-                            updateVolumeIcon();
-                        }).catch(error => {
-                            console.log("❌ Play attempt failed:", error);
-                            // If autoplay is blocked, we rely on user interaction to unmute/play
-                        });
-                    }
-                }
-
-                // Update Play/Pause Icon
-                function updatePlayPauseIcon() {
-                    if (elements.playPauseIcon && elements.mainVideo) {
-                        if (elements.mainVideo.paused) {
-                            elements.playPauseIcon.setAttribute('d', 'M8 5v14l11-7z'); // Play icon
-                        } else {
-                            elements.playPauseIcon.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z'); // Pause icon
-                        }
-                    }
-                }
-
-                // Update Volume Icon
-                function updateVolumeIcon() {
-                    if (elements.volumeIcon && elements.mainVideo) {
-                        if (elements.mainVideo.muted || elements.mainVideo.volume === 0) {
-                            elements.volumeIcon.setAttribute('d', 'M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.47 14.65 21 13.34 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 4V9l-1.27-1.27L4.27 3zM10 15.59L7.41 13H5v-2h2.41l.59-.59L10 9.41v6.18z'); // Mute icon
-                        } else if (elements.mainVideo.volume < 0.5) {
-                            elements.volumeIcon.setAttribute('d', 'M7 9v6h4l5 4V5l-5 4H7z'); // Low volume icon
-                        } else {
-                            elements.volumeIcon.setAttribute('d', 'M14 8.83v6.34L17.17 12 14 8.83zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.47 14.65 21 13.34 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 4V9l-1.27-1.27L4.27 3zM10 15.59L7.41 13H5v-2h2.41l.59-.59L10 9.41v6.18z'); // High volume icon
-                        }
-                    }
-                }
-
-                // Play/Pause Button
-                if (elements.playPauseBtn) {
-                    elements.playPauseBtn.addEventListener('click', () => {
-                        if (elements.mainVideo.paused) {
-                            tryPlay(); // Try to play if paused
-                        } else {
-                            elements.mainVideo.pause();
-                        }
-                        updatePlayPauseIcon();
-                    });
-                }
-
-                // Mute/Unmute Button
-                if (elements.muteUnmuteBtn) {
-                    elements.muteUnmuteBtn.addEventListener('click', () => {
-                        elements.mainVideo.muted = !elements.mainVideo.muted;
-                        updateVolumeIcon();
-                        // If unmuting and volume was 0, set to default
-                        if (!elements.mainVideo.muted && elements.mainVideo.volume === 0) {
-                            elements.mainVideo.volume = 0.9;
-                            if (elements.volumeSlider) elements.volumeSlider.value = 0.9;
-                        }
-                        tryPlay(); // Attempt to play if unmuting (user interaction)
-                    });
-                }
-
-                // Volume Slider
-                if (elements.volumeSlider) {
-                    elements.volumeSlider.addEventListener('input', () => {
-                        elements.mainVideo.volume = elements.volumeSlider.value;
-                        elements.mainVideo.muted = elements.volumeSlider.value === 0;
-                        updateVolumeIcon();
-                        tryPlay(); // Attempt to play if user interacts with volume
-                    });
-                }
-
-                // Progress Slider
-                if (elements.progressSlider) {
-                    elements.progressSlider.addEventListener('input', () => {
-                        if (elements.mainVideo.duration) {
-                            const seekTime = (elements.progressSlider.value / 100) * elements.mainVideo.duration;
-                            elements.mainVideo.currentTime = seekTime;
-                        }
-                    });
-                }
-
-                // Subtitle Toggle Button
-                if (elements.subtitleToggleBtn) {
-                    elements.subtitleToggleBtn.addEventListener('click', () => {
-                        const textTracks = elements.mainVideo.textTracks;
-                        if (textTracks.length > 0) {
-                            const track = textTracks[0];
-                            if (track.mode === 'showing') {
-                                track.mode = 'hidden';
-                                console.log('Subtitles hidden');
-                            } else {
-                                track.mode = 'showing';
-                                console.log('Subtitles showing');
-                            }
-                        } else {
-                            console.log('No subtitle tracks available.');
-                        }
-                    });
-                }
-
-                // Video Events
-                elements.mainVideo.addEventListener('timeupdate', () => {
-                    if (elements.progressSlider && elements.currentTimeSpan && elements.mainVideo.duration) {
-                        const progress = (elements.mainVideo.currentTime / elements.mainVideo.duration) * 100;
-                        elements.progressSlider.value = progress;
-                        elements.currentTimeSpan.textContent = formatTime(elements.mainVideo.currentTime);
-                    }
-                });
-
-                elements.mainVideo.addEventListener('loadedmetadata', () => {
-                    if (elements.durationSpan && elements.mainVideo.duration) {
-                        elements.durationSpan.textContent = formatTime(elements.mainVideo.duration);
-                        if (elements.progressSlider) elements.progressSlider.max = 100;
-                    }
-                    updatePlayPauseIcon();
-                    updateVolumeIcon(); // Set initial volume icon (muted)
-                });
-
-                elements.mainVideo.addEventListener('play', updatePlayPauseIcon);
-                elements.mainVideo.addEventListener('pause', updatePlayPauseIcon);
-                elements.mainVideo.addEventListener('volumechange', updateVolumeIcon);
-
-                // Video looping logic
-                elements.mainVideo.addEventListener('ended', () => {
+                mainVideo.addEventListener('ended', () => {
+                    console.log("Video ended, switching to next video.");
                     currentVideoIndex++;
                     if (currentVideoIndex >= videoSources.length) {
-                        currentVideoIndex = 0;
+                        currentVideoIndex = 0; // Loop back to the first video
                     }
-                    elements.mainVideo.src = videoSources[currentVideoIndex];
-                    elements.mainVideo.load();
-                    tryPlay(); // Attempt to play next video (will be muted)
-                });
-
-                // Initial autoplay attempt (will be muted)
-                tryPlay();
-            }
-
-            // Language Toggle Event Listeners
-            if (elements.langToggleBtn && elements.langDropdown) {
-                elements.langToggleBtn.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    try {
-                        elements.langDropdown.classList.toggle('hidden');
-                    } catch (e) {
-                        console.error("Error toggling langDropdown classList:", e);
-                    }
-                });
-
-                elements.langDropdown.querySelectorAll('.lang-option').forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        currentLanguage = event.target.dataset.lang;
-                        updateContent(elements);
-                        try {
-                            elements.langDropdown.classList.add('hidden');
-                        } catch (e) {
-                            console.error("Error adding hidden to langDropdown classList:", e);
-                        }
-                        trackEvent('language_changed', { language: currentLanguage });
+                    mainVideo.src = videoSources[currentVideoIndex];
+                    mainVideo.load(); // Load the new video source
+                    mainVideo.play().catch(error => {
+                        console.log("Autoplay prevented after video ended:", error);
                     });
                 });
 
-                document.addEventListener('click', (event) => {
-                    if (!elements.langDropdown.contains(event.target) && !elements.langToggleBtn.contains(event.target)) {
-                        try {
-                            elements.langDropdown.classList.add('hidden');
-                        } catch (e) {
-                            console.error("Error adding hidden to langDropdown classList on outside click:", e);
-                        }
-                    }
+                // Attempt to play on load (will be caught if autoplay is blocked)
+                mainVideo.play().catch(error => {
+                    console.log("Initial autoplay prevented:", error);
+                });
+            }
+
+            // Language Toggle Event Listener (Direct Toggle)
+            if (langToggleBtn) { // Check if the button exists
+                langToggleBtn.addEventListener('click', () => {
+                    console.log("Language toggle clicked!");
+                    currentLanguage = (currentLanguage === 'en') ? 'de' : 'en';
+                    updateContent(); // Update content based on new language
                 });
             }
 
             // Theme Toggle Event Listener
-            if (elements.themeToggleBtn && elements.mainLogo) {
-                elements.themeToggleBtn.addEventListener('click', () => {
-                    document.body.classList.toggle('dark');
-                    document.documentElement.classList.toggle('dark');
+            if (themeToggleBtn && mainLogo) {
+                themeToggleBtn.addEventListener('click', () => {
+                    console.log("Theme toggle clicked!");
+                    // Toggle the 'light-mode' class on both html and body
+                    document.documentElement.classList.toggle('light-mode');
+                    document.body.classList.toggle('light-mode');
                     
-                    if (document.body.classList.contains('dark')) {
-                        localStorage.setItem('theme', 'dark');
-                        elements.mainLogo.src = 'Shapes-Logo neu White.png';
-                    } else {
+                    // Update localStorage and logo based on the new state
+                    if (document.documentElement.classList.contains('light-mode')) {
                         localStorage.setItem('theme', 'light');
-                        elements.mainLogo.src = 'Shapes-Logo neu Black.png';
+                        mainLogo.src = 'Shapes-Logo neu Black.png';
+                    } else {
+                        localStorage.setItem('theme', 'dark');
+                        mainLogo.src = 'Shapes-Logo neu White.png';
                     }
-                    updateThemeToggleIcon(elements);
-                    trackEvent('theme_changed', { 
-                        theme: document.body.classList.contains('dark') ? 'dark' : 'light' 
-                    });
+                    updateThemeToggleIcon(); // Update icon after theme change
                 });
             }
         });
     </script>
+
 </body>
 </html>
