@@ -301,7 +301,7 @@
             background-color: rgba(239, 68, 68, 0.1); /* Subtle red tint on hover */
             color: #ef4444; /* Red text on hover */
             border-color: #ef4444; /* Red border on hover */
-            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.1); /* Lighter red shadow */
+            box-shadow: 0 44px 10px rgba(239, 68, 68, 0.1); /* Lighter red shadow */
         }
 
         #cookie-banner.light-mode button.manage-preferences-button:hover,
@@ -693,6 +693,10 @@
                 <p><strong>Responsible for Content:</strong> <span id="imprint-responsible-content"></span></p>
                 <p><strong>EU Commission Online Dispute Resolution Platform:</strong> <a href="https://ec.europa.eu/consumers/odr/" target="_blank" id="imprint-dispute-resolution" class="text-blue-400 hover:underline"></a></p>
             </div>
+            <div class="flex justify-center space-x-4 mt-4 text-sm">
+                <span id="imprint-to-cookie-info-link" class="text-blue-400 hover:underline cursor-pointer"></span>
+                <span id="imprint-to-privacy-policy-link" class="text-blue-400 hover:underline cursor-pointer"></span>
+            </div>
         </div>
     </div>
     
@@ -760,6 +764,10 @@
                 <h3>Changes to this Privacy Policy</h3>
                 <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
             </div>
+            <div class="flex justify-center space-x-4 mt-4 text-sm">
+                <span id="privacy-policy-to-cookie-info-link" class="text-blue-400 hover:underline cursor-pointer"></span>
+                <span id="privacy-policy-to-imprint-link" class="text-blue-400 hover:underline cursor-pointer"></span>
+            </div>
         </div>
     </div>
 
@@ -820,6 +828,10 @@
                 privacyPolicyAddress: "Bismarckstraße 22, 66111 Saarbrücken, Germany", // Updated to match imprint
                 privacyPolicyContactEmail: "hello@get-shapes.com", // Updated to match imprint
                 privacyPolicyContactPhone: "+49 (0)30 987654321", // Updated to match imprint
+                imprintToCookieInfoLink: "Cookie Information",
+                imprintToPrivacyPolicyLink: "Privacy Policy",
+                privacyPolicyToCookieInfoLink: "Cookie Information",
+                privacyPolicyToImprintLink: "Imprint",
             },
             de: {
                 scheduleCta: "Buche deine kostenlose Beratung.",
@@ -874,6 +886,10 @@
                 privacyPolicyAddress: "Bismarckstraße 22, 66111 Saarbrücken, Deutschland", // Updated to match imprint
                 privacyPolicyContactEmail: "hello@get-shapes.com", // Updated to match imprint
                 privacyPolicyContactPhone: "+49 (0)30 987654321", // Updated to match imprint
+                imprintToCookieInfoLink: "Cookie-Informationen",
+                imprintToPrivacyPolicyLink: "Datenschutzerklärung",
+                privacyPolicyToCookieInfoLink: "Cookie-Informationen",
+                privacyPolicyToImprintLink: "Impressum",
             }
         };
 
@@ -933,6 +949,9 @@
             const imprintResponsibleContent = document.getElementById('imprint-responsible-content');
             const imprintDisputeResolution = document.getElementById('imprint-dispute-resolution');
             const footerCookiePreferencesLink = document.getElementById('footer-cookie-preferences-link');
+            const imprintToCookieInfoLink = document.getElementById('imprint-to-cookie-info-link');
+            const imprintToPrivacyPolicyLink = document.getElementById('imprint-to-privacy-policy-link');
+
 
             // Privacy Policy Modal elements
             const privacyPolicyLink = document.getElementById('privacy-policy-link');
@@ -942,6 +961,8 @@
             const privacyPolicyAddress = document.getElementById('privacy-policy-address');
             const privacyPolicyContactEmail = document.getElementById('privacy-policy-contact-email');
             const privacyPolicyContactPhone = document.getElementById('privacy-policy-contact-phone');
+            const privacyPolicyToCookieInfoLink = document.getElementById('privacy-policy-to-cookie-info-link');
+            const privacyPolicyToImprintLink = document.getElementById('privacy-policy-to-imprint-link');
 
 
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
@@ -999,6 +1020,8 @@
             if (imprintResponsibleContent) imprintResponsibleContent.textContent = langData.imprintResponsibleContent;
             if (imprintDisputeResolution) imprintDisputeResolution.href = langData.imprintDisputeResolution; // Update new field href
             if (imprintDisputeResolution) imprintDisputeResolution.textContent = langData.imprintDisputeResolution; // Update new field text
+            if (imprintToCookieInfoLink) imprintToCookieInfoLink.textContent = langData.imprintToCookieInfoLink;
+            if (imprintToPrivacyPolicyLink) imprintToPrivacyPolicyLink.textContent = langData.imprintToPrivacyPolicyLink;
 
 
             // Update Footer Cookie Preferences Link
@@ -1017,6 +1040,8 @@
                 privacyPolicyContactEmail.textContent = langData.imprintContactEmail;
             }
             if (privacyPolicyContactPhone) privacyPolicyContactPhone.textContent = langData.imprintContactPhone;
+            if (privacyPolicyToCookieInfoLink) privacyPolicyToCookieInfoLink.textContent = langData.privacyPolicyToCookieInfoLink;
+            if (privacyPolicyToImprintLink) privacyPolicyToImprintLink.textContent = langData.privacyPolicyToImprintLink;
 
 
             // Update link colors based on theme
@@ -1025,7 +1050,7 @@
             const hoverLinkColorClass = isLightModeActive ? 'hover:text-blue-900' : 'hover:text-blue-600';
 
             // Apply blue colors to modal links
-            document.querySelectorAll('#cookie-info-modal a[href^="mailto:"], #imprint-modal a[href^="mailto:"], #imprint-modal a[href^="https://ec.europa.eu"], #privacy-policy-modal a[href^="mailto:"], #cookie-info-imprint-link-span, #cookie-info-privacy-policy-link-span').forEach(link => {
+            document.querySelectorAll('#cookie-info-modal a[href^="mailto:"], #imprint-modal a[href^="mailto:"], #imprint-modal a[href^="https://ec.europa.eu"], #privacy-policy-modal a[href^="mailto:"], #cookie-info-imprint-link-span, #cookie-info-privacy-policy-link-span, #imprint-to-cookie-info-link, #imprint-to-privacy-policy-link, #privacy-policy-to-cookie-info-link, #privacy-policy-to-imprint-link').forEach(link => {
                 link.classList.remove('text-blue-400', 'hover:underline', 'text-blue-700', 'hover:text-blue-900', 'hover:text-blue-600', 'text-gray-400', 'hover:text-gray-200', 'text-black', 'hover:text-gray-700');
                 link.classList.add(linkColorClass, hoverLinkColorClass, 'hover:underline');
             });
@@ -1075,7 +1100,7 @@
         }
 
         // Event handler functions for the links
-        function openImprintModalFromCookieInfo(e) {
+        function openImprintModalFromCookieInfo() {
             console.log("Imprint link span clicked from cookie info modal.");
             const cookieInfoModal = document.getElementById('cookie-info-modal');
             const imprintModal = document.getElementById('imprint-modal');
@@ -1091,7 +1116,7 @@
             }
         }
 
-        function openPrivacyPolicyModalFromCookieInfo(e) {
+        function openPrivacyPolicyModalFromCookieInfo() {
             console.log("Privacy Policy link span clicked from cookie info modal.");
             const cookieInfoModal = document.getElementById('cookie-info-modal');
             const privacyPolicyModal = document.getElementById('privacy-policy-modal');
@@ -1104,6 +1129,54 @@
                 console.log("Privacy Policy modal displayed. Current display:", privacyPolicyModal.style.display);
             } else {
                 console.log("Privacy Policy modal element not found!");
+            }
+        }
+
+        function openCookieInfoModalFromImprint() {
+            console.log("Cookie Info link span clicked from imprint modal.");
+            const imprintModal = document.getElementById('imprint-modal');
+            const cookieInfoModal = document.getElementById('cookie-info-modal');
+            if (imprintModal) {
+                imprintModal.style.display = 'none';
+            }
+            if (cookieInfoModal) {
+                cookieInfoModal.style.display = 'flex';
+            }
+        }
+
+        function openPrivacyPolicyModalFromImprint() {
+            console.log("Privacy Policy link span clicked from imprint modal.");
+            const imprintModal = document.getElementById('imprint-modal');
+            const privacyPolicyModal = document.getElementById('privacy-policy-modal');
+            if (imprintModal) {
+                imprintModal.style.display = 'none';
+            }
+            if (privacyPolicyModal) {
+                privacyPolicyModal.style.display = 'flex';
+            }
+        }
+
+        function openCookieInfoModalFromPrivacyPolicy() {
+            console.log("Cookie Info link span clicked from privacy policy modal.");
+            const privacyPolicyModal = document.getElementById('privacy-policy-modal');
+            const cookieInfoModal = document.getElementById('cookie-info-modal');
+            if (privacyPolicyModal) {
+                privacyPolicyModal.style.display = 'none';
+            }
+            if (cookieInfoModal) {
+                cookieInfoModal.style.display = 'flex';
+            }
+        }
+
+        function openImprintModalFromPrivacyPolicy() {
+            console.log("Imprint link span clicked from privacy policy modal.");
+            const privacyPolicyModal = document.getElementById('privacy-policy-modal');
+            const imprintModal = document.getElementById('imprint-modal');
+            if (privacyPolicyModal) {
+                privacyPolicyModal.style.display = 'none';
+            }
+            if (imprintModal) {
+                imprintModal.style.display = 'flex';
             }
         }
 
@@ -1137,9 +1210,6 @@
             // Cookie Info Modal elements
             const cookieInfoModal = document.getElementById('cookie-info-modal');
             const closeCookieInfoModalBtn = document.getElementById('close-cookie-info-modal');
-            // These are now spans, handled by event delegation on cookieInfoModal
-            // const cookieInfoImprintLink = document.getElementById('cookie-info-imprint-link');
-            // const cookieInfoPrivacyPolicyLink = document.getElementById('cookie-info-privacy-policy-link');
 
             // Cookie Preferences Modal elements (new)
             const cookiePreferencesModal = document.getElementById('cookie-preferences-modal');
@@ -1390,6 +1460,14 @@
                         if (imprintModal) imprintModal.style.display = 'none';
                     }
                 });
+                // Event delegation for links within imprintModal
+                imprintModal.addEventListener('click', (e) => {
+                    if (e.target.id === 'imprint-to-cookie-info-link') {
+                        openCookieInfoModalFromImprint();
+                    } else if (e.target.id === 'imprint-to-privacy-policy-link') {
+                        openPrivacyPolicyModalFromImprint();
+                    }
+                });
             }
 
             // Open Privacy Policy Modal from Footer
@@ -1412,6 +1490,14 @@
                 privacyPolicyModal.addEventListener('click', (e) => {
                     if (e.target === privacyPolicyModal) {
                         if (privacyPolicyModal) privacyPolicyModal.style.display = 'none';
+                    }
+                });
+                // Event delegation for links within privacyPolicyModal
+                privacyPolicyModal.addEventListener('click', (e) => {
+                    if (e.target.id === 'privacy-policy-to-cookie-info-link') {
+                        openCookieInfoModalFromPrivacyPolicy();
+                    } else if (e.target.id === 'privacy-policy-to-imprint-link') {
+                        openImprintModalFromPrivacyPolicy();
                     }
                 });
             }
