@@ -223,7 +223,7 @@
             border-radius: 0.5rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease, color 0.3s ease; /* Added border-color and color to transition */
+            transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow to transition */
             white-space: nowrap; /* Prevent button text from wrapping */
         }
 
@@ -234,9 +234,11 @@
         }
 
         #cookie-banner button.accept-button:hover {
-            background-color: #22c55e; /* Solid green on hover */
-            color: white; /* White text on hover */
-            transform: translateY(-2px);
+            background-color: rgba(34, 197, 94, 0.1); /* Very subtle green tint */
+            color: #22c55e;
+            border-color: #22c55e;
+            transform: translateY(-2px) scale(1.02); /* Slight lift and scale */
+            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3); /* Green shadow */
         }
 
         #cookie-banner button.decline-button {
@@ -246,9 +248,11 @@
         }
 
         #cookie-banner button.decline-button:hover {
-            background-color: #ef4444; /* Solid red on hover */
-            color: white; /* White text on hover */
-            transform: translateY(-2px);
+            background-color: rgba(239, 68, 68, 0.1); /* Very subtle red tint */
+            color: #ef4444;
+            border-color: #ef4444;
+            transform: translateY(-2px) scale(1.02); /* Slight lift and scale */
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); /* Red shadow */
         }
 
         /* Responsive adjustments for cookie banner */
@@ -435,8 +439,8 @@
     <!-- Cookie Consent Banner -->
     <div id="cookie-banner" class="hidden">
         <p class="text-sm md:text-base">
-            We use cookies to ensure you get the best experience on our website. By continuing to use this site, you agree to our use of cookies.
-            <a href="#" id="learn-more-cookies" class="text-blue-400 hover:underline ml-1">Learn more</a>.
+            <span id="cookie-message-text"></span>
+            <a href="#" id="learn-more-cookies" class="text-blue-400 hover:underline ml-1"></a>.
         </p>
         <div class="cookie-buttons">
             <button id="accept-cookies" class="accept-button">Accept All</button>
@@ -455,20 +459,20 @@
                 </p>
 
                 <h3 id="cookie-info-what-are-cookies">What Are Cookies?</h3>
-                <p>
+                <p id="cookie-info-what-are-cookies-text">
                     Cookies are small text files stored on your device (computer, tablet, mobile) when you visit certain web pages. They are widely used to make websites work more efficiently, as well as to provide information to the owners of the site.
                 </p>
 
                 <h3 id="cookie-info-how-we-use-cookies">How We Use Cookies</h3>
-                <p>We use cookies for the following purposes:</p>
+                <p id="cookie-info-how-we-use-cookies-text">We use cookies for the following purposes:</p>
                 <ul>
-                    <li id="cookie-info-essential"><strong>Essential Cookies:</strong> These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms.</li>
-                    <li id="cookie-info-analytics"><strong>Analytics Cookies:</strong> These cookies allow us to count visits and traffic sources, so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site. All information these cookies collect is aggregated and therefore anonymous.</li>
-                    <li id="cookie-info-marketing"><strong>Marketing Cookies:</strong> These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device.</li>
+                    <li><strong id="cookie-info-essential">Essential Cookies:</strong> <span id="cookie-info-essential-text">These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms.</span></li>
+                    <li><strong id="cookie-info-analytics">Analytics Cookies:</strong> <span id="cookie-info-analytics-text">These cookies allow us to count visits and traffic sources, so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site. All information these cookies collect is aggregated and therefore anonymous.</span></li>
+                    <li><strong id="cookie-info-marketing">Marketing Cookies:</strong> <span id="cookie-info-marketing-text">These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device.</span></li>
                 </ul>
 
                 <h3 id="cookie-info-managing-cookies">Managing Your Cookie Preferences</h3>
-                <p>
+                <p id="cookie-info-managing-cookies-text">
                     You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.
                 </p>
                 <p id="cookie-info-contact">
@@ -551,7 +555,7 @@
             const scheduleCtaButton = document.getElementById('schedule-cta');
 
             // Cookie banner elements
-            const cookieMessageElement = document.querySelector('#cookie-banner p');
+            const cookieMessageTextElement = document.getElementById('cookie-message-text'); // New ID for text span
             const cookieLearnMoreElement = document.getElementById('learn-more-cookies'); // Get by ID now
             const cookieAcceptButton = document.getElementById('accept-cookies');
             const cookieDeclineButton = document.getElementById('decline-cookies');
@@ -560,17 +564,17 @@
             const cookieInfoTitle = document.getElementById('cookie-info-title');
             const cookieInfoIntro = document.getElementById('cookie-info-intro');
             const cookieInfoWhatAreCookies = document.getElementById('cookie-info-what-are-cookies');
-            const cookieInfoWhatAreCookiesText = document.getElementById('cookie-info-what-are-cookies-text'); // New ID
+            const cookieInfoWhatAreCookiesText = document.getElementById('cookie-info-what-are-cookies-text');
             const cookieInfoHowWeUseCookies = document.getElementById('cookie-info-how-we-use-cookies');
-            const cookieInfoHowWeUseCookiesText = document.getElementById('cookie-info-how-we-use-cookies-text'); // New ID
+            const cookieInfoHowWeUseCookiesText = document.getElementById('cookie-info-how-we-use-cookies-text');
             const cookieInfoEssential = document.getElementById('cookie-info-essential');
-            const cookieInfoEssentialText = document.getElementById('cookie-info-essential-text'); // New ID
+            const cookieInfoEssentialText = document.getElementById('cookie-info-essential-text');
             const cookieInfoAnalytics = document.getElementById('cookie-info-analytics');
-            const cookieInfoAnalyticsText = document.getElementById('cookie-info-analytics-text'); // New ID
+            const cookieInfoAnalyticsText = document.getElementById('cookie-info-analytics-text');
             const cookieInfoMarketing = document.getElementById('cookie-info-marketing');
-            const cookieInfoMarketingText = document.getElementById('cookie-info-marketing-text'); // New ID
+            const cookieInfoMarketingText = document.getElementById('cookie-info-marketing-text');
             const cookieInfoManagingCookies = document.getElementById('cookie-info-managing-cookies');
-            const cookieInfoManagingCookiesText = document.getElementById('cookie-info-managing-cookies-text'); // New ID
+            const cookieInfoManagingCookiesText = document.getElementById('cookie-info-managing-cookies-text');
             const cookieInfoContact = document.getElementById('cookie-info-contact');
 
 
@@ -582,10 +586,8 @@
             if (scheduleCtaButton) scheduleCtaButton.textContent = langData.scheduleCta;
 
             // Update cookie banner content
-            if (cookieMessageElement) {
-                // Reconstruct the paragraph to include the link
-                cookieMessageElement.innerHTML = `${langData.cookieMessage} <a href="#" id="learn-more-cookies" class="text-blue-400 hover:underline ml-1">${langData.cookieLearnMore}</a>.`;
-            }
+            if (cookieMessageTextElement) cookieMessageTextElement.textContent = langData.cookieMessage;
+            if (cookieLearnMoreElement) cookieLearnMoreElement.textContent = langData.cookieLearnMore;
             if (cookieAcceptButton) cookieAcceptButton.textContent = langData.cookieAccept;
             if (cookieDeclineButton) cookieDeclineButton.textContent = langData.cookieDecline;
 
