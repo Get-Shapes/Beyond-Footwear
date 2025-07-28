@@ -208,7 +208,7 @@
             background-color: rgba(255, 255, 255, 0.8); /* Lighter, semi-transparent background */
             color: #000000; /* Dark text */
             border-top: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Adjusted for light mode */
         }
 
         #cookie-banner .cookie-buttons {
@@ -227,33 +227,62 @@
             white-space: nowrap; /* Prevent button text from wrapping */
         }
 
+        /* Default (Dark Mode) Button Styles */
         #cookie-banner button.accept-button {
-            background-color: transparent; /* Made transparent */
-            color: #22c55e; /* Green text */
-            border: 1px solid #22c55e; /* Green border */
+            background-color: transparent;
+            color: #e2e8f0; /* Light text for dark mode */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
         }
 
         #cookie-banner button.accept-button:hover {
-            background-color: rgba(34, 197, 94, 0.1); /* Very subtle green tint */
-            color: #22c55e;
-            border-color: #22c55e;
-            transform: translateY(-2px) scale(1.02); /* Slight lift and scale */
-            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3); /* Green shadow */
+            background-color: rgba(34, 197, 94, 0.2); /* Subtle green tint on hover */
+            color: #22c55e; /* Green text on hover */
+            border-color: #22c55e; /* Green border on hover */
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
         }
 
         #cookie-banner button.decline-button {
-            background-color: transparent; /* Made transparent */
-            color: #ef4444; /* Red text */
-            border: 1px solid #ef4444; /* Red border */
+            background-color: transparent;
+            color: #e2e8f0; /* Light text for dark mode */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
         }
 
         #cookie-banner button.decline-button:hover {
-            background-color: rgba(239, 68, 68, 0.1); /* Very subtle red tint */
-            color: #ef4444;
-            border-color: #ef4444;
-            transform: translateY(-2px) scale(1.02); /* Slight lift and scale */
-            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); /* Red shadow */
+            background-color: rgba(239, 68, 68, 0.2); /* Subtle red tint on hover */
+            color: #ef4444; /* Red text on hover */
+            border-color: #ef4444; /* Red border on hover */
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
         }
+
+        /* Light Mode Specific Button Styles */
+        #cookie-banner.light-mode button.accept-button {
+            background-color: transparent;
+            color: #000000; /* Dark text for light mode */
+            border: 1px solid rgba(0, 0, 0, 0.3); /* Subtle black border */
+        }
+
+        #cookie-banner.light-mode button.accept-button:hover {
+            background-color: rgba(34, 197, 94, 0.1); /* Subtle green tint on hover */
+            color: #22c55e; /* Green text on hover */
+            border-color: #22c55e; /* Green border on hover */
+            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.1); /* Lighter green shadow */
+        }
+
+        #cookie-banner.light-mode button.decline-button {
+            background-color: transparent;
+            color: #000000; /* Dark text for light mode */
+            border: 1px solid rgba(0, 0, 0, 0.3); /* Subtle black border */
+        }
+
+        #cookie-banner.light-mode button.decline-button:hover {
+            background-color: rgba(239, 68, 68, 0.1); /* Subtle red tint on hover */
+            color: #ef4444; /* Red text on hover */
+            border-color: #ef4444; /* Red border on hover */
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.1); /* Lighter red shadow */
+        }
+
 
         /* Responsive adjustments for cookie banner */
         @media (min-width: 768px) {
@@ -618,214 +647,4 @@
                 if (!isLightModeActive) { // If light-mode is NOT active, it's dark mode
                     themeToggleBtn.innerHTML = `
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.128 6.062a.75.75 0 10-1.06-1.06l-1.59 1.59a.75.75 0 001.06 1.06l1.59-1.59zM2.25 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3a.75.75 0 01-.75-.75zM6.062 16.872a.75.75 0 101.06 1.06l1.59-1.59a.75.75 0 00-1.06-1.06l-1.59 1.59zM12 18.75a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0v-2.25a.75.75 0 01.75-.75zM16.872 17.938a.75.75 0 101.06 1.06l1.59-1.59a.75.75 0 00-1.06-1.06l-1.59 1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM17.938 7.128a.75.75 0 10-1.06-1.06l-1.59 1.59a.75.75 0 001.06 1.06l1.59-1.59zM12 15a3 3 0 100-6 3 3 0 000 6z"/>
-                        </svg>
-                    `; // Sun icon for dark mode
-                } else { // It's light mode
-                    themeToggleBtn.innerHTML = `
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                        </svg>
-                    `; // Half moon icon for light mode
-                }
-            }
-        }
-
-        // This ensures the DOM is fully loaded before trying to access elements
-        document.addEventListener('DOMContentLoaded', () => {
-            // DOM elements
-            const calendlyModal = document.getElementById('calendly-modal');
-            const closeModalBtn = document.getElementById('close-modal');
-            const landingPageContent = document.getElementById('landing-page-content');
-            const thankYouPage = document.getElementById('thank-you-page');
-            const backToHomepageBtn = document.getElementById('back-to-homepage');
-            const langToggleBtn = document.getElementById('lang-toggle');
-            const currentLangSpan = document.getElementById('current-lang');
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const mainLogo = document.getElementById('main-logo'); // Changed to single logo ID
-            const scheduleCtaButton = document.getElementById('schedule-cta'); // Declared here
-
-            // Cookie banner elements
-            const cookieBanner = document.getElementById('cookie-banner');
-            const acceptCookiesBtn = document.getElementById('accept-cookies');
-            const declineCookiesBtn = document.getElementById('decline-cookies');
-            const learnMoreCookiesLink = document.getElementById('learn-more-cookies'); // Get the link
-
-            // Cookie Info Modal elements
-            const cookieInfoModal = document.getElementById('cookie-info-modal');
-            const closeCookieInfoModalBtn = document.getElementById('close-cookie-info-modal');
-
-
-            // Initial theme application (already handled by inline script in head for FOUC prevention)
-            // This block is for updating logo and icon based on the *initial* state
-            const savedTheme = localStorage.getItem('theme');
-            let isLightModeInitial = false;
-            if (savedTheme === 'light') {
-                isLightModeInitial = true;
-            }
-
-            if (isLightModeInitial) {
-                if (mainLogo) mainLogo.src = 'Shapes-Logo neu Black.png';
-            } else {
-                if (mainLogo) mainLogo.src = 'Shapes-Logo neu White.png';
-            }
-            updateThemeToggleIcon(); // Set initial icon on load
-
-            // Set initial language based on browser preference or default to 'en'
-            const browserLang = navigator.language.split('-')[0];
-            const availableLangs = Object.keys(content);
-            const initialLang = availableLangs.includes(browserLang) ? browserLang : 'en';
-            currentLanguage = initialLang;
-            updateContent(); // Initial content update
-
-            // Cookie Consent Logic
-            const cookieConsent = localStorage.getItem('cookieConsent');
-            if (cookieConsent === null) {
-                // If no consent, show the banner
-                if (cookieBanner) cookieBanner.classList.remove('hidden');
-            } else {
-                // If consent exists, hide the banner
-                if (cookieBanner) cookieBanner.classList.add('hidden');
-            }
-
-            if (acceptCookiesBtn) {
-                acceptCookiesBtn.addEventListener('click', () => {
-                    localStorage.setItem('cookieConsent', 'accepted');
-                    if (cookieBanner) cookieBanner.classList.add('hidden');
-                });
-            }
-
-            if (declineCookiesBtn) {
-                declineCookiesBtn.addEventListener('click', () => {
-                    localStorage.setItem('cookieConsent', 'declined');
-                    if (cookieBanner) cookieBanner.classList.add('hidden');
-                    // Optionally, you could disable certain features here if cookies are declined
-                    console.log("Cookies declined. Some features might be limited.");
-                });
-            }
-
-            // Open Cookie Info Modal
-            if (learnMoreCookiesLink) {
-                learnMoreCookiesLink.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent default link behavior
-                    if (cookieInfoModal) cookieInfoModal.style.display = 'flex';
-                });
-            }
-
-            // Close Cookie Info Modal
-            if (closeCookieInfoModalBtn) {
-                closeCookieInfoModalBtn.addEventListener('click', () => {
-                    if (cookieInfoModal) cookieInfoModal.style.display = 'none';
-                });
-            }
-
-            // Close Cookie Info Modal if clicking outside content
-            if (cookieInfoModal) {
-                cookieInfoModal.addEventListener('click', (e) => {
-                    if (e.target === cookieInfoModal) {
-                        cookieInfoModal.style.display = 'none';
-                    }
-                });
-            }
-
-
-            // Show Calendly Modal from main CTA
-            if (scheduleCtaButton) {
-                scheduleCtaButton.addEventListener('click', () => {
-                    console.log("Schedule CTA button clicked!");
-                    if (calendlyModal) calendlyModal.style.display = 'flex';
-                });
-            }
-
-            // Close Calendly Modal
-            if (closeModalBtn) {
-                closeModalBtn.addEventListener('click', () => {
-                    console.log("Close modal button clicked!");
-                    if (calendlyModal) calendlyModal.style.display = 'none';
-                });
-            }
-
-            // Close modal if clicking outside content
-            if (calendlyModal) {
-                calendlyModal.addEventListener('click', (e) => {
-                    if (e.target === calendlyModal) {
-                        console.log("Clicked outside modal, closing.");
-                        calendlyModal.style.display = 'none';
-                    }
-                });
-            }
-
-            // Back to Homepage from Thank You Page
-            if (backToHomepageBtn && thankYouPage && landingPageContent) {
-                backToHomepageBtn.addEventListener('click', () => {
-                    console.log("Back to homepage button clicked!");
-                    thankYouPage.classList.add('hidden');
-                    landingPageContent.classList.remove('hidden');
-                });
-            }
-
-            // Video looping logic
-            const mainVideo = document.getElementById('mainVideo');
-            const videoSources = [
-                'Zurab 1.mp4' // Only Zurab video
-            ];
-            let currentVideoIndex = 0;
-
-            // Set initial video source on script load (or when video element is ready)
-            if (mainVideo) {
-                mainVideo.src = videoSources[currentVideoIndex];
-
-                mainVideo.addEventListener('ended', () => {
-                    console.log("Video ended, switching to next video.");
-                    currentVideoIndex++;
-                    if (currentVideoIndex >= videoSources.length) {
-                        currentVideoIndex = 0; // Loop back to the first video
-                    }
-                    mainVideo.src = videoSources[currentVideoIndex];
-                    mainVideo.load(); // Load the new video source
-                    mainVideo.play().catch(error => {
-                        console.log("Autoplay prevented after video ended:", error);
-                    });
-                });
-
-                // Attempt to play on load (will be caught if autoplay is blocked)
-                mainVideo.play().catch(error => {
-                    console.log("Initial autoplay prevented:", error);
-                });
-            }
-
-            // Language Toggle Event Listener (Direct Toggle)
-            if (langToggleBtn) { // Check if the button exists
-                langToggleBtn.addEventListener('click', () => {
-                    console.log("Language toggle clicked!");
-                    currentLanguage = (currentLanguage === 'en') ? 'de' : 'en';
-                    updateContent(); // Update content based on new language
-                });
-            }
-
-            // Theme Toggle Event Listener
-            if (themeToggleBtn && mainLogo) {
-                themeToggleBtn.addEventListener('click', () => {
-                    console.log("Theme toggle clicked!");
-                    // Toggle the 'light-mode' class on both html and body
-                    document.documentElement.classList.toggle('light-mode');
-                    document.body.classList.toggle('light-mode');
-                    
-                    // Update localStorage and logo based on the new state
-                    if (document.documentElement.classList.contains('light-mode')) {
-                        localStorage.setItem('theme', 'light');
-                        mainLogo.src = 'Shapes-Logo neu Black.png';
-                        if (cookieBanner) cookieBanner.classList.add('light-mode'); // Apply light mode to banner
-                    } else {
-                        localStorage.setItem('theme', 'dark');
-                        mainLogo.src = 'Shapes-Logo neu White.png';
-                        if (cookieBanner) cookieBanner.classList.remove('light-mode'); // Remove light mode from banner
-                    }
-                    updateThemeToggleIcon(); // Update icon after theme change
-                });
-            }
-        });
-    </script>
-
-</body>
-</html>
+                            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.128 6.062a.75.75 0 10-1.06-1.06l-1.59 1.59a.75.75 0 001.06 
