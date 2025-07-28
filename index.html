@@ -544,8 +544,9 @@
         <footer class="container mx-auto mt-8 mb-8 text-center text-gray-400 text-sm">
             © 2024 Shape Industries @ Sport. All rights reserved
             <div class="mt-2 flex justify-center space-x-4">
-                <a href="#" id="imprint-link" class="text-blue-400 hover:underline"></a>
-                <a href="#" id="footer-cookie-preferences-link" class="text-blue-400 hover:underline"></a>
+                <!-- Removed text-blue-400 from here to allow dynamic styling -->
+                <a href="#" id="imprint-link" class="hover:underline"></a>
+                <a href="#" id="footer-cookie-preferences-link" class="hover:underline"></a>
             </div>
         </footer>
 
@@ -793,9 +794,9 @@
                 privacyPolicyTitle: "Privacy Policy",
                 privacyPolicyIntro: "This Privacy Policy explains how Shapes Innovations GmbH collects, uses, and protects your personal data when you visit our website. We are committed to protecting your privacy and ensuring the security of your personal information.",
                 privacyPolicyCompany: "Shapes Innovations GmbH",
-                privacyPolicyAddress: "Musterstraße 123, 12345 Musterstadt, Germany",
-                privacyPolicyContactEmail: "info@shapes-footwear.com",
-                privacyPolicyContactPhone: "+49 (0)30 987654321",
+                privacyPolicyAddress: "Bismarckstraße 22, 66111 Saarbrücken, Germany", // Updated to match imprint
+                privacyPolicyContactEmail: "hello@get-shapes.com", // Updated to match imprint
+                privacyPolicyContactPhone: "+49 (0)30 987654321", // Updated to match imprint
             },
             de: {
                 scheduleCta: "Buche deine kostenlose Beratung.",
@@ -820,7 +821,7 @@
                 cookieInfoTitle: "Cookie-Informationen",
                 cookieInfoIntro: "Diese Website verwendet Cookies, um Ihr Browser-Erlebnis zu verbessern und zu verstehen, wie Sie mit unserer Website interagieren. Durch die Nutzung unserer Website stimmen Sie unserer Verwendung von Cookies gemäß dieser Richtlinie zu.",
                 cookieInfoWhatAreCookies: "Was sind Cookies?",
-                cookieInfoWhatAreCookiesText: "Cookies sind kleine Textdateien, die auf Ihrem Gerät (Computer, Tablet, Mobiltelefon) gespeichert werden, wenn Sie bestimmte Webseiten besuchen. Sie werden häufig verwendet, um Websites effizienter zu gestalten und den Eigentütern der Website Informationen zur Verfügung zu stellen.",
+                cookieInfoWhatAreCookiesText: "Cookies sind kleine Textdateien, die auf Ihrem Gerät (Computer, Tablet, Mobiltelefon) gespeichert werden, wenn Sie bestimmte Webseiten besuchen. Sie werden häufig verwendet, um Websites effizienter zu gestalten und den Eigentümern der Website Informationen zur Verfügung zu stellen.",
                 cookieInfoHowWeUseCookies: "Wie wir Cookies verwenden",
                 cookieInfoHowWeUseCookiesText: "Wir verwenden Cookies für die folgenden Zwecke:",
                 cookieInfoEssential: "Essentielle Cookies:",
@@ -849,9 +850,9 @@
                 privacyPolicyTitle: "Datenschutzerklärung",
                 privacyPolicyIntro: "Diese Datenschutzerklärung erläutert, wie Shapes Innovations GmbH Ihre personenbezogenen Daten beim Besuch unserer Website sammelt, verwendet und schützt. Wir verpflichten uns, Ihre Privatsphäre zu schützen und die Sicherheit Ihrer persönlichen Daten zu gewährleisten.",
                 privacyPolicyCompany: "Shapes Innovations GmbH",
-                privacyPolicyAddress: "Musterstraße 123, 12345 Musterstadt, Deutschland",
-                privacyPolicyContactEmail: "info@shapes-footwear.com",
-                privacyPolicyContactPhone: "+49 (0)30 987654321",
+                privacyPolicyAddress: "Bismarckstraße 22, 66111 Saarbrücken, Deutschland", // Updated to match imprint
+                privacyPolicyContactEmail: "hello@get-shapes.com", // Updated to match imprint
+                privacyPolicyContactPhone: "+49 (0)30 987654321", // Updated to match imprint
             }
         };
 
@@ -943,11 +944,11 @@
             if (savePreferencesBtn) savePreferencesBtn.textContent = langData.cookieSavePreferences;
             if (cookiePreferencesTitle) cookiePreferencesTitle.textContent = langData.cookiePreferencesTitle;
             if (essentialCookiesLabel) essentialCookiesLabel.textContent = langData.essentialCookiesLabel;
-            if (essentialCookiesDescription) essentialCookiesDescription.textContent = langData.essentialCookiesDescription;
+            if (essentialCookiesDescription) essentialCookiesDescription.textContent = langData.currentLang === 'en' ? "(Always active, necessary for site functionality)" : "(Immer aktiv, notwendig für die Website-Funktionalität)";
             if (analyticsCookiesLabel) analyticsCookiesLabel.textContent = langData.analyticsCookiesLabel;
-            if (analyticsCookiesDescription) analyticsCookiesDescription.textContent = langData.analyticsCookiesDescription;
+            if (analyticsCookiesDescription) analyticsCookiesDescription.textContent = langData.currentLang === 'en' ? "(Help us understand how you use our site to improve it)" : "(Helfen uns zu verstehen, wie Sie unsere Website nutzen, um sie zu verbessern)";
             if (marketingCookiesLabel) marketingCookiesLabel.textContent = langData.marketingCookiesLabel;
-            if (marketingCookiesDescription) marketingCookiesDescription.textContent = langData.marketingCookiesDescription;
+            if (marketingCookiesDescription) marketingCookiesDescription.textContent = langData.currentLang === 'en' ? "(Used to show you relevant ads on other platforms)" : "(Wird verwendet, um Ihnen relevante Anzeigen auf anderen Plattformen anzuzeigen)";
 
 
             // Update Cookie Info Modal content
@@ -1006,9 +1007,19 @@
             const linkColorClass = isLightModeActive ? 'text-blue-700' : 'text-blue-400';
             const hoverLinkColorClass = isLightModeActive ? 'hover:text-blue-900' : 'hover:text-blue-600';
 
-            document.querySelectorAll('#imprint-link, #footer-cookie-preferences-link, #cookie-info-imprint-link, #cookie-info-privacy-policy-link, #cookie-info-modal a[href^="mailto:"], #imprint-modal a[href^="mailto:"], #imprint-modal a[href^="https://ec.europa.eu"], #privacy-policy-modal a[href^="mailto:"], #privacy-policy-link').forEach(link => {
-                link.classList.remove('text-blue-400', 'hover:underline', 'text-blue-700', 'hover:text-blue-900', 'hover:text-blue-600'); // Remove all previous color classes
+            // Apply blue colors to modal links
+            document.querySelectorAll('#cookie-info-imprint-link, #cookie-info-privacy-policy-link, #cookie-info-modal a[href^="mailto:"], #imprint-modal a[href^="mailto:"], #imprint-modal a[href^="https://ec.europa.eu"], #privacy-policy-modal a[href^="mailto:"], #privacy-policy-link').forEach(link => {
+                link.classList.remove('text-blue-400', 'hover:underline', 'text-blue-700', 'hover:text-blue-900', 'hover:text-blue-600', 'text-gray-400', 'hover:text-gray-200', 'text-black', 'hover:text-gray-700');
                 link.classList.add(linkColorClass, hoverLinkColorClass, 'hover:underline');
+            });
+
+            // Apply footer text color to specific footer links
+            const footerLinkColorClass = isLightModeActive ? 'text-black' : 'text-gray-400';
+            const footerHoverLinkColorClass = isLightModeActive ? 'hover:text-gray-700' : 'hover:text-gray-200';
+
+            document.querySelectorAll('#imprint-link, #footer-cookie-preferences-link').forEach(link => {
+                link.classList.remove('text-blue-400', 'hover:underline', 'text-blue-700', 'hover:text-blue-900', 'hover:text-blue-600', 'text-gray-400', 'hover:text-gray-200', 'text-black', 'hover:text-gray-700');
+                link.classList.add(footerLinkColorClass, footerHoverLinkColorClass, 'hover:underline');
             });
         }
 
