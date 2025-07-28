@@ -648,7 +648,7 @@
                     You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.
                 </p>
                 <p id="cookie-info-contact">
-                    For more detailed information about how we use cookies and your choices, please contact us at <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <span class="text-blue-400">imprint</span> and our <span class="text-blue-400">Privacy Policy</span>.
+                    For more detailed information about how we use cookies and your choices, please contact us at <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <span>imprint</span> and our <span>Privacy Policy</span>.
                 </p>
             </div>
             <!-- New Cross-Navigation Links for Cookie Info Modal -->
@@ -1012,8 +1012,8 @@
             if (cookieInfoManagingCookies) cookieInfoManagingCookies.textContent = langData.cookieInfoManagingCookies;
             if (cookieInfoManagingCookiesText) cookieInfoManagingCookiesText.textContent = langData.cookieInfoManagingCookiesText;
             if (cookieInfoContact) {
-                // Modified: Removed IDs and cursor-pointer class from the spans for imprint and privacy policy
-                cookieInfoContact.innerHTML = `${langData.cookieInfoContact} <a href="mailto:${langData.imprintContactEmail}" class="text-blue-400 hover:underline">${langData.imprintContactEmail}</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <span class="text-blue-400">imprint</span> and our <span class="text-blue-400">Privacy Policy</span>.`;
+                // Modified: Removed text-blue-400 and hover:underline classes from the spans for imprint and privacy policy
+                cookieInfoContact.innerHTML = `${langData.cookieInfoContact} <a href="mailto:${langData.imprintContactEmail}" class="text-blue-400 hover:underline">${langData.imprintContactEmail}</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <span>imprint</span> and our <span>Privacy Policy</span>.`;
             }
             if (cookieInfoToImprintLink) cookieInfoToImprintLink.textContent = langData.cookieInfoToImprintLink;
             if (cookieInfoToPrivacyPolicyLink) cookieInfoToPrivacyPolicyLink.textContent = langData.cookieInfoToPrivacyPolicyLink;
