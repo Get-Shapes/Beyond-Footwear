@@ -107,7 +107,7 @@
             top: 0;
             width: 100%; /* Full width */
             height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
+            /* Removed overflow: auto; from .modal to prevent double scrollbars */
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
             justify-content: center;
             align-items: center;
@@ -124,7 +124,7 @@
             justify-content: flex-start;
             align-items: center;
             color: #000000; /* Default text color for modal content */
-            overflow: hidden; /* Hide modal scrollbar */
+            overflow: hidden; /* Hide modal scrollbar by default for Calendly */
             border-radius: 1rem; /* Keep border-radius from glassy-box */
         }
         /* Modal content text color based on theme */
@@ -376,8 +376,10 @@
         #cookie-info-modal .modal-content {
             max-width: 800px; /* Wider for more text */
             height: 90vh; /* Allow more vertical space */
-            overflow-y: auto; /* Enable scrolling for content */
+            /* Removed overflow-y: auto; from modal-content here as text-content handles it */
             text-align: left; /* Align text left */
+            display: flex; /* Ensure flex container */
+            flex-direction: column; /* Ensure column direction */
         }
 
         #cookie-info-modal .modal-content h2 {
@@ -401,6 +403,14 @@
         #cookie-info-modal .modal-content ul {
             list-style-type: disc;
             margin-left: 1.5rem;
+        }
+
+        /* Text content for cookie info modal */
+        #cookie-info-modal .modal-content .text-content {
+            flex-grow: 1; /* Allow text content to fill available space */
+            overflow-y: auto; /* Make this specific div scrollable */
+            padding-right: 0.5rem; /* Add a little padding to the right for scrollbar clearance */
+            padding-bottom: 1.5rem; /* Add padding to the bottom for scrollable content */
         }
 
         /* New styles for cookie preferences modal */
@@ -447,7 +457,7 @@
             text-align: left; /* Align text left */
             display: flex; /* Ensure flex container */
             flex-direction: column; /* Ensure column direction */
-            padding-bottom: 1.5rem; /* Add padding to the bottom of the modal content if needed to prevent close button overlap */
+            /* Removed padding-bottom from modal-content, moved to text-content */
         }
 
         /* Add styles for the text-content div specifically within the privacy policy modal */
@@ -455,6 +465,7 @@
             flex-grow: 1; /* Allow text content to fill available space */
             overflow-y: auto; /* Make this specific div scrollable */
             padding-right: 0.5rem; /* Add a little padding to the right for scrollbar clearance */
+            padding-bottom: 1.5rem; /* Add padding to the bottom for scrollable content */
         }
 
         /* Styles for imprint modal to ensure scrollability */
@@ -464,13 +475,14 @@
             text-align: left; /* Align text left */
             display: flex; /* Ensure flex container */
             flex-direction: column; /* Ensure column direction */
-            padding-bottom: 1.5rem; /* Add padding to the bottom of the modal content if needed to prevent close button overlap */
+            /* Removed padding-bottom from modal-content, moved to text-content */
         }
 
         #imprint-modal .modal-content .text-content {
             flex-grow: 1; /* Allow text content to fill available space */
             overflow-y: auto; /* Make this specific div scrollable */
             padding-right: 0.5rem; /* Add a little padding to the right for scrollbar clearance */
+            padding-bottom: 1.5rem; /* Add padding to the bottom for scrollable content */
         }
     </style>
     <!-- Script to ensure dark mode is always loaded first unless explicitly set to light -->
@@ -636,7 +648,7 @@
                     You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.
                 </p>
                 <p id="cookie-info-contact">
-                    For more detailed information about how we use cookies and your choices, please contact us at <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <a href="#" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a> and our <a href="#" id="cookie-info-privacy-policy-link" class="text-blue-400 hover:underline">Privacy Policy</a>.
+                    For more detailed information about how we use cookies and your choices, please contact us at <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <a href="javascript:void(0);" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a> and our <a href="javascript:void(0);" id="cookie-info-privacy-policy-link" class="text-blue-400 hover:underline">Privacy Policy</a>.
                 </p>
             </div>
         </div>
@@ -970,7 +982,7 @@
             if (cookieInfoManagingCookiesText) cookieInfoManagingCookiesText.textContent = langData.cookieInfoManagingCookiesText;
             if (cookieInfoContact) {
                 // Update the entire innerHTML to include the new Privacy Policy link
-                cookieInfoContact.innerHTML = `${langData.cookieInfoContact} <a href="mailto:${langData.imprintContactEmail}" class="text-blue-400 hover:underline">${langData.imprintContactEmail}</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <a href="#" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a> and our <a href="#" id="cookie-info-privacy-policy-link" class="text-blue-400 hover:underline">Privacy Policy</a>.`;
+                cookieInfoContact.innerHTML = `${langData.cookieInfoContact} <a href="mailto:${langData.imprintContactEmail}" class="text-blue-400 hover:underline">${langData.imprintContactEmail}</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <a href="javascript:void(0);" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a> and our <a href="javascript:void(0);" id="cookie-info-privacy-policy-link" class="text-blue-400 hover:underline">Privacy Policy</a>.`;
             }
 
             // Update Imprint Modal content
