@@ -648,7 +648,7 @@
                     You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.
                 </p>
                 <p id="cookie-info-contact">
-                    For more detailed information about how we use cookies and your choices, please contact us at <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <span id="cookie-info-imprint-link-span" class="text-blue-400 hover:underline cursor-pointer">imprint</span> and our <span id="cookie-info-privacy-policy-link-span" class="text-blue-400 hover:underline cursor-pointer">Privacy Policy</span>.
+                    For more detailed information about how we use cookies and your choices, please contact us at <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <span class="text-blue-400">imprint</span> and our <span class="text-blue-400">Privacy Policy</span>.
                 </p>
             </div>
             <!-- New Cross-Navigation Links for Cookie Info Modal -->
@@ -1012,9 +1012,8 @@
             if (cookieInfoManagingCookies) cookieInfoManagingCookies.textContent = langData.cookieInfoManagingCookies;
             if (cookieInfoManagingCookiesText) cookieInfoManagingCookiesText.textContent = langData.cookieInfoManagingCookiesText;
             if (cookieInfoContact) {
-                // Update the entire innerHTML to include the new Privacy Policy link
-                // Changed <a> to <span> and added cursor-pointer class
-                cookieInfoContact.innerHTML = `${langData.cookieInfoContact} <a href="mailto:${langData.imprintContactEmail}" class="text-blue-400 hover:underline">${langData.imprintContactEmail}</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <span id="cookie-info-imprint-link-span" class="text-blue-400 hover:underline cursor-pointer">imprint</span> and our <span id="cookie-info-privacy-policy-link-span" class="text-blue-400 hover:underline cursor-pointer">Privacy Policy</span>.`;
+                // Modified: Removed IDs and cursor-pointer class from the spans for imprint and privacy policy
+                cookieInfoContact.innerHTML = `${langData.cookieInfoContact} <a href="mailto:${langData.imprintContactEmail}" class="text-blue-400 hover:underline">${langData.imprintContactEmail}</a>. For a comprehensive list of the cookies we use and further details on data processing, please refer to our <span class="text-blue-400">imprint</span> and our <span class="text-blue-400">Privacy Policy</span>.`;
             }
             if (cookieInfoToImprintLink) cookieInfoToImprintLink.textContent = langData.cookieInfoToImprintLink;
             if (cookieInfoToPrivacyPolicyLink) cookieInfoToPrivacyPolicyLink.textContent = langData.cookieInfoToPrivacyPolicyLink;
@@ -1065,7 +1064,7 @@
             const hoverLinkColorClass = isLightModeActive ? 'hover:text-blue-900' : 'hover:text-blue-600';
 
             // Apply blue colors to modal links
-            document.querySelectorAll('#cookie-info-modal a[href^="mailto:"], #imprint-modal a[href^="mailto:"], #imprint-modal a[href^="https://ec.europa.eu"], #privacy-policy-modal a[href^="mailto:"], #cookie-info-imprint-link-span, #cookie-info-privacy-policy-link-span, #imprint-to-cookie-info-link, #imprint-to-privacy-policy-link, #privacy-policy-to-cookie-info-link, #privacy-policy-to-imprint-link, #cookie-info-to-imprint-link, #cookie-info-to-privacy-policy-link').forEach(link => {
+            document.querySelectorAll('#cookie-info-modal a[href^="mailto:"], #imprint-modal a[href^="mailto:"], #imprint-modal a[href^="https://ec.europa.eu"], #privacy-policy-modal a[href^="mailto:"], #imprint-to-cookie-info-link, #imprint-to-privacy-policy-link, #privacy-policy-to-cookie-info-link, #privacy-policy-to-imprint-link, #cookie-info-to-imprint-link, #cookie-info-to-privacy-policy-link').forEach(link => {
                 link.classList.remove('text-blue-400', 'hover:underline', 'text-blue-700', 'hover:text-blue-900', 'hover:text-blue-600', 'text-gray-400', 'hover:text-gray-200', 'text-black', 'hover:text-gray-700');
                 link.classList.add(linkColorClass, hoverLinkColorClass, 'hover:underline');
             });
@@ -1396,13 +1395,11 @@
 
                 // Event delegation for imprint and privacy policy links within cookieInfoModal
                 cookieInfoModal.addEventListener('click', (e) => {
-                    if (e.target.id === 'cookie-info-imprint-link-span') {
+                    // Removed specific IDs for the imprint and privacy policy spans in the 'cookie-info-contact' paragraph
+                    // The cross-navigation links at the bottom of the modal still work.
+                    if (e.target.id === 'cookie-info-to-imprint-link') {
                         openImprintModalFromCookieInfo();
-                    } else if (e.target.id === 'cookie-info-privacy-policy-link-span') {
-                        openPrivacyPolicyModalFromCookieInfo();
-                    } else if (e.target.id === 'cookie-info-to-imprint-link') { // New cross-navigation link
-                        openImprintModalFromCookieInfo();
-                    } else if (e.target.id === 'cookie-info-to-privacy-policy-link') { // New cross-navigation link
+                    } else if (e.target.id === 'cookie-info-to-privacy-policy-link') {
                         openPrivacyPolicyModalFromCookieInfo();
                     }
                 });
