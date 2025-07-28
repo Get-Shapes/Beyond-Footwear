@@ -831,7 +831,7 @@
                 cookieInfoTitle: "Cookie-Informationen",
                 cookieInfoIntro: "Diese Website verwendet Cookies, um Ihr Browser-Erlebnis zu verbessern und zu verstehen, wie Sie mit unserer Website interagieren. Durch die Nutzung unserer Website stimmen Sie unserer Verwendung von Cookies gemäß dieser Richtlinie zu.",
                 cookieInfoWhatAreCookies: "Was sind Cookies?",
-                cookieInfoWhatAreCookiesText: "Cookies sind kleine Textdateien, die auf Ihrem Gerät (Computer, Tablet, Mobiltelefon) gespeichert werden, wenn Sie bestimmte Webseiten besuchen. Sie werden häufig verwendet, um Websites effizienter zu gestalten und den Eigentütern der Website Informationen zur Verfügung zu stellen.",
+                cookieInfoWhatAreCookiesText: "Cookies sind kleine Textdateien, die auf Ihrem Gerät (Computer, Tablet, Mobiltelefon) gespeichert werden, wenn Sie bestimmte Webseiten besuchen. Sie werden häufig verwendet, um Websites effizienter zu gestalten und den Eigentümern der Website Informationen zur Verfügung zu stellen.",
                 cookieInfoHowWeUseCookies: "Wie wir Cookies verwenden",
                 cookieInfoHowWeUseCookiesText: "Wir verwenden Cookies für die folgenden Zwecke:",
                 cookieInfoEssential: "Essentielle Cookies:",
@@ -1475,6 +1475,9 @@
             if (themeToggleBtn && mainLogo) {
                 themeToggleBtn.addEventListener('click', () => {
                     console.log("Theme toggle clicked!");
+                    const wasHidden = cookieBanner.classList.contains('hidden');
+                    console.log("Cookie banner was hidden before theme toggle:", wasHidden);
+
                     // Toggle the 'light-mode' class on both html and body
                     document.documentElement.classList.toggle('light-mode');
                     document.body.classList.toggle('light-mode');
@@ -1491,6 +1494,15 @@
                     }
                     updateThemeToggleIcon(); // Update icon after theme change
                     updateContent(); // Re-apply link colors based on new theme
+
+                    // IMPORTANT: Ensure the 'hidden' state of the cookie banner is NOT altered by theme toggle
+                    // If it was hidden, ensure it remains hidden.
+                    if (wasHidden && cookieBanner) {
+                        cookieBanner.classList.add('hidden');
+                    } else if (!wasHidden && cookieBanner) {
+                        cookieBanner.classList.remove('hidden'); // If it was visible, ensure it remains visible
+                    }
+                    console.log("Cookie banner is hidden after theme toggle:", cookieBanner.classList.contains('hidden'));
                 });
             }
         });
