@@ -464,15 +464,15 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- Google Analytics Placeholder -->
-    <!-- These scripts will be conditionally loaded by JavaScript -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID"></script> -->
-    <!-- <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'YOUR_GA_TRACKING_ID');
-    </script> -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S56QD5EQ6S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-S56QD5EQ6S');
+    </script>
 
     <!-- Main Landing Page Content -->
     <div id="landing-page-content" class="min-h-screen flex flex-col">
@@ -594,7 +594,7 @@
                 <ul>
                     <li><strong id="cookie-info-essential">Essential Cookies:</strong> <span id="cookie-info-essential-text">These cookies are strictly necessary for the core functionality of our website, such as managing user sessions, remembering your cookie preferences, and enabling secure areas. Without these cookies, the website cannot function properly. They do not store any personally identifiable information.</span></li>
                     <li><strong id="cookie-info-analytics">Analytics Cookies:</strong> <span id="cookie-info-analytics-text">These cookies allow us to collect information about how visitors use our website, such as which pages are visited most often, how long users stay on a page, and if they encounter any errors. This data helps us to analyze and improve the performance and design of our website. All information collected by these cookies is aggregated and anonymous.</span></li>
-                    <li><strong id="cookie-info-marketing">Marketing Cookies:</strong> <span id="cookie-info-marketing-text">These cookies are used to track visitors across websites. The intention is to display advertisements that are relevant and engaging for the individual user and thereby more valuable for publishers and third-party advertisers. They may be set through our site by our advertising partners to build a profile of your interests and show you relevant adverts on other sites.</span></li>
+                    <!-- Removed Marketing Cookies from this list -->
                 </ul>
 
                 <h3 id="cookie-info-managing-cookies">Managing Your Cookie Preferences</h3>
@@ -624,10 +624,7 @@
                     <span id="analytics-cookies-label">Analytics Cookies</span>
                     <span class="text-xs text-gray-400" id="analytics-cookies-description">(Help us understand how you use our site to improve it)</span>
                 </label>
-                <label for="marketing-cookies">
-                    <input type="checkbox" id="marketing-cookies">
-                    <span class="text-xs text-gray-400" id="marketing-cookies-description">(Used to show you relevant ads on other platforms)</span>
-                </label>
+                <!-- Removed Marketing Cookies checkbox -->
             </div>
             <button id="save-preferences-button" class="save-preferences-button mt-6 w-full md:w-auto">Save Preferences</button>
         </div>
@@ -673,6 +670,7 @@
                     <li><strong>Usage Data:</strong> Information about how you use our website, including IP address, browser type, operating system, referral URLs, pages viewed, and access times. This data is collected automatically through cookies and similar technologies.</li>
                     <li><strong>Contact Data:</strong> Information you provide when contacting us through forms or email, such as your name, email address, and message content.</li>
                     <li><strong>Booking Data:</strong> Information provided when scheduling a consultation, which may include your name, email, and any details you provide related to your appointment.</li>
+                    <!-- Removed Marketing Cookies from this list -->
                 </ul>
 
                 <h3>Purposes of Data Processing</h3>
@@ -688,7 +686,7 @@
                 <h3>Legal Basis for Processing</h3>
                 <p>The legal basis for processing your data depends on the purpose of the processing:</p>
                 <ul>
-                    <li><strong>Consent:</strong> For the use of non-essential cookies (e.g., analytics, marketing) and when you explicitly agree to data processing (Art. 6(1)(a) GDPR).</li>
+                    <li><strong>Consent:</strong> For the use of non-essential cookies (e.g., analytics) and when you explicitly agree to data processing (Art. 6(1)(a) GDPR).</li>
                     <li><strong>Contractual Necessity:</strong> For processing data necessary to fulfill a contract with you or to take steps at your request prior to entering into a contract (e.g., booking a consultation) (Art. 6(1)(b) GDPR).</li>
                     <li><strong>Legitimate Interests:</strong> For improving our website and services, provided that your interests do not override our legitimate interests (Art. 6(1)(f) GDPR).</li>
                     <li><strong>Legal Obligation:</strong> For compliance with legal obligations (Art. 6(1)(c) GDPR).</li>
@@ -739,8 +737,7 @@
                 essentialCookiesDescription: "(Always active, necessary for site functionality)",
                 analyticsCookiesLabel: "Analytics Cookies",
                 analyticsCookiesDescription: "(Help us understand how you use our site to improve it)",
-                marketingCookiesLabel: "Marketing Cookies",
-                marketingCookiesDescription: "(Used to show you relevant ads on other platforms)",
+                // Removed marketingCookiesLabel and marketingCookiesDescription
                 cookieInfoTitle: "Cookie Information",
                 cookieInfoIntro: "This website uses cookies to enhance your browsing experience and to understand how you interact with our site. By using our website, you consent to our use of cookies in accordance with this policy.",
                 cookieInfoWhatAreCookies: "What Are Cookies?",
@@ -751,8 +748,7 @@
                 cookieInfoEssentialText: "These cookies are strictly necessary for the core functionality of our website, such as managing user sessions, remembering your cookie preferences, and enabling secure areas. Without these cookies, the website cannot function properly. They do not store any personally identifiable information.",
                 cookieInfoAnalytics: "Analytics Cookies:",
                 cookieInfoAnalyticsText: "These cookies allow us to collect information about how visitors use our website, such as which pages are visited most often, how long users stay on a page, and if they encounter any errors. This data helps us to analyze and improve the performance and design of our website. All information collected by these cookies is aggregated and anonymous.",
-                cookieInfoMarketing: "Marketing Cookies:",
-                cookieInfoMarketingText: "These cookies are used to track visitors across websites. The intention is to display advertisements that are relevant and engaging for the individual user and thereby more valuable for publishers and third-party advertisers. They may be set through our site by our advertising partners to build a profile of your interests and show you relevant adverts on other sites.",
+                // Removed cookieInfoMarketing and cookieInfoMarketingText
                 cookieInfoManagingCookies: "Managing Your Cookie Preferences",
                 cookieInfoManagingCookiesText: "You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.",
                 cookieInfoContact: "For more detailed information about how we use cookies and your choices, please contact us at",
@@ -795,8 +791,7 @@
                 essentialCookiesDescription: "(Immer aktiv, notwendig für die Website-Funktionalität)",
                 analyticsCookiesLabel: "Analyse-Cookies",
                 analyticsCookiesDescription: "(Helfen uns zu verstehen, wie Sie unsere Website nutzen, um sie zu verbessern)",
-                marketingCookiesLabel: "Marketing-Cookies",
-                marketingCookiesDescription: "(Wird verwendet, um Ihnen relevante Anzeigen auf anderen Plattformen anzuzeigen)",
+                // Removed marketingCookiesLabel and marketingCookiesDescription
                 cookieInfoTitle: "Cookie-Informationen",
                 cookieInfoIntro: "Diese Website verwendet Cookies, um Ihr Browser-Erlebnis zu verbessern und zu verstehen, wie Sie mit unserer Website interagieren. Durch die Nutzung unserer Website stimmen Sie unserer Verwendung von Cookies gemäß dieser Richtlinie zu.",
                 cookieInfoWhatAreCookies: "Was sind Cookies?",
@@ -807,8 +802,7 @@
                 cookieInfoEssentialText: "Diese Cookies sind für die Kernfunktionalität unserer Website unbedingt erforderlich, z. B. zur Verwaltung von Benutzersitzungen, zum Speichern Ihrer Cookie-Einstellungen und zur Aktivierung sicherer Bereiche. Ohne diese Cookies kann die Website nicht richtig funktionieren. Sie speichern keine persönlich identifizierbaren Informationen.",
                 cookieInfoAnalytics: "Analyse-Cookies:",
                 cookieInfoAnalyticsText: "Diese Cookies ermöglichen es uns, Informationen darüber zu sammeln, wie Besucher unsere Website nutzen, z. B. welche Seiten am häufigsten besucht werden, wie lange Benutzer auf einer Seite bleiben und ob Fehler auftreten. Diese Daten helfen uns, die Leistung und das Design unserer Website zu analysieren und zu verbessern. Alle von diesen Cookies gesammelten Informationen sind aggregiert und anonym.",
-                cookieInfoMarketing: "Marketing Cookies:",
-                cookieInfoMarketingText: "Diese Cookies werden verwendet, um Besucher über Websites hinweg zu verfolgen. Die Absicht ist, Anzeigen anzuzeigen, die für den einzelnen Benutzer relevant und ansprechend und somit für Publisher und Drittanbieter von Werbung wertvoller sind. Sie können über unsere Website von unseren Werbepartnern gesetzt werden, um ein Profil Ihrer Interessen zu erstellen und Ihnen relevante Werbung auf anderen Websites anzuzeigen.",
+                // Removed cookieInfoMarketing and cookieInfoMarketingText
                 cookieInfoManagingCookies: "Verwaltung Ihrer Cookie-Einstellungen",
                 cookieInfoManagingCookiesText: "Sie haben das Recht zu entscheiden, ob Sie Cookies akzeptieren oder ablehnen möchten. Sie können Ihren Browser so einstellen, dass er alle oder einige Browser-Cookies ablehnt oder Sie benachrichtigt, wenn Websites Cookies setzen oder darauf zugreifen. Wenn Sie Cookies deaktivieren oder ablehnen, beachten Sie bitte, dass einige Teile dieser Website möglicherweise nicht zugänglich sind oder nicht richtig funktionieren.",
                 cookieInfoContact: "Für detailliertere Informationen zur Verwendung von Cookies und Ihren Wahlmöglichkeiten kontaktieren Sie uns bitte unter",
@@ -860,8 +854,7 @@
             const essentialCookiesDescription = document.getElementById('essential-cookies-description');
             const analyticsCookiesLabel = document.getElementById('analytics-cookies-label');
             const analyticsCookiesDescription = document.getElementById('analytics-cookies-description');
-            const marketingCookiesLabel = document.getElementById('marketing-cookies-label');
-            const marketingCookiesDescription = document.getElementById('marketing-cookies-description');
+            // Removed marketingCookiesLabel and marketingCookiesDescription
 
             // Cookie Info Modal elements
             const cookieInfoTitle = document.getElementById('cookie-info-title');
@@ -874,8 +867,7 @@
             const cookieInfoEssentialText = document.getElementById('cookie-info-essential-text');
             const cookieInfoAnalytics = document.getElementById('cookie-info-analytics');
             const cookieInfoAnalyticsText = document.getElementById('cookie-info-analytics-text');
-            const cookieInfoMarketing = document.getElementById('cookie-info-marketing');
-            const cookieInfoMarketingText = document.getElementById('cookie-info-marketing-text');
+            // Removed cookieInfoMarketing and cookieInfoMarketingText
             const cookieInfoManagingCookies = document.getElementById('cookie-info-managing-cookies');
             const cookieInfoManagingCookiesText = document.getElementById('cookie-info-managing-cookies-text');
             const cookieInfoContact = document.getElementById('cookie-info-contact');
@@ -926,8 +918,6 @@
             if (essentialCookiesDescription) essentialCookiesDescription.textContent = langData.essentialCookiesDescription;
             if (analyticsCookiesLabel) analyticsCookiesLabel.textContent = langData.analyticsCookiesLabel;
             if (analyticsCookiesDescription) analyticsCookiesDescription.textContent = langData.analyticsCookiesDescription;
-            if (marketingCookiesLabel) marketingCookiesLabel.textContent = langData.marketingCookiesLabel;
-            if (marketingCookiesDescription) marketingCookiesDescription.textContent = langData.marketingCookiesDescription;
 
 
             // Update Cookie Info Modal content
@@ -941,8 +931,6 @@
             if (cookieInfoEssentialText) cookieInfoEssentialText.textContent = langData.cookieInfoEssentialText;
             if (cookieInfoAnalytics) cookieInfoAnalytics.textContent = langData.cookieInfoAnalytics;
             if (cookieInfoAnalyticsText) cookieInfoAnalyticsText.textContent = langData.cookieInfoAnalyticsText;
-            if (cookieInfoMarketing) cookieInfoMarketing.textContent = langData.cookieInfoMarketing;
-            if (cookieInfoMarketingText) cookieInfoMarketingText.textContent = langData.cookieInfoMarketingText;
             if (cookieInfoManagingCookies) cookieInfoManagingCookies.textContent = langData.cookieInfoManagingCookies;
             if (cookieInfoManagingCookiesText) cookieInfoManagingCookiesText.textContent = langData.cookieInfoManagingCookiesText;
             if (cookieInfoContact) {
@@ -1028,28 +1016,16 @@
             }
         }
 
-        // Function to load external scripts conditionally
+        // Function to load external scripts conditionally (now only for non-GA scripts)
         function loadExternalScripts(consent) {
-            // Remove existing GA scripts if they were loaded previously
-            document.querySelectorAll('[data-script-type="analytics"]').forEach(el => el.remove());
-
+            // No dynamic scripts to load currently, as GA is embedded directly
+            // and marketing pixel was removed.
+            // This function remains for future extensibility if other scripts are added.
+            document.querySelectorAll('[data-script-type="analytics"], [data-script-type="marketing"]').forEach(el => el.remove());
             if (consent.analytics) {
-                // Google Analytics
-                const gaScript = document.createElement('script');
-                gaScript.async = true;
-                gaScript.src = "https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID";
-                gaScript.setAttribute('data-script-type', 'analytics');
-                document.head.appendChild(gaScript);
-
-                gaScript.onload = () => {
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', 'YOUR_GA_TRACKING_ID');
-                    console.log("Google Analytics loaded.");
-                };
+                // Google Analytics is now directly in HTML, so no need to load it here dynamically.
+                // This block is left empty as a placeholder for other analytics tools if needed.
             }
-            // Removed Facebook Pixel loading logic
         }
 
 
@@ -1075,7 +1051,7 @@
             const savePreferencesBtn = document.getElementById('save-preferences-button');
             const essentialCookiesCheckbox = document.getElementById('essential-cookies');
             const analyticsCookiesCheckbox = document.getElementById('analytics-cookies');
-            const marketingCookiesCheckbox = document.getElementById('marketing-cookies');
+            // Removed marketingCookiesCheckbox
             const learnMoreCookiesLink = document.getElementById('learn-more-cookies');
 
             // Cookie Info Modal elements
@@ -1135,7 +1111,8 @@
                 // Default checkboxes to checked if no prior consent
                 if (essentialCookiesCheckbox) essentialCookiesCheckbox.checked = true;
                 if (analyticsCookiesCheckbox) analyticsCookiesCheckbox.checked = true;
-                if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = true;
+                // Since marketing cookies are no longer relevant, ensure it's false
+                // if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = false; // Removed marketing checkbox
             } else {
                 // If consent exists, hide the banner and apply preferences
                 if (cookieBanner) {
@@ -1144,8 +1121,7 @@
                 }
                 if (essentialCookiesCheckbox) essentialCookiesCheckbox.checked = cookieConsent.essential;
                 if (analyticsCookiesCheckbox) analyticsCookiesCheckbox.checked = cookieConsent.analytics;
-                // Since marketing cookies are no longer relevant for Facebook Pixel, ensure it's false if no other marketing tools are used
-                if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = cookieConsent.marketing;
+                // if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = cookieConsent.marketing; // Removed marketing checkbox
                 loadExternalScripts(cookieConsent); // Load scripts based on stored consent
             }
 
@@ -1153,7 +1129,7 @@
             // Event Listeners for Cookie Banner Buttons
             if (acceptAllCookiesBtn) {
                 acceptAllCookiesBtn.addEventListener('click', () => {
-                    const consent = { essential: true, analytics: true, marketing: marketingCookiesCheckbox ? marketingCookiesCheckbox.checked : false }; // Marketing consent remains if other tools are added later
+                    const consent = { essential: true, analytics: true }; // Marketing consent removed
                     localStorage.setItem('cookieConsent', JSON.stringify(consent));
                     if (cookieBanner) {
                         cookieBanner.classList.add('hidden');
@@ -1165,13 +1141,13 @@
 
             if (declineAllCookiesBtn) {
                 declineAllCookiesBtn.addEventListener('click', () => {
-                    const consent = { essential: true, analytics: false, marketing: false }; // Essential always true
+                    const consent = { essential: true, analytics: false }; // Essential always true, marketing removed
                     localStorage.setItem('cookieConsent', JSON.stringify(consent));
                     if (cookieBanner) {
                         cookieBanner.classList.add('hidden');
                         console.log("Decline All Cookies clicked. Cookie banner hidden. ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
                     }
-                    loadExternalScripts(consent); // This will remove analytics/marketing scripts
+                    loadExternalScripts(consent); // This will remove analytics scripts if declined
                 });
             }
 
@@ -1183,10 +1159,10 @@
                     }
                     if (cookiePreferencesModal) {
                         // Ensure checkboxes reflect current consent before opening
-                        const currentConsent = JSON.parse(localStorage.getItem('cookieConsent')) || { essential: true, analytics: false, marketing: false };
+                        const currentConsent = JSON.parse(localStorage.getItem('cookieConsent')) || { essential: true, analytics: false }; // Marketing removed
                         if (essentialCookiesCheckbox) essentialCookiesCheckbox.checked = currentConsent.essential;
                         if (analyticsCookiesCheckbox) analyticsCookiesCheckbox.checked = currentConsent.analytics;
-                        if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = currentConsent.marketing;
+                        // if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = currentConsent.marketing; // Removed marketing checkbox
 
                         cookiePreferencesModal.style.display = 'flex';
                         console.log("Cookie preferences modal shown. Current display:", cookiePreferencesModal.style.display, "Computed Display:", getComputedStyle(cookiePreferencesModal).display);
@@ -1201,7 +1177,7 @@
                     const consent = {
                         essential: true, // Essential is always true
                         analytics: analyticsCookiesCheckbox ? analyticsCookiesCheckbox.checked : false,
-                        marketing: marketingCookiesCheckbox ? marketingCookiesCheckbox.checked : false
+                        // marketing: false // Marketing removed
                     };
                     localStorage.setItem('cookieConsent', JSON.stringify(consent));
                     if (cookieBanner) {
@@ -1318,10 +1294,10 @@
                     e.preventDefault();
                     if (cookiePreferencesModal) {
                         // Ensure checkboxes reflect current consent before opening
-                        const currentConsent = JSON.parse(localStorage.getItem('cookieConsent')) || { essential: true, analytics: false, marketing: false };
+                        const currentConsent = JSON.parse(localStorage.getItem('cookieConsent')) || { essential: true, analytics: false }; // Marketing removed
                         if (essentialCookiesCheckbox) essentialCookiesCheckbox.checked = currentConsent.essential;
                         if (analyticsCookiesCheckbox) analyticsCookiesCheckbox.checked = currentConsent.analytics;
-                        if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = currentConsent.marketing;
+                        // if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = currentConsent.marketing; // Removed marketing checkbox
 
                         cookiePreferencesModal.style.display = 'flex';
                     }
