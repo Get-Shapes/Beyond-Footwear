@@ -131,6 +131,16 @@
             color: #e2e8f0; /* Light text for modal content in dark mode */
         }
 
+        /* Specific styles for cookie info and preferences modals in light mode */
+        html.light-mode #cookie-info-modal .modal-content,
+        html.light-mode #cookie-preferences-modal .modal-content {
+            color: #ffffff !important; /* White text in light mode for these modals */
+            background-color: rgba(0, 0, 0, 0.7) !important; /* Dark background for contrast */
+            border: 1px solid rgba(255, 255, 255, 0.1) !important; /* Light border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important; /* Dark shadow */
+        }
+
+
         .close-button {
             color: #000000; /* Pure Black for light mode */
             position: absolute;
@@ -441,11 +451,8 @@
             document.body.classList.add('light-mode');
             localStorage.setItem('theme', 'light');
         } else {
-            // Ensure dark mode classes are present if not in light mode
             document.documentElement.classList.remove('light-mode');
             document.body.classList.remove('light-mode');
-            // Tailwind's dark class is applied dynamically, so we don't remove it here.
-            // The default CSS handles the dark mode appearance.
             localStorage.setItem('theme', 'dark'); // Ensure localStorage reflects dark mode
         }
     </script>
@@ -707,7 +714,7 @@
                 cookieInfoEssentialText: "Diese Cookies sind für die Funktion der Website notwendig und können in unseren Systemen nicht deaktiviert werden. Sie werden in der Regel nur als Reaktion auf von Ihnen getätigte Aktionen gesetzt, die einer Dienstanfrage gleichkommen, wie das Festlegen Ihrer Datenschutzeinstellungen, das Anmelden oder das Ausfüllen von Formularen.",
                 cookieInfoAnalytics: "Analyse-Cookies:",
                 cookieInfoAnalyticsText: "Diese Cookies ermöglichen es uns, Besuche und Traffic-Quellen zu zählen, um die Leistung unserer Website zu messen und zu verbessern. Sie helfen uns zu wissen, welche Seiten am beliebtesten und am wenigsten beliebt sind und wie sich Besucher auf der Website bewegen. Alle Informationen, die diese Cookies sammeln, sind aggregiert und daher anonym.",
-                cookieInfoMarketing: "Marketing-Cookies:",
+                cookieInfoMarketing: "Marketing Cookies:",
                 cookieInfoMarketingText: "Diese Cookies können über unsere Website von unseren Werbepartnern gesetzt werden. Sie können von diesen Unternehmen verwendet werden, um ein Profil Ihrer Interessen zu erstellen und Ihnen relevante Werbung auf anderen Websites anzuzeigen. Sie speichern keine direkten persönlichen Informationen, sondern basieren auf der eindeutigen Identifizierung Ihres Browsers und Internetgeräts.",
                 cookieInfoManagingCookies: "Verwaltung Ihrer Cookie-Einstellungen",
                 cookieInfoManagingCookiesText: "Sie haben das Recht zu entscheiden, ob Sie Cookies akzeptieren oder ablehnen möchten. Sie können Ihren Browser so einstellen, dass er alle oder einige Browser-Cookies ablehnt oder Sie benachrichtigt, wenn Websites Cookies setzen oder darauf zugreifen. Wenn Sie Cookies deaktivieren oder ablehnen, beachten Sie bitte, dass einige Teile dieser Website möglicherweise nicht zugänglich sind oder nicht richtig funktionieren.",
@@ -895,7 +902,7 @@
             const savePreferencesBtn = document.getElementById('save-preferences-button');
             // const cookiePreferencesContainer = document.getElementById('cookie-preferences-container'); // No longer needed directly in banner
             const essentialCookiesCheckbox = document.getElementById('essential-cookies');
-            const analyticsCookiesCheckbox = document.getElementById('analytics-cookies');
+            const analyticsCookiesCheckbox = document = document.getElementById('analytics-cookies');
             const marketingCookiesCheckbox = document.getElementById('marketing-cookies');
             const learnMoreCookiesLink = document.getElementById('learn-more-cookies');
 
@@ -938,7 +945,7 @@
                 // If no consent, show the banner
                 if (cookieBanner) {
                     cookieBanner.classList.remove('hidden');
-                    console.log("Cookie banner shown: ", cookieBanner.classList, cookieBanner.style.display);
+                    console.log("Cookie banner shown on load (no consent). ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
                 }
                 // Default checkboxes to checked if no prior consent
                 if (essentialCookiesCheckbox) essentialCookiesCheckbox.checked = true;
@@ -948,7 +955,7 @@
                 // If consent exists, hide the banner and apply preferences
                 if (cookieBanner) {
                     cookieBanner.classList.add('hidden');
-                    console.log("Cookie banner hidden on load (consent exists): ", cookieBanner.classList, cookieBanner.style.display);
+                    console.log("Cookie banner hidden on load (consent exists). ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
                 }
                 if (essentialCookiesCheckbox) essentialCookiesCheckbox.checked = cookieConsent.essential;
                 if (analyticsCookiesCheckbox) analyticsCookiesCheckbox.checked = cookieConsent.analytics;
@@ -964,7 +971,7 @@
                     localStorage.setItem('cookieConsent', JSON.stringify(consent));
                     if (cookieBanner) {
                         cookieBanner.classList.add('hidden');
-                        console.log("Accept All Cookies clicked. Cookie banner hidden: ", cookieBanner.classList, cookieBanner.style.display);
+                        console.log("Accept All Cookies clicked. Cookie banner hidden. ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
                     }
                     loadExternalScripts(consent);
                 });
@@ -976,7 +983,7 @@
                     localStorage.setItem('cookieConsent', JSON.stringify(consent));
                     if (cookieBanner) {
                         cookieBanner.classList.add('hidden');
-                        console.log("Decline All Cookies clicked. Cookie banner hidden: ", cookieBanner.classList, cookieBanner.style.display);
+                        console.log("Decline All Cookies clicked. Cookie banner hidden. ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
                     }
                     loadExternalScripts(consent); // This will remove analytics/marketing scripts
                 });
@@ -986,7 +993,7 @@
                 managePreferencesBtn.addEventListener('click', () => {
                     if (cookieBanner) {
                         cookieBanner.classList.add('hidden'); // Hide main banner
-                        console.log("Manage Preferences clicked. Main cookie banner hidden: ", cookieBanner.classList, cookieBanner.style.display);
+                        console.log("Manage Preferences clicked. Main cookie banner hidden. ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
                     }
                     if (cookiePreferencesModal) {
                         // Ensure checkboxes reflect current consent before opening
@@ -996,7 +1003,9 @@
                         if (marketingCookiesCheckbox) marketingCookiesCheckbox.checked = currentConsent.marketing;
 
                         cookiePreferencesModal.style.display = 'flex';
-                        console.log("Cookie preferences modal shown.");
+                        console.log("Cookie preferences modal shown. Current display:", cookiePreferencesModal.style.display, "Computed Display:", getComputedStyle(cookiePreferencesModal).display);
+                    } else {
+                        console.log("cookiePreferencesModal element not found!");
                     }
                 });
             }
@@ -1011,11 +1020,11 @@
                     localStorage.setItem('cookieConsent', JSON.stringify(consent));
                     if (cookieBanner) {
                         cookieBanner.classList.add('hidden'); // Ensure banner is hidden
-                        console.log("Save Preferences clicked. Cookie banner hidden: ", cookieBanner.classList, cookieBanner.style.display);
+                        console.log("Save Preferences clicked. Cookie banner hidden. ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
                     }
                     if (cookiePreferencesModal) {
                         cookiePreferencesModal.style.display = 'none'; // Close the preferences modal
-                        console.log("Cookie preferences modal hidden.");
+                        console.log("Cookie preferences modal hidden. Current display:", cookiePreferencesModal.style.display, "Computed Display:", getComputedStyle(cookiePreferencesModal).display);
                     }
                     loadExternalScripts(consent);
                 });
@@ -1025,14 +1034,23 @@
             if (learnMoreCookiesLink) {
                 learnMoreCookiesLink.addEventListener('click', (e) => {
                     e.preventDefault(); // Prevent default link behavior
-                    if (cookieInfoModal) cookieInfoModal.style.display = 'flex';
+                    console.log("Learn more cookies link clicked.");
+                    if (cookieInfoModal) {
+                        cookieInfoModal.style.display = 'flex';
+                        console.log("cookieInfoModal display set to flex. Current display:", cookieInfoModal.style.display, "Computed Display:", getComputedStyle(cookieInfoModal).display);
+                    } else {
+                        console.log("cookieInfoModal element not found!");
+                    }
                 });
             }
 
             // Close Cookie Info Modal
             if (closeCookieInfoModalBtn) {
                 closeCookieInfoModalBtn.addEventListener('click', () => {
-                    if (cookieInfoModal) cookieInfoModal.style.display = 'none';
+                    if (cookieInfoModal) {
+                        cookieInfoModal.style.display = 'none';
+                        console.log("Cookie info modal closed. Current display:", cookieInfoModal.style.display, "Computed Display:", getComputedStyle(cookieInfoModal).display);
+                    }
                 });
             }
 
@@ -1040,7 +1058,10 @@
             if (cookieInfoModal) {
                 cookieInfoModal.addEventListener('click', (e) => {
                     if (e.target === cookieInfoModal) {
-                        cookieInfoModal.style.display = 'none';
+                        if (cookieInfoModal) {
+                            cookieInfoModal.style.display = 'none';
+                            console.log("Clicked outside cookie info modal. Current display:", cookieInfoModal.style.display, "Computed Display:", getComputedStyle(cookieInfoModal).display);
+                        }
                     }
                 });
             }
@@ -1049,9 +1070,15 @@
             if (closeCookiePreferencesModalBtn) {
                 closeCookiePreferencesModalBtn.addEventListener('click', () => {
                     console.log("Closing preferences modal without saving. Re-showing banner.");
-                    if (cookiePreferencesModal) cookiePreferencesModal.style.display = 'none';
+                    if (cookiePreferencesModal) {
+                        cookiePreferencesModal.style.display = 'none';
+                        console.log("Cookie preferences modal hidden. Current display:", cookiePreferencesModal.style.display, "Computed Display:", getComputedStyle(cookiePreferencesModal).display);
+                    }
                     // If preferences modal is closed without saving, show the main banner again
-                    if (cookieBanner) cookieBanner.classList.remove('hidden');
+                    if (cookieBanner) {
+                        cookieBanner.classList.remove('hidden');
+                        console.log("Cookie banner re-shown after preferences modal close. ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
+                    }
                 });
             }
 
@@ -1060,9 +1087,15 @@
                 cookiePreferencesModal.addEventListener('click', (e) => {
                     if (e.target === cookiePreferencesModal) {
                         console.log("Clicked outside preferences modal. Re-showing banner.");
-                        cookiePreferencesModal.style.display = 'none';
+                        if (cookiePreferencesModal) {
+                            cookiePreferencesModal.style.display = 'none';
+                            console.log("Cookie preferences modal hidden. Current display:", cookiePreferencesModal.style.display, "Computed Display:", getComputedStyle(cookiePreferencesModal).display);
+                        }
                         // If preferences modal is closed by clicking outside, show the main banner again
-                        if (cookieBanner) cookieBanner.classList.remove('hidden');
+                        if (cookieBanner) {
+                            cookieBanner.classList.remove('hidden');
+                            console.log("Cookie banner re-shown after preferences modal outside click. ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
+                        }
                     }
                 });
             }
