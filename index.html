@@ -232,9 +232,10 @@
         #cookie-banner button.decline-all-button,
         #cookie-banner button.manage-preferences-button,
         #cookie-banner button.save-preferences-button {
-            background-color: transparent;
+            background-color: transparent; /* Always transparent background */
+            border: 1px solid rgba(255, 255, 255, 0.4); /* Slightly more visible border */
             color: #e2e8f0; /* Light text for dark mode */
-            border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+            box-shadow: none; /* No initial shadow */
         }
 
         #cookie-banner button.accept-button:hover {
@@ -267,9 +268,10 @@
         #cookie-banner.light-mode button.decline-all-button,
         #cookie-banner.light-mode button.manage-preferences-button,
         #cookie-banner.light-mode button.save-preferences-button {
-            background-color: transparent;
+            background-color: transparent; /* Always transparent background */
             color: #000000; /* Dark text for light mode */
-            border: 1px solid rgba(0, 0, 0, 0.3); /* Subtle black border */
+            border: 1px solid rgba(0, 0, 0, 0.4); /* Slightly more visible border */
+            box-shadow: none; /* No initial shadow */
         }
 
         #cookie-banner.light-mode button.accept-button:hover {
