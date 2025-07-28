@@ -133,7 +133,8 @@
 
         /* Specific styles for cookie info and preferences modals in light mode */
         html.light-mode #cookie-info-modal .modal-content,
-        html.light-mode #cookie-preferences-modal .modal-content {
+        html.light-mode #cookie-preferences-modal .modal-content,
+        html.light-mode #imprint-modal .modal-content { /* Added imprint modal */
             color: #ffffff !important; /* White text in light mode for these modals */
             background-color: rgba(0, 0, 0, 0.7) !important; /* Dark background for contrast */
             border: 1px solid rgba(255, 255, 255, 0.1) !important; /* Light border */
@@ -542,6 +543,9 @@
         <!-- Footer Section -->
         <footer class="container mx-auto mt-8 mb-8 text-center text-gray-400 text-sm">
             © 2024 Shape Industries @ Sport. All rights reserved
+            <div class="mt-2">
+                <a href="#" id="imprint-link" class="text-blue-400 hover:underline"></a>
+            </div>
         </footer>
 
     </div>
@@ -613,7 +617,7 @@
                     You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.
                 </p>
                 <p id="cookie-info-contact">
-                    For more detailed information about how we use cookies and your choices, please contact us. <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. To check our imprint for more details of what cookies we do use.
+                    For more detailed information about how we use cookies and your choices, please contact us. <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. To check our <a href="#" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a> for more details of what cookies we do use.
                 </p>
             </div>
         </div>
@@ -642,6 +646,24 @@
                 </label>
             </div>
             <button id="save-preferences-button" class="save-preferences-button mt-6 w-full md:w-auto">Save Preferences</button>
+        </div>
+    </div>
+
+    <!-- Imprint Modal (New) -->
+    <div id="imprint-modal" class="modal">
+        <div class="modal-content glassy-box">
+            <span class="close-button" id="close-imprint-modal">&times;</span>
+            <h2 id="imprint-title" class="text-3xl font-bold mb-6">Imprint</h2>
+            <div class="text-content mt-4 text-left">
+                <p id="imprint-company-name"><strong>Company Name:</strong> [Your Company Name]</p>
+                <p id="imprint-legal-form"><strong>Legal Form:</strong> [e.g., GmbH, AG, Sole Proprietorship]</p>
+                <p id="imprint-address"><strong>Address:</strong> [Your Street Address], [Your City], [Your Postal Code], [Your Country]</p>
+                <p id="imprint-contact-email"><strong>Email:</strong> <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a></p>
+                <p id="imprint-contact-phone"><strong>Phone:</strong> [Your Phone Number]</p>
+                <p id="imprint-register-entry"><strong>Register Entry:</strong> [e.g., Commercial Register, Register of Associations] [Register Number], [Register Court]</p>
+                <p id="imprint-vat-id"><strong>VAT ID:</strong> [Your VAT Identification Number (if applicable)]</p>
+                <p id="imprint-responsible-content"><strong>Responsible for Content:</strong> [Name of responsible person/entity, if different]</p>
+            </div>
         </div>
     </div>
 
@@ -682,7 +704,17 @@
                 cookieInfoMarketingText: "These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device.",
                 cookieInfoManagingCookies: "Managing Your Cookie Preferences",
                 cookieInfoManagingCookiesText: "You have the right to decide whether to accept or reject cookies. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of this website may become inaccessible or not function properly.",
-                cookieInfoContact: "For more detailed information about how we use cookies and your choices, please contact us. To check our imprint for more details of what cookies we do use."
+                cookieInfoContact: "For more detailed information about how we use cookies and your choices, please contact us.",
+                imprintLinkText: "Imprint",
+                imprintTitle: "Imprint",
+                imprintCompanyName: "Shapes Beyond Footwear GmbH",
+                imprintLegalForm: "GmbH",
+                imprintAddress: "Musterstraße 123, 12345 Musterstadt, Germany",
+                imprintContactEmail: "hello@get-shapes.com",
+                imprintContactPhone: "+49 123 456789",
+                imprintRegisterEntry: "Amtsgericht Musterstadt, HRB 12345",
+                imprintVatId: "DE123456789",
+                imprintResponsibleContent: "Max Mustermann"
             },
             de: {
                 scheduleCta: "Buche deine kostenlose Beratung.",
@@ -718,7 +750,17 @@
                 cookieInfoMarketingText: "Diese Cookies können über unsere Website von unseren Werbepartnern gesetzt werden. Sie können von diesen Unternehmen verwendet werden, um ein Profil Ihrer Interessen zu erstellen und Ihnen relevante Werbung auf anderen Websites anzuzeigen. Sie speichern keine direkten persönlichen Informationen, sondern basieren auf der eindeutigen Identifizierung Ihres Browsers und Internetgeräts.",
                 cookieInfoManagingCookies: "Verwaltung Ihrer Cookie-Einstellungen",
                 cookieInfoManagingCookiesText: "Sie haben das Recht zu entscheiden, ob Sie Cookies akzeptieren oder ablehnen möchten. Sie können Ihren Browser so einstellen, dass er alle oder einige Browser-Cookies ablehnt oder Sie benachrichtigt, wenn Websites Cookies setzen oder darauf zugreifen. Wenn Sie Cookies deaktivieren oder ablehnen, beachten Sie bitte, dass einige Teile dieser Website möglicherweise nicht zugänglich sind oder nicht richtig funktionieren.",
-                cookieInfoContact: "Für detailliertere Informationen zur Verwendung von Cookies und Ihren Wahlmöglichkeiten kontaktieren Sie uns bitte. Um unser Impressum für weitere Details zu den von uns verwendeten Cookies zu überprüfen."
+                cookieInfoContact: "Für detailliertere Informationen zur Verwendung von Cookies und Ihren Wahlmöglichkeiten kontaktieren Sie uns bitte.",
+                imprintLinkText: "Impressum",
+                imprintTitle: "Impressum",
+                imprintCompanyName: "Shapes Beyond Footwear GmbH",
+                imprintLegalForm: "GmbH",
+                imprintAddress: "Musterstraße 123, 12345 Musterstadt, Deutschland",
+                imprintContactEmail: "hello@get-shapes.com",
+                imprintContactPhone: "+49 123 456789",
+                imprintRegisterEntry: "Amtsgericht Musterstadt, HRB 12345",
+                imprintVatId: "DE123456789",
+                imprintResponsibleContent: "Max Mustermann"
             }
         };
 
@@ -750,7 +792,6 @@
             const marketingCookiesLabel = document.getElementById('marketing-cookies-label');
             const marketingCookiesDescription = document.getElementById('marketing-cookies-description');
 
-
             // Cookie Info Modal elements
             const cookieInfoTitle = document.getElementById('cookie-info-title');
             const cookieInfoIntro = document.getElementById('cookie-info-intro');
@@ -767,6 +808,19 @@
             const cookieInfoManagingCookies = document.getElementById('cookie-info-managing-cookies');
             const cookieInfoManagingCookiesText = document.getElementById('cookie-info-managing-cookies-text');
             const cookieInfoContact = document.getElementById('cookie-info-contact');
+            const cookieInfoImprintLink = document.getElementById('cookie-info-imprint-link');
+
+            // Imprint Modal elements
+            const imprintLink = document.getElementById('imprint-link');
+            const imprintTitle = document.getElementById('imprint-title');
+            const imprintCompanyName = document.getElementById('imprint-company-name');
+            const imprintLegalForm = document.getElementById('imprint-legal-form');
+            const imprintAddress = document.getElementById('imprint-address');
+            const imprintContactEmail = document.getElementById('imprint-contact-email');
+            const imprintContactPhone = document.getElementById('imprint-contact-phone');
+            const imprintRegisterEntry = document.getElementById('imprint-register-entry');
+            const imprintVatId = document.getElementById('imprint-vat-id');
+            const imprintResponsibleContent = document.getElementById('imprint-responsible-content');
 
 
             if (modalTitle) modalTitle.textContent = langData.modalTitle;
@@ -809,8 +863,20 @@
             if (cookieInfoManagingCookiesText) cookieInfoManagingCookiesText.textContent = langData.cookieInfoManagingCookiesText;
             if (cookieInfoContact) {
                 // The email address is hardcoded in the HTML, so only update the preceding text
-                cookieInfoContact.innerHTML = langData.cookieInfoContact + ` <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>.`;
+                cookieInfoContact.innerHTML = langData.cookieInfoContact + ` <a href="mailto:hello@get-shapes.com" class="text-blue-400 hover:underline">hello@get-shapes.com</a>. To check our <a href="#" id="cookie-info-imprint-link" class="text-blue-400 hover:underline">imprint</a> for more details of what cookies we do use.`;
             }
+
+            // Update Imprint Modal content
+            if (imprintLink) imprintLink.textContent = langData.imprintLinkText;
+            if (imprintTitle) imprintTitle.textContent = langData.imprintTitle;
+            if (imprintCompanyName) imprintCompanyName.innerHTML = `<strong>Company Name:</strong> ${langData.imprintCompanyName}`;
+            if (imprintLegalForm) imprintLegalForm.innerHTML = `<strong>Legal Form:</strong> ${langData.imprintLegalForm}`;
+            if (imprintAddress) imprintAddress.innerHTML = `<strong>Address:</strong> ${langData.imprintAddress}`;
+            if (imprintContactEmail) imprintContactEmail.innerHTML = `<strong>Email:</strong> <a href="mailto:${langData.imprintContactEmail}" class="text-blue-400 hover:underline">${langData.imprintContactEmail}</a>`;
+            if (imprintContactPhone) imprintContactPhone.innerHTML = `<strong>Phone:</strong> ${langData.imprintContactPhone}`;
+            if (imprintRegisterEntry) imprintRegisterEntry.innerHTML = `<strong>Register Entry:</strong> ${langData.imprintRegisterEntry}`;
+            if (imprintVatId) imprintVatId.innerHTML = `<strong>VAT ID:</strong> ${langData.imprintVatId}`;
+            if (imprintResponsibleContent) imprintResponsibleContent.innerHTML = `<strong>Responsible for Content:</strong> ${langData.imprintResponsibleContent}`;
         }
 
         // Function to update the theme toggle icon
@@ -903,19 +969,24 @@
             const declineAllCookiesBtn = document.getElementById('decline-all-cookies');
             const managePreferencesBtn = document.getElementById('manage-preferences-button');
             const savePreferencesBtn = document.getElementById('save-preferences-button');
-            // const cookiePreferencesContainer = document.getElementById('cookie-preferences-container'); // No longer needed directly in banner
             const essentialCookiesCheckbox = document.getElementById('essential-cookies');
-            const analyticsCookiesCheckbox = document = document.getElementById('analytics-cookies');
+            const analyticsCookiesCheckbox = document.getElementById('analytics-cookies');
             const marketingCookiesCheckbox = document.getElementById('marketing-cookies');
             const learnMoreCookiesLink = document.getElementById('learn-more-cookies');
 
             // Cookie Info Modal elements
             const cookieInfoModal = document.getElementById('cookie-info-modal');
             const closeCookieInfoModalBtn = document.getElementById('close-cookie-info-modal');
+            const cookieInfoImprintLink = document.getElementById('cookie-info-imprint-link');
 
             // Cookie Preferences Modal elements (new)
             const cookiePreferencesModal = document.getElementById('cookie-preferences-modal');
             const closeCookiePreferencesModalBtn = document.getElementById('close-cookie-preferences-modal');
+
+            // Imprint Modal elements (new)
+            const imprintModal = document.getElementById('imprint-modal');
+            const closeImprintModalBtn = document.getElementById('close-imprint-modal');
+            const imprintLink = document.getElementById('imprint-link');
 
 
             // Initial theme application (already handled by inline script in head for FOUC prevention)
@@ -1049,158 +1120,4 @@
 
             // Close Cookie Info Modal
             if (closeCookieInfoModalBtn) {
-                closeCookieInfoModalBtn.addEventListener('click', () => {
-                    if (cookieInfoModal) {
-                        cookieInfoModal.style.display = 'none';
-                        console.log("Cookie info modal closed. Current display:", cookieInfoModal.style.display, "Computed Display:", getComputedStyle(cookieInfoModal).display);
-                    }
-                });
-            }
-
-            // Close Cookie Info Modal if clicking outside content
-            if (cookieInfoModal) {
-                cookieInfoModal.addEventListener('click', (e) => {
-                    if (e.target === cookieInfoModal) {
-                        if (cookieInfoModal) {
-                            cookieInfoModal.style.display = 'none';
-                            console.log("Clicked outside cookie info modal. Current display:", cookieInfoModal.style.display, "Computed Display:", getComputedStyle(cookieInfoModal).display);
-                        }
-                    }
-                });
-            }
-
-            // Close Cookie Preferences Modal (new)
-            if (closeCookiePreferencesModalBtn) {
-                closeCookiePreferencesModalBtn.addEventListener('click', () => {
-                    console.log("Closing preferences modal without saving. Re-showing banner.");
-                    if (cookiePreferencesModal) {
-                        cookiePreferencesModal.style.display = 'none';
-                        console.log("Cookie preferences modal hidden. Current display:", cookiePreferencesModal.style.display, "Computed Display:", getComputedStyle(cookiePreferencesModal).display);
-                    }
-                    // If preferences modal is closed without saving, show the main banner again
-                    if (cookieBanner) {
-                        cookieBanner.classList.remove('hidden');
-                        console.log("Cookie banner re-shown after preferences modal close. ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
-                    }
-                });
-            }
-
-            // Close Cookie Preferences Modal if clicking outside content (new)
-            if (cookiePreferencesModal) {
-                cookiePreferencesModal.addEventListener('click', (e) => {
-                    if (e.target === cookiePreferencesModal) {
-                        console.log("Clicked outside preferences modal. Re-showing banner.");
-                        if (cookiePreferencesModal) {
-                            cookiePreferencesModal.style.display = 'none';
-                            console.log("Cookie preferences modal hidden. Current display:", cookiePreferencesModal.style.display, "Computed Display:", getComputedStyle(cookiePreferencesModal).display);
-                        }
-                        // If preferences modal is closed by clicking outside, show the main banner again
-                        if (cookieBanner) {
-                            cookieBanner.classList.remove('hidden');
-                            console.log("Cookie banner re-shown after preferences modal outside click. ClassList:", Array.from(cookieBanner.classList), "Computed Display:", getComputedStyle(cookieBanner).display);
-                        }
-                    }
-                });
-            }
-
-
-            // Show Calendly Modal from main CTA
-            if (scheduleCtaButton) {
-                scheduleCtaButton.addEventListener('click', () => {
-                    console.log("Schedule CTA button clicked!");
-                    if (calendlyModal) calendlyModal.style.display = 'flex';
-                });
-            }
-
-            // Close Calendly Modal
-            if (closeModalBtn) {
-                closeModalBtn.addEventListener('click', () => {
-                    console.log("Close modal button clicked!");
-                    if (calendlyModal) calendlyModal.style.display = 'none';
-                });
-            }
-
-            // Close modal if clicking outside content
-            if (calendlyModal) {
-                calendlyModal.addEventListener('click', (e) => {
-                    if (e.target === calendlyModal) {
-                        console.log("Clicked outside modal, closing.");
-                        calendlyModal.style.display = 'none';
-                    }
-                });
-            }
-
-            // Back to Homepage from Thank You Page
-            if (backToHomepageBtn && thankYouPage && landingPageContent) {
-                backToHomepageBtn.addEventListener('click', () => {
-                    console.log("Back to homepage button clicked!");
-                    thankYouPage.classList.add('hidden');
-                    landingPageContent.classList.remove('hidden');
-                });
-            }
-
-            // Video looping logic
-            const mainVideo = document.getElementById('mainVideo');
-            const videoSources = [
-                'Zurab 1.mp4' // Only Zurab video
-            ];
-            let currentVideoIndex = 0;
-
-            // Set initial video source on script load (or when video element is ready)
-            if (mainVideo) {
-                mainVideo.src = videoSources[currentVideoIndex];
-
-                mainVideo.addEventListener('ended', () => {
-                    console.log("Video ended, switching to next video.");
-                    currentVideoIndex++;
-                    if (currentVideoIndex >= videoSources.length) {
-                        currentVideoIndex = 0; // Loop back to the first video
-                    }
-                    mainVideo.src = videoSources[currentVideoIndex];
-                    mainVideo.load(); // Load the new video source
-                    mainVideo.play().catch(error => {
-                        console.log("Autoplay prevented after video ended:", error);
-                    });
-                });
-
-                // Attempt to play on load (will be caught if autoplay is blocked)
-                mainVideo.play().catch(error => {
-                    console.log("Initial autoplay prevented:", error);
-                });
-            }
-
-            // Language Toggle Event Listener (Direct Toggle)
-            if (langToggleBtn) { // Check if the button exists
-                langToggleBtn.addEventListener('click', () => {
-                    console.log("Language toggle clicked!");
-                    currentLanguage = (currentLanguage === 'en') ? 'de' : 'en';
-                    updateContent(); // Update content based on new language
-                });
-            }
-
-            // Theme Toggle Event Listener
-            if (themeToggleBtn && mainLogo) {
-                themeToggleBtn.addEventListener('click', () => {
-                    console.log("Theme toggle clicked!");
-                    // Toggle the 'light-mode' class on both html and body
-                    document.documentElement.classList.toggle('light-mode');
-                    document.body.classList.toggle('light-mode');
-                    
-                    // Update localStorage and logo based on the new state
-                    if (document.documentElement.classList.contains('light-mode')) {
-                        localStorage.setItem('theme', 'light');
-                        mainLogo.src = 'Shapes-Logo neu Black.png';
-                        if (cookieBanner) cookieBanner.classList.add('light-mode'); // Apply light mode to banner
-                    } else {
-                        localStorage.setItem('theme', 'dark');
-                        mainLogo.src = 'Shapes-Logo neu White.png';
-                        if (cookieBanner) cookieBanner.classList.remove('light-mode'); // Remove light mode from banner
-                    }
-                    updateThemeToggleIcon(); // Update icon after theme change
-                });
-            }
-        });
-    </script>
-
-</body>
-</html>
+                closeCookieInfoModalBtn.addEventListene
