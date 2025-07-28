@@ -466,20 +466,9 @@
                 </button>
             </section>
 
-            <!-- Benefits Section -->
-            <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box">
-                <div class="grid grid-cols-1 gap-8">
-                    <div class="text-center transition duration-300">
-                        <h2 id="benefit2-title" class="text-black-force dark:text-gray-200 text-2xl font-semibold mb-3">Award-Winning</h2>
-                        <div id="benefit2-text" class="text-black-force dark:text-gray-300">
-                            <ul class="list-none p-0 space-y-2">
-                                <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
-                                <li><strong>Winner of German Design Award 23</strong></li>
-                                <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <!-- Benefits Section - Replaced with Image -->
+            <section class="container mx-auto mt-5 p-8 rounded-xl glassy-box flex justify-center items-center">
+                <img src="Abbinder-home_final.jpg" alt="Awards and Partnerships" class="max-w-full h-auto rounded-lg shadow-md">
             </section>
         </main>
 
@@ -535,14 +524,14 @@
         const content = {
             en: {
                 scheduleCta: "Book your free consultation.",
-                benefit2Title: "Award-Winning",
+                benefit2Title: "Award-Winning", // This title is no longer displayed but kept for consistency
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
                         <li>Multiple nominations for Wellness & Spa Innovation Award & German Design Award</li>
                         <li><strong>Winner of German Design Award 23</strong></li>
                         <li><strong>Winner of German Innovation Award 23</strong> (Medical & Health)</li>
                     </ul>
-                `,
+                `, // This text is no longer displayed but kept for consistency
                 modalTitle: "Schedule Your Appointment",
                 thankyouHeadline: "Thank you! Your appointment is confirmed.",
                 thankyouSubheadline: "Check your email for confirmation.",
@@ -551,14 +540,14 @@
             },
             de: {
                 scheduleCta: "Buche deine kostenlose Beratung.",
-                benefit2Title: "Preisgekrönt",
+                benefit2Title: "Preisgekrönt", // This title is no longer displayed but kept for consistency
                 benefit2Text: `
                     <ul class="list-none p-0 space-y-2">
                         <li>Mehrfache Nominierungen für Wellness & Spa Innovation Award & German Design Award</li>
                         <li><strong>Gewinner des German Design Award 23</strong></li>
                         <li><strong>Gewinner des German Innovation Award 23</strong> (Medizin & Gesundheit)</li>
                     </ul>
-                `,
+                `, // This text is no longer displayed but kept for consistency
                 modalTitle: "Termin vereinbaren",
                 thankyouHeadline: "Vielen Dank! Ihr Termin ist bestätigt.",
                 thankyouSubheadline: "Bitte überprüfen Sie Ihre E-Mails zur Bestätigung.",
@@ -572,8 +561,7 @@
         // Function to update text content
         function updateContent(elements) {
             const langData = content[currentLanguage];
-            if (elements.benefit2Title) elements.benefit2Title.textContent = langData.benefit2Title;
-            if (elements.benefit2Text) elements.benefit2Text.innerHTML = langData.benefit2Text;
+            // Removed direct updates for benefit2Title and benefit2Text as they are replaced by an image
             if (elements.modalTitle) elements.modalTitle.textContent = langData.modalTitle;
             if (elements.thankyouHeadline) elements.thankyouHeadline.textContent = langData.thankyouHeadline;
             if (elements.thankyouSubheadline) elements.thankyouSubheadline.textContent = langData.thankyouSubheadline;
@@ -636,8 +624,7 @@
                 currentTimeSpan: document.getElementById('current-time'),
                 durationSpan: document.getElementById('duration'),
                 subtitleToggleBtn: document.getElementById('subtitle-toggle-btn'),
-                benefit2Title: document.getElementById('benefit2-title'),
-                benefit2Text: document.getElementById('benefit2-text'),
+                // Removed references to benefit2Title and benefit2Text as they are replaced by an image
                 modalTitle: document.getElementById('modal-title'),
                 thankyouHeadline: document.getElementById('thankyou-headline'),
                 thankyouSubheadline: document.getElementById('thankyou-subheadline'),
